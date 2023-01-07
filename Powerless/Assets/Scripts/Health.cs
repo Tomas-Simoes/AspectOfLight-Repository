@@ -25,8 +25,6 @@ public class Health : MonoBehaviour, IDataPersistence
         data.currentHealth = this.currentHealth;
     }
 
-    public void SaveData(GameData data) { }
-
     public void Damage(int amount)
     {
         currentHealth -= amount;

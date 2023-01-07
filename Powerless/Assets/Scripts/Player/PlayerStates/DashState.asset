@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7dc204e91a816c64ca90ebce848c9ccb, type: 3}
-  m_Name: New Walk_State
+  m_Script: {fileID: 11500000, guid: 557d929e327bba5428d0328c9f35f6b2, type: 3}
+  m_Name: DashState
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
-  AxisMovementyx: {x: 0, y: 0}
-  Speed: 3
-  MovingSpeed: 3
-  SprintSpeed: 3
+  _rigidbody: {fileID: 0}
+  dashSpeed: 6
+  dashTime: 0.15
+  dashing: 0
+  timeDashing: 0
+  timeSinceDash: 0

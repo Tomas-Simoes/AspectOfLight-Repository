@@ -8,13 +8,14 @@ using UnityEngine;
 
 public abstract class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
 {
-
     [SerializeField]
     private List<State<T>> _states;
+    private readonly Dictionary<Type, State<T>> _stateByType = new();
     private State<T> _activeState;
 
     protected virtual void Awake()
     {
+        _states.ForEach(s => _stateByType.Add(s.GetType(), s));
         SetState(_states[0].GetType());
     }
 
@@ -25,8 +26,10 @@ public abstract class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
             _activeState.Exit();
         }
 
+        Debug.Log("Setting new state...");
         _activeState = _states.First(s => s.GetType() == newStateType);
-        _activeState.Init(parent:GetComponent<T>());
+        Debug.Log(_activeState);
+        _activeState.Init(parent: GetComponent<T>());
     }
 
     private void Update()

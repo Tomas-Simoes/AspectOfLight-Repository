@@ -36,6 +36,7 @@ public class DataPersistenceManager : MonoBehaviour
             useEncryption
         );
         this.dataPersistanceObjects = FindAllDataPersistenceObjects();
+
         LoadGame();
     }
 

@@ -16,5 +16,4 @@ public abstract class State<T> : ScriptableObject where T : MonoBehaviour
     public abstract void FixedUpdate();
     public abstract void ChangeState();
     public abstract void Exit();
-
 }
