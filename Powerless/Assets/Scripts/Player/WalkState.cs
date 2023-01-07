@@ -1,10 +1,11 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/Player/Walk")]
 public class WalkState : State<PlayerController>
 {
 
-    private Rigidbody2D Rb;
+    public Rigidbody2D _rigidbody;
 
     public Vector2 AxisMovementyx; // X & Y Movement
 
@@ -15,20 +16,25 @@ public class WalkState : State<PlayerController>
 
     public override void Init(PlayerController parent)
     {
+        if (_rigidbody == null) _rigidbody = parent.GetComponent<Rigidbody2D>();
         base.Init(parent);
     }
 
     public override void GetInput()
     {
+
+        _rigidbody.velocity = AxisMovementyx.normalized * Speed;
+
         //Get's raw X value and makes it (+1 up / -1 down)
         AxisMovementyx.x = Input.GetAxisRaw("Horizontal");
         //Get's raw Y value and makes it (+1 up / -1 down)
         AxisMovementyx.y = Input.GetAxisRaw("Vertical");
+
+    
     }
 
     public override void Update()
     {
-        Rb.velocity = AxisMovementyx.normalized * Speed;
         Speed = MovingSpeed;
     }
 
@@ -37,9 +43,5 @@ public class WalkState : State<PlayerController>
     public override void ChangeState(){}
 
     public override void Exit(){}
-
-
-
-
 
 }
