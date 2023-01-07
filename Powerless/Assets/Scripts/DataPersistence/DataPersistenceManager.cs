@@ -9,6 +9,9 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField]
     private string fileName;
 
+    [SerializeField]
+    private bool encryptData;
+
     private GameData gameData;
     private List<IDataPersistence> dataPersistanceObjects;
     private FileDataHandler dataHandler;
@@ -27,7 +30,11 @@ public class DataPersistenceManager : MonoBehaviour
     //? Only for testing purpouses
     private void Start()
     {
-        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
+        this.dataHandler = new FileDataHandler(
+            Application.persistentDataPath,
+            fileName,
+            encryptData
+        );
         this.dataPersistanceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
@@ -45,7 +52,6 @@ public class DataPersistenceManager : MonoBehaviour
         }
 
         Debug.Log("Saved Health: " + gameData.currentHealth);
-
         dataHandler.Save(gameData);
     }
 

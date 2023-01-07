@@ -5,17 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
-    Health health;
     public int currentHealth;
-
-    void Start()
-    {
-        if (health == null)
-            GameObject.Find("Player").GetComponent<Health>();
-    }
+    public Vector3 playerPosition;
 
     public GameData()
     {
+        playerPosition = Vector3.zero;
         this.currentHealth = 10;
     }
 }
