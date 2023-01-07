@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : StateRunner<PlayerController>
+public class PlayerController : StateRunner<PlayerController>, IDataPersistence
 {
     public PlayerAnimation playerAnimation;
 
@@ -11,4 +11,13 @@ public class PlayerController : StateRunner<PlayerController>
         base.Awake();
     }
 
+    public void LoadData(GameData data)
+    {
+        this.transform.position = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.playerPosition = this.transform.position;
+    }
 }
