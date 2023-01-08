@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public long lastUpdated;
     public int currentHealth;
     public int deathCount;
     public string areaInMap;

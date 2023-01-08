@@ -20,7 +20,7 @@ public class Health : MonoBehaviour, IDataPersistence
         this.currentHealth = data.currentHealth;
     }
 
-    public void SaveData(ref GameData data)
+    public void SaveData(GameData data)
     {
         data.currentHealth = this.currentHealth;
     }

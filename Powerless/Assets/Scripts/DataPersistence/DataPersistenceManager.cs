@@ -10,6 +10,15 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField]
     private bool initializeDataIfNull = false;
 
+    [SerializeField]
+    private bool disableDataPersitence = false;
+
+    [SerializeField]
+    private bool overrideSelectedProfileId = false;
+
+    [SerializeField]
+    private string testSelectedProfileId = "test";
+
     [Header("File Storage Config")]
     [SerializeField]
     private string fileName;
@@ -20,7 +29,7 @@ public class DataPersistenceManager : MonoBehaviour
     private GameData gameData;
     private FileDataHandler dataHandler;
 
-    private string selectedProfileId = "test";
+    private string selectedProfileId = "";
 
     private List<IDataPersistence> dataPersistanceObjects;
     public static DataPersistenceManager instance { get; private set; }
@@ -39,23 +48,28 @@ public class DataPersistenceManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(this.gameObject);
 
+        if (disableDataPersitence)
+        {
+            Debug.LogWarning("Data Persitence is currently disabled.");
+        }
+
         this.dataHandler = new FileDataHandler(
             Application.persistentDataPath,
             fileName,
             useEncryption
         );
+
+        InitializeSelectedProfileId();
     }
 
     private void OnEnable()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
-        SceneManager.sceneUnloaded += OnSceneUnloaded;
     }
 
     private void OnDisable()
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
-        SceneManager.sceneUnloaded -= OnSceneUnloaded;
     }
 
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -64,9 +78,27 @@ public class DataPersistenceManager : MonoBehaviour
         LoadGame();
     }
 
-    public void OnSceneUnloaded(Scene scene)
+    public void ChangeSelectedProfileId(string newProfileId)
     {
-        SaveGame();
+        this.selectedProfileId = newProfileId;
+        LoadGame();
+    }
+
+    public void DeleteProfileData(string profileId)
+    {
+        dataHandler.Delete(profileId);
+        InitializeSelectedProfileId();
+        LoadGame();
+    }
+
+    private void InitializeSelectedProfileId()
+    {
+        this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
+        if (overrideSelectedProfileId)
+        {
+            this.selectedProfileId = testSelectedProfileId;
+            Debug.LogWarning("Override selected profile id with test id: " + testSelectedProfileId);
+        }
     }
 
     public void NewGame()
@@ -76,6 +108,11 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
+        if (disableDataPersitence)
+        {
+            return;
+        }
+
         if (this.gameData == null)
         {
             Debug.LogWarning(
@@ -86,15 +123,21 @@ public class DataPersistenceManager : MonoBehaviour
 
         foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
-            dataPersistenceObj.SaveData(ref gameData);
+            dataPersistenceObj.SaveData(gameData);
         }
-
+        gameData.lastUpdated = System.DateTime.Now.ToBinary();
         dataHandler.Save(gameData, selectedProfileId);
-        Debug.Log("Saved Successfully");
+
+        Debug.Log("Saved profile: " + selectedProfileId);
     }
 
     public void LoadGame()
     {
+        if (disableDataPersitence)
+        {
+            return;
+        }
+
         this.gameData = dataHandler.Load(selectedProfileId);
 
         //? This is only for debugging reasons
@@ -115,6 +158,8 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
+
+        Debug.Log("Loaded profile: " + selectedProfileId);
     }
 
     //? Only for testing purpouses
@@ -125,7 +170,9 @@ public class DataPersistenceManager : MonoBehaviour
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
-        IEnumerable<IDataPersistence> dataPersistencesObjects = FindObjectsOfType<MonoBehaviour>()
+        IEnumerable<IDataPersistence> dataPersistencesObjects = FindObjectsOfType<MonoBehaviour>(
+                true
+            )
             .OfType<IDataPersistence>();
 
         return new List<IDataPersistence>(dataPersistencesObjects);

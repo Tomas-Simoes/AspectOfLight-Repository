@@ -1448,6 +1448,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initializeDataIfNull: 1
+  disableDataPersitence: 1
+  overrideSelectedProfileId: 0
+  testSelectedProfileId: test
   fileName: data.game
   useEncryption: 1
 --- !u!4 &1090981526
