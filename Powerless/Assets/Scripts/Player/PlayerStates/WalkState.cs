@@ -4,7 +4,7 @@ using UnityEngine;
 public class WalkState : State<PlayerController>
 {
     InputHandler inputHandler;
-    public Rigidbody2D rigidbody;
+    private Rigidbody2D rigidbody;
     public Vector2 axisMovement;
     private bool dashing = false;
 

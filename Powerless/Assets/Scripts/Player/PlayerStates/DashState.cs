@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "States/Player/Dash")]
 public class DashState : State<PlayerController>
 {
-    public Rigidbody2D _rigidbody;
+    private Rigidbody2D _rigidbody;
 
     [Header("Dash Settings")]
     [SerializeField]
