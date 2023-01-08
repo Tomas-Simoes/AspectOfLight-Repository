@@ -6,11 +6,15 @@ using UnityEngine;
 public class GameData
 {
     public int currentHealth;
+    public int deathCount;
+    public string areaInMap;
     public Vector3 playerPosition;
 
     public GameData()
     {
         this.currentHealth = 10;
         this.playerPosition = Vector3.zero;
+        this.areaInMap = "Village";
+        this.deathCount = 0;
     }
 }

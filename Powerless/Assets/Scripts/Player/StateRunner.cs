@@ -26,9 +26,7 @@ public abstract class StateRunner<T> : MonoBehaviour where T : MonoBehaviour
             _activeState.Exit();
         }
 
-        Debug.Log("Setting new state...");
         _activeState = _states.First(s => s.GetType() == newStateType);
-        Debug.Log(_activeState);
         _activeState.Init(parent: GetComponent<T>());
     }
 

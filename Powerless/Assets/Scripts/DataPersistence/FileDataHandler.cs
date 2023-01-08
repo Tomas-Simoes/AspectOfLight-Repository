@@ -19,9 +19,9 @@ public class FileDataHandler
         this.dataFileName = dataFileName;
     }
 
-    public GameData Load()
+    public GameData Load(string profileId)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
         GameData loadedData = null;
 
         if (File.Exists(fullPath))
@@ -56,9 +56,9 @@ public class FileDataHandler
         return loadedData;
     }
 
-    public void Save(GameData data)
+    public void Save(GameData data, string profileId)
     {
-        string fullPath = Path.Combine(dataDirPath, dataFileName);
+        string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
 
         try
         {
@@ -85,6 +85,42 @@ public class FileDataHandler
                 "Error occured when trying to save data to file: " + fullPath + "\n" + e
             );
         }
+    }
+
+    public Dictionary<string, GameData> LoadAllProfiles()
+    {
+        Dictionary<string, GameData> profileDictionary = new Dictionary<string, GameData>();
+
+        IEnumerable<DirectoryInfo> dirInfos = new DirectoryInfo(dataDirPath).EnumerateDirectories();
+        foreach (DirectoryInfo dirInfo in dirInfos)
+        {
+            string profileId = dirInfo.Name;
+
+            string fullPath = Path.Combine(dataDirPath, profileId, dataFileName);
+
+            if (!File.Exists(fullPath))
+            {
+                Debug.Log(
+                    "Skipping directory when loading all profiles because it does not contain data: "
+                        + profileId
+                );
+                continue;
+            }
+
+            GameData profileData = Load(profileId);
+
+            if (profileData != null)
+            {
+                profileDictionary.Add(profileId, profileData);
+            }
+            else
+            {
+                Debug.Log(
+                    "Tried to load a profile but something went wrong. Profile ID: " + profileId
+                );
+            }
+        }
+        return profileDictionary;
     }
 
     private string EncryptDecrypt(string data)
