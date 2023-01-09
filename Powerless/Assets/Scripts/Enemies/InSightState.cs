@@ -4,14 +4,14 @@ using UnityEngine;
 
 
 [CreateAssetMenu(menuName = "States/Skeleton/InsightFollow")]
-public class InSightState : SkeletonState<SkeletonController>
-{
-    private Transform player;
-    
+public class InSightState : EnemyState<SkeletonController>
+{   
     public float LineOfSite;
 
-    private Rigidbody2D _rigidbody;
-    private float speed = 3f;
+    EnemyInfo enemyinfo;
+
+    Rigidbody2D _rigidbody;
+
     //  private bool InsightFollow = false;
 
     GameObject skeletonComponent;
@@ -23,20 +23,20 @@ public class InSightState : SkeletonState<SkeletonController>
         if (_rigidbody == null)
             _rigidbody = parent.GetComponent<Rigidbody2D>();
 
-        if (player == null)
-            player = parent.GetComponent<Transform>();
+        if (enemyinfo == null)
+            enemyinfo = parent.GetComponent<EnemyInfo>();
 
         skeletonComponent = parent.transform.gameObject;
-        Debug.Log(player);
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        Debug.Log(enemyinfo.target);
+        enemyinfo.target = GameObject.FindGameObjectWithTag("Player").transform;
 
         base.Init(parent);
     }
     public override void Update()
     {
-        float distanceFromPlayer = Vector2.Distance(player.position, skeletonComponent.transform.position);
+        float distanceFromPlayer = Vector2.Distance(enemyinfo.target.position, skeletonComponent.transform.position);
         Debug.Log("ismoving");
-        skeletonComponent.transform.position = Vector2.MoveTowards(this.skeletonComponent.transform.position, player.transform.position, speed * Time.deltaTime);
+        skeletonComponent.transform.position = Vector2.MoveTowards(this.skeletonComponent.transform.position, enemyinfo.target.transform.position, enemyinfo.speed * Time.deltaTime);
     }
     public override void FixedUpdate() { }
     public override void ChangeState() { }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class SkeletonState<T> : ScriptableObject where T : MonoBehaviour
+public abstract class EnemyState<T> : ScriptableObject where T : MonoBehaviour
 {
     protected T _runner;
 

@@ -9,9 +9,9 @@ using UnityEngine;
 public class EnemyStateRunner<T> : MonoBehaviour where T : MonoBehaviour
 {
     [SerializeField]
-    private List<SkeletonState<T>> _states;
-    private readonly Dictionary<Type, SkeletonState<T>> _stateByType = new();
-    private SkeletonState<T> _activeState;
+    private List<EnemyState<T>> _states;
+    private readonly Dictionary<Type, EnemyState<T>> _stateByType = new();
+    private EnemyState<T> _activeState;
 
     protected virtual void Awake()
     {

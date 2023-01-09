@@ -3,41 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "States/Skeleton/Patrol")]
-public class PatrolState : SkeletonState<SkeletonController>
+public class PatrolState : EnemyState<SkeletonController>
 {
-
-    public Transform[] patrolPoints;
-
     int currentPatrolIndex;
-    private Transform player;
 
-
-    Transform currentPatrolPoint;
-    GameObject PatrolPoint;
+    GameObject currentPatrolPoint;
     GameObject skeletonComponent;
-
-    private float speed = 3;                                      
+    
+    EnemyInfo enemyInfo;
 
     public override void Init(SkeletonController parent)
     {
+
+        if (enemyInfo == null)
+            enemyInfo = parent.GetComponent<EnemyInfo>();
+
+
         currentPatrolIndex = 0;
-        currentPatrolPoint = patrolPoints[currentPatrolIndex];
+        currentPatrolPoint = enemyInfo.PatrolPoint[currentPatrolIndex];
+
+        skeletonComponent = parent.gameObject;
 
         base.Init(parent);
     }
     public override void Update()
     {
-        Transform wp = patrolPoints[currentPatrolIndex];
-        if (Vector3.Distance(skeletonComponent.transform.position, wp.position) < 0.01f)
+        GameObject waypoint = enemyInfo.PatrolPoint[currentPatrolIndex];
+        if (Vector3.Distance(skeletonComponent.transform.position, waypoint.transform.position) < 0.01f)
         {
-            currentPatrolIndex = (currentPatrolIndex + 1) % patrolPoints.Length;
+            currentPatrolIndex = (currentPatrolIndex + 1) % enemyInfo.PatrolPoint.Length;
         }
         else
         {
             skeletonComponent.transform.position = Vector3.MoveTowards(
                 skeletonComponent.transform.position,
-                wp.position,
-                speed * Time.deltaTime);
+                waypoint.transform.position,
+                enemyInfo.speed * Time.deltaTime);
         }
     }
     public override void FixedUpdate() { }

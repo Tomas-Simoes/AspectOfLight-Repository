@@ -47,6 +47,5 @@ public class WalkState : State<PlayerController>
             _runner.SetState(typeof(DashState));
         }
     }
-
     public override void Exit() { }
 }
