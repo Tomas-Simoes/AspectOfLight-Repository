@@ -87,7 +87,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -546,7 +546,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 28
+  controlID: 19
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -604,9 +604,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: b4baffff
-      m_LastClickedID: -17740
-      m_ExpandedIDs: b4baffff7abcffffcebcffffe8bdffff4e9f0000549f00007c9f0000a49f0000
+      m_SelectedIDs: da9f0000
+      m_LastClickedID: 40922
+      m_ExpandedIDs: b8bcffffe6bdffffae9f0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -705,14 +705,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scripts/Enemies/EnemySpecific/WolfKnight
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: E:\Games Projects\Powerless-Repository\Powerless
+  m_LastProjectPath: C:\Users\12prog\Desktop\Powerless-Repository\Powerless
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 26a50000
-    m_LastClickedID: 42278
-    m_ExpandedIDs: 00000000229f0000249f0000289f00002c9f00002e9f000086a1000026a50000f6a700001eae0000a6b1000000ca9a3b
+    m_SelectedIDs: 10a00000
+    m_LastClickedID: 40976
+    m_ExpandedIDs: 00000000269f0000309f000004a000000ca0000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -765,8 +765,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: b4baffff
-    m_LastClickedInstanceID: -17740
+    m_SelectedInstanceIDs: da9f0000
+    m_LastClickedInstanceID: 40922
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000fc9c0000
     m_RenameOverlay:
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 130
+  controlID: 173
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -919,7 +919,7 @@ MonoBehaviour:
     m_SaveData: []
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: -17286
+  m_LastSelectedObjectID: -17226
 --- !u!114 &16
 MonoBehaviour:
   m_ObjectHideFlags: 52
