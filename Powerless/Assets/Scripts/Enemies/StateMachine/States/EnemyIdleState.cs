@@ -5,7 +5,9 @@ using UnityEngine;
 public class EnemyIdleState : EnemyState
 {
     protected D_EnemyIdleState stateData;
+
     protected bool flipAfterIdle;
+    
     protected bool isIdleTimeOver;
     protected float idleTime;
 
@@ -33,7 +35,6 @@ public class EnemyIdleState : EnemyState
     {
         base.Exit();
 
-        Debug.Log(flipAfterIdle); 
         if (flipAfterIdle)
         {
             entity.Flip();
@@ -62,6 +63,6 @@ public class EnemyIdleState : EnemyState
 
     private void SetRandomIdleTime()
     {
-        idleTime = Random.Range(stateData.minIdleTime, stateData.maxIdleTime);
+        idleTime = Random.Range(stateData.minIdleTime, stateData.maxIdleTime); // 1s
     }
 }

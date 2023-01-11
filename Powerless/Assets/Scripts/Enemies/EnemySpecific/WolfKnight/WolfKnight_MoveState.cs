@@ -33,11 +33,10 @@ public class WolfKnight_MoveState : EnemyMoveState
         base.LogicUpdate();
         _waypoint = enemy.patrolPoints[enemy.currentPatrolIndex];
 
-        Debug.Log(Vector3.Distance(enemy.transform.position, _waypoint.transform.position));
+       // Debug.Log(Vector3.Distance(enemy.transform.position, _waypoint.transform.position));
 
         if (Vector3.Distance(enemy.transform.position, _waypoint.transform.position) < 0.5f)
         {
-            Debug.Log("pov");
             int _newIndex = (enemy.currentPatrolIndex + 1) % enemy.patrolPoints.Length;
             enemy.SetCurrentPatrolIndex(_newIndex);
 

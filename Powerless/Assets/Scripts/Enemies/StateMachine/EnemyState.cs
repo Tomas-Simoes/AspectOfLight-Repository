@@ -27,7 +27,7 @@ public class EnemyState
         entity.anim.SetBool(animBoolName, false);
     }
 
-    public virtual void LogicUpdate() { }
+    public virtual void LogicUpdate() { } 
 
     public virtual void PhysicsUpdate() { }
 }

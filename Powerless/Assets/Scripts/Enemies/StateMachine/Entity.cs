@@ -11,13 +11,12 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
-    public GameObject enemyObj { get; private set; }
 
     [SerializeField]
     private Transform wallCheck;
 
     private Vector2 velocityWorkspace;
-
+    
     public virtual void Start()
     {
         facingDirection = 1;
