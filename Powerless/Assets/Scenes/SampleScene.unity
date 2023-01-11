@@ -1048,7 +1048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &204035292
 Transform:
   m_ObjectHideFlags: 0
@@ -1907,9 +1907,10 @@ GameObject:
   - component: {fileID: 661723166}
   - component: {fileID: 661723165}
   - component: {fileID: 661723168}
-  - component: {fileID: 661723167}
-  - component: {fileID: 661723169}
   - component: {fileID: 661723170}
+  - component: {fileID: 661723172}
+  - component: {fileID: 661723171}
+  - component: {fileID: 661723169}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1984,25 +1985,10 @@ Transform:
   - {fileID: 1650271625}
   - {fileID: 1828441616}
   - {fileID: 204035292}
+  - {fileID: 1387288926}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &661723167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 661723164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3126a81837de4f4badc99d484cf9505, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _states:
-  - {fileID: 11400000, guid: 15a1b11962e7e5544adbb87ef4f032a3, type: 2}
-  - {fileID: 11400000, guid: 5a41e866d2e7bae4f8fafbf58aa76fca, type: 2}
-  playerAnimation: {fileID: 0}
 --- !u!50 &661723168
 Rigidbody2D:
   serializedVersion: 4
@@ -2055,6 +2041,43 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2.0000002}
   m_Direction: 0
+--- !u!114 &661723171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661723164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33718251956ee84d9e13a5543398a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityData: {fileID: 11400000, guid: 8c4f4faf969e2a34287972178e6bd276, type: 2}
+  wallCheck: {fileID: 1387288926}
+  coolDownData: {fileID: 11400000, guid: 07f65c5ccfc73e64ab563f8dec899eee, type: 2}
+  moveStateData: {fileID: 11400000, guid: e70a09bca30f5c243b680560dfe84669, type: 2}
+  dashStateData: {fileID: 11400000, guid: b726f2b98028dd54e9b5d4211cfee371, type: 2}
+--- !u!95 &661723172
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 661723164}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &736284320
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,6 +2532,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1387288925
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1387288926}
+  m_Layer: 0
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1387288926
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1387288925}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5, y: -0.13, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 661723166}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1557629973
 GameObject:
   m_ObjectHideFlags: 0
@@ -2556,7 +2610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1650271625
 Transform:
   m_ObjectHideFlags: 0
@@ -2695,7 +2749,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1828441616
 Transform:
   m_ObjectHideFlags: 0
@@ -2919,7 +2973,6 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 539363421}
   - {fileID: 1557629973}
-  currentPatrolIndex: 0
   idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
   moveStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
 --- !u!4 &4617882224955040058
