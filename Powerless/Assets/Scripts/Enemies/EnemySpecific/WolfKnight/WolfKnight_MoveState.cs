@@ -31,10 +31,13 @@ public class WolfKnight_MoveState : EnemyMoveState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         _waypoint = enemy.patrolPoints[enemy.currentPatrolIndex];
-        if (Vector3.Distance(enemy.transform.position, _waypoint.transform.position) < 0.1f)
+
+        Debug.Log(Vector3.Distance(enemy.transform.position, _waypoint.transform.position));
+
+        if (Vector3.Distance(enemy.transform.position, _waypoint.transform.position) < 0.5f)
         {
+            Debug.Log("pov");
             int _newIndex = (enemy.currentPatrolIndex + 1) % enemy.patrolPoints.Length;
             enemy.SetCurrentPatrolIndex(_newIndex);
 
@@ -43,13 +46,15 @@ public class WolfKnight_MoveState : EnemyMoveState
 
             if (enemy.facingDirection == 1)
             {
-                if(_newPatrolPointIsOnLeft){
+                if (_newPatrolPointIsOnLeft)
+                {
                     enemy.idleState.SetFlipAfterIdle(true);
                 }
             }
-            else 
+            else
             {
-                if(!_newPatrolPointIsOnLeft) {
+                if (!_newPatrolPointIsOnLeft)
+                {
                     enemy.idleState.SetFlipAfterIdle(true);
                 }
             }
