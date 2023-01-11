@@ -6,8 +6,8 @@ public class PlayerMoveState : State
 {
   private Player player;
 
-  protected D_PlayerMoveState stateData;
-  InputHandler inputHandler;
+  private D_PlayerMoveState stateData;
+  private D_PlayerCoolDown coolDownData;
 
   private bool dashing = false;
 
@@ -16,22 +16,19 @@ public class PlayerMoveState : State
     StateMachine stateMachine,
     string animBoolName,
     D_PlayerMoveState stateData,
-    Player player
+    Player player,
+    D_PlayerCoolDown coolDownData
     ) : base(entity, stateMachine, animBoolName)
   {
     this.player = player;
     this.stateData = stateData;
+    this.coolDownData = coolDownData;
   }
 
   public override void Enter()
   {
     base.Enter();
     dashing = false;
-
-    if (inputHandler == null)
-    {
-      inputHandler = entity.GetComponent<InputHandler>();
-    }
   }
 
   public override void Exit()
@@ -42,16 +39,17 @@ public class PlayerMoveState : State
   public override void LogicUpdate()
   {
     base.LogicUpdate();
-    stateData.axisMovement.x = inputHandler.xAxis;
-    stateData.axisMovement.y = inputHandler.yAxis;
+    stateData.axisMovement.x = player.inputHandler.xAxis;
+    stateData.axisMovement.y = player.inputHandler.yAxis;
 
-    dashing = inputHandler.pressedDash;
+    dashing = player.inputHandler.pressedDash;
 
-    if (inputHandler.pressedDash)
+    if (player.inputHandler.pressedDash && coolDownData.timeSinceDash >= coolDownData.dashCD)
     {
       stateMachine.ChangeState(player.dashState);
-
     }
+
+    UpdateCooldowns();
   }
 
   public override void PhysicsUpdate()
@@ -59,5 +57,12 @@ public class PlayerMoveState : State
     base.PhysicsUpdate();
 
     entity.rb.velocity = stateData.axisMovement.normalized * stateData.movementSpeed;
+  }
+
+  public override void UpdateCooldowns()
+  {
+    base.UpdateCooldowns();
+
+    coolDownData.timeSinceDash += Time.deltaTime;
   }
 }

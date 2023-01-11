@@ -4,57 +4,77 @@ using UnityEngine;
 
 public class EnemyMoveState : State
 {
-  protected D_EnemyMoveState stateData;
-  protected bool isDetectingWall;
+    protected D_EnemyMoveState stateData;
+    protected bool isDetectingWall;
 
-  public int currentPatrolIndex = 0;
+    public int currentPatrolIndex = 0;
 
-  public EnemyMoveState(
-      Entity entity,
-      StateMachine stateMachine,
-      string animBoolName,
-      D_EnemyMoveState stateData
-  ) : base(entity, stateMachine, animBoolName)
-  {
-    this.stateData = stateData;
-  }
+    public EnemyMoveState(
+        Entity entity,
+        StateMachine stateMachine,
+        string animBoolName,
+        D_EnemyMoveState stateData
+    ) : base(entity, stateMachine, animBoolName)
+    {
+        this.stateData = stateData;
+    }
 
-  public override void Enter()
-  {
-    base.Enter();
-    entity.SetVelocity(stateData.movementSpeed);
+    public override void Enter()
+    {
+        base.Enter();
+        entity.SetVelocity(stateData.movementSpeed);
 
-    isDetectingWall = entity.CheckWall();
-  }
+        isDetectingWall = entity.CheckWall();
+    }
 
-  public override void Exit()
-  {
-    base.Exit();
-  }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
-  public override void LogicUpdate()
-  {
-    base.LogicUpdate();
-  }
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+    }
 
-  public override void PhysicsUpdate()
-  {
-    base.PhysicsUpdate();
-  }
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
 
-  public void SetCurrentPatrolIndex(int newIndex)
-  {
-    currentPatrolIndex = newIndex;
-  }
+    public void SetCurrentPatrolIndex(int newIndex)
+    {
+        currentPatrolIndex = newIndex;
+    }
 
-  public void MoveTowardsPatrolPoint(GameObject patrolPoint, float movementSpeed)
-  {
-    entity.rb.MovePosition(
-        Vector3.MoveTowards(
-            entity.transform.position,
-            patrolPoint.transform.position,
-            movementSpeed * Time.fixedDeltaTime
-        )
-    );
-  }
+    public void MoveTowardsPatrolPoint(GameObject patrolPoint, float movementSpeed)
+    {
+        entity.rb.MovePosition(
+            Vector3.MoveTowards(
+                entity.transform.position,
+                patrolPoint.transform.position,
+                movementSpeed * Time.fixedDeltaTime
+            )
+        );
+    }
+
+    public void CheckIfFlip(
+        int facingDirection,
+        GameObject currentPatrolPoint,
+        GameObject newPatrolPoint,
+        EnemyIdleState idleState
+    )
+    {
+        bool _newPatrolPointIsOnLeft =
+            currentPatrolPoint.transform.position.x > newPatrolPoint.transform.position.x;
+
+        if (facingDirection == 1)
+        {
+            idleState.SetFlipAfterIdle(_newPatrolPointIsOnLeft);
+        }
+        else
+        {
+            idleState.SetFlipAfterIdle(!_newPatrolPointIsOnLeft);
+        }
+    }
 }

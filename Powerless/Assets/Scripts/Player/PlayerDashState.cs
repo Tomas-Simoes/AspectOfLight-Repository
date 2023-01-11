@@ -7,25 +7,28 @@ public class PlayerDashState : State
   private Player player;
 
   protected D_PlayerDashState stateData;
-
+  private D_PlayerCoolDown coolDownData;
   public bool dashing;
   public float timeDashing = 0;
 
-  public PlayerDashState(Entity entity, StateMachine stateMachine, string animBoolName, D_PlayerDashState stateData, Player player
+  public PlayerDashState(Entity entity, StateMachine stateMachine, string animBoolName, D_PlayerDashState stateData, Player player, D_PlayerCoolDown coolDownData
 
 ) : base(entity, stateMachine, animBoolName)
   {
     this.player = player;
     this.stateData = stateData;
+    this.coolDownData = coolDownData;
   }
 
   public override void Enter()
   {
     base.Enter();
 
-    entity.SetVelocity(stateData.dashSpeed);
+    float _xAxis = player.inputHandler.xAxis;
+    float _yAxis = player.inputHandler.yAxis;
 
-    timeDashing = 0;
+    entity.rb.velocity = new Vector2(_xAxis, _yAxis) * stateData.dashSpeed;
+
     dashing = true;
   }
 
@@ -42,6 +45,8 @@ public class PlayerDashState : State
     if (timeDashing >= stateData.dashTime)
     {
       timeDashing = 0;
+      coolDownData.timeSinceDash = 0;
+
       dashing = false;
     }
 
