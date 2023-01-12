@@ -20,14 +20,15 @@ public class Miniums : MonoBehaviour
 
         _rigidbody = GetComponent<Rigidbody2D>();
 
+
     }
     
     private void Update()
     {
-       // float distanceFromEnemys = Vector2.Distance(Enemys.position, transform.position);
-
+        // float distanceFromEnemys = Vector2.Distance(Enemys.position, transform.position);
         chase();
     }
+
 
     private void chase()
     {
