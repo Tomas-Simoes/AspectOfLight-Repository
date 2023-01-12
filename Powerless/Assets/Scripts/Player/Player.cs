@@ -7,7 +7,7 @@ public class Player : Entity
   public PlayerMoveState moveState { get; private set; }
   public PlayerDashState dashState { get; private set; }
   public InputHandler inputHandler { get; private set; }
-
+  
   [SerializeField]
   private D_PlayerCoolDown coolDownData;
 

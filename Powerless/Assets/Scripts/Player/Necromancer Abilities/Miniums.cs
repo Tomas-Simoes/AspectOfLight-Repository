@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class Miniums : MonoBehaviour
 {
-    public float LineOfSite;
-    public float PersonalSpace;
-
-    public float speed = 3f;
+    public GameObject[] enemies;
+    public GameObject closestEnemy;
 
     public Transform Enemys;
+ 
+
+    public float speed = 3f;
 
     private Rigidbody2D _rigidbody;
     public Vector2 axisMovement;
 
     private void Start()
     {
-        Enemys = GameObject.FindGameObjectWithTag("Enemy").transform;
+        enemies = GameObject.FindGameObjectsWithTag ("enemy");
 
         _rigidbody = GetComponent<Rigidbody2D>();
 
@@ -24,13 +25,20 @@ public class Miniums : MonoBehaviour
     
     private void Update()
     {
-       // float distanceFromEnemys = Vector2.Distance(Enemys.position, transform.position);
-
-        chase();
+        FindClosestEnemy();
     }
 
-    private void chase()
+    void FindClosestEnemy()
     {
-        transform.position = Vector2.MoveTowards(this.transform.position, Enemys.transform.position, speed * Time.deltaTime);
+     float distance = 100f; // Any large number will do as long as it's further than any enemy could be
+     foreach (GameObject e in enemies) {
+         float tempdist = Vector3.Distance (transform.position,e.transform.position);
+         if (tempdist < distance)
+            {
+             closestEnemy = e;
+             distance = tempdist;
+            }
+            transform.position = Vector2.MoveTowards(this.transform.position, Enemys.transform.position, speed * Time.deltaTime);
+        }
     }
 }
