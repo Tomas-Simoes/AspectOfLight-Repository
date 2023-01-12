@@ -2,17 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[CreateAssetMenu(fileName = "newCoolDownData", menuName = "Data/State Data/Player/NecromancerState")]
 public class D_PlayerNecromancerState : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
+    public float TimeSinceNecromancer = 20; 
+
 }
