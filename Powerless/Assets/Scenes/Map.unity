@@ -4625,11 +4625,11 @@ PrefabInstance:
     - target: {fileID: 8933178181438029007, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
       propertyPath: enemyData
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 592e4818a89fb1d439c38075e25a9117, type: 2}
     - target: {fileID: 8933178181438029007, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
       propertyPath: chaseStateData
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 11400000, guid: 6cbc5e6c7c7b0a644b61a7d6e26f8bf8, type: 2}
     - target: {fileID: 8933178181438029007, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
