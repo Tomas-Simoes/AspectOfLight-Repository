@@ -52,7 +52,6 @@ public class WolfTank : Entity
         if (other.CompareTag("Player"))
         {
             enemyData.target = null;
-            Debug.Log(enemyData.target);
             stateMachine.ChangeState(moveState);
         }
     }
