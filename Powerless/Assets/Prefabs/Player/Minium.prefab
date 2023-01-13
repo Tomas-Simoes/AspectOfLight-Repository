@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 251412087955800704}
   - component: {fileID: -904532022261219653}
   - component: {fileID: -1394053911047200645}
-  - component: {fileID: 330330799979307369}
   m_Layer: 0
   m_Name: Minium
   m_TagString: Enemy
@@ -124,22 +123,3 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &330330799979307369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2668328830784829214}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57d70bee820617b4c869195c606b0a9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-  - {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-  closestEnemy: {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-  Enemys: {fileID: 0}
-  speed: 3
-  axisMovement: {x: 0, y: 0}

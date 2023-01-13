@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
+  [Header("Entity Data")]
   public StateMachine stateMachine;
   public D_Entity entityData;
 
@@ -14,7 +15,6 @@ public class Entity : MonoBehaviour
 
   [SerializeField]
   private Transform wallCheck;
-
   private Vector2 velocityWorkspace;
 
   public virtual void Start()

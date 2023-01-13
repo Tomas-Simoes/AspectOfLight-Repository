@@ -11,7 +11,12 @@ public class PlayerDashState : State
   public bool dashing;
   public float timeDashing = 0;
 
-  public PlayerDashState(Entity entity, StateMachine stateMachine, string animBoolName, D_PlayerDashState stateData, Player player, D_PlayerCoolDown coolDownData
+  public PlayerDashState(Entity entity, 
+      StateMachine stateMachine,
+      string animBoolName,
+      D_PlayerDashState stateData,
+      Player player,
+      D_PlayerCoolDown coolDownData
 
 ) : base(entity, stateMachine, animBoolName)
   {
