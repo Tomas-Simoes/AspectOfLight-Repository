@@ -11,13 +11,12 @@ public class PlayerMoveState : State
 
   private bool dashing = false;
 
-  public PlayerMoveState(
-    Entity entity,
-    StateMachine stateMachine,
-    string animBoolName,
-    D_PlayerMoveState stateData,
-    Player player,
-    D_PlayerCoolDown coolDownData
+  public PlayerMoveState( Entity entity,
+      StateMachine stateMachine,
+      string animBoolName,
+      D_PlayerMoveState stateData, 
+      Player player, D_PlayerCoolDown
+      coolDownData
     ) : base(entity, stateMachine, animBoolName)
   {
     this.player = player;
@@ -48,7 +47,8 @@ public class PlayerMoveState : State
     {
       stateMachine.ChangeState(player.dashState);
     }
-
+    
+    GetInputs();
     UpdateCooldowns();
   }
 
@@ -64,5 +64,19 @@ public class PlayerMoveState : State
     base.UpdateCooldowns();
 
     coolDownData.timeSinceDash += Time.deltaTime;
+  }
+
+  public override void GetInputs()
+  {
+    base.GetInputs();
+
+    if (player.inputHandler.pressedDash && coolDownData.timeSinceDash >= coolDownData.dashCD)
+    {
+      stateMachine.ChangeState(player.dashState);
+    }
+
+    if(player.inputHandler.pressedAbilityOne){
+      stateMachine.ChangeState(player.necromancerState);
+    }
   }
 }

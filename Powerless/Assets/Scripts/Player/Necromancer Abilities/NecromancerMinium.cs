@@ -10,9 +10,7 @@ public class NecromancerMinium : MonoBehaviour
 
     [SerializeField]
     public GameObject Drone;
-
-
-    void Start()
+    public void SpawnDrone()
     {
         Instantiate(Drone, transform);
     }

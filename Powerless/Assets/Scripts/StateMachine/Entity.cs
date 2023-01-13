@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public StateMachine stateMachine;
-    public D_Entity entityData;
+  [Header("Entity Data")]
+  public StateMachine stateMachine;
+  public D_Entity entityData;
 
     public int facingDirection { get; private set; }
     public Rigidbody2D rb { get; private set; }
@@ -14,7 +15,9 @@ public class Entity : MonoBehaviour
     [SerializeField]
     private Transform wallCheck;
 
-    private Vector2 velocityWorkspace;
+  [SerializeField]
+  private Transform wallCheck;
+  private Vector2 velocityWorkspace;
 
     public virtual void Start()
     {

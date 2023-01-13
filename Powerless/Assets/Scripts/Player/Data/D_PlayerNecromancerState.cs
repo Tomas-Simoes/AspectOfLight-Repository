@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "newCoolDownData", menuName = "Data/State Data/Player/NecromancerState")]
-public class D_PlayerNecromancerState : MonoBehaviour
+public class D_PlayerNecromancerState : ScriptableObject
 {
-
-
-    public float TimeSinceNecromancer = 20; 
-
+    public GameObject drone;
 }

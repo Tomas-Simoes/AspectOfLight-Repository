@@ -53,6 +53,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""AbilityOne"",
+                    ""type"": ""Button"",
+                    ""id"": ""5a2feab5-8687-40ec-8ab9-7de7af88cee7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -198,6 +207,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""YAxisMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a60a2e5a-25ef-415e-b3b7-25393bd95af1"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilityOne"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -362,6 +382,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_XAxisMovement = m_Player.FindAction("XAxisMovement", throwIfNotFound: true);
         m_Player_YAxisMovement = m_Player.FindAction("YAxisMovement", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
+        m_Player_AbilityOne = m_Player.FindAction("AbilityOne", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
@@ -428,6 +449,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_XAxisMovement;
     private readonly InputAction m_Player_YAxisMovement;
     private readonly InputAction m_Player_Dash;
+    private readonly InputAction m_Player_AbilityOne;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -435,6 +457,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @XAxisMovement => m_Wrapper.m_Player_XAxisMovement;
         public InputAction @YAxisMovement => m_Wrapper.m_Player_YAxisMovement;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
+        public InputAction @AbilityOne => m_Wrapper.m_Player_AbilityOne;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -453,6 +476,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
+                @AbilityOne.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityOne;
+                @AbilityOne.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityOne;
+                @AbilityOne.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityOne;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -466,6 +492,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @AbilityOne.started += instance.OnAbilityOne;
+                @AbilityOne.performed += instance.OnAbilityOne;
+                @AbilityOne.canceled += instance.OnAbilityOne;
             }
         }
     }
@@ -525,6 +554,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnXAxisMovement(InputAction.CallbackContext context);
         void OnYAxisMovement(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnAbilityOne(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
