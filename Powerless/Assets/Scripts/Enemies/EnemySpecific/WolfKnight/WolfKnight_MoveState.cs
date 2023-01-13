@@ -41,11 +41,10 @@ public class WolfKnight_MoveState : EnemyMoveState
             int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
 
             SetCurrentPatrolIndex(_newIndex);
-            CheckIfFlip(
+            entity.CheckIfFlip(
                 enemy.facingDirection,
-                _currentPatrolPoint,
-                enemy.patrolPoints[_newIndex],
-                enemy.idleState
+                _currentPatrolPoint.transform.position,
+                enemy.patrolPoints[_newIndex].transform.position
             );
 
             stateMachine.ChangeState(enemy.idleState);

@@ -57,24 +57,4 @@ public class EnemyMoveState : State
             )
         );
     }
-
-    public void CheckIfFlip(
-        int facingDirection,
-        GameObject currentPatrolPoint,
-        GameObject newPatrolPoint,
-        EnemyIdleState idleState
-    )
-    {
-        bool _newPatrolPointIsOnLeft =
-            currentPatrolPoint.transform.position.x > newPatrolPoint.transform.position.x;
-
-        if (facingDirection == 1)
-        {
-            idleState.SetFlipAfterIdle(_newPatrolPointIsOnLeft);
-        }
-        else
-        {
-            idleState.SetFlipAfterIdle(!_newPatrolPointIsOnLeft);
-        }
-    }
 }

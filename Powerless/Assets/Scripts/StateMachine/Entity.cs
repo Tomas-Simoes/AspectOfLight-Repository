@@ -58,6 +58,26 @@ public class Entity : MonoBehaviour
         gameObject.transform.Rotate(0f, 180f, 0f);
     }
 
+    public virtual void CheckIfFlip(
+        int facingDirection,
+        Vector2 currentPosition,
+        Vector2 futurePosition
+    )
+    {
+        bool _newPatrolPointIsOnLeft = currentPosition.x > futurePosition.x;
+
+        if (facingDirection == 1)
+        {
+            if (_newPatrolPointIsOnLeft)
+                Flip();
+        }
+        else
+        {
+            if (!_newPatrolPointIsOnLeft)
+                Flip();
+        }
+    }
+
     public virtual void OnDrawGizmos()
     {
         Gizmos.DrawLine(
