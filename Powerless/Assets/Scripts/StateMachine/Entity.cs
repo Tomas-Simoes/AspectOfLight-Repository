@@ -12,8 +12,6 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
-    [SerializeField]
-    private Transform wallCheck;
 
   [SerializeField]
   private Transform wallCheck;

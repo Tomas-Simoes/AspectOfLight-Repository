@@ -29,8 +29,12 @@ public class PlayerNecromancerState : State
     public override void Enter()
     {
         base.Enter();
+        coolDownData.timSinceNecromancer = 0;
+        Debug.Log("Enter the necromancer state");
+
         foreach (GameObject spawnpoint in player.dronesSpawnPoints)
         {
+            Debug.Log("Create drone");
             player.CreatePrefab(stateData.drone, spawnpoint, GameObject.Find("Drones"));    
         }
 

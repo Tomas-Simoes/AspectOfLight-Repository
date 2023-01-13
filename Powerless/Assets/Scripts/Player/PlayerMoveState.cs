@@ -64,6 +64,7 @@ public class PlayerMoveState : State
     base.UpdateCooldowns();
 
     coolDownData.timeSinceDash += Time.deltaTime;
+    coolDownData.timSinceNecromancer += Time.deltaTime;
   }
 
   public override void GetInputs()
@@ -75,7 +76,7 @@ public class PlayerMoveState : State
       stateMachine.ChangeState(player.dashState);
     }
 
-    if(player.inputHandler.pressedAbilityOne){
+    if(player.inputHandler.pressedAbilityOne && coolDownData.timSinceNecromancer >= coolDownData.necromancerCD){
       stateMachine.ChangeState(player.necromancerState);
     }
   }
