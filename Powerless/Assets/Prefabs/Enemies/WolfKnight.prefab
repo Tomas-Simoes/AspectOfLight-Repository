@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 4617882225253241956}
   - component: {fileID: 4617882225253241958}
   - component: {fileID: 4617882225253241959}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WolfKnight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,8 +106,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1738723677
-  m_SortingLayer: 5
+  m_SortingLayerID: -30422557
+  m_SortingLayer: 6
   m_SortingOrder: 1
   m_Sprite: {fileID: -1197312576, guid: ce3a96ae46a7196458ee6770305c272d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -133,8 +133,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.05533557, y: -0.17940779}
-  m_Size: {x: 0.7171742, y: 1.0720284}
+  m_Offset: {x: 0, y: -0.16518034}
+  m_Size: {x: 1, y: 1.0213839}
   m_Direction: 0
 --- !u!50 &4617882225253241956
 Rigidbody2D:
@@ -192,6 +192,7 @@ MonoBehaviour:
   entityData: {fileID: 11400000, guid: b41bfb5335fad054cb47c4fe857503f6, type: 2}
   wallCheck: {fileID: 4617882224428714322}
   patrolPoints:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
