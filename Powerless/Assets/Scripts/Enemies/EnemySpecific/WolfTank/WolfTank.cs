@@ -42,6 +42,7 @@ public class WolfTank : Entity
     {
         if (other.CompareTag("Player"))
         {
+            enemyData.target = other.gameObject;
             stateMachine.ChangeState(chaseState);
         }
     }
@@ -50,7 +51,7 @@ public class WolfTank : Entity
     {
         if (other.CompareTag("Player"))
         {
-            enemyData.target = other.gameObject;
+            enemyData.target = null;
             Debug.Log(enemyData.target);
             stateMachine.ChangeState(moveState);
         }
