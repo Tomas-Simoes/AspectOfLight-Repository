@@ -7,9 +7,9 @@ public class WolfKnight : Entity
     public WolfKnight_IdleState idleState { get; private set; }
     public WolfKnight_MoveState moveState { get; private set; }
     public WolfKnight_ChaseState chaseState { get; private set; }
+    public WolfKnight_AttackState attackState { get; private set; }
 
-    public GameObject[] patrolPoints;
-
+    [Header("State Data")]
     [SerializeField]
     private D_EnemyIdleState idleStateData;
 
@@ -20,7 +20,17 @@ public class WolfKnight : Entity
     private D_EnemyChaseState chaseStateData;
 
     [SerializeField]
+    private D_EnemyMeleeAttackData meleeAttackData;
+
+    [SerializeField]
+    private D_EnemyCoolDownData coolDownData;
+
+    [SerializeField]
     private D_EnemyData enemyData;
+
+    [Header("Others")]
+    public GameObject[] patrolPoints;
+    public GameObject attackPosition;
 
     public override void Start()
     {
@@ -34,7 +44,17 @@ public class WolfKnight : Entity
             "move", // this can change if we want to have a "chace" animation aswell
             chaseStateData,
             this,
-            enemyData
+            enemyData,
+            meleeAttackData,
+            coolDownData
+        );
+
+        attackState = new WolfKnight_AttackState(
+            this,
+            stateMachine,
+            "attack",
+            meleeAttackData,
+            this
         );
 
         stateMachine.Init(moveState);
