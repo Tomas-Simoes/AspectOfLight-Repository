@@ -24,6 +24,7 @@ public class Player : Entity
 
     [Header("Other Data")]
     public GameObject[] dronesSpawnPoints;
+    
 
     public override void Start()
     {
