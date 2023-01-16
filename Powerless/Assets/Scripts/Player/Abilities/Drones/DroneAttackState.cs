@@ -6,7 +6,6 @@ public class DroneAttackState : State
 {
     private Drone drone;
     protected D_DroneAttackState stateData;
-    private D_DroneCooldown coolDownData;
 
     public DroneAttackState(
         Entity entity,

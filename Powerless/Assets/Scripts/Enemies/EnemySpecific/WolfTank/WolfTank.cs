@@ -10,8 +10,7 @@ public class WolfTank : Entity
     public WolfTank_MoveState moveState { get; private set; }
     public WolfTank_ChaseState chaseState { get; private set; }
 
-    public GameObject[] patrolPoints;
-
+    [Header("State Data")]
     [SerializeField]
     private D_EnemyIdleState idleStateData;
 
@@ -24,9 +23,15 @@ public class WolfTank : Entity
     [SerializeField]
     private D_EnemyData enemyData;
 
+    [Header("Others")]
+    public GameObject[] patrolPoints;
+    public GameObject attackPosition;
+
     public override void Start()
     {
         base.Start();
+        currentHealth = enemyData.MAX_HEALTH;
+
         idleState = new WolfTank_IdleState(this, stateMachine, "idle", idleStateData, this);
         moveState = new WolfTank_MoveState(this, stateMachine, "move", moveStateData, this);
         chaseState = new WolfTank_ChaseState(

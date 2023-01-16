@@ -19,9 +19,6 @@ public class Drone : Entity
     private D_DroneChaseState chaseStateData;
 
     [SerializeField]
-    private D_DroneCooldown coolDownData;
-
-    [SerializeField]
     private LayerMask targetableObjects;
 
     public override void Start()
@@ -34,7 +31,6 @@ public class Drone : Entity
             "chase",
             chaseStateData,
             this,
-            coolDownData,
             attackStateData
         );
         attackState = new DroneAttackState(this, stateMachine, "die", attackStateData, this);
@@ -52,9 +48,17 @@ public class Drone : Entity
 
         foreach (Collider2D _enemy in _enemiesToDamage)
         {
+            Debug.Log(_enemy.transform.parent);
             _enemy.GetComponent<Entity>().TakeDamage(attackStateData.damage);
         }
 
         base.Die();
+    }
+
+    public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.DrawWireSphere(transform.position, attackStateData.explosionRange);
     }
 }

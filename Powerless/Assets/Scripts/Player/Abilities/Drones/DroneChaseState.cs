@@ -9,7 +9,6 @@ public class DroneChaseState : State
 
     protected D_DroneChaseState stateData;
     private D_DroneAttackState attackStateData;
-    private D_DroneCooldown coolDownData;
 
     public DroneChaseState(
         Entity entity,
@@ -17,14 +16,12 @@ public class DroneChaseState : State
         string animBoolName,
         D_DroneChaseState stateData,
         Drone drone,
-        D_DroneCooldown coolDownData,
         D_DroneAttackState attackStateData
     ) : base(entity, stateMachine, animBoolName)
     {
         this.attackStateData = attackStateData;
         this.drone = drone;
         this.stateData = stateData;
-        this.coolDownData = coolDownData;
     }
 
     public override void Enter()

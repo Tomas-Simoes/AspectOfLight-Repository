@@ -4557,13 +4557,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfKnight (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4606,10 +4602,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: coolDownData
-      value: 
-      objectReference: {fileID: 11400000, guid: dac2e77e8f31de642bb344ec9a6befd9, type: 2}
-    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 266076143}
@@ -4619,6 +4611,11 @@ PrefabInstance:
       objectReference: {fileID: 194952364}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+--- !u!4 &1527278392 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+  m_PrefabInstance: {fileID: 1728496906}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1536770296
 GameObject:
   m_ObjectHideFlags: 0
@@ -4647,8 +4644,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1949710553}
   - {fileID: 404212499}
+  - {fileID: 1527278392}
   - {fileID: 1674304702}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -4806,6 +4803,71 @@ Transform:
   m_Father: {fileID: 815845517}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1728496906
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1536770297}
+    m_Modifications:
+    - target: {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_Name
+      value: WolfKnight
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.19
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.053937726
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: patrolPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 1142426403}
+    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: patrolPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1811157315}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
 --- !u!1 &1811157315
 GameObject:
   m_ObjectHideFlags: 0
@@ -5033,84 +5095,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1001 &1949710552
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1536770297}
-    m_Modifications:
-    - target: {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_Name
-      value: WolfKnight
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -10.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.053937726
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: coolDownData
-      value: 
-      objectReference: {fileID: 11400000, guid: dac2e77e8f31de642bb344ec9a6befd9, type: 2}
-    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: patrolPoints.Array.data[0]
-      value: 
-      objectReference: {fileID: 1142426403}
-    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: patrolPoints.Array.data[1]
-      value: 
-      objectReference: {fileID: 1811157315}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
---- !u!4 &1949710553 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-  m_PrefabInstance: {fileID: 1949710552}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2063269988
 GameObject:
   m_ObjectHideFlags: 0
@@ -5208,10 +5192,6 @@ PrefabInstance:
     - target: {fileID: 1267277768789818681, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: m_Name
       value: WolfTank
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267277768789818681, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
