@@ -8,6 +8,8 @@ public class Entity : MonoBehaviour
   public StateMachine stateMachine;
   public D_Entity entityData;
 
+  protected float currentHealth;
+
   public int facingDirection { get; private set; }
   public Rigidbody2D rb { get; private set; }
   public Animator anim { get; private set; }
@@ -91,5 +93,9 @@ public class Entity : MonoBehaviour
         wallCheck.position
             + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance)
     );
+  }
+
+  public virtual void TakeDamage(float damage)
+  {
   }
 }
