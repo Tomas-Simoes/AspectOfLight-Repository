@@ -84,6 +84,7 @@ public class Entity : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        StartCoroutine(VisualIndicator(Color.red));
         currentHealth -= damage;
 
         if (currentHealth <= 0)
@@ -96,6 +97,15 @@ public class Entity : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    //Only for testing purpouses
+    private IEnumerator VisualIndicator(Color color)
+    {
+        Debug.Log("pov");
+        GetComponent<SpriteRenderer>().color = color;
+        yield return new WaitForSeconds(0.15f);
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public virtual void OnDrawGizmos()

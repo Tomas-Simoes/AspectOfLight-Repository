@@ -48,7 +48,6 @@ public class Drone : Entity
 
         foreach (Collider2D _enemy in _enemiesToDamage)
         {
-            Debug.Log(_enemy.transform.parent);
             _enemy.GetComponent<Entity>().TakeDamage(attackStateData.damage);
         }
 
