@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1553190749}
   - component: {fileID: 1553190750}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: LineOfSign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2024559158}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4617882225253241959}
   m_Layer: 7
   m_Name: WolfKnight
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   moveStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
   chaseStateData: {fileID: 11400000, guid: 6164c9fe3611dd340ae169556772652e, type: 2}
   meleeAttackData: {fileID: 11400000, guid: 355cc5c9f7b0ffc43835a17966465aa2, type: 2}
+  coolDownData: {fileID: 11400000, guid: dac2e77e8f31de642bb344ec9a6befd9, type: 2}
   enemyData: {fileID: 11400000, guid: 1032107bf9dd2d444b575cee41e2864a, type: 2}
   patrolPoints:
   - {fileID: 0}

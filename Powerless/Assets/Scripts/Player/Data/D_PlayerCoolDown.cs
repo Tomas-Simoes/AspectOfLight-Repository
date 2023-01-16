@@ -9,5 +9,5 @@ public class D_PlayerCoolDown : ScriptableObject
 
     // Necromancer //
   public float necromancerCD = 10;
-  public float timSinceNecromancer = 10;
+  public float timeSinceNecromancer = 10;
 }

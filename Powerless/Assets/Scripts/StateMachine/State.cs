@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State
+public class State : MonoBehaviour
 {
   protected StateMachine stateMachine;
   protected Entity entity;
@@ -34,4 +34,6 @@ public class State
   public virtual void UpdateCooldowns() { }
 
   public virtual void GetInputs() { }
+
+
 }
