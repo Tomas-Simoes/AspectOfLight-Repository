@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
 public class PlayerNecromancerState : State
 {
     public Player player;
@@ -10,14 +9,14 @@ public class PlayerNecromancerState : State
     private D_PlayerNecromancerState stateData;
     private D_PlayerCoolDown coolDownData;
 
-
-    public PlayerNecromancerState( Entity entity, 
-        StateMachine stateMachine, 
-        string animBoolName, 
-        D_PlayerNecromancerState stateData, 
+    public PlayerNecromancerState(
+        Entity entity,
+        StateMachine stateMachine,
+        string animBoolName,
+        D_PlayerNecromancerState stateData,
         Player player,
         D_PlayerCoolDown coolDownData
-  ) : base(entity, stateMachine, animBoolName)
+    ) : base(entity, stateMachine, animBoolName)
     {
         this.player = player;
         this.stateData = stateData;
@@ -31,14 +30,13 @@ public class PlayerNecromancerState : State
 
         foreach (GameObject spawnpoint in player.dronesSpawnPoints)
         {
-            Debug.Log("Create " + stateData.drone + " in " + spawnpoint);
-            player.CreatePrefab(stateData.drone, spawnpoint, GameObject.Find("Drones"));    
+            player.CreatePrefab(stateData.drone, spawnpoint, GameObject.Find("Drones"));
         }
 
         stateMachine.ChangeState(player.moveState);
     }
 
-    public override void Exit() 
+    public override void Exit()
     {
         base.Exit();
     }

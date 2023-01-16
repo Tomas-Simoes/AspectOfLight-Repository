@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WolfTank : Entity
 {
+    public GameObject target;
+
     public WolfTank_IdleState idleState { get; private set; }
     public WolfTank_MoveState moveState { get; private set; }
     public WolfTank_ChaseState chaseState { get; private set; }
@@ -42,7 +44,7 @@ public class WolfTank : Entity
     {
         if (other.CompareTag("Player"))
         {
-            enemyData.target = other.gameObject;
+            target = other.gameObject;
             stateMachine.ChangeState(chaseState);
         }
     }
@@ -51,7 +53,7 @@ public class WolfTank : Entity
     {
         if (other.CompareTag("Player"))
         {
-            enemyData.target = null;
+            target = null;
             stateMachine.ChangeState(moveState);
         }
     }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WolfKnight : Entity
 {
+    public GameObject target;
+
     public WolfKnight_IdleState idleState { get; private set; }
     public WolfKnight_MoveState moveState { get; private set; }
     public WolfKnight_ChaseState chaseState { get; private set; }
@@ -35,6 +37,7 @@ public class WolfKnight : Entity
     public override void Start()
     {
         base.Start();
+        currentHealth = enemyData.MAX_HEALTH;
 
         idleState = new WolfKnight_IdleState(this, stateMachine, "idle", idleStateData, this);
         moveState = new WolfKnight_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -64,7 +67,7 @@ public class WolfKnight : Entity
     {
         if (other.CompareTag("Player"))
         {
-            enemyData.target = other.gameObject;
+            target = other.gameObject;
             stateMachine.ChangeState(chaseState);
         }
     }
@@ -73,7 +76,7 @@ public class WolfKnight : Entity
     {
         if (other.CompareTag("Player"))
         {
-            enemyData.target = null;
+            target = null;
             stateMachine.ChangeState(moveState);
         }
     }

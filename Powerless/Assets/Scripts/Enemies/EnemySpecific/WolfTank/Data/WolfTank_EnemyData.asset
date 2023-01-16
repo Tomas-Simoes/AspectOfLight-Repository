@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bac454e30b1dfb4cafeef6a87f8e39c, type: 3}
   m_Name: WolfTank_EnemyData
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
+  MAX_HEALTH: 15

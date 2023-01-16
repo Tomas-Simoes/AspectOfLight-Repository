@@ -37,13 +37,13 @@ public class WolfTank_ChaseState : EnemyChaseState
         entity.CheckIfFlip(
             enemy.facingDirection,
             enemy.transform.position,
-            enemyData.target.transform.position
+            enemy.target.transform.position
         );
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        StartChasing(enemyData.target);
+        StartChasing(enemy.target);
     }
 }

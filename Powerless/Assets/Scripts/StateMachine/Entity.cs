@@ -4,98 +4,106 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-  [Header("Entity Data")]
-  public StateMachine stateMachine;
-  public D_Entity entityData;
+    [Header("Entity Data")]
+    public StateMachine stateMachine;
+    public D_Entity entityData;
 
-  protected float currentHealth;
+    public int facingDirection { get; private set; }
+    public Rigidbody2D rb { get; private set; }
+    public Animator anim { get; private set; }
 
-  public int facingDirection { get; private set; }
-  public Rigidbody2D rb { get; private set; }
-  public Animator anim { get; private set; }
+    [SerializeField]
+    private Transform wallCheck;
 
+    [SerializeField]
+    protected float currentHealth;
 
-  [SerializeField]
-  private Transform wallCheck;
-  private Vector2 velocityWorkspace;
+    private Vector2 velocityWorkspace;
 
-  public virtual void Start()
-  {
-    facingDirection = 1;
-
-    rb = GetComponent<Rigidbody2D>();
-    anim = GetComponent<Animator>();
-
-    stateMachine = new StateMachine();
-  }
-
-  public virtual void Update()
-  {
-    stateMachine.currentState.LogicUpdate();
-  }
-
-  public virtual void FixedUpdate()
-  {
-    stateMachine.currentState.PhysicsUpdate();
-  }
-
-  public virtual void SetVelocity(float velocity)
-  {
-    velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
-    rb.velocity = velocityWorkspace;
-  }
-
-  public virtual bool CheckWall()
-  {
-    return Physics2D.Raycast(
-        wallCheck.position,
-        gameObject.transform.right,
-        entityData.wallCheckDistance,
-        entityData.whatIsGround
-    );
-  }
-
-  public virtual void Flip()
-  {
-    facingDirection *= -1;
-    gameObject.transform.Rotate(0f, 180f, 0f);
-  }
-
-  public virtual void CheckIfFlip(
-      int facingDirection,
-      Vector2 currentPosition,
-      Vector2 futurePosition
-  )
-  {
-    bool _newPatrolPointIsOnLeft = currentPosition.x > futurePosition.x;
-
-    if (facingDirection == 1)
+    public virtual void Start()
     {
-      if (_newPatrolPointIsOnLeft)
-        Flip();
+        facingDirection = 1;
+
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
+        stateMachine = new StateMachine();
     }
-    else
+
+    public virtual void Update()
     {
-      if (!_newPatrolPointIsOnLeft)
-        Flip();
+        stateMachine.currentState.LogicUpdate();
     }
-  }
 
-  public void OnDeathAnimationFinished()
-  {
-    Destroy(gameObject);
-  }
+    public virtual void FixedUpdate()
+    {
+        stateMachine.currentState.PhysicsUpdate();
+    }
 
-  public virtual void OnDrawGizmos()
-  {
-    Gizmos.DrawLine(
-        wallCheck.position,
-        wallCheck.position
-            + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance)
-    );
-  }
+    public virtual void SetVelocity(float velocity)
+    {
+        velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
+        rb.velocity = velocityWorkspace;
+    }
 
-  public virtual void TakeDamage(float damage)
-  {
-  }
+    public virtual bool CheckWall()
+    {
+        return Physics2D.Raycast(
+            wallCheck.position,
+            gameObject.transform.right,
+            entityData.wallCheckDistance,
+            entityData.whatIsGround
+        );
+    }
+
+    public virtual void Flip()
+    {
+        facingDirection *= -1;
+        gameObject.transform.Rotate(0f, 180f, 0f);
+    }
+
+    public virtual void CheckIfFlip(
+        int facingDirection,
+        Vector2 currentPosition,
+        Vector2 futurePosition
+    )
+    {
+        bool _newPatrolPointIsOnLeft = currentPosition.x > futurePosition.x;
+
+        if (facingDirection == 1)
+        {
+            if (_newPatrolPointIsOnLeft)
+                Flip();
+        }
+        else
+        {
+            if (!_newPatrolPointIsOnLeft)
+                Flip();
+        }
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            //play death animation and then Die();
+            Die();
+        }
+    }
+
+    public virtual void Die()
+    {
+        Destroy(gameObject);
+    }
+
+    public virtual void OnDrawGizmos()
+    {
+        Gizmos.DrawLine(
+            wallCheck.position,
+            wallCheck.position
+                + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance)
+        );
+    }
 }
