@@ -7,6 +7,7 @@ public class Player : Entity
     public PlayerMoveState moveState { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerNecromancerState necromancerState { get; private set; }
+    
     public InputHandler inputHandler { get; private set; }
 
     [Header("States Data")]
@@ -24,6 +25,7 @@ public class Player : Entity
 
     [Header("Other Data")]
     public GameObject[] dronesSpawnPoints;
+    
 
     public override void Start()
     {

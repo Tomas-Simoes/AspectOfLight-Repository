@@ -10,8 +10,6 @@ public class PlayerNecromancerState : State
     private D_PlayerNecromancerState stateData;
     private D_PlayerCoolDown coolDownData;
 
-    public NecromancerMinium MiniumM;
-
 
     public PlayerNecromancerState( Entity entity, 
         StateMachine stateMachine, 
@@ -29,12 +27,11 @@ public class PlayerNecromancerState : State
     public override void Enter()
     {
         base.Enter();
-        coolDownData.timSinceNecromancer = 0;
-        Debug.Log("Enter the necromancer state");
+        coolDownData.timeSinceNecromancer = 0;
 
         foreach (GameObject spawnpoint in player.dronesSpawnPoints)
         {
-            Debug.Log("Create drone");
+            Debug.Log("Create " + stateData.drone + " in " + spawnpoint);
             player.CreatePrefab(stateData.drone, spawnpoint, GameObject.Find("Drones"));    
         }
 
@@ -54,11 +51,5 @@ public class PlayerNecromancerState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-    }
-
-    public override void UpdateCooldowns()
-    {
-        base.UpdateCooldowns();
-        coolDownData.timSinceNecromancer += Time.deltaTime;
     }
 }
