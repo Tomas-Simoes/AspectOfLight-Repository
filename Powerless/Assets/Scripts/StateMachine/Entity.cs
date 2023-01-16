@@ -8,7 +8,7 @@ public class Entity : MonoBehaviour
     public StateMachine stateMachine;
     public D_Entity entityData;
 
-    public int facingDirection { get; private set; }
+    public int facingDirection;
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
@@ -62,22 +62,18 @@ public class Entity : MonoBehaviour
         gameObject.transform.Rotate(0f, 180f, 0f);
     }
 
-    public virtual void CheckIfFlip(
-        int facingDirection,
-        Vector2 currentPosition,
-        Vector2 futurePosition
-    )
+    public void CheckIfFlip(int facingDirection, Vector2 currentPosition, Vector2 futurePosition)
     {
-        bool _newPatrolPointIsOnLeft = currentPosition.x > futurePosition.x;
+        bool _newPositionIsOnLeft = currentPosition.x > futurePosition.x;
 
         if (facingDirection == 1)
         {
-            if (_newPatrolPointIsOnLeft)
+            if (_newPositionIsOnLeft)
                 Flip();
         }
         else
         {
-            if (!_newPatrolPointIsOnLeft)
+            if (!_newPositionIsOnLeft)
                 Flip();
         }
     }

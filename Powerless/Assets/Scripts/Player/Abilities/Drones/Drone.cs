@@ -24,6 +24,7 @@ public class Drone : Entity
     public override void Start()
     {
         base.Start();
+        facingDirection = -1;
 
         chaseState = new DroneChaseState(
             this,

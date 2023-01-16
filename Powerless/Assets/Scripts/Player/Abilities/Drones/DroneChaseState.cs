@@ -66,6 +66,12 @@ public class DroneChaseState : State
         {
             stateMachine.ChangeState(drone.attackState);
         }
+
+        entity.CheckIfFlip(
+            entity.facingDirection,
+            entity.transform.position,
+            drone.closestEnemy.transform.position
+        );
     }
 
     public override void PhysicsUpdate()
