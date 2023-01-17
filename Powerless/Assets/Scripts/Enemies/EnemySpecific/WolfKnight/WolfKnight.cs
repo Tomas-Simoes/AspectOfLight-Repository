@@ -10,6 +10,10 @@ public class WolfKnight : Entity
     public WolfKnight_MoveState moveState { get; private set; }
     public WolfKnight_ChaseState chaseState { get; private set; }
     public WolfKnight_AttackState attackState { get; private set; }
+    public WolfKnight_RecoveryAttackState recoveryAttackState { get; private set; }
+
+    [Header("Cooldowns")]
+    public float timeSinceAttack;
 
     [Header("State Data")]
     [SerializeField]
@@ -30,6 +34,9 @@ public class WolfKnight : Entity
     [SerializeField]
     private D_EnemyData enemyData;
 
+    [SerializeField]
+    private D_EnemyRecoveryAttackState recoveryAttackData;
+
     [Header("Others")]
     public GameObject[] patrolPoints;
     public GameObject attackPosition;
@@ -38,6 +45,7 @@ public class WolfKnight : Entity
     {
         base.Start();
         currentHealth = enemyData.MAX_HEALTH;
+        timeSinceAttack = coolDownData.normalAttackCD;
 
         idleState = new WolfKnight_IdleState(this, stateMachine, "idle", idleStateData, this);
         moveState = new WolfKnight_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -60,7 +68,24 @@ public class WolfKnight : Entity
             this
         );
 
+        recoveryAttackState = new WolfKnight_RecoveryAttackState(
+            this,
+            stateMachine,
+            "move",
+            recoveryAttackData,
+            this,
+            meleeAttackData,
+            coolDownData
+        );
+
         stateMachine.Init(moveState);
+    }
+
+    public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPosition.transform.position, meleeAttackData.attackRadius);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -79,5 +104,12 @@ public class WolfKnight : Entity
             target = null;
             stateMachine.ChangeState(moveState);
         }
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        timeSinceAttack += Time.deltaTime;
     }
 }

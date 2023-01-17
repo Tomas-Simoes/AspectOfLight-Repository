@@ -40,22 +40,6 @@ public class Entity : MonoBehaviour
         stateMachine.currentState.PhysicsUpdate();
     }
 
-    public virtual void SetVelocity(float velocity)
-    {
-        velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
-        rb.velocity = velocityWorkspace;
-    }
-
-    public virtual bool CheckWall()
-    {
-        return Physics2D.Raycast(
-            wallCheck.position,
-            gameObject.transform.right,
-            entityData.wallCheckDistance,
-            entityData.whatIsGround
-        );
-    }
-
     public virtual void Flip()
     {
         facingDirection *= -1;
@@ -95,10 +79,36 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //Only for testing purpouses
+    public virtual void SetVelocity(float velocity)
+    {
+        velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
+        rb.velocity = velocityWorkspace;
+    }
+
+    public virtual bool CheckWall()
+    {
+        return Physics2D.Raycast(
+            wallCheck.position,
+            gameObject.transform.right,
+            entityData.wallCheckDistance,
+            entityData.whatIsGround
+        );
+    }
+
+    public void WaitForAnimationToFinish(float animationDuration)
+    {
+        Debug.Log("Waiting animation to finish");
+        StartCoroutine(Wait(animationDuration));
+    }
+
+    public IEnumerator Wait(float timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        Debug.Log("Animation is finished");
+    }
+
     private IEnumerator VisualIndicator(Color color)
     {
-        Debug.Log("pov");
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.15f);
         GetComponent<SpriteRenderer>().color = Color.white;

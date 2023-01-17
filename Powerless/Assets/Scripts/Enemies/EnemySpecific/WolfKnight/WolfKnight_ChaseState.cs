@@ -42,11 +42,13 @@ public class WolfKnight_ChaseState : EnemyChaseState
 
         if (
             Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
-                <= attackData.minimumDistanceToAttack
-            && coolDownData.timeSinceNormalAttack >= coolDownData.normalAttackCD
+            <= attackData.minimumDistanceToAttack
         )
         {
-            stateMachine.ChangeState(enemy.attackState);
+            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemy.attackState);
+            else
+                stateMachine.ChangeState(enemy.recoveryAttackState);
         }
 
         entity.CheckIfFlip(
@@ -54,8 +56,6 @@ public class WolfKnight_ChaseState : EnemyChaseState
             enemy.transform.position,
             enemy.target.transform.position
         );
-
-        coolDownData.timeSinceNormalAttack += Time.deltaTime;
     }
 
     public override void PhysicsUpdate()

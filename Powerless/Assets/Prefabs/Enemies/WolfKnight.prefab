@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1553190749}
   - component: {fileID: 1125331893943953442}
   m_Layer: 0
-  m_Name: LineOfSign
+  m_Name: LineOfSignTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3.6146104
+  m_Radius: 4.652814
 --- !u!1 &2024559157
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,7 +72,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024559157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: -0.27, z: 0}
+  m_LocalPosition: {x: 0.52, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -146,6 +146,7 @@ Transform:
   - {fileID: 4617882224428714322}
   - {fileID: 1553190749}
   - {fileID: 2024559158}
+  - {fileID: 1835826570393380330}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -271,16 +272,67 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: b41bfb5335fad054cb47c4fe857503f6, type: 2}
+  facingDirection: 0
   wallCheck: {fileID: 4617882224428714322}
   currentHealth: 0
   target: {fileID: 0}
+  timeSinceAttack: 0
   idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
   moveStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
   chaseStateData: {fileID: 11400000, guid: 6164c9fe3611dd340ae169556772652e, type: 2}
   meleeAttackData: {fileID: 11400000, guid: 355cc5c9f7b0ffc43835a17966465aa2, type: 2}
   coolDownData: {fileID: 11400000, guid: dac2e77e8f31de642bb344ec9a6befd9, type: 2}
   enemyData: {fileID: 11400000, guid: 1032107bf9dd2d444b575cee41e2864a, type: 2}
+  recoveryAttackData: {fileID: 0}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   attackPosition: {fileID: 2024559157}
+--- !u!1 &6887429388559361941
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1835826570393380330}
+  - component: {fileID: 8278509517957282637}
+  m_Layer: 0
+  m_Name: RecoveryAreaTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1835826570393380330
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6887429388559361941}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4617882225253241955}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &8278509517957282637
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6887429388559361941}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 3.6146104

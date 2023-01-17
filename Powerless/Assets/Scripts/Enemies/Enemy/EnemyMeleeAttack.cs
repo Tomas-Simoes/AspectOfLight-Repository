@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyMeleeAttack : State
 {
+    protected bool attackedOnce = false;
+
     public EnemyMeleeAttack(Entity entity, StateMachine stateMachine, string animBoolName)
         : base(entity, stateMachine, animBoolName) { }
 
