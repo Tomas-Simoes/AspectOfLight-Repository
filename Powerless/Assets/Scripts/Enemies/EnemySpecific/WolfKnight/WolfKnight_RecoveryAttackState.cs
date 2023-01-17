@@ -7,6 +7,11 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
     private WolfKnight enemy;
     private D_EnemyMeleeAttackData attackData;
     private D_EnemyCoolDownData coolDownData;
+    private D_EnemyMoveState moveStateData;
+
+    private bool goTowardsTarget;
+    private bool goTowardsRecoveryPoint;
+    private Vector2 recoveryPoint;
 
     public WolfKnight_RecoveryAttackState(
         Entity entity,
@@ -15,17 +20,20 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
         D_EnemyRecoveryAttackState stateData,
         WolfKnight enemy,
         D_EnemyMeleeAttackData attackData,
-        D_EnemyCoolDownData coolDownData
+        D_EnemyCoolDownData coolDownData,
+        D_EnemyMoveState moveStateData
     ) : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
         this.attackData = attackData;
         this.coolDownData = coolDownData;
+        this.moveStateData = moveStateData;
     }
 
     public override void Enter()
     {
         base.Enter();
+        entity.SetVelocity(0f);
     }
 
     public override void Exit()
@@ -36,23 +44,63 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        bool _enemyInDistanceToAttack =
-            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
-            <= attackData.minimumDistanceToAttack;
 
-        if (!_enemyInDistanceToAttack)
-        {
+        if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
             stateMachine.ChangeState(enemy.chaseState);
+
+        if (
+            Vector2.Distance(enemy.target.transform.position, enemy.pivot.transform.position)
+            > stateData.recoveryAreaRadius + 0.5f
+        )
+        {
+            Debug.Log("Going towards target");
+            goTowardsTarget = true;
+            goTowardsRecoveryPoint = false;
         }
         else
         {
-            entity.SetVelocity(0);
-            Debug.Log("Recovering");
+            Debug.Log("Go towards recovery point");
+
+            bool _createNewRecoveryPoint =
+                !goTowardsRecoveryPoint
+                || Vector2.Distance(recoveryPoint, enemy.pivot.transform.position) < 0.5f;
+
+            if (_createNewRecoveryPoint)
+            {
+                Debug.Log("Created new target point");
+
+                recoveryPoint = GetNewRandomPosition();
+                goTowardsRecoveryPoint = true;
+            }
+
+            goTowardsTarget = false;
         }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        if (goTowardsTarget)
+        {
+            entity.CheckIfFlip(
+                entity.facingDirection,
+                enemy.transform.position,
+                enemy.target.transform.position
+            );
+
+            entity.GoTowardsTarget(enemy.target.transform.position, moveStateData.movementSpeed);
+        }
+
+        if (goTowardsRecoveryPoint)
+        {
+            entity.CheckIfFlip(
+                entity.facingDirection,
+                enemy.transform.position,
+                enemy.target.transform.position
+            );
+
+            entity.GoTowardsTarget(recoveryPoint, stateData.recoveryMovementSpeed);
+        }
     }
 }

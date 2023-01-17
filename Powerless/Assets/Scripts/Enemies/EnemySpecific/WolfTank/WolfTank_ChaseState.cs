@@ -44,6 +44,6 @@ public class WolfTank_ChaseState : EnemyChaseState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        StartChasing(enemy.target);
+        entity.GoTowardsTarget(enemy.target.transform.position, stateData.chaseSpeed);
     }
 }

@@ -54,7 +54,7 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
 
         if (_animationTime > 1f)
         {
-            stateMachine.ChangeState(enemy.chaseState);
+            stateMachine.ChangeState(enemy.recoveryAttackState);
         }
     }
 

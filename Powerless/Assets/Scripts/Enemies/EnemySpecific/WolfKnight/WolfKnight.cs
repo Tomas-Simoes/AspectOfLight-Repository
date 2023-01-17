@@ -75,10 +75,18 @@ public class WolfKnight : Entity
             recoveryAttackData,
             this,
             meleeAttackData,
-            coolDownData
+            coolDownData,
+            moveStateData
         );
 
         stateMachine.Init(moveState);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+
+        timeSinceAttack += Time.deltaTime;
     }
 
     public override void OnDrawGizmos()
@@ -86,6 +94,9 @@ public class WolfKnight : Entity
         base.OnDrawGizmos();
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPosition.transform.position, meleeAttackData.attackRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(pivot.transform.position, recoveryAttackData.recoveryAreaRadius);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -104,12 +115,5 @@ public class WolfKnight : Entity
             target = null;
             stateMachine.ChangeState(moveState);
         }
-    }
-
-    public override void Update()
-    {
-        base.Update();
-
-        timeSinceAttack += Time.deltaTime;
     }
 }

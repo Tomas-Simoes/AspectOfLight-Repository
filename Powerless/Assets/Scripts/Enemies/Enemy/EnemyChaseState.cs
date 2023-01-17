@@ -36,17 +36,6 @@ public class EnemyChaseState : State
         base.PhysicsUpdate();
     }
 
-    public virtual void StartChasing(GameObject target)
-    {
-        entity.rb.MovePosition(
-            Vector3.MoveTowards(
-                entity.transform.position,
-                target.transform.position,
-                stateData.chaseSpeed * Time.fixedDeltaTime
-            )
-        );
-    }
-
     public bool CheckIfFlip(int facingDirection, Vector2 currentPosition, Vector2 futurePosition)
     {
         bool _newPatrolPointIsOnLeft = currentPosition.x > futurePosition.x;

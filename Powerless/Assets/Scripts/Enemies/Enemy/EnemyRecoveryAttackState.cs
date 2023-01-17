@@ -35,4 +35,10 @@ public class EnemyRecoveryAttackState : State
     {
         base.PhysicsUpdate();
     }
+
+    public virtual Vector2 GetNewRandomPosition()
+    {
+        Vector2 x = Random.insideUnitCircle * stateData.recoveryAreaRadius;
+        return x;
+    }
 }

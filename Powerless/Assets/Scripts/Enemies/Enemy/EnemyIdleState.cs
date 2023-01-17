@@ -22,7 +22,6 @@ public class EnemyIdleState : State
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("in idle state");
         entity.SetVelocity(0f);
         isIdleTimeOver = false;
 

@@ -7,8 +7,9 @@ public class Entity : MonoBehaviour
     [Header("Entity Data")]
     public StateMachine stateMachine;
     public D_Entity entityData;
-
+    protected float currentHealth;
     public int facingDirection;
+
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
@@ -16,7 +17,7 @@ public class Entity : MonoBehaviour
     private Transform wallCheck;
 
     [SerializeField]
-    protected float currentHealth;
+    public GameObject pivot;
 
     private Vector2 velocityWorkspace;
 
@@ -38,6 +39,19 @@ public class Entity : MonoBehaviour
     public virtual void FixedUpdate()
     {
         stateMachine.currentState.PhysicsUpdate();
+    }
+
+    public virtual void SetVelocity(float velocity)
+    {
+        velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
+        rb.velocity = velocityWorkspace;
+    }
+
+    public void GoTowardsTarget(Vector2 targetPosition, float speed)
+    {
+        rb.MovePosition(
+            Vector3.MoveTowards(transform.position, targetPosition, speed * Time.fixedDeltaTime)
+        );
     }
 
     public virtual void Flip()
@@ -79,12 +93,6 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public virtual void SetVelocity(float velocity)
-    {
-        velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
-        rb.velocity = velocityWorkspace;
-    }
-
     public virtual bool CheckWall()
     {
         return Physics2D.Raycast(
@@ -97,14 +105,12 @@ public class Entity : MonoBehaviour
 
     public void WaitForAnimationToFinish(float animationDuration)
     {
-        Debug.Log("Waiting animation to finish");
         StartCoroutine(Wait(animationDuration));
     }
 
     public IEnumerator Wait(float timeToWait)
     {
         yield return new WaitForSeconds(timeToWait);
-        Debug.Log("Animation is finished");
     }
 
     private IEnumerator VisualIndicator(Color color)

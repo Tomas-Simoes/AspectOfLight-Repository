@@ -47,8 +47,6 @@ public class WolfKnight_ChaseState : EnemyChaseState
         {
             if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
                 stateMachine.ChangeState(enemy.attackState);
-            else
-                stateMachine.ChangeState(enemy.recoveryAttackState);
         }
 
         entity.CheckIfFlip(
@@ -61,7 +59,7 @@ public class WolfKnight_ChaseState : EnemyChaseState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        StartChasing(enemy.target);
+        entity.GoTowardsTarget(enemy.target.transform.position, stateData.chaseSpeed);
     }
 
     private void OnDrawGizmos()
