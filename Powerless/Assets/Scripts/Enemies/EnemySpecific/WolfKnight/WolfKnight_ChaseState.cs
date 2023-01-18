@@ -29,6 +29,8 @@ public class WolfKnight_ChaseState : EnemyChaseState
     public override void Enter()
     {
         base.Enter();
+
+        enemy.timeSinceAttack = coolDownData.normalAttackCD;
     }
 
     public override void Exit()

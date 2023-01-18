@@ -62,6 +62,10 @@ public class Entity : MonoBehaviour
 
     public void CheckIfFlip(int facingDirection, Vector2 currentPosition, Vector2 futurePosition)
     {
+        Debug.Log(facingDirection);
+        Debug.Log(currentPosition);
+        Debug.Log(futurePosition);
+
         bool _newPositionIsOnLeft = currentPosition.x > futurePosition.x;
 
         if (facingDirection == 1)

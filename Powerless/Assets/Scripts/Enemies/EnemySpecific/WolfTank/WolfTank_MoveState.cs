@@ -21,15 +21,6 @@ public class WolfTank_MoveState : EnemyMoveState
     public override void Enter()
     {
         base.Enter();
-
-        if (_currentPatrolPoint != null)
-        {
-            entity.CheckIfFlip(
-                enemy.facingDirection,
-                enemy.transform.position,
-                _currentPatrolPoint.transform.position
-            );
-        }
     }
 
     public override void Exit()

@@ -96,7 +96,7 @@ public class WolfKnight : Entity
         Gizmos.DrawWireSphere(attackPosition.transform.position, meleeAttackData.attackRadius);
 
         Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(pivot.transform.position, recoveryAttackData.recoveryAreaRadius);
+        Gizmos.DrawWireSphere(target.transform.position, recoveryAttackData.recoveryAreaRadius);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -112,7 +112,6 @@ public class WolfKnight : Entity
     {
         if (other.CompareTag("Player"))
         {
-            target = null;
             stateMachine.ChangeState(moveState);
         }
     }

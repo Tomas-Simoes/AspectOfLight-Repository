@@ -36,7 +36,7 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
         base.LogicUpdate();
         float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-        if (_animationTime > 0.5f && !attackedOnce)
+        if (_animationTime > 0.40f && !attackedOnce)
         {
             Collider2D[] objectsOverlaped = Physics2D.OverlapCircleAll(
                 enemy.attackPosition.transform.position,

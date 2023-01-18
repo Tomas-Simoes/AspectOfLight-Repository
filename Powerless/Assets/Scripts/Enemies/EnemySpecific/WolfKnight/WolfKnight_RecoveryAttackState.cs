@@ -53,23 +53,18 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
             > stateData.recoveryAreaRadius + 0.5f
         )
         {
-            Debug.Log("Going towards target");
             goTowardsTarget = true;
             goTowardsRecoveryPoint = false;
         }
         else
         {
-            Debug.Log("Go towards recovery point");
-
             bool _createNewRecoveryPoint =
                 !goTowardsRecoveryPoint
                 || Vector2.Distance(recoveryPoint, enemy.pivot.transform.position) < 0.5f;
 
             if (_createNewRecoveryPoint)
             {
-                Debug.Log("Created new target point");
-
-                recoveryPoint = GetNewRandomPosition();
+                recoveryPoint = GetNewRandomPosition(enemy.target.transform.position);
                 goTowardsRecoveryPoint = true;
             }
 
