@@ -26,7 +26,6 @@ public class WolfKnight_MoveState : EnemyMoveState
     public override void Exit()
     {
         base.Exit();
-        Debug.Log("exit");
     }
 
     public override void LogicUpdate()

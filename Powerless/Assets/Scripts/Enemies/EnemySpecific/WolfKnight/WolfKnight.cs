@@ -97,6 +97,10 @@ public class WolfKnight : Entity
 
         Gizmos.color = Color.cyan;
         Gizmos.DrawWireSphere(target.transform.position, recoveryAttackData.recoveryAreaRadius);
+
+        if (recoveryAttackState != null)
+            if (recoveryAttackState.recoveryPoint != null)
+                Gizmos.DrawLine(transform.position, recoveryAttackState.recoveryPoint);
     }
 
     private void OnTriggerEnter2D(Collider2D other)

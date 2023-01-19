@@ -38,7 +38,11 @@ public class EnemyRecoveryAttackState : State
 
     public virtual Vector2 GetNewRandomPosition(Vector2 center)
     {
-        Vector2 x = center + Random.insideUnitCircle * stateData.recoveryAreaRadius;
-        return x;
+        Vector2 _newRandomPosition;
+
+        Debug.Log("Created new position");
+
+        _newRandomPosition = center + Random.insideUnitCircle * stateData.recoveryAreaRadius;
+        return _newRandomPosition;
     }
 }

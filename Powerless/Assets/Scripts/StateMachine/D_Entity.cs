@@ -7,4 +7,5 @@ public class D_Entity : ScriptableObject
 {
     public float wallCheckDistance = 0.2f;
     public LayerMask whatIsGround;
+    public LayerMask whatIsWall;
 }

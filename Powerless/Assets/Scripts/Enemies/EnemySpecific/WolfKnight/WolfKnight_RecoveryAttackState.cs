@@ -11,7 +11,7 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
 
     private bool goTowardsTarget;
     private bool goTowardsRecoveryPoint;
-    private Vector2 recoveryPoint;
+    public Vector2 recoveryPoint;
 
     public WolfKnight_RecoveryAttackState(
         Entity entity,
