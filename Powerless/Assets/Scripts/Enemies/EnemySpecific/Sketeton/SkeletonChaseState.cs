@@ -45,11 +45,28 @@ public class SkeletonChaseState : EnemyChaseState
   public override void LogicUpdate()
   {
     base.LogicUpdate();
+     if (
+            Vector2.Distance(enemySkeleton.transform.position, enemySkeleton.target.transform.position)
+                <= attackData.minimumDistanceToAttack
+            && coolDownData.timeSinceNormalAttack >= coolDownData.normalAttackCD
+        )
+        {
+            stateMachine.ChangeState(enemySkeleton.attackState);
+        }
+
+        entity.CheckIfFlip(
+            enemySkeleton.facingDirection,
+            enemySkeleton.transform.position,
+            enemySkeleton.target.transform.position
+        );
+
+        coolDownData.timeSinceNormalAttack += Time.deltaTime;
   }
 
   public override void PhysicsUpdate()
   {
     base.PhysicsUpdate();
+    StartChasing(enemySkeleton.target);
   }
 
   public override void UpdateCooldowns()

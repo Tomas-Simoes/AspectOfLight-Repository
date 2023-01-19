@@ -5,7 +5,6 @@ using UnityEngine;
 public class Skeleton : Entity
 {
     public GameObject target;
-
     public SkeletonidleState idleState { get; private set; }
     public SkeletonMoveState moveState { get; private set; }
     public SkeletonChaseState chaseState { get; private set; }
@@ -39,7 +38,12 @@ public class Skeleton : Entity
         base.Start();
         currentHealth = enemyData.MAX_HEALTH;
 
-        idleState = new SkeletonidleState(this, stateMachine, "idle", idleStateData, this);
+        idleState = new SkeletonidleState(
+            this,
+            stateMachine,
+            "idle",
+            idleStateData,
+            this);
         moveState = new SkeletonMoveState(
             this,
             stateMachine,

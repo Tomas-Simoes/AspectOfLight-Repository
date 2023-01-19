@@ -51,5 +51,4 @@ public class SkeletonAttackState : EnemyShootingState
   {
     base.UpdateCooldowns();
   }
-
 }
