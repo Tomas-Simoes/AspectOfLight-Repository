@@ -17,7 +17,8 @@ public class DroneChaseState : State
         D_DroneChaseState stateData,
         Drone drone,
         D_DroneAttackState attackStateData
-    ) : base(entity, stateMachine, animBoolName)
+    )
+        : base(entity, stateMachine, animBoolName)
     {
         this.attackStateData = attackStateData;
         this.drone = drone;

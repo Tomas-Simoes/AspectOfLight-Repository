@@ -13,7 +13,8 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
         string animBoolName,
         D_EnemyMeleeAttackData stateData,
         WolfKnight enemy
-    ) : base(entity, stateMachine, animBoolName)
+    )
+        : base(entity, stateMachine, animBoolName)
     {
         this.stateData = stateData;
         this.enemy = enemy;
@@ -44,10 +45,7 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
                 stateData.attackableLayer
             );
 
-            foreach (Collider2D objectHitted in objectsOverlaped)
-            {
-                Debug.Log("This got hitted" + objectHitted);
-            }
+            foreach (Collider2D objectHitted in objectsOverlaped) { }
 
             attackedOnce = true;
         }

@@ -11,6 +11,7 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
 
     private bool goTowardsTarget;
     private bool goTowardsRecoveryPoint;
+    private Collider2D _collider;
     public Vector2 recoveryPoint;
 
     public WolfKnight_RecoveryAttackState(
@@ -22,7 +23,8 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
         D_EnemyMeleeAttackData attackData,
         D_EnemyCoolDownData coolDownData,
         D_EnemyMoveState moveStateData
-    ) : base(entity, stateMachine, animBoolName, stateData)
+    )
+        : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
         this.attackData = attackData;
@@ -60,11 +62,30 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
         {
             bool _createNewRecoveryPoint =
                 !goTowardsRecoveryPoint
-                || Vector2.Distance(recoveryPoint, enemy.pivot.transform.position) < 0.5f;
+                || Vector2.Distance((Vector2)recoveryPoint, enemy.pivot.transform.position) < 0.5f;
 
             if (_createNewRecoveryPoint)
             {
-                recoveryPoint = GetNewRandomPosition(enemy.target.transform.position);
+                do
+                {
+                    totalIterationsMade++;
+
+                    if (totalIterationsMade >= MAX_ITERATIONS)
+                    {
+                        stateMachine.ChangeState(enemy.moveState);
+                    }
+
+                    recoveryPoint = GetNewRandomPosition(enemy.target.transform.position);
+
+                    _collider = Physics2D
+                        .Linecast(
+                            entity.pivot.transform.position,
+                            recoveryPoint,
+                            entity.entityData.whatIsWall
+                        )
+                        .collider;
+                } while (_collider != null);
+
                 goTowardsRecoveryPoint = true;
             }
 
@@ -95,7 +116,7 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
                 enemy.target.transform.position
             );
 
-            entity.GoTowardsTarget(recoveryPoint, stateData.recoveryMovementSpeed);
+            entity.GoTowardsTarget((Vector2)recoveryPoint, stateData.recoveryMovementSpeed);
         }
     }
 }

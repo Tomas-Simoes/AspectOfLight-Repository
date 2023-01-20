@@ -5,13 +5,16 @@ using UnityEngine;
 public class EnemyRecoveryAttackState : State
 {
     protected D_EnemyRecoveryAttackState stateData;
+    protected int MAX_ITERATIONS = 50;
+    protected int totalIterationsMade = 0;
 
     public EnemyRecoveryAttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
         D_EnemyRecoveryAttackState stateData
-    ) : base(entity, stateMachine, animBoolName)
+    )
+        : base(entity, stateMachine, animBoolName)
     {
         this.stateData = stateData;
     }
@@ -19,6 +22,7 @@ public class EnemyRecoveryAttackState : State
     public override void Enter()
     {
         base.Enter();
+        totalIterationsMade = 0;
     }
 
     public override void Exit()
@@ -38,11 +42,9 @@ public class EnemyRecoveryAttackState : State
 
     public virtual Vector2 GetNewRandomPosition(Vector2 center)
     {
-        Vector2 _newRandomPosition;
+        Vector2 _newRandomPosition =
+            center + Random.insideUnitCircle * stateData.recoveryAreaRadius;
 
-        Debug.Log("Created new position");
-
-        _newRandomPosition = center + Random.insideUnitCircle * stateData.recoveryAreaRadius;
         return _newRandomPosition;
     }
 }
