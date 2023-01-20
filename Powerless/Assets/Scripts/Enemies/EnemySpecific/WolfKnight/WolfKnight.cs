@@ -32,9 +32,6 @@ public class WolfKnight : Entity
     private D_EnemyCoolDownData coolDownData;
 
     [SerializeField]
-    private D_EnemyData enemyData;
-
-    [SerializeField]
     private D_EnemyRecoveryAttackState recoveryAttackData;
 
     [Header("Others")]
@@ -44,7 +41,7 @@ public class WolfKnight : Entity
     public override void Start()
     {
         base.Start();
-        currentHealth = enemyData.MAX_HEALTH;
+        currentHealth = entityData.MAX_HEALTH;
         timeSinceAttack = coolDownData.normalAttackCD;
 
         idleState = new WolfKnight_IdleState(this, stateMachine, "idle", idleStateData, this);
@@ -55,7 +52,6 @@ public class WolfKnight : Entity
             "move", // this can change if we want to have a "chace" animation aswell
             chaseStateData,
             this,
-            enemyData,
             meleeAttackData,
             coolDownData
         );

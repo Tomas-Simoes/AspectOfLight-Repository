@@ -5,7 +5,6 @@ using UnityEngine;
 public class WolfKnight_ChaseState : EnemyChaseState
 {
     private WolfKnight enemy;
-    private D_EnemyData enemyData;
     private D_EnemyMeleeAttackData attackData;
     private D_EnemyCoolDownData coolDownData;
 
@@ -15,14 +14,13 @@ public class WolfKnight_ChaseState : EnemyChaseState
         string animBoolName,
         D_EnemyChaseState stateData,
         WolfKnight enemy,
-        D_EnemyData enemyData,
         D_EnemyMeleeAttackData attackData,
         D_EnemyCoolDownData coolDownData
-    ) : base(entity, stateMachine, animBoolName, stateData)
+    )
+        : base(entity, stateMachine, animBoolName, stateData)
     {
         this.coolDownData = coolDownData;
         this.attackData = attackData;
-        this.enemyData = enemyData;
         this.enemy = enemy;
     }
 

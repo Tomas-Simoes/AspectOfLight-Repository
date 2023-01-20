@@ -7,6 +7,8 @@ public class Entity : MonoBehaviour
     [Header("Entity Data")]
     public StateMachine stateMachine;
     public D_Entity entityData;
+
+    [SerializeField]
     protected float currentHealth;
     public int facingDirection;
 

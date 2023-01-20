@@ -45,7 +45,11 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
                 stateData.attackableLayer
             );
 
-            foreach (Collider2D objectHitted in objectsOverlaped) { }
+            foreach (Collider2D objectHitted in objectsOverlaped)
+            {
+                // this can change if I want the enemy to attack several entities and not only the player
+                objectHitted.gameObject.GetComponent<Player>().TakeDamage(stateData.damage);
+            }
 
             attackedOnce = true;
         }
