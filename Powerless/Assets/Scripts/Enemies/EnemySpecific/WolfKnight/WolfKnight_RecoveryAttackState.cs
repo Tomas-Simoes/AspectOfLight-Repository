@@ -113,7 +113,7 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
             entity.CheckIfFlip(
                 entity.facingDirection,
                 enemy.transform.position,
-                enemy.target.transform.position
+                (Vector2)recoveryPoint
             );
 
             entity.GoTowardsTarget((Vector2)recoveryPoint, stateData.recoveryMovementSpeed);

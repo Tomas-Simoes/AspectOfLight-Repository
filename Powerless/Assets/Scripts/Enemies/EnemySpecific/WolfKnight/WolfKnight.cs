@@ -48,7 +48,7 @@ public class WolfKnight : Entity
         base.Start();
 
         seeker = GetComponent<Seeker>();
-        InvokeRepeating("UpdatePath", 0f, 0.5f);
+        InvokeRepeating("UpdatePath", 0f, 0.2f);
 
         currentHealth = entityData.MAX_HEALTH;
         timeSinceAttack = coolDownData.normalAttackCD;
@@ -97,6 +97,7 @@ public class WolfKnight : Entity
     {
         if (seeker.IsDone())
         {
+            Debug.Log("Updating Path.");
             seeker.StartPath(pivot.transform.position, target.transform.position, OnPathComplete);
         }
     }
@@ -107,6 +108,8 @@ public class WolfKnight : Entity
         {
             this.path = path;
             currentWaypoint = 0;
+
+            Debug.Log("Path Completed!");
         }
     }
 
@@ -120,7 +123,19 @@ public class WolfKnight : Entity
         Gizmos.DrawWireSphere(target.transform.position, recoveryAttackData.recoveryAreaRadius);
 
         if (Application.isPlaying)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(
+                pivot.transform.position,
+                meleeAttackData.minimumDistanceToAttack
+            );
+
+            Gizmos.color = Color.black;
             Gizmos.DrawLine(transform.position, recoveryAttackState.recoveryPoint);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere((Vector2)path.vectorPath[currentWaypoint], 0.5f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)

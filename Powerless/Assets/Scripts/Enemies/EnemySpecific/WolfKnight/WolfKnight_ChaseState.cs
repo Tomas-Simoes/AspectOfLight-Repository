@@ -54,7 +54,9 @@ public class WolfKnight_ChaseState : EnemyChaseState
             enemy.target.transform.position
         );
 
-        if (Vector2.Distance(enemy.rb.position, enemy.path.vectorPath[enemy.currentWaypoint]) < 3f)
+        if (
+            Vector2.Distance(enemy.rb.position, enemy.path.vectorPath[enemy.currentWaypoint]) < 0.5f
+        )
         {
             enemy.currentWaypoint++;
         }
@@ -68,11 +70,5 @@ public class WolfKnight_ChaseState : EnemyChaseState
             (Vector2)enemy.path.vectorPath[enemy.currentWaypoint],
             stateData.chaseSpeed
         );
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(enemy.transform.position, attackData.minimumDistanceToAttack);
     }
 }
