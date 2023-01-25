@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class WolfKnight : Entity
 {
     public GameObject target;
+    private Seeker seeker;
+
+    public Path path;
+    public int currentWaypoint = 0;
 
     public WolfKnight_IdleState idleState { get; private set; }
     public WolfKnight_MoveState moveState { get; private set; }
@@ -41,6 +46,10 @@ public class WolfKnight : Entity
     public override void Start()
     {
         base.Start();
+
+        seeker = GetComponent<Seeker>();
+        InvokeRepeating("UpdatePath", 0f, 0.5f);
+
         currentHealth = entityData.MAX_HEALTH;
         timeSinceAttack = coolDownData.normalAttackCD;
 
@@ -81,8 +90,24 @@ public class WolfKnight : Entity
     public override void Update()
     {
         base.Update();
-
         timeSinceAttack += Time.deltaTime;
+    }
+
+    private void UpdatePath()
+    {
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(pivot.transform.position, target.transform.position, OnPathComplete);
+        }
+    }
+
+    private void OnPathComplete(Path path)
+    {
+        if (!path.error)
+        {
+            this.path = path;
+            currentWaypoint = 0;
+        }
     }
 
     public override void OnDrawGizmos()

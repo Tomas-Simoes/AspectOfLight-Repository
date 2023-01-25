@@ -39,7 +39,6 @@ public class WolfKnight_ChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         if (
             Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
             <= attackData.minimumDistanceToAttack
@@ -54,12 +53,21 @@ public class WolfKnight_ChaseState : EnemyChaseState
             enemy.transform.position,
             enemy.target.transform.position
         );
+
+        if (Vector2.Distance(enemy.rb.position, enemy.path.vectorPath[enemy.currentWaypoint]) < 3f)
+        {
+            enemy.currentWaypoint++;
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        entity.GoTowardsTarget(enemy.target.transform.position, stateData.chaseSpeed);
+
+        entity.GoTowardsTarget(
+            (Vector2)enemy.path.vectorPath[enemy.currentWaypoint],
+            stateData.chaseSpeed
+        );
     }
 
     private void OnDrawGizmos()

@@ -11,7 +11,8 @@ public class EnemyChaseState : State
         StateMachine stateMachine,
         string animBoolName,
         D_EnemyChaseState stateData
-    ) : base(entity, stateMachine, animBoolName)
+    )
+        : base(entity, stateMachine, animBoolName)
     {
         this.stateData = stateData;
     }
