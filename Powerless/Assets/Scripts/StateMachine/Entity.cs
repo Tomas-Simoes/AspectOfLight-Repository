@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     public StateMachine stateMachine;
     public D_Entity entityData;
 
+    [Header("Entity Data")]
     [SerializeField]
     protected float currentHealth;
     public int facingDirection;
@@ -93,7 +94,14 @@ public class Entity : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+
+    //Change this later to Enemy class
+    public GameObject InstantiateObject(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(prefab, position, rotation);
     }
+
+    //Only for testing purpouses
 
     public virtual bool CheckWall()
     {
