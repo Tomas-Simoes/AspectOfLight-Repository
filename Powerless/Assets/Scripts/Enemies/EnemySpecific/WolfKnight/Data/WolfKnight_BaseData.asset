@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a23a8e8e3d037b459b4e95d45929a50, type: 3}
   m_Name: WolfKnight_BaseData
   m_EditorClassIdentifier: 
+  MAX_HEALTH: 5
   wallCheckDistance: 0.2
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 512

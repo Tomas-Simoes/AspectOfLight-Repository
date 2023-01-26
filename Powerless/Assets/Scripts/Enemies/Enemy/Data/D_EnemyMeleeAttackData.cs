@@ -8,4 +8,5 @@ public class D_EnemyMeleeAttackData : ScriptableObject
     public float minimumDistanceToAttack;
     public float attackRadius;
     public LayerMask attackableLayer;
+    public float damage;
 }

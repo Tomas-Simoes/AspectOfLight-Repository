@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1553190749}
   - component: {fileID: 1125331893943953442}
   m_Layer: 0
-  m_Name: LineOfSign
+  m_Name: LineOfSignTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.5191018, y: 0}
   serializedVersion: 2
-  m_Radius: 3.6146104
+  m_Radius: 5.1719155
 --- !u!1 &2024559157
 GameObject:
   m_ObjectHideFlags: 0
@@ -72,12 +72,43 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2024559157}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.22, y: -0.27, z: 0}
+  m_LocalPosition: {x: 0.52, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4617882225253241955}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &649408093733718686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3050112523613307258}
+  m_Layer: 7
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3050112523613307258
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 649408093733718686}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.133, y: -0.176, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4617882225253241955}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4617882224428714323
 GameObject:
@@ -146,6 +177,7 @@ Transform:
   - {fileID: 4617882224428714322}
   - {fileID: 1553190749}
   - {fileID: 2024559158}
+  - {fileID: 3050112523613307258}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -271,15 +303,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: b41bfb5335fad054cb47c4fe857503f6, type: 2}
+  facingDirection: 0
   wallCheck: {fileID: 4617882224428714322}
-  currentHealth: 0
+  pivot: {fileID: 649408093733718686}
   target: {fileID: 0}
+  timeSinceAttack: 0
   idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
   moveStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
   chaseStateData: {fileID: 11400000, guid: 6164c9fe3611dd340ae169556772652e, type: 2}
   meleeAttackData: {fileID: 11400000, guid: 355cc5c9f7b0ffc43835a17966465aa2, type: 2}
   coolDownData: {fileID: 11400000, guid: dac2e77e8f31de642bb344ec9a6befd9, type: 2}
   enemyData: {fileID: 11400000, guid: 1032107bf9dd2d444b575cee41e2864a, type: 2}
+  recoveryAttackData: {fileID: 11400000, guid: b3a871399d97cb3439f023b6d915cc0c, type: 2}
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}

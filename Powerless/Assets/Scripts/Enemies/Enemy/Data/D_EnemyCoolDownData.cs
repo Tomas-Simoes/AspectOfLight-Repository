@@ -6,5 +6,4 @@ using UnityEngine;
 public class D_EnemyCoolDownData : ScriptableObject
 {
     public float normalAttackCD = 5;
-    public float timeSinceNormalAttack = 5;
 }

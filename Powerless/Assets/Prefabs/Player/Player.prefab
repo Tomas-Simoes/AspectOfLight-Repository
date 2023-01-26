@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 229118593}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Spawnpoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -40,7 +40,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 752691949}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: SpawnPoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1956915855}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Spawnpoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -105,7 +105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1990554868}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Spawnpoint
   m_TagString: Untagged
   m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
@@ -288,7 +288,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 8c4f4faf969e2a34287972178e6bd276, type: 2}
+  facingDirection: 0
   wallCheck: {fileID: 480230101691718370}
+  pivot: {fileID: 0}
   coolDownData: {fileID: 11400000, guid: 07f65c5ccfc73e64ab563f8dec899eee, type: 2}
   moveStateData: {fileID: 11400000, guid: e70a09bca30f5c243b680560dfe84669, type: 2}
   dashStateData: {fileID: 11400000, guid: b726f2b98028dd54e9b5d4211cfee371, type: 2}

@@ -5,7 +5,6 @@ using UnityEngine;
 public class WolfKnight_ChaseState : EnemyChaseState
 {
     private WolfKnight enemy;
-    private D_EnemyData enemyData;
     private D_EnemyMeleeAttackData attackData;
     private D_EnemyCoolDownData coolDownData;
 
@@ -15,20 +14,21 @@ public class WolfKnight_ChaseState : EnemyChaseState
         string animBoolName,
         D_EnemyChaseState stateData,
         WolfKnight enemy,
-        D_EnemyData enemyData,
         D_EnemyMeleeAttackData attackData,
         D_EnemyCoolDownData coolDownData
-    ) : base(entity, stateMachine, animBoolName, stateData)
+    )
+        : base(entity, stateMachine, animBoolName, stateData)
     {
         this.coolDownData = coolDownData;
         this.attackData = attackData;
-        this.enemyData = enemyData;
         this.enemy = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        enemy.timeSinceAttack = coolDownData.normalAttackCD;
     }
 
     public override void Exit()
@@ -39,14 +39,13 @@ public class WolfKnight_ChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         if (
             Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
-                <= attackData.minimumDistanceToAttack
-            && coolDownData.timeSinceNormalAttack >= coolDownData.normalAttackCD
+            <= attackData.minimumDistanceToAttack
         )
         {
-            stateMachine.ChangeState(enemy.attackState);
+            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemy.attackState);
         }
 
         entity.CheckIfFlip(
@@ -55,18 +54,21 @@ public class WolfKnight_ChaseState : EnemyChaseState
             enemy.target.transform.position
         );
 
-        coolDownData.timeSinceNormalAttack += Time.deltaTime;
+        if (
+            Vector2.Distance(enemy.rb.position, enemy.path.vectorPath[enemy.currentWaypoint]) < 0.5f
+        )
+        {
+            enemy.currentWaypoint++;
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        StartChasing(enemy.target);
-    }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(enemy.transform.position, attackData.minimumDistanceToAttack);
+        entity.GoTowardsTarget(
+            (Vector2)enemy.path.vectorPath[enemy.currentWaypoint],
+            stateData.chaseSpeed
+        );
     }
 }

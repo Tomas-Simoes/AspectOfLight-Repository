@@ -1,15 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class WolfKnight : Entity
 {
     public GameObject target;
+    private Seeker seeker;
+
+    public Path path;
+    public int currentWaypoint = 0;
 
     public WolfKnight_IdleState idleState { get; private set; }
     public WolfKnight_MoveState moveState { get; private set; }
     public WolfKnight_ChaseState chaseState { get; private set; }
     public WolfKnight_AttackState attackState { get; private set; }
+    public WolfKnight_RecoveryAttackState recoveryAttackState { get; private set; }
+
+    [Header("Cooldowns")]
+    public float timeSinceAttack;
 
     [Header("State Data")]
     [SerializeField]
@@ -28,7 +37,7 @@ public class WolfKnight : Entity
     private D_EnemyCoolDownData coolDownData;
 
     [SerializeField]
-    private D_EnemyData enemyData;
+    private D_EnemyRecoveryAttackState recoveryAttackData;
 
     [Header("Others")]
     public GameObject[] patrolPoints;
@@ -37,7 +46,12 @@ public class WolfKnight : Entity
     public override void Start()
     {
         base.Start();
-        currentHealth = enemyData.MAX_HEALTH;
+
+        seeker = GetComponent<Seeker>();
+        InvokeRepeating("UpdatePath", 0f, 0.2f);
+
+        currentHealth = entityData.MAX_HEALTH;
+        timeSinceAttack = coolDownData.normalAttackCD;
 
         idleState = new WolfKnight_IdleState(this, stateMachine, "idle", idleStateData, this);
         moveState = new WolfKnight_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -47,7 +61,6 @@ public class WolfKnight : Entity
             "move", // this can change if we want to have a "chace" animation aswell
             chaseStateData,
             this,
-            enemyData,
             meleeAttackData,
             coolDownData
         );
@@ -60,7 +73,69 @@ public class WolfKnight : Entity
             this
         );
 
+        recoveryAttackState = new WolfKnight_RecoveryAttackState(
+            this,
+            stateMachine,
+            "move",
+            recoveryAttackData,
+            this,
+            meleeAttackData,
+            coolDownData,
+            moveStateData
+        );
+
         stateMachine.Init(moveState);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        timeSinceAttack += Time.deltaTime;
+    }
+
+    private void UpdatePath()
+    {
+        if (seeker.IsDone())
+        {
+            Debug.Log("Updating Path.");
+            seeker.StartPath(pivot.transform.position, target.transform.position, OnPathComplete);
+        }
+    }
+
+    private void OnPathComplete(Path path)
+    {
+        if (!path.error)
+        {
+            this.path = path;
+            currentWaypoint = 0;
+
+            Debug.Log("Path Completed!");
+        }
+    }
+
+    public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(attackPosition.transform.position, meleeAttackData.attackRadius);
+
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(target.transform.position, recoveryAttackData.recoveryAreaRadius);
+
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(
+                pivot.transform.position,
+                meleeAttackData.minimumDistanceToAttack
+            );
+
+            Gizmos.color = Color.black;
+            Gizmos.DrawLine(transform.position, recoveryAttackState.recoveryPoint);
+
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere((Vector2)path.vectorPath[currentWaypoint], 0.5f);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -76,7 +151,6 @@ public class WolfKnight : Entity
     {
         if (other.CompareTag("Player"))
         {
-            target = null;
             stateMachine.ChangeState(moveState);
         }
     }

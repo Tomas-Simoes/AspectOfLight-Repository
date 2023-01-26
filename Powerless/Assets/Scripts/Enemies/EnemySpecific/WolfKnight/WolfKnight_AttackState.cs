@@ -23,6 +23,8 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
     public override void Enter()
     {
         base.Enter();
+        enemy.timeSinceAttack = 0;
+        attackedOnce = false;
     }
 
     public override void Exit()
@@ -33,24 +35,28 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        // TODO find a way to stop the code until the animation is completed
-        for (
-            float i = 0;
-            i <= enemy.anim.GetCurrentAnimatorStateInfo(0).length;
-            i += Time.deltaTime
-        ) { }
+        float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-        enemy.anim.SetBool("attack", false);
-
-        Collider2D[] objectsOverlaped = Physics2D.OverlapCircleAll(
-            enemy.attackPosition.transform.position,
-            stateData.attackRadius,
-            stateData.attackableLayer
-        );
-
-        foreach (Collider2D objectHitted in objectsOverlaped)
+        if (_animationTime > 0.40f && !attackedOnce)
         {
-            Debug.Log("This got hitted" + objectHitted);
+            Collider2D[] objectsOverlaped = Physics2D.OverlapCircleAll(
+                enemy.attackPosition.transform.position,
+                stateData.attackRadius,
+                stateData.attackableLayer
+            );
+
+            foreach (Collider2D objectHitted in objectsOverlaped)
+            {
+                // this can change if I want the enemy to attack several entities and not only the player
+                objectHitted.gameObject.GetComponent<Player>().TakeDamage(stateData.damage);
+            }
+
+            attackedOnce = true;
+        }
+
+        if (_animationTime > 1f)
+        {
+            stateMachine.ChangeState(enemy.recoveryAttackState);
         }
     }
 
