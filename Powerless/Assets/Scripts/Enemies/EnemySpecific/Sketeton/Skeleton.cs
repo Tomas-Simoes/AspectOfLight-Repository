@@ -31,6 +31,7 @@ public class Skeleton : Entity
 
     [Header("Others")]
     public GameObject[] patrolPoints;
+    public GameObject attackPosition;
 
     //  public GameObject attackPosition;
     public override void Start()
@@ -38,12 +39,7 @@ public class Skeleton : Entity
         base.Start();
         currentHealth = enemyData.MAX_HEALTH;
 
-        idleState = new SkeletonidleState(
-            this,
-            stateMachine,
-            "idle",
-            idleStateData,
-            this);
+        idleState = new SkeletonidleState(this, stateMachine, "idle", idleStateData, this);
         moveState = new SkeletonMoveState(
             this,
             stateMachine,
@@ -89,6 +85,17 @@ public class Skeleton : Entity
         {
             target = null;
             stateMachine.ChangeState(moveState);
+        }
+    }
+
+    public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(rb.transform.position, shootingStateData.minimumDistanceToAttack); //TODO Change this to draw with the center on the pivot
         }
     }
 }

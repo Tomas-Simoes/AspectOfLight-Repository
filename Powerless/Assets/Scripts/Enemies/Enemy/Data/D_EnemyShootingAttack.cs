@@ -6,6 +6,11 @@ using UnityEngine;
 public class D_EnemyShootingAttack : ScriptableObject
 {
     public float minimumDistanceToAttack;
-    public float attackRadius;
     public LayerMask attackableLayer;
+
+    public GameObject bullet;
+
+    public float bulletSpeed;
+    public float fireRate = 0.5f;
+    private float nextFireTime;
 }

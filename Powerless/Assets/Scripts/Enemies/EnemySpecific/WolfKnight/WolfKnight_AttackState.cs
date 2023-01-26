@@ -13,7 +13,8 @@ public class WolfKnight_AttackState : EnemyMeleeAttack
         string animBoolName,
         D_EnemyMeleeAttackData stateData,
         WolfKnight enemy
-    ) : base(entity, stateMachine, animBoolName)
+    )
+        : base(entity, stateMachine, animBoolName)
     {
         this.stateData = stateData;
         this.enemy = enemy;

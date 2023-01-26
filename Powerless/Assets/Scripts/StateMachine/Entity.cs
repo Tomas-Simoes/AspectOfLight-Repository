@@ -8,6 +8,7 @@ public class Entity : MonoBehaviour
     public StateMachine stateMachine;
     public D_Entity entityData;
 
+    [Header("Entity Data")]
     public int facingDirection;
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
@@ -93,6 +94,12 @@ public class Entity : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    //Change this later to Enemy class
+    public GameObject InstantiateObject(GameObject prefab, Vector3 position, Quaternion rotation)
+    {
+        return Instantiate(prefab, position, rotation);
     }
 
     //Only for testing purpouses

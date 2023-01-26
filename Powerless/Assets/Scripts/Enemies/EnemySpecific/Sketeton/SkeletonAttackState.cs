@@ -4,51 +4,60 @@ using UnityEngine;
 
 public class SkeletonAttackState : EnemyShootingState
 {
+    private Skeleton enemy;
+    private D_EnemyData enemyData;
+    private D_EnemyShootingAttack stateData;
+    private D_EnemyCoolDownData coolDownData;
 
-  private Skeleton skeletonEnemy;
-  private D_EnemyData enemyData;
-  private D_EnemyShootingAttack stateData;
-  private D_EnemyCoolDownData coolDownData;
+    public SkeletonAttackState(
+        Entity entity,
+        StateMachine stateMachine,
+        string animBoolName,
+        D_EnemyShootingAttack stateData,
+        Skeleton enemy
+    )
+        : base(entity, stateMachine, animBoolName)
+    {
+        this.stateData = stateData;
+        this.enemy = enemy;
+    }
 
-  public SkeletonAttackState(
-      Entity entity,
-      StateMachine stateMachine,
-      string animBoolName,
-      D_EnemyShootingAttack stateData,
-      Skeleton enemy
-  ) : base(entity, stateMachine, animBoolName)
-  {
-    this.stateData = stateData;
-    this.skeletonEnemy = enemy;
-  }
+    public override void Enter()
+    {
+        base.Enter();
+        GameObject _bulletInstance = entity.InstantiateObject(
+            stateData.bullet,
+            enemy.attackPosition.transform.position,
+            Quaternion.identity
+        );
 
-  public override void Enter()
-  {
-    base.Enter();
-  }
+        _bulletInstance.transform.parent = GameObject.Find("Enemies Bullets").transform;
 
-  public override void Exit()
-  {
-    base.Exit();
-  }
+        stateMachine.ChangeState(enemy.chaseState);
+    }
 
-  public override void GetInputs()
-  {
-    base.GetInputs();
-  }
+    public override void Exit()
+    {
+        base.Exit();
+    }
 
-  public override void LogicUpdate()
-  {
-    base.LogicUpdate();
-  }
+    public override void GetInputs()
+    {
+        base.GetInputs();
+    }
 
-  public override void PhysicsUpdate()
-  {
-    base.PhysicsUpdate();
-  }
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+    }
 
-  public override void UpdateCooldowns()
-  {
-    base.UpdateCooldowns();
-  }
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
+
+    public override void UpdateCooldowns()
+    {
+        base.UpdateCooldowns();
+    }
 }
