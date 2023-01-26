@@ -5,48 +5,48 @@ using Pathfinding;
 
 public class WolfKnight : Entity
 {
-    public GameObject target;
-    private Seeker seeker;
-
-    public Path path;
-    public int currentWaypoint = 0;
-
     public WolfKnight_IdleState idleState { get; private set; }
     public WolfKnight_MoveState moveState { get; private set; }
     public WolfKnight_ChaseState chaseState { get; private set; }
     public WolfKnight_AttackState attackState { get; private set; }
     public WolfKnight_RecoveryAttackState recoveryAttackState { get; private set; }
 
-    [Header("Cooldowns")]
-    public float timeSinceAttack;
-
     [Header("State Data")]
     [SerializeField]
     private D_EnemyIdleState idleStateData;
 
     [SerializeField]
-    private D_EnemyMoveState moveStateData;
+    private D_EnemyPatrolState patrolStateData;
 
     [SerializeField]
     private D_EnemyChaseState chaseStateData;
 
     [SerializeField]
-    private D_EnemyMeleeAttackData meleeAttackData;
+    private D_EnemyMeleeAttackState meleeAttackData;
 
     [SerializeField]
-    private D_EnemyCoolDownData coolDownData;
+    private D_EnemyCoolDown coolDownData;
 
     [SerializeField]
     private D_EnemyRecoveryAttackState recoveryAttackData;
 
-    [Header("Others")]
+    [Header("Cooldowns")]
+    public float timeSinceAttack;
+
+    [Header("Pathing")]
+    private Seeker seeker;
+    public Path path;
+    public int currentWaypoint = 0;
+
+    [Header("Informations")]
+    public GameObject target;
+    public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
     public GameObject attackPosition;
 
     public override void Start()
     {
         base.Start();
-
         seeker = GetComponent<Seeker>();
         InvokeRepeating("UpdatePath", 0f, 0.2f);
 
@@ -54,7 +54,7 @@ public class WolfKnight : Entity
         timeSinceAttack = coolDownData.normalAttackCD;
 
         idleState = new WolfKnight_IdleState(this, stateMachine, "idle", idleStateData, this);
-        moveState = new WolfKnight_MoveState(this, stateMachine, "move", moveStateData, this);
+        moveState = new WolfKnight_MoveState(this, stateMachine, "move", patrolStateData, this);
         chaseState = new WolfKnight_ChaseState(
             this,
             stateMachine,
@@ -81,7 +81,7 @@ public class WolfKnight : Entity
             this,
             meleeAttackData,
             coolDownData,
-            moveStateData
+            patrolStateData
         );
 
         stateMachine.Init(moveState);
@@ -90,6 +90,12 @@ public class WolfKnight : Entity
     public override void Update()
     {
         base.Update();
+        UpdateCooldowns();
+    }
+
+    public override void UpdateCooldowns()
+    {
+        base.UpdateCooldowns();
         timeSinceAttack += Time.deltaTime;
     }
 
@@ -97,7 +103,6 @@ public class WolfKnight : Entity
     {
         if (seeker.IsDone())
         {
-            Debug.Log("Updating Path.");
             seeker.StartPath(pivot.transform.position, target.transform.position, OnPathComplete);
         }
     }
@@ -108,8 +113,6 @@ public class WolfKnight : Entity
         {
             this.path = path;
             currentWaypoint = 0;
-
-            Debug.Log("Path Completed!");
         }
     }
 

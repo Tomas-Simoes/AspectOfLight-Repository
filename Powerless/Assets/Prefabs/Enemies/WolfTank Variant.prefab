@@ -111,6 +111,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6cbc5e6c7c7b0a644b61a7d6e26f8bf8, type: 2}
     - target: {fileID: 8933178181438029007, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
+      propertyPath: patrolStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: 6327beb54036f674caa3d1c980b585d1, type: 2}
+    - target: {fileID: 8933178181438029007, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 0}
@@ -140,11 +144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8933178181438029008, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.15
+      value: -5.73
       objectReference: {fileID: 0}
     - target: {fileID: 8933178181438029008, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.95
+      value: -2.46
       objectReference: {fileID: 0}
     - target: {fileID: 8933178181438029008, guid: a651cfd96b626b34d93f8e6622e65839, type: 3}
       propertyPath: m_LocalPosition.z

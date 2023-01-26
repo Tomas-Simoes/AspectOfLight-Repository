@@ -8,8 +8,6 @@ public class Player : Entity
     public PlayerDashState dashState { get; private set; }
     public PlayerNecromancerState necromancerState { get; private set; }
 
-    public InputHandler inputHandler { get; private set; }
-
     [Header("States Data")]
     [SerializeField]
     private D_PlayerCoolDown coolDownData;
@@ -23,27 +21,29 @@ public class Player : Entity
     [SerializeField]
     private D_PlayerNecromancerState necromancerStateData;
 
-    [Header("Other Data")]
+    [Header("Cooldowns")]
+    public float timeSinceDash;
+    public float timeSinceNecromancer;
+
+    [Header("Information")]
+    public Vector2 axisMovement;
     public GameObject[] dronesSpawnPoints;
+
+    public InputHandler inputHandler { get; private set; }
 
     public override void Start()
     {
         base.Start();
         currentHealth = entityData.MAX_HEALTH;
+        timeSinceDash = coolDownData.dashCD;
+        timeSinceNecromancer = coolDownData.necromancerCD;
 
         if (inputHandler == null)
         {
             inputHandler = this.GetComponent<InputHandler>();
         }
 
-        moveState = new PlayerMoveState(
-            this,
-            stateMachine,
-            "move",
-            moveStateData,
-            this,
-            coolDownData
-        );
+        moveState = new PlayerMoveState(this, stateMachine, "move", moveStateData, this);
         dashState = new PlayerDashState(
             this,
             stateMachine,
@@ -63,11 +63,38 @@ public class Player : Entity
         stateMachine.Init(moveState);
     }
 
-    public virtual void CreatePrefab(
-        GameObject prefabToSpawn,
-        GameObject spawnPoint,
-        GameObject parent
-    )
+    public override void Update()
+    {
+        base.Update();
+
+        GetInputs();
+    }
+
+    public override void UpdateCooldowns()
+    {
+        base.UpdateCooldowns();
+
+        timeSinceDash += Time.deltaTime;
+        timeSinceNecromancer += Time.deltaTime;
+    }
+
+    private void GetInputs()
+    {
+        axisMovement.x = inputHandler.xAxis;
+        axisMovement.y = inputHandler.yAxis;
+
+        if (inputHandler.pressedDash && timeSinceDash >= coolDownData.dashCD)
+        {
+            stateMachine.ChangeState(dashState);
+        }
+
+        if (inputHandler.pressedAbilityOne && timeSinceNecromancer >= coolDownData.necromancerCD)
+        {
+            stateMachine.ChangeState(necromancerState);
+        }
+    }
+
+    public void CreatePrefab(GameObject prefabToSpawn, GameObject spawnPoint, GameObject parent)
     {
         var _newGameObject = Instantiate(
             prefabToSpawn,

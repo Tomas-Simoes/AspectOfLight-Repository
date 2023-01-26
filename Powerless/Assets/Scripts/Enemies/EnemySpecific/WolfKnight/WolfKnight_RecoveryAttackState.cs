@@ -5,9 +5,9 @@ using UnityEngine;
 public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
 {
     private WolfKnight enemy;
-    private D_EnemyMeleeAttackData attackData;
-    private D_EnemyCoolDownData coolDownData;
-    private D_EnemyMoveState moveStateData;
+    private D_EnemyMeleeAttackState attackData;
+    private D_EnemyCoolDown coolDownData;
+    private D_EnemyPatrolState patrolStateData;
 
     private bool goTowardsTarget;
     private bool goTowardsRecoveryPoint;
@@ -20,16 +20,16 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
         string animBoolName,
         D_EnemyRecoveryAttackState stateData,
         WolfKnight enemy,
-        D_EnemyMeleeAttackData attackData,
-        D_EnemyCoolDownData coolDownData,
-        D_EnemyMoveState moveStateData
+        D_EnemyMeleeAttackState attackData,
+        D_EnemyCoolDown coolDownData,
+        D_EnemyPatrolState patrolStateData
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
         this.attackData = attackData;
         this.coolDownData = coolDownData;
-        this.moveStateData = moveStateData;
+        this.patrolStateData = patrolStateData;
     }
 
     public override void Enter()
@@ -105,7 +105,10 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
                 enemy.target.transform.position
             );
 
-            entity.GoTowardsTarget(enemy.target.transform.position, moveStateData.movementSpeed);
+            entity.GoTowardsPosition(
+                enemy.target.transform.position,
+                patrolStateData.movementSpeed
+            );
         }
 
         if (goTowardsRecoveryPoint)
@@ -116,7 +119,7 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
                 (Vector2)recoveryPoint
             );
 
-            entity.GoTowardsTarget((Vector2)recoveryPoint, stateData.recoveryMovementSpeed);
+            entity.GoTowardsPosition((Vector2)recoveryPoint, stateData.recoveryMovementSpeed);
         }
     }
 }

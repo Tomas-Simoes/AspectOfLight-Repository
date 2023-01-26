@@ -14,7 +14,8 @@ public class EnemyIdleState : State
         StateMachine stateMachine,
         string animBoolName,
         D_EnemyIdleState stateData
-    ) : base(entity, stateMachine, animBoolName)
+    )
+        : base(entity, stateMachine, animBoolName)
     {
         this.stateData = stateData;
     }
@@ -51,11 +52,6 @@ public class EnemyIdleState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-    }
-
-    public void SetFlipAfterIdle(bool flip)
-    {
-        flipAfterIdle = flip;
     }
 
     private void SetRandomIdleTime()

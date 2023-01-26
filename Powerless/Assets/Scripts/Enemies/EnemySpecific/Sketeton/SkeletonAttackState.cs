@@ -2,29 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonAttackState : EnemyShootingState
+public class SkeletonAttackState : EnemyRangedAttackState
 {
     private Skeleton enemy;
-    private D_EnemyData enemyData;
-    private D_EnemyShootingAttack stateData;
-    private D_EnemyCoolDownData coolDownData;
+    private D_EnemyCoolDown coolDownData;
 
     public SkeletonAttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyShootingAttack stateData,
+        D_EnemyRangedAttackState stateData,
         Skeleton enemy
     )
-        : base(entity, stateMachine, animBoolName)
+        : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.stateData = stateData;
         this.enemy = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
+        /*
         GameObject _bulletInstance = entity.InstantiateObject(
             stateData.bullet,
             enemy.attackPosition.transform.position,
@@ -34,16 +32,12 @@ public class SkeletonAttackState : EnemyShootingState
         _bulletInstance.transform.parent = GameObject.Find("Enemies Bullets").transform;
 
         stateMachine.ChangeState(enemy.chaseState);
+        */
     }
 
     public override void Exit()
     {
         base.Exit();
-    }
-
-    public override void GetInputs()
-    {
-        base.GetInputs();
     }
 
     public override void LogicUpdate()
@@ -54,10 +48,5 @@ public class SkeletonAttackState : EnemyShootingState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-    }
-
-    public override void UpdateCooldowns()
-    {
-        base.UpdateCooldowns();
     }
 }

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class WolfTank : Entity
 {
-    public GameObject target;
-
     public WolfTank_IdleState idleState { get; private set; }
     public WolfTank_MoveState moveState { get; private set; }
     public WolfTank_ChaseState chaseState { get; private set; }
@@ -15,12 +13,14 @@ public class WolfTank : Entity
     private D_EnemyIdleState idleStateData;
 
     [SerializeField]
-    private D_EnemyMoveState moveStateData;
+    private D_EnemyPatrolState patrolStateData;
 
     [SerializeField]
     private D_EnemyChaseState chaseStateData;
 
-    [Header("Others")]
+    [Header("Informations")]
+    public GameObject target;
+    public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
     public GameObject attackPosition;
 
@@ -30,7 +30,7 @@ public class WolfTank : Entity
         currentHealth = entityData.MAX_HEALTH;
 
         idleState = new WolfTank_IdleState(this, stateMachine, "idle", idleStateData, this);
-        moveState = new WolfTank_MoveState(this, stateMachine, "move", moveStateData, this);
+        moveState = new WolfTank_MoveState(this, stateMachine, "move", patrolStateData, this);
         chaseState = new WolfTank_ChaseState(
             this,
             stateMachine,

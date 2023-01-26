@@ -5,9 +5,7 @@ using UnityEngine;
 public class PlayerNecromancerState : State
 {
     public Player player;
-
     private D_PlayerNecromancerState stateData;
-    private D_PlayerCoolDown coolDownData;
 
     public PlayerNecromancerState(
         Entity entity,
@@ -16,17 +14,17 @@ public class PlayerNecromancerState : State
         D_PlayerNecromancerState stateData,
         Player player,
         D_PlayerCoolDown coolDownData
-    ) : base(entity, stateMachine, animBoolName)
+    )
+        : base(entity, stateMachine, animBoolName)
     {
         this.player = player;
         this.stateData = stateData;
-        this.coolDownData = coolDownData;
     }
 
     public override void Enter()
     {
         base.Enter();
-        coolDownData.timeSinceNecromancer = 0;
+        player.timeSinceNecromancer = 0;
 
         foreach (GameObject spawnpoint in player.dronesSpawnPoints)
         {

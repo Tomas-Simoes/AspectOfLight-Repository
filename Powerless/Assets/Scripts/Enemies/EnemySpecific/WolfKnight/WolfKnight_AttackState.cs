@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfKnight_AttackState : EnemyMeleeAttack
+public class WolfKnight_AttackState : EnemyMeleeAttackState
 {
     private WolfKnight enemy;
-    private D_EnemyMeleeAttackData stateData;
 
     public WolfKnight_AttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyMeleeAttackData stateData,
+        D_EnemyMeleeAttackState stateData,
         WolfKnight enemy
     )
-        : base(entity, stateMachine, animBoolName)
+        : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.stateData = stateData;
         this.enemy = enemy;
     }
 

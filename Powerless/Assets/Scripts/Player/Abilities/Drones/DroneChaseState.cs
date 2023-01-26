@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class DroneChaseState : State
 {
-    protected bool isDetectingWall;
     private Drone drone;
-
     protected D_DroneChaseState stateData;
     private D_DroneAttackState attackStateData;
 
@@ -51,11 +49,6 @@ public class DroneChaseState : State
         base.Exit();
     }
 
-    public override void GetInputs()
-    {
-        base.GetInputs();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -78,22 +71,6 @@ public class DroneChaseState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        StartChasing(drone.closestEnemy);
-    }
-
-    public void StartChasing(GameObject closestEnemy)
-    {
-        entity.rb.MovePosition(
-            Vector3.MoveTowards(
-                entity.transform.position,
-                closestEnemy.transform.position,
-                stateData.droneChaseSpeed * Time.fixedDeltaTime
-            )
-        );
-    }
-
-    public override void UpdateCooldowns()
-    {
-        base.UpdateCooldowns();
+        entity.GoTowardsPosition(drone.closestEnemy.transform.position, stateData.movementSpeed);
     }
 }

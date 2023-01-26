@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class Drone : Entity
 {
-    public GameObject closestEnemy;
-
     public DroneChaseState chaseState { get; private set; }
     public DroneAttackState attackState { get; private set; }
-
-    //public DroneIdleState droneIdle { get; private set; } ???
 
     [Header("States Data")]
     [SerializeField]
@@ -18,13 +14,15 @@ public class Drone : Entity
     [SerializeField]
     private D_DroneChaseState chaseStateData;
 
+    [Header("Information")]
     [SerializeField]
     private LayerMask targetableObjects;
+    public GameObject closestEnemy;
 
     public override void Start()
     {
         base.Start();
-        facingDirection = -1;
+        facingDirection = -1; // just because the sprite was made facing left
 
         chaseState = new DroneChaseState(
             this,

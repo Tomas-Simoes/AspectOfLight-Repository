@@ -2,22 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonMoveState : EnemyMoveState
+public class SkeletonMoveState : EnemyPatrolState
 {
-    private Skeleton enemySkeleton;
+    private Skeleton enemy;
     private GameObject _currentPatrolPoint;
 
     public SkeletonMoveState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyMoveState stateData,
-        Skeleton enemy,
-        D_EnemyData enemyData
+        D_EnemyPatrolState stateData,
+        Skeleton enemy
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemySkeleton = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
@@ -30,51 +29,42 @@ public class SkeletonMoveState : EnemyMoveState
         base.Exit();
     }
 
-    public override void GetInputs()
-    {
-        base.GetInputs();
-    }
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        _currentPatrolPoint = enemySkeleton.patrolPoints[currentPatrolIndex];
+        _currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
 
         if (
-            Vector3.Distance(
-                enemySkeleton.transform.position,
-                _currentPatrolPoint.transform.position
-            ) < 0.5f
+            Vector3.Distance(enemy.transform.position, _currentPatrolPoint.transform.position)
+            < 0.5f
         )
         {
-            int _newIndex = (currentPatrolIndex + 1) % enemySkeleton.patrolPoints.Length;
+            int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
 
             SetCurrentPatrolIndex(_newIndex);
             entity.CheckIfFlip(
-                enemySkeleton.facingDirection,
+                enemy.facingDirection,
                 _currentPatrolPoint.transform.position,
-                enemySkeleton.patrolPoints[_newIndex].transform.position
+                enemy.patrolPoints[_newIndex].transform.position
             );
 
-            stateMachine.ChangeState(enemySkeleton.idleState);
+            stateMachine.ChangeState(enemy.idleState);
         }
         else
         {
-            stateData.goTowardsOtherPatrolPoint = true;
+            enemy.goTowardsOtherPatrolPoint = true;
         }
-    }
-
-    public override void UpdateCooldowns()
-    {
-        base.UpdateCooldowns();
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (stateData.goTowardsOtherPatrolPoint && _currentPatrolPoint != null)
+        if (enemy.goTowardsOtherPatrolPoint && _currentPatrolPoint != null)
         {
-            MoveTowardsPatrolPoint(_currentPatrolPoint, stateData.movementSpeed);
+            entity.GoTowardsPosition(
+                _currentPatrolPoint.transform.position,
+                stateData.movementSpeed
+            );
         }
     }
 }

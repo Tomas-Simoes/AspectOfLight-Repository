@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "newMoveData", menuName = "Data/State Data/Drone/Chase State")]
 public class D_DroneChaseState : ScriptableObject
 {
-    public float droneChaseSpeed = 4;
+    public float movementSpeed = 4;
 }

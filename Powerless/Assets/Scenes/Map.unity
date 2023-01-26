@@ -1748,7 +1748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 869319714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.15, y: -2.35, z: 0}
+  m_LocalPosition: {x: -3.43, y: -0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3974,7 +3974,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1142426403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.45, y: 0.36, z: 0}
+  m_LocalPosition: {x: -1.74, y: 2.46, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4286,39 +4286,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1356085779 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-  m_PrefabInstance: {fileID: 1467548310}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1356085785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356085779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 373b52eb9bf8c40f785bb6947a1aee66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  drawGizmos: 1
-  detailedGizmos: 0
-  startEndModifier:
-    addPoints: 0
-    exactStartPoint: 3
-    exactEndPoint: 3
-    useRaycasting: 0
-    mask:
-      serializedVersion: 2
-      m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
-  tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
-  graphMask:
-    value: -1
 --- !u!1 &1419205912
 GameObject:
   m_ObjectHideFlags: 0
@@ -4761,22 +4728,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfKnight (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241954, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_Size.x
-      value: 0.75687915
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241954, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_Size.y
-      value: 0.9437871
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241954, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.0916117
-      objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241954, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_Offset.y
-      value: -0.20666097
-      objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5020,7 +4971,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1699722723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.25, y: -3.94, z: 0}
+  m_LocalPosition: {x: -2.28, y: -1.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5038,21 +4989,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfKnight
       objectReference: {fileID: 0}
-    - target: {fileID: 4617882225253241953, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.37
+      value: -7
       objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.15
+      value: 2.76
       objectReference: {fileID: 0}
     - target: {fileID: 4617882225253241955, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5124,7 +5071,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1811157315}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.85, y: 2.52, z: 0}
+  m_LocalPosition: {x: -0.13, y: 3.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5371,11 +5318,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1267277768789818663, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -9.55
+      value: -5.73
       objectReference: {fileID: 0}
     - target: {fileID: 1267277768789818663, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.74
+      value: -2.46
       objectReference: {fileID: 0}
     - target: {fileID: 1267277768789818663, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5424,10 +5371,6 @@ PrefabInstance:
     - target: {fileID: 1267277768789818681, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: m_Name
       value: WolfTank
-      objectReference: {fileID: 0}
-    - target: {fileID: 1267277768789818681, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}

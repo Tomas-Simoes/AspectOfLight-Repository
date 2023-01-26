@@ -30,8 +30,4 @@ public class State
     public virtual void LogicUpdate() { }
 
     public virtual void PhysicsUpdate() { }
-
-    public virtual void UpdateCooldowns() { }
-
-    public virtual void GetInputs() { }
 }

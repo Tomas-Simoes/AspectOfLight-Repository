@@ -5,8 +5,8 @@ using UnityEngine;
 public class WolfKnight_ChaseState : EnemyChaseState
 {
     private WolfKnight enemy;
-    private D_EnemyMeleeAttackData attackData;
-    private D_EnemyCoolDownData coolDownData;
+    private D_EnemyMeleeAttackState attackData;
+    private D_EnemyCoolDown coolDownData;
 
     public WolfKnight_ChaseState(
         Entity entity,
@@ -14,8 +14,8 @@ public class WolfKnight_ChaseState : EnemyChaseState
         string animBoolName,
         D_EnemyChaseState stateData,
         WolfKnight enemy,
-        D_EnemyMeleeAttackData attackData,
-        D_EnemyCoolDownData coolDownData
+        D_EnemyMeleeAttackState attackData,
+        D_EnemyCoolDown coolDownData
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
@@ -66,7 +66,7 @@ public class WolfKnight_ChaseState : EnemyChaseState
     {
         base.PhysicsUpdate();
 
-        entity.GoTowardsTarget(
+        entity.GoTowardsPosition(
             (Vector2)enemy.path.vectorPath[enemy.currentWaypoint],
             stateData.chaseSpeed
         );

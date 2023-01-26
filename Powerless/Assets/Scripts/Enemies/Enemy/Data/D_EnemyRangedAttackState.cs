@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "newMoveData", menuName = "Data/State Data/Enemy/Shooting State")]
-public class D_EnemyShootingAttack : ScriptableObject
+[CreateAssetMenu(
+    fileName = "newRangedAttackData",
+    menuName = "Data/State Data/Enemy/Ranged Attack State"
+)]
+public class D_EnemyRangedAttackState : ScriptableObject
 {
     public float minimumDistanceToAttack;
     public LayerMask attackableLayer;

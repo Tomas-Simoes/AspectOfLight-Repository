@@ -26,28 +26,4 @@ public class EnemyChaseState : State
     {
         base.Exit();
     }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-    public bool CheckIfFlip(int facingDirection, Vector2 currentPosition, Vector2 futurePosition)
-    {
-        bool _newPatrolPointIsOnLeft = currentPosition.x > futurePosition.x;
-
-        if (facingDirection == 1)
-        {
-            return _newPatrolPointIsOnLeft;
-        }
-        else
-        {
-            return !_newPatrolPointIsOnLeft;
-        }
-    }
 }

@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    [Header("Entity Data")]
+    public Rigidbody2D rb { get; private set; }
+    public Animator anim { get; private set; }
+
     public StateMachine stateMachine;
-    public D_Entity entityData;
 
     [Header("Entity Data")]
+    public D_Entity entityData;
+
     [SerializeField]
     protected float currentHealth;
     public int facingDirection;
 
-    public Rigidbody2D rb { get; private set; }
-    public Animator anim { get; private set; }
-
+    [Header("Entity Informations")]
     [SerializeField]
     private Transform wallCheck;
 
@@ -37,6 +38,7 @@ public class Entity : MonoBehaviour
     public virtual void Update()
     {
         stateMachine.currentState.LogicUpdate();
+        UpdateCooldowns();
     }
 
     public virtual void FixedUpdate()
@@ -44,16 +46,18 @@ public class Entity : MonoBehaviour
         stateMachine.currentState.PhysicsUpdate();
     }
 
+    public virtual void UpdateCooldowns() { }
+
     public virtual void SetVelocity(float velocity)
     {
         velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
         rb.velocity = velocityWorkspace;
     }
 
-    public void GoTowardsTarget(Vector2 targetPosition, float speed)
+    public void GoTowardsPosition(Vector2 newPosition, float speed)
     {
         rb.MovePosition(
-            Vector3.MoveTowards(transform.position, targetPosition, speed * Time.fixedDeltaTime)
+            Vector3.MoveTowards(transform.position, newPosition, speed * Time.fixedDeltaTime)
         );
     }
 
@@ -94,24 +98,15 @@ public class Entity : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+    }
 
-    //Change this later to Enemy class
+    //TODO in entities that need this method, put it on that class
+    /*
     public GameObject InstantiateObject(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         return Instantiate(prefab, position, rotation);
     }
-
-    //Only for testing purpouses
-
-    public virtual bool CheckWall()
-    {
-        return Physics2D.Raycast(
-            wallCheck.position,
-            gameObject.transform.right,
-            entityData.wallCheckDistance,
-            entityData.whatIsGround
-        );
-    }
+    */
 
     public void WaitForAnimationToFinish(float animationDuration)
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfTank_MoveState : EnemyMoveState
+public class WolfTank_MoveState : EnemyPatrolState
 {
     private WolfTank enemy;
     private GameObject _currentPatrolPoint;
@@ -11,9 +11,10 @@ public class WolfTank_MoveState : EnemyMoveState
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyMoveState stateData,
+        D_EnemyPatrolState stateData,
         WolfTank enemy
-    ) : base(entity, stateMachine, animBoolName, stateData)
+    )
+        : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
     }
@@ -51,16 +52,19 @@ public class WolfTank_MoveState : EnemyMoveState
         }
         else
         {
-            stateData.goTowardsOtherPatrolPoint = true;
+            enemy.goTowardsOtherPatrolPoint = true;
         }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (stateData.goTowardsOtherPatrolPoint && _currentPatrolPoint != null)
+        if (enemy.goTowardsOtherPatrolPoint && _currentPatrolPoint != null)
         {
-            MoveTowardsPatrolPoint(_currentPatrolPoint, stateData.movementSpeed);
+            entity.GoTowardsPosition(
+                _currentPatrolPoint.transform.position,
+                stateData.movementSpeed
+            );
         }
     }
 }

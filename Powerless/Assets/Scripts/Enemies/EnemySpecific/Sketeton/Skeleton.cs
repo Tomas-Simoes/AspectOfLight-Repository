@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Skeleton : Entity
 {
-    public GameObject target;
     public SkeletonidleState idleState { get; private set; }
     public SkeletonMoveState moveState { get; private set; }
     public SkeletonChaseState chaseState { get; private set; }
@@ -15,21 +14,23 @@ public class Skeleton : Entity
     private D_EnemyIdleState idleStateData;
 
     [SerializeField]
-    private D_EnemyMoveState moveStateData;
+    private D_EnemyPatrolState patrolStateData;
 
     [SerializeField]
     private D_EnemyChaseState chaseStateData;
 
     [SerializeField]
-    private D_EnemyShootingAttack shootingStateData;
+    private D_EnemyRangedAttackState rangedStateData;
 
     [SerializeField]
-    private D_EnemyCoolDownData coolDownData;
+    private D_EnemyCoolDown coolDownData;
 
-    [SerializeField]
-    private D_EnemyData enemyData;
+    [Header("Cooldowns")]
+    public float timeSinceAttack;
 
-    [Header("Others")]
+    [Header("Informations")]
+    public GameObject target;
+    public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
     public GameObject attackPosition;
 
@@ -37,37 +38,41 @@ public class Skeleton : Entity
     public override void Start()
     {
         base.Start();
-        currentHealth = enemyData.MAX_HEALTH;
+        currentHealth = entityData.MAX_HEALTH;
+        timeSinceAttack = coolDownData.normalAttackCD;
 
         idleState = new SkeletonidleState(this, stateMachine, "idle", idleStateData, this);
-        moveState = new SkeletonMoveState(
-            this,
-            stateMachine,
-            "move",
-            moveStateData,
-            this,
-            enemyData
-        );
+        moveState = new SkeletonMoveState(this, stateMachine, "move", patrolStateData, this);
         chaseState = new SkeletonChaseState(
             this,
             stateMachine,
             "move", // this can change if we want to have a "chace" animation aswell
             chaseStateData,
             this,
-            enemyData,
-            shootingStateData,
+            rangedStateData,
             coolDownData
         );
 
-        attackState = new SkeletonAttackState(
-            this,
-            stateMachine,
-            "attack",
-            shootingStateData,
-            this
-        );
+        attackState = new SkeletonAttackState(this, stateMachine, "attack", rangedStateData, this);
 
         stateMachine.Init(moveState);
+    }
+
+    public override void Update()
+    {
+        base.Update();
+        timeSinceAttack += Time.deltaTime;
+    }
+
+    public override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        if (Application.isPlaying)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(rb.transform.position, rangedStateData.minimumDistanceToAttack); //TODO Change this to draw with the center on the pivot
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -85,17 +90,6 @@ public class Skeleton : Entity
         {
             target = null;
             stateMachine.ChangeState(moveState);
-        }
-    }
-
-    public override void OnDrawGizmos()
-    {
-        base.OnDrawGizmos();
-
-        if (Application.isPlaying)
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(rb.transform.position, shootingStateData.minimumDistanceToAttack); //TODO Change this to draw with the center on the pivot
         }
     }
 }
