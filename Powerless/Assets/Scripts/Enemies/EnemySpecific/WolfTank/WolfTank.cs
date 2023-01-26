@@ -20,9 +20,6 @@ public class WolfTank : Entity
     [SerializeField]
     private D_EnemyChaseState chaseStateData;
 
-    [SerializeField]
-    private D_EnemyData enemyData;
-
     [Header("Others")]
     public GameObject[] patrolPoints;
     public GameObject attackPosition;
@@ -30,7 +27,7 @@ public class WolfTank : Entity
     public override void Start()
     {
         base.Start();
-        currentHealth = enemyData.MAX_HEALTH;
+        currentHealth = entityData.MAX_HEALTH;
 
         idleState = new WolfTank_IdleState(this, stateMachine, "idle", idleStateData, this);
         moveState = new WolfTank_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -39,8 +36,7 @@ public class WolfTank : Entity
             stateMachine,
             "move", // this can change if we want to have a "chace" animation aswell
             chaseStateData,
-            this,
-            enemyData
+            this
         );
         stateMachine.Init(moveState);
     }

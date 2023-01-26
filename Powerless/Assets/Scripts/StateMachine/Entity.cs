@@ -8,7 +8,10 @@ public class Entity : MonoBehaviour
     public StateMachine stateMachine;
     public D_Entity entityData;
 
+    [SerializeField]
+    protected float currentHealth;
     public int facingDirection;
+
     public Rigidbody2D rb { get; private set; }
     public Animator anim { get; private set; }
 
@@ -16,7 +19,7 @@ public class Entity : MonoBehaviour
     private Transform wallCheck;
 
     [SerializeField]
-    protected float currentHealth;
+    public GameObject pivot;
 
     private Vector2 velocityWorkspace;
 
@@ -46,13 +49,10 @@ public class Entity : MonoBehaviour
         rb.velocity = velocityWorkspace;
     }
 
-    public virtual bool CheckWall()
+    public void GoTowardsTarget(Vector2 targetPosition, float speed)
     {
-        return Physics2D.Raycast(
-            wallCheck.position,
-            gameObject.transform.right,
-            entityData.wallCheckDistance,
-            entityData.whatIsGround
+        rb.MovePosition(
+            Vector3.MoveTowards(transform.position, targetPosition, speed * Time.fixedDeltaTime)
         );
     }
 
@@ -95,10 +95,28 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //Only for testing purpouses
+    public virtual bool CheckWall()
+    {
+        return Physics2D.Raycast(
+            wallCheck.position,
+            gameObject.transform.right,
+            entityData.wallCheckDistance,
+            entityData.whatIsGround
+        );
+    }
+
+    public void WaitForAnimationToFinish(float animationDuration)
+    {
+        StartCoroutine(Wait(animationDuration));
+    }
+
+    public IEnumerator Wait(float timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+    }
+
     private IEnumerator VisualIndicator(Color color)
     {
-        Debug.Log("pov");
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.15f);
         GetComponent<SpriteRenderer>().color = Color.white;
