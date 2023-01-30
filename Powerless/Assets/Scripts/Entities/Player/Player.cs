@@ -93,14 +93,4 @@ public class Player : Entity
             stateMachine.ChangeState(necromancerState);
         }
     }
-
-    public void CreatePrefab(GameObject prefabToSpawn, GameObject spawnPoint, GameObject parent)
-    {
-        var _newGameObject = Instantiate(
-            prefabToSpawn,
-            spawnPoint.transform.position,
-            Quaternion.identity
-        );
-        _newGameObject.transform.parent = parent.transform;
-    }
 }

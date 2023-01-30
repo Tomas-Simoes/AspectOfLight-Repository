@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1048324992
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1048324993}
+  m_Layer: 0
+  m_Name: Pivot
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1048324993
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048324992}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.51, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7000588727279769453}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1950009794232826641
 GameObject:
   m_ObjectHideFlags: 0
@@ -45,9 +76,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.5961047, y: 0}
   serializedVersion: 2
-  m_Radius: 8.833334
+  m_Radius: 13.792788
 --- !u!1 &7000588726111749095
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +146,7 @@ Transform:
   - {fileID: 7000588726111749094}
   - {fileID: 4616618979432374238}
   - {fileID: 4522705296350534004}
+  - {fileID: 1048324993}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -157,7 +189,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1738723677
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -135328805, guid: d95e137c0d3d67f4a86ffa756a827076, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -183,20 +215,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: be9542943167a8e419b87d274a836192, type: 2}
+  currentHealth: 0
   facingDirection: 0
   wallCheck: {fileID: 7000588726111749094}
-  currentHealth: 0
-  target: {fileID: 0}
+  pivot: {fileID: 1048324992}
   idleStateData: {fileID: 11400000, guid: 63eca3d7ade355e4a88b47302f3f602f, type: 2}
-  moveStateData: {fileID: 11400000, guid: 979ecb811b000dd45bc37ab4fe0f0b2c, type: 2}
+  patrolStateData: {fileID: 11400000, guid: 979ecb811b000dd45bc37ab4fe0f0b2c, type: 2}
   chaseStateData: {fileID: 11400000, guid: d267c02e27fd0af478a31820b2f5108e, type: 2}
-  shootingStateData: {fileID: 11400000, guid: f056717ef5890dc48b3bd144e403dbec, type: 2}
+  rangedStateData: {fileID: 11400000, guid: f056717ef5890dc48b3bd144e403dbec, type: 2}
   coolDownData: {fileID: 11400000, guid: 6795d4ace07963b43887db2a90584f9d, type: 2}
-  enemyData: {fileID: 11400000, guid: 3e7f7377db9167740b9947ab50787ba4, type: 2}
+  timeSinceAttack: 0
+  bulletPrefab: {fileID: 1843742842366480047, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+  bulletsParent: {fileID: 0}
+  target: {fileID: 0}
+  goTowardsOtherPatrolPoint: 0
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  attackPosition: {fileID: 7880402948321065120}
 --- !u!50 &7000588727279769449
 Rigidbody2D:
   serializedVersion: 4

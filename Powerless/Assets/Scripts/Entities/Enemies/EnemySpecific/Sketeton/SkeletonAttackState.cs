@@ -22,17 +22,16 @@ public class SkeletonAttackState : EnemyRangedAttackState
     public override void Enter()
     {
         base.Enter();
-        /*
-        GameObject _bulletInstance = entity.InstantiateObject(
-            stateData.bullet,
-            enemy.attackPosition.transform.position,
-            Quaternion.identity
-        );
+        enemy.timeSinceAttack = 0;
 
-        _bulletInstance.transform.parent = GameObject.Find("Enemies Bullets").transform;
+        GameObject _bullet = entity.CreatePrefab(
+            enemy.bulletPrefab,
+            enemy.attackPosition,
+            enemy.bulletsParent
+        );
+        _bullet.GetComponent<Bullet>().bulletParent = enemy;
 
         stateMachine.ChangeState(enemy.chaseState);
-        */
     }
 
     public override void Exit()

@@ -230,7 +230,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -179532761
-  m_SortingLayer: 8
+  m_SortingLayer: 9
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -680,11 +680,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &584302625 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7880402948321065120, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
-  m_PrefabInstance: {fileID: 7000588726550900039}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &605466468
 GameObject:
   m_ObjectHideFlags: 0
@@ -3197,7 +3192,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1045663903
-  m_SortingLayer: 7
+  m_SortingLayer: 8
   m_SortingOrder: 2
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -3666,7 +3661,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1048909065
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4683,6 +4678,37 @@ Transform:
   m_Father: {fileID: 152314565}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1664759539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1664759540}
+  m_Layer: 0
+  m_Name: Bullets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1664759540
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1664759539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.9290195, y: -1.8253729, z: 0.025462743}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1748849825 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 480230100939751979, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
@@ -5347,22 +5373,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 605466469}
     m_Modifications:
-    - target: {fileID: 1842614957795272602, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
-      propertyPath: m_Radius
-      value: 13.792788
-      objectReference: {fileID: 0}
-    - target: {fileID: 1842614957795272602, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
-      propertyPath: m_Offset.x
-      value: -0.5961047
-      objectReference: {fileID: 0}
     - target: {fileID: 7000588727279769452, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 1748849825}
-    - target: {fileID: 7000588727279769452, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
-      propertyPath: attackPosition
-      value: 
-      objectReference: {fileID: 584302625}
     - target: {fileID: 7000588727279769452, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 

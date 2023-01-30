@@ -100,13 +100,21 @@ public class Entity : MonoBehaviour
         Destroy(gameObject);
     }
 
-    //TODO in entities that need this method, put it on that class
-    /*
-    public GameObject InstantiateObject(GameObject prefab, Vector3 position, Quaternion rotation)
+    public GameObject CreatePrefab(
+        GameObject prefabToSpawn,
+        GameObject spawnPoint,
+        GameObject parent
+    )
     {
-        return Instantiate(prefab, position, rotation);
+        GameObject _newGameObject = Instantiate(
+            prefabToSpawn,
+            spawnPoint.transform.position,
+            Quaternion.identity
+        );
+        _newGameObject.transform.parent = parent.transform;
+
+        return _newGameObject;
     }
-    */
 
     public void WaitForAnimationToFinish(float animationDuration)
     {

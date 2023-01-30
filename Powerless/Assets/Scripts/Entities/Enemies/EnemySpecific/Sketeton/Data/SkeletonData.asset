@@ -9,8 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e58d7dc566b2f56439ee2d6fcac16758, type: 3}
-  m_Name: SkeletonMoveState
+  m_Script: {fileID: 11500000, guid: 0a23a8e8e3d037b459b4e95d45929a50, type: 3}
+  m_Name: SkeletonData
   m_EditorClassIdentifier: 
-  goTowardsOtherPatrolPoint: 0
-  movementSpeed: 3
+  MAX_HEALTH: 10
+  wallCheckDistance: 0.2
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 8
+  whatIsWall:
+    serializedVersion: 2
+    m_Bits: 512

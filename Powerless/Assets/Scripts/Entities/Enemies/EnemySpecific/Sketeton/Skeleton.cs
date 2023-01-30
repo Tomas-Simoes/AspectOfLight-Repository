@@ -29,6 +29,12 @@ public class Skeleton : Entity
     public float timeSinceAttack;
 
     [Header("Informations")]
+    [SerializeField]
+    public GameObject bulletPrefab;
+
+    [SerializeField]
+    public GameObject bulletsParent;
+
     public GameObject target;
     public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
@@ -61,6 +67,11 @@ public class Skeleton : Entity
     public override void Update()
     {
         base.Update();
+    }
+
+    public override void UpdateCooldowns()
+    {
+        base.UpdateCooldowns();
         timeSinceAttack += Time.deltaTime;
     }
 
