@@ -5,8 +5,15 @@ public class Bullet : MonoBehaviour
     //TODO make a IBullet interface which contains the bullet speed or a scriptable object and make a reference to that scriptable object
     public Entity bulletParent;
 
+    [Header("Bullet Stats")]
     [SerializeField]
     public float projectileSpeed = 3f;
+
+    [SerializeField]
+    public float fireRate = 0.5f;
+    private float nextFireTime;
+
+    private Rigidbody2D rigidBodyBullet;
 
     void Start() { }
 
@@ -17,11 +24,11 @@ public class Bullet : MonoBehaviour
                 a: bulletParent.target.transform.position,
                 b: transform.position,
                 vA: bulletParent.target.GetComponent<Rigidbody2D>().velocity,
-                bulletParent.projectileSpeed,
+                projectileSpeed,
                 result: out var direction
             )
         )
-            bulletParent.rb.velocity = direction * projectileSpeed;
+            rigidBodyBullet.velocity = direction * projectileSpeed;
         else
             instance.velocity =
                 (bulletParent.target.transform.position - transform.position).normalized
