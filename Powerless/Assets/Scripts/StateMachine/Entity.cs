@@ -20,6 +20,8 @@ public class Entity : MonoBehaviour
     [SerializeField]
     private Transform wallCheck;
 
+    public GameObject target;
+
     [SerializeField]
     public GameObject pivot;
 

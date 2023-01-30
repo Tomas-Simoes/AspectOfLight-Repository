@@ -19,7 +19,6 @@ public class WolfTank : Entity
     private D_EnemyChaseState chaseStateData;
 
     [Header("Informations")]
-    public GameObject target;
     public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
     public GameObject attackPosition;

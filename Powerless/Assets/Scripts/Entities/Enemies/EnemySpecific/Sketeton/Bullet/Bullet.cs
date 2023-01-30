@@ -5,11 +5,13 @@ public class Bullet : MonoBehaviour
     //TODO make a IBullet interface which contains the bullet speed or a scriptable object and make a reference to that scriptable object
     public Entity bulletParent;
 
+    [SerializeField]
+    public float projectileSpeed = 3f;
+
     void Start() { }
 
     void Update()
     {
-        /*
         if (
             InterceptionDirection(
                 a: bulletParent.target.transform.position,
@@ -19,12 +21,12 @@ public class Bullet : MonoBehaviour
                 result: out var direction
             )
         )
-            rb.velocity = direction * projectileSpeed;
+            bulletParent.rb.velocity = direction * projectileSpeed;
         else
             instance.velocity =
-                (target.transform.position - transform.position).normalized * projectileSpeed;
+                (bulletParent.target.transform.position - transform.position).normalized
+                * projectileSpeed;
         nextFireTime = Time.time + fireRate;
-        */
     }
 
     public bool InterceptionDirection(

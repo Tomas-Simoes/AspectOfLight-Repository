@@ -39,7 +39,6 @@ public class WolfKnight : Entity
     public int currentWaypoint = 0;
 
     [Header("Informations")]
-    public GameObject target;
     public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
     public GameObject attackPosition;

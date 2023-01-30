@@ -35,7 +35,6 @@ public class Skeleton : Entity
     [SerializeField]
     public GameObject bulletsParent;
 
-    public GameObject target;
     public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
     public GameObject attackPosition;
