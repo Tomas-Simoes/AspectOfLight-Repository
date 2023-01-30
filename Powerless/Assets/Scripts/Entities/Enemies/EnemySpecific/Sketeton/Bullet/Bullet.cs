@@ -17,8 +17,7 @@ public class Bullet : MonoBehaviour
 
     void Start() { }
 
-    void Update()
-    {
+    void Update() { /*
         if (
             InterceptionDirection(
                 a: bulletParent.target.transform.position,
@@ -34,6 +33,7 @@ public class Bullet : MonoBehaviour
                 (bulletParent.target.transform.position - transform.position).normalized
                 * projectileSpeed;
         nextFireTime = Time.time + fireRate;
+        */
     }
 
     public bool InterceptionDirection(
