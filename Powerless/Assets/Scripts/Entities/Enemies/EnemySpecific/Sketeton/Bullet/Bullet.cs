@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+    //TODO make a IBullet interface which contains the bullet speed or a scriptable object and make a reference to that scriptable object
     public Entity bulletParent;
 
     void Start() { }
