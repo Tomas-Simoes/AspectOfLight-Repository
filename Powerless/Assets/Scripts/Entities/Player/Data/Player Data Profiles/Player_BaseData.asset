@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a23a8e8e3d037b459b4e95d45929a50, type: 3}
   m_Name: Player_BaseData
   m_EditorClassIdentifier: 
-  MAX_HEALTH: 10
+  MAX_HEALTH: 1000
   wallCheckDistance: 0.2
   whatIsGround:
     serializedVersion: 2

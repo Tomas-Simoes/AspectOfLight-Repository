@@ -332,7 +332,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1985199073
-  m_SortingLayer: 3
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -594,7 +594,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1708827055
-  m_SortingLayer: 4
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -1783,6 +1783,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skeleton
       objectReference: {fileID: 0}
+    - target: {fileID: 7000588727279769454, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96acc88d471077e4c9c96c678b3e941f, type: 3}
 --- !u!1 &869319714
@@ -1847,7 +1851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAAIeyBpkZFYAIAABgFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVMly4jAQ/RVK5yFlOyHL3GYIIXNIQoVM5cJFsdpYhSy5tARIin+fbtnGhjnRvNfL60X+ZlK7GnJv7NxK8WQEsJ8jRjb7MerJR9jxtdFL+QWdz7sUviQnHn1euZcG8ZTCnKnAW5n/0mtFzgmCQcvC2Gom1jA1zjuEC64cIGWNp2iN0PeI7fBnfEche7SyG7K+0LpLRgc0c9AebO+aXUxa13ESTfJtXIPOFa9qEKR7EJG2AWka3TR21HokF7dUwiglXSuI+X0dG17WJVigjoXk2F8UQalKkOvSU+Jh7EtROPBt85bv76XFMTVJ2W/TzK7ibtMI++QqUJlJmkVRTdKn//hxo7mwpnrs6qYJ1fClzDevfJ9z5wfDHcL3p8KD3nK14R8K3kvQz2ZuTdACSW8DhQYH2X3/99jatIR80+ON1DMw1P3Au112m6QeDrH73VTJ6iMO/qoBlsrEcccDAIur+YOC43m4NgWipOKvgze+Ht5RSzxI6zxSbZea5H2YYMmVzeLMqJvgp8ZqiHArugbNld8vMI0/X+EZNyh7xjxwejFt8ZbrHsJZSIR7/yQ5oxZme1yWK832CVz5ErySGnrRRDzjnKZG6+bC3ClJUctgC54PotZBitPLYonIbrJruC743fXN5PJqfHmZQVLAbY7EBNKCxdOTGtvkatHobKeDS9N9co1n1n1HRnPL63jswvLtXH5VZqBP6sIscwugX5oM3YQcWCyCr1LMhMT5LMF7qeO62feKKZNvQKz6gFVsdbbzlp+gtfw0npAVm8Yvx4oRfLzlhYVPCVuqvmplHdjhH1BLAwQUAAAICAAAACHs20IDfmwAAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0kkGKkbmRWapZWqKlmbmpsYmusbFRqkFaqkUyUMI01TBNKRaovqSyINUvMTcVoicgsSQjLTMvJTMvXc+9KDPFHWS0UmwtAFBLAQItABQAAAgIAAAAIeyBpkZFYAIAABgFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAAAIezbQgN+bAAAAHgAAAAJACQAAAAAAAAAAAAAAK0CAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAZAMAAAAA
+    dataString: UEsDBBQAAAgIAAAAIey0nkxyXQIAABMFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQF9VE1z2jAQ/SuMziVjTD57awkhPSRhQju5+KJYa6xBljz6CJAM/727so0NnekJ8d7b3berlb+Y1K6G3Bu7sFI8GQHs+4jRmX0b9eQj7Pja6JX8hE7zJoUvScSj5pV7aRCfUJgzFXgr8x96rUicIBi0LIyt5mINM+O8Q7jgygFS1niK1gh9jdgOf8Z3FLLHU3pDp0883SWjAx5z0B5sL+2EnWycXEyiMOhc8aoGQa57fXrbBkymUaaxn1ZB3nOjlHStGeb3dWx2VZdggboVkmNv0QDJS5Dr0lPaYexLUTjwrSnL9/fS4oiapOynaeZWcbdpbH1wFajM1SSNlpqkT//w46axwprqsas7SaiGL2W+eeX7nDs/GOwQvj81HvSWqw1/V/BWgn42C2uCFkh6Gyg0OEjv+7/H1mYl5Jseb6yegaH+z/VgD4fY/W6mZPVO1MVlA6yUieOOlw8WL+YXGo6r4doUiJKLPw5+8/Vwh1riQVrnkWq71GTv3QRLUjaPM6Nugp8ZqyHCrekaNFd+v8Q0/vwKz7hB2TPmgdNraYu3XPcIzkIi3OuT5Ixamu3xslxptk/gypfgldTQmybiGec0M1o3G+ZOSYpaBVvwfBC1DlKcbhZLRHqTXsN1we+ub66ml+PpNIWkgNsciSuYFCyuntTYJlfLxmc7Hbw03SfXuGbdN2S0sLyOyy4s3y7kZ2UG/qQuzCq3APqlydBNyIHFIvgmxVxInM8KvJc6Xjf7ypgy+QZEdkyUxU7nO2951mfJWC0/jCckY7P40cgYwcdVXlr4kLCl4l2yAzv8BVBLAwQUAAAICAAAACHs20IDfmwAAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0kkGKkbmRWapZWqKlmbmpsYmusbFRqkFaqkUyUMI01TBNKRaovqSyINUvMTcVoicgsSQjLTMvJTMvXc+9KDPFHWS0UmwtAFBLAQItABQAAAgIAAAAIey0nkxyXQIAABMFAAALACQAAAAAAAAAAAAAAAAAAABncmFwaDAuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLAQItABQAAAgIAAAAIezbQgN+bAAAAHgAAAAJACQAAAAAAAAAAAAAAKoCAABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwUGAAAAAAIAAgC4AAAAYQMAAAAA
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -1859,7 +1863,7 @@ MonoBehaviour:
   debugRoof: 1
   manualDebugFloorRoof: 0
   showSearchTree: 0
-  unwalkableNodeDebugSize: 0.3
+  unwalkableNodeDebugSize: 0.1
   logPathResults: 1
   maxNearestNodeDistance: 100
   scanOnStartup: 1
@@ -1879,7 +1883,7 @@ MonoBehaviour:
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
-  maxFrameTime: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   euclideanEmbedding:
@@ -1897,7 +1901,7 @@ Transform:
   m_GameObject: {fileID: 904739719}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1125, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2009,7 +2013,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 49304647
-  m_SortingLayer: 1
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4165,7 +4169,7 @@ TilemapRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -179532761
-  m_SortingLayer: 9
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -4873,6 +4877,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 566540208}
     - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: playerReference
+      value: 
+      objectReference: {fileID: 566540208}
+    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
       objectReference: {fileID: 266076143}
@@ -4880,6 +4888,10 @@ PrefabInstance:
       propertyPath: patrolPoints.Array.data[1]
       value: 
       objectReference: {fileID: 194952364}
+    - target: {fileID: 4617882225253241959, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+      propertyPath: patrolPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 2063269988}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
 --- !u!4 &1527278392 stripped
@@ -4933,6 +4945,7 @@ GameObject:
   - component: {fileID: 1546927194}
   - component: {fileID: 1546927193}
   - component: {fileID: 1546927192}
+  - component: {fileID: 1546927195}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5006,6 +5019,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1546927195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1546927191}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1659963369
 GameObject:
   m_ObjectHideFlags: 0

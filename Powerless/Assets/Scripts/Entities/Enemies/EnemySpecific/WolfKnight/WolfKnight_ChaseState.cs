@@ -27,7 +27,7 @@ public class WolfKnight_ChaseState : EnemyChaseState
     public override void Enter()
     {
         base.Enter();
-
+        enemy.target = enemy.playerReference;
         enemy.timeSinceAttack = coolDownData.normalAttackCD;
     }
 
@@ -39,15 +39,6 @@ public class WolfKnight_ChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (
-            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
-            <= attackData.minimumDistanceToAttack
-        )
-        {
-            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
-                stateMachine.ChangeState(enemy.attackState);
-        }
-
         entity.CheckIfFlip(
             enemy.facingDirection,
             enemy.transform.position,
@@ -55,10 +46,14 @@ public class WolfKnight_ChaseState : EnemyChaseState
         );
 
         if (
-            Vector2.Distance(enemy.rb.position, enemy.path.vectorPath[enemy.currentWaypoint]) < 0.5f
+            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
+            <= attackData.minimumDistanceToAttack
         )
         {
-            enemy.currentWaypoint++;
+            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemy.attackState);
+            else
+                stateMachine.ChangeState(enemy.recoveryAttackState);
         }
     }
 

@@ -1,0 +1,56 @@
+if (
+            Vector2.Distance(enemy.target.transform.position, enemy.pivot.transform.position)
+            > stateData.recoveryAreaRadius + 0.5f
+        )
+        {
+            goingTowardsRecoveryPoint = false;
+            stateMachine.ChangeState(enemy.chaseState);
+        }
+        else
+        {
+            bool _createNewRecoveryPoint =
+                firstTimeInState
+                || !goingTowardsRecoveryPoint
+                || Vector2.Distance((Vector2)recoveryPointPosition, enemy.pivot.transform.position)
+                    < 0.5f;
+
+            if (_createNewRecoveryPoint)
+            {
+                firstTimeInState = false;
+                D
+                do
+                {
+                    totalIterationsMade++;
+
+                    if (totalIterationsMade >= MAX_ITERATIONS)
+                    {
+                        stateMachine.ChangeState(enemy.patrolState);
+                    }
+
+                    recoveryPointPosition = GetNewRandomPosition(
+                        enemy.playerReference.transform.position
+                    );
+
+                    enemy.target = entity.CreatePrefab(
+                        new GameObject(),
+                        recoveryPointPosition,
+                        enemy.transform.parent.gameObject
+                    );
+
+                    _collider = Physics2D
+                        .Linecast(
+                            entity.pivot.transform.position,
+                            recoveryPointPosition,
+                            entity.entityData.whatIsWall
+                        )
+                        .collider;
+                } while (_collider != null);
+
+                goingTowardsRecoveryPoint = true;
+                entity.CheckIfFlip(
+                    entity.facingDirection,
+                    enemy.transform.position,
+                    recoveryPointPosition
+                );
+            }
+        }

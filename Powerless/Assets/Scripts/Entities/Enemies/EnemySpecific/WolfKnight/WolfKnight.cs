@@ -6,7 +6,7 @@ using Pathfinding;
 public class WolfKnight : Entity
 {
     public WolfKnight_IdleState idleState { get; private set; }
-    public WolfKnight_MoveState moveState { get; private set; }
+    public WolfKnight_PatrolState patrolState { get; private set; }
     public WolfKnight_ChaseState chaseState { get; private set; }
     public WolfKnight_AttackState attackState { get; private set; }
     public WolfKnight_RecoveryAttackState recoveryAttackState { get; private set; }
@@ -39,6 +39,7 @@ public class WolfKnight : Entity
     public int currentWaypoint = 0;
 
     [Header("Informations")]
+    public GameObject playerReference;
     public bool goTowardsOtherPatrolPoint;
     public GameObject[] patrolPoints;
     public GameObject attackPosition;
@@ -53,7 +54,7 @@ public class WolfKnight : Entity
         timeSinceAttack = coolDownData.normalAttackCD;
 
         idleState = new WolfKnight_IdleState(this, stateMachine, "idle", idleStateData, this);
-        moveState = new WolfKnight_MoveState(this, stateMachine, "move", patrolStateData, this);
+        patrolState = new WolfKnight_PatrolState(this, stateMachine, "move", patrolStateData, this);
         chaseState = new WolfKnight_ChaseState(
             this,
             stateMachine,
@@ -75,7 +76,7 @@ public class WolfKnight : Entity
         recoveryAttackState = new WolfKnight_RecoveryAttackState(
             this,
             stateMachine,
-            "move",
+            "idle",
             recoveryAttackData,
             this,
             meleeAttackData,
@@ -83,13 +84,14 @@ public class WolfKnight : Entity
             patrolStateData
         );
 
-        stateMachine.Init(moveState);
+        stateMachine.Init(patrolState);
     }
 
     public override void Update()
     {
         base.Update();
         UpdateCooldowns();
+        UpdateWaypoints();
     }
 
     public override void UpdateCooldowns()
@@ -102,7 +104,7 @@ public class WolfKnight : Entity
     {
         if (seeker.IsDone())
         {
-            seeker.StartPath(pivot.transform.position, target.transform.position, OnPathComplete);
+            seeker.StartPath(transform.position, target.transform.position, OnPathComplete);
         }
     }
 
@@ -112,6 +114,17 @@ public class WolfKnight : Entity
         {
             this.path = path;
             currentWaypoint = 0;
+        }
+    }
+
+    private void UpdateWaypoints()
+    {
+        if (currentWaypoint >= path.vectorPath.Count)
+            return;
+
+        if (Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]) < 0.1f)
+        {
+            currentWaypoint++;
         }
     }
 
@@ -133,10 +146,7 @@ public class WolfKnight : Entity
             );
 
             Gizmos.color = Color.black;
-            Gizmos.DrawLine(transform.position, recoveryAttackState.recoveryPoint);
-
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere((Vector2)path.vectorPath[currentWaypoint], 0.5f);
+            Gizmos.DrawLine(transform.position, recoveryAttackState.recoveryPointPosition);
         }
     }
 
@@ -153,7 +163,7 @@ public class WolfKnight : Entity
     {
         if (other.CompareTag("Player"))
         {
-            stateMachine.ChangeState(moveState);
+            stateMachine.ChangeState(patrolState);
         }
     }
 }

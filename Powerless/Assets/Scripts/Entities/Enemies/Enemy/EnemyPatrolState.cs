@@ -4,7 +4,8 @@ using UnityEngine;
 public class EnemyPatrolState : State
 {
     protected D_EnemyPatrolState stateData;
-    public int currentPatrolIndex = 0;
+    protected int currentPatrolIndex = 0;
+    protected GameObject currentPatrolPoint;
 
     public EnemyPatrolState(
         Entity entity,
@@ -26,10 +27,5 @@ public class EnemyPatrolState : State
     public override void Exit()
     {
         base.Exit();
-    }
-
-    public void SetCurrentPatrolIndex(int newIndex)
-    {
-        currentPatrolIndex = newIndex;
     }
 }

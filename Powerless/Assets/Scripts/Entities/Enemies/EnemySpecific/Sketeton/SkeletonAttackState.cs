@@ -26,7 +26,7 @@ public class SkeletonAttackState : EnemyRangedAttackState
 
         GameObject _bullet = entity.CreatePrefab(
             enemy.bulletPrefab,
-            enemy.attackPosition,
+            enemy.attackPosition.transform.position,
             enemy.bulletsParent
         );
         _bullet.GetComponent<Bullet>().bulletParent = enemy;

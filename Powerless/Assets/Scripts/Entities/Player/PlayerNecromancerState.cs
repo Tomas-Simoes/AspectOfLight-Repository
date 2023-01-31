@@ -28,7 +28,11 @@ public class PlayerNecromancerState : State
 
         foreach (GameObject spawnpoint in player.dronesSpawnPoints)
         {
-            player.CreatePrefab(stateData.drone, spawnpoint, GameObject.Find("Drones"));
+            player.CreatePrefab(
+                stateData.drone,
+                spawnpoint.transform.position,
+                GameObject.Find("Drones")
+            );
         }
 
         stateMachine.ChangeState(player.moveState);

@@ -220,8 +220,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -30422557
-  m_SortingLayer: 6
+  m_SortingLayerID: 1275185391
+  m_SortingLayer: 4
   m_SortingOrder: 1
   m_Sprite: {fileID: -1197312576, guid: ce3a96ae46a7196458ee6770305c272d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -317,8 +317,10 @@ MonoBehaviour:
   recoveryAttackData: {fileID: 11400000, guid: b3a871399d97cb3439f023b6d915cc0c, type: 2}
   timeSinceAttack: 0
   currentWaypoint: 0
+  playerReference: {fileID: 0}
   goTowardsOtherPatrolPoint: 0
   patrolPoints:
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   attackPosition: {fileID: 2024559157}

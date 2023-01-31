@@ -32,11 +32,6 @@ public class EnemyIdleState : State
     public override void Exit()
     {
         base.Exit();
-
-        if (flipAfterIdle)
-        {
-            entity.Flip();
-        }
     }
 
     public override void LogicUpdate()

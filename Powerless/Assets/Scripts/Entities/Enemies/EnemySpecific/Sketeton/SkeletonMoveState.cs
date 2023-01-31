@@ -41,7 +41,7 @@ public class SkeletonMoveState : EnemyPatrolState
         {
             int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
 
-            SetCurrentPatrolIndex(_newIndex);
+            currentPatrolIndex = _newIndex;
             entity.CheckIfFlip(
                 enemy.facingDirection,
                 _currentPatrolPoint.transform.position,

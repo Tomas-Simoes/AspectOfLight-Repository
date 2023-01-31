@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfKnight_MoveState : EnemyPatrolState
+public class WolfKnight_PatrolState : EnemyPatrolState
 {
     private WolfKnight enemy;
-    private GameObject _currentPatrolPoint;
 
-    public WolfKnight_MoveState(
+    public WolfKnight_PatrolState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
@@ -22,6 +21,13 @@ public class WolfKnight_MoveState : EnemyPatrolState
     public override void Enter()
     {
         base.Enter();
+        enemy.target = enemy.patrolPoints[currentPatrolIndex];
+
+        entity.CheckIfFlip(
+            enemy.facingDirection,
+            enemy.transform.position,
+            enemy.target.transform.position
+        );
     }
 
     public override void Exit()
@@ -32,22 +38,16 @@ public class WolfKnight_MoveState : EnemyPatrolState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        _currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
+        currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
 
-        if (
-            Vector3.Distance(enemy.transform.position, _currentPatrolPoint.transform.position)
-            < 0.5f
-        )
+        if (enemy.currentWaypoint >= enemy.path.vectorPath.Count)
         {
+            Debug.Log("Current path waypoint count" + enemy.path.vectorPath.Count);
+            Debug.Log("Change Target");
             int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
+            currentPatrolIndex = _newIndex;
 
-            SetCurrentPatrolIndex(_newIndex);
-            entity.CheckIfFlip(
-                enemy.facingDirection,
-                _currentPatrolPoint.transform.position,
-                enemy.patrolPoints[_newIndex].transform.position
-            );
-
+            enemy.target = enemy.patrolPoints[currentPatrolIndex];
             stateMachine.ChangeState(enemy.idleState);
         }
         else
@@ -59,10 +59,10 @@ public class WolfKnight_MoveState : EnemyPatrolState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (enemy.goTowardsOtherPatrolPoint && _currentPatrolPoint != null)
+        if (enemy.goTowardsOtherPatrolPoint && currentPatrolPoint != null)
         {
             entity.GoTowardsPosition(
-                _currentPatrolPoint.transform.position,
+                (Vector2)enemy.path.vectorPath[enemy.currentWaypoint],
                 stateData.movementSpeed
             );
         }

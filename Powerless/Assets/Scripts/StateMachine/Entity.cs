@@ -104,13 +104,13 @@ public class Entity : MonoBehaviour
 
     public GameObject CreatePrefab(
         GameObject prefabToSpawn,
-        GameObject spawnPoint,
+        Vector2 spawnPointPosition,
         GameObject parent
     )
     {
         GameObject _newGameObject = Instantiate(
             prefabToSpawn,
-            spawnPoint.transform.position,
+            spawnPointPosition,
             Quaternion.identity
         );
         _newGameObject.transform.parent = parent.transform;
