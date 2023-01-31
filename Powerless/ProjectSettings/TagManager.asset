@@ -43,14 +43,17 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1001983481
+    locked: 0
   - name: Ground
     uniqueID: 49304647
     locked: 0
   - name: Wall
     uniqueID: 2586140241
     locked: 0
-  - name: New Layer 10
-    uniqueID: 2588852421
+  - name: Foreground
+    uniqueID: 1275185391
     locked: 0
   - name: Wall Miscellaneous
     uniqueID: 4115434535
@@ -66,10 +69,4 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2556243619
-    locked: 0
-  - name: NPCs
-    uniqueID: 287345473
-    locked: 0
-  - name: Enemy
-    uniqueID: 4264544739
     locked: 0
