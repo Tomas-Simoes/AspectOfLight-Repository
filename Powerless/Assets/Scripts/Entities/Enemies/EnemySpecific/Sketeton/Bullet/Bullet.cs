@@ -11,14 +11,20 @@ public class Bullet : MonoBehaviour
 
     [SerializeField]
     public float fireRate = 0.5f;
+
+    [SerializeField]
+    public float lifeTime = 4f;
+
     private float nextFireTime;
 
-    private Rigidbody2D rigidBodyBullet;
+    private GameObject bulletProjectile;
 
-    void Start() { }
+    private Rigidbody2D rb;
 
-    void Update()
+    void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         if (
             InterceptionDirection(
                 a: bulletParent.target.transform.position,
@@ -28,13 +34,17 @@ public class Bullet : MonoBehaviour
                 result: out var direction
             )
         )
-            rigidBodyBullet.velocity = direction * projectileSpeed;
+            rb.velocity = direction * projectileSpeed;
         else
-            instance.velocity =
+            rb.velocity =
                 (bulletParent.target.transform.position - transform.position).normalized
                 * projectileSpeed;
         nextFireTime = Time.time + fireRate;
+
+        Destroy(this.gameObject, lifeTime);
     }
+
+    void Update() { }
 
     public bool InterceptionDirection(
         Vector2 a,
