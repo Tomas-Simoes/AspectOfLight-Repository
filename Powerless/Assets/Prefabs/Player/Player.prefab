@@ -186,7 +186,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -205,7 +205,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1738723677
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -288,13 +288,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 8c4f4faf969e2a34287972178e6bd276, type: 2}
+  currentHealth: 0
   facingDirection: 0
   wallCheck: {fileID: 480230101691718370}
+  target: {fileID: 0}
   pivot: {fileID: 0}
   coolDownData: {fileID: 11400000, guid: 07f65c5ccfc73e64ab563f8dec899eee, type: 2}
   moveStateData: {fileID: 11400000, guid: e70a09bca30f5c243b680560dfe84669, type: 2}
   dashStateData: {fileID: 11400000, guid: b726f2b98028dd54e9b5d4211cfee371, type: 2}
   necromancerStateData: {fileID: 11400000, guid: 6efe397210b46db43baabae9f78c84e0, type: 2}
+  timeSinceDash: 0
+  timeSinceNecromancer: 0
+  axisMovement: {x: 0, y: 0}
   dronesSpawnPoints:
   - {fileID: 1990554867}
   - {fileID: 229118592}

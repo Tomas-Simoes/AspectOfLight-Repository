@@ -24,7 +24,6 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-
         if (
             InterceptionDirection(
                 a: bulletParent.target.transform.position,
@@ -40,11 +39,12 @@ public class Bullet : MonoBehaviour
                 (bulletParent.target.transform.position - transform.position).normalized
                 * projectileSpeed;
         nextFireTime = Time.time + fireRate;
-
-        Destroy(this.gameObject, lifeTime);
     }
 
-    void Update() { }
+    void Update()
+    {
+        Destroy(this.gameObject, lifeTime);
+    }
 
     public bool InterceptionDirection(
         Vector2 a,

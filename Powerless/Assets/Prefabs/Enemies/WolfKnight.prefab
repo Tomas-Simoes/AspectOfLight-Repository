@@ -202,7 +202,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -307,6 +307,7 @@ MonoBehaviour:
   currentHealth: 0
   facingDirection: 0
   wallCheck: {fileID: 4617882224428714322}
+  target: {fileID: 0}
   pivot: {fileID: 649408093733718686}
   idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
   patrolStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
@@ -316,7 +317,6 @@ MonoBehaviour:
   recoveryAttackData: {fileID: 11400000, guid: b3a871399d97cb3439f023b6d915cc0c, type: 2}
   timeSinceAttack: 0
   currentWaypoint: 0
-  target: {fileID: 0}
   goTowardsOtherPatrolPoint: 0
   patrolPoints:
   - {fileID: 0}

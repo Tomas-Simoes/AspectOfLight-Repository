@@ -88,7 +88,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -190,10 +190,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 5bc66f8126831b34a994bbfc4a7d29ae, type: 2}
+  currentHealth: 0
+  facingDirection: 0
   wallCheck: {fileID: 8933178180947100364}
+  target: {fileID: 0}
+  pivot: {fileID: 0}
+  idleStateData: {fileID: 11400000, guid: 61b19bb3673114241a71ccd9d4056123, type: 2}
+  patrolStateData: {fileID: 0}
+  chaseStateData: {fileID: 0}
+  goTowardsOtherPatrolPoint: 0
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  idleStateData: {fileID: 11400000, guid: 61b19bb3673114241a71ccd9d4056123, type: 2}
-  moveStateData: {fileID: 11400000, guid: 6327beb54036f674caa3d1c980b585d1, type: 2}
+  attackPosition: {fileID: 0}

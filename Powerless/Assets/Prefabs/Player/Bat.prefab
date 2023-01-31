@@ -57,7 +57,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1048909065
-  m_SortingLayer: 6
+  m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: -636252377, guid: e942c696b17f49049bc4f57c1b515bc8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -159,14 +159,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entityData: {fileID: 11400000, guid: 7eeb444d0a607dd45a624cf269b0f951, type: 2}
-  wallCheck: {fileID: 1842529163472828023}
   currentHealth: 0
-  closestEnemy: {fileID: 0}
+  facingDirection: 0
+  wallCheck: {fileID: 1842529163472828023}
+  target: {fileID: 0}
+  pivot: {fileID: 0}
   attackStateData: {fileID: 11400000, guid: 50c7dd01cae7be447b727d84bd6b2351, type: 2}
   chaseStateData: {fileID: 11400000, guid: e6e2f61b64dbb514fb0385a3f9dc118f, type: 2}
   targetableObjects:
     serializedVersion: 2
     m_Bits: 128
+  closestEnemy: {fileID: 0}
 --- !u!1 &8788947464693772216
 GameObject:
   m_ObjectHideFlags: 0
