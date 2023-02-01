@@ -8,8 +8,4 @@ public class D_EnemyRangedAttackState : ScriptableObject
 {
     public float minimumDistanceToAttack;
     public LayerMask attackableLayer;
-
-    public float bulletSpeed;
-    public float fireRate = 0.5f;
-    private float nextFireTime;
 }

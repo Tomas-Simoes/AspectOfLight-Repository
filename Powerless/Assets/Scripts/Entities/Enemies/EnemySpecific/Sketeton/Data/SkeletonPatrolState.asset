@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58d7dc566b2f56439ee2d6fcac16758, type: 3}
   m_Name: SkeletonPatrolState
   m_EditorClassIdentifier: 
-  goTowardsOtherPatrolPoint: 0
-  movementSpeed: 3
+  movementSpeed: 1.5

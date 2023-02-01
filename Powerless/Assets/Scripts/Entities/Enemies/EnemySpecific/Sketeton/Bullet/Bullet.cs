@@ -3,14 +3,12 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     //TODO make a IBullet interface which contains the bullet speed or a scriptable object and make a reference to that scriptable object
+    [SerializeField]
     public Entity bulletParent;
 
     [Header("Bullet Stats")]
     [SerializeField]
     public float projectileSpeed = 3f;
-
-    [SerializeField]
-    public float fireRate = 0.5f;
 
     [SerializeField]
     public float lifeTime = 4f;
@@ -38,12 +36,17 @@ public class Bullet : MonoBehaviour
             rb.velocity =
                 (bulletParent.target.transform.position - transform.position).normalized
                 * projectileSpeed;
-        nextFireTime = Time.time + fireRate;
+        nextFireTime = Time.time;
     }
 
     void Update()
     {
         Destroy(this.gameObject, lifeTime);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        Destroy(this.gameObject);
     }
 
     public bool InterceptionDirection(

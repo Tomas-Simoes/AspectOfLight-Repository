@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d131421d8c83a44429cdbcf4b6f94ca1, type: 3}
   m_Name: SkeletonCoolDownState
   m_EditorClassIdentifier: 
-  normalAttackCD: 5
-  timeSinceNormalAttack: 5
+  normalAttackCD: 0.4
