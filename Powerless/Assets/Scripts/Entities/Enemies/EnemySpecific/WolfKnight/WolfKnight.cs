@@ -134,9 +134,6 @@ public class WolfKnight : Entity
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPosition.transform.position, meleeAttackData.attackRadius);
 
-        Gizmos.color = Color.cyan;
-        Gizmos.DrawWireSphere(target.transform.position, recoveryAttackData.recoveryAreaRadius);
-
         if (Application.isPlaying)
         {
             Gizmos.color = Color.magenta;
@@ -154,7 +151,6 @@ public class WolfKnight : Entity
     {
         if (other.CompareTag("Player"))
         {
-            target = other.gameObject;
             stateMachine.ChangeState(chaseState);
         }
     }

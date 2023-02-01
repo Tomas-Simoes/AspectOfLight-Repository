@@ -8,6 +8,7 @@ public class Skeleton : Entity
     public SkeletonMoveState moveState { get; private set; }
     public SkeletonChaseState chaseState { get; private set; }
     public SkeletonAttackState attackState { get; private set; }
+    public SkeletonRecoveryState recoveryState { get; private set; }
 
     [Header("State Data")]
     [SerializeField]
@@ -21,6 +22,9 @@ public class Skeleton : Entity
 
     [SerializeField]
     private D_EnemyRangedAttackState rangedStateData;
+
+    [SerializeField]
+    private D_EnemyRecoveryAttackState recoveryAttackData;
 
     [SerializeField]
     private D_EnemyCoolDown coolDownData;
@@ -59,6 +63,17 @@ public class Skeleton : Entity
         );
 
         attackState = new SkeletonAttackState(this, stateMachine, "attack", rangedStateData, this);
+
+        recoveryState = new SkeletonRecoveryState(
+            this,
+            stateMachine,
+            "idle",
+            recoveryAttackData,
+            this,
+            rangedStateData,
+            coolDownData,
+            patrolStateData
+        );
 
         stateMachine.Init(moveState);
     }

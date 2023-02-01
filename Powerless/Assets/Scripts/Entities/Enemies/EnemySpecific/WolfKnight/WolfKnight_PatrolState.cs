@@ -42,8 +42,6 @@ public class WolfKnight_PatrolState : EnemyPatrolState
 
         if (enemy.currentWaypoint >= enemy.path.vectorPath.Count)
         {
-            Debug.Log("Current path waypoint count" + enemy.path.vectorPath.Count);
-            Debug.Log("Change Target");
             int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
             currentPatrolIndex = _newIndex;
 

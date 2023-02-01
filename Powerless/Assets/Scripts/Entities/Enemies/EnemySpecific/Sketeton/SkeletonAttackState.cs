@@ -29,9 +29,11 @@ public class SkeletonAttackState : EnemyRangedAttackState
             enemy.attackPosition.transform.position,
             enemy.bulletsParent
         );
-        _bullet.GetComponent<Bullet>().bulletParent = enemy;
 
-        stateMachine.ChangeState(enemy.chaseState);
+        if (_bullet.GetComponent<Bullet>().bulletParent = enemy)
+        {
+            stateMachine.ChangeState(enemy.recoveryState);
+        }
     }
 
     public override void Exit()
