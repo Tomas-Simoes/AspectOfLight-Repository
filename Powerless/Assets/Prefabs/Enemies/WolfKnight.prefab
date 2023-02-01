@@ -267,7 +267,7 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
@@ -309,13 +309,6 @@ MonoBehaviour:
   wallCheck: {fileID: 4617882224428714322}
   target: {fileID: 0}
   pivot: {fileID: 649408093733718686}
-  idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
-  patrolStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
-  chaseStateData: {fileID: 11400000, guid: 6164c9fe3611dd340ae169556772652e, type: 2}
-  meleeAttackData: {fileID: 11400000, guid: 355cc5c9f7b0ffc43835a17966465aa2, type: 2}
-  coolDownData: {fileID: 11400000, guid: dac2e77e8f31de642bb344ec9a6befd9, type: 2}
-  recoveryAttackData: {fileID: 11400000, guid: b3a871399d97cb3439f023b6d915cc0c, type: 2}
-  timeSinceAttack: 0
   currentWaypoint: 0
   playerReference: {fileID: 0}
   goTowardsOtherPatrolPoint: 0
@@ -323,6 +316,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
+  patrolStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
+  chaseStateData: {fileID: 11400000, guid: 6164c9fe3611dd340ae169556772652e, type: 2}
+  meleeAttackData: {fileID: 11400000, guid: 355cc5c9f7b0ffc43835a17966465aa2, type: 2}
+  coolDownData: {fileID: 11400000, guid: dac2e77e8f31de642bb344ec9a6befd9, type: 2}
+  recoveryAttackData: {fileID: 11400000, guid: b3a871399d97cb3439f023b6d915cc0c, type: 2}
+  timeSinceAttack: 0
   attackPosition: {fileID: 2024559157}
 --- !u!114 &1356085785
 MonoBehaviour:

@@ -61,10 +61,10 @@ public class WolfKnight_PatrolState : EnemyPatrolState
         base.PhysicsUpdate();
         if (enemy.goTowardsOtherPatrolPoint && currentPatrolPoint != null)
         {
-            entity.GoTowardsPosition(
-                (Vector2)enemy.path.vectorPath[enemy.currentWaypoint],
-                stateData.movementSpeed
-            );
+            Vector2 _direction =
+                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+
+            entity.rb.velocity = _direction.normalized * stateData.movementSpeed;
         }
     }
 }

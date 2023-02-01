@@ -21,8 +21,7 @@ public class EnemyRangedAttackState : State
     public override void Enter()
     {
         base.Enter();
-
-        entity.SetVelocity(0f);
+        entity.rb.velocity = Vector2.zero;
     }
 
     public override void Exit()

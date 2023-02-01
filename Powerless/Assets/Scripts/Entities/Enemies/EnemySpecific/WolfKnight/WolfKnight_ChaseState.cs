@@ -61,9 +61,9 @@ public class WolfKnight_ChaseState : EnemyChaseState
     {
         base.PhysicsUpdate();
 
-        entity.GoTowardsPosition(
-            (Vector2)enemy.path.vectorPath[enemy.currentWaypoint],
-            stateData.chaseSpeed
-        );
+        Vector2 _direction =
+            enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+
+        entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
     }
 }

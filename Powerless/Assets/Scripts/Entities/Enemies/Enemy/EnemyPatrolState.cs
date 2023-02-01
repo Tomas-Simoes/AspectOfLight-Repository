@@ -21,7 +21,6 @@ public class EnemyPatrolState : State
     public override void Enter()
     {
         base.Enter();
-        entity.SetVelocity(stateData.movementSpeed);
     }
 
     public override void Exit()

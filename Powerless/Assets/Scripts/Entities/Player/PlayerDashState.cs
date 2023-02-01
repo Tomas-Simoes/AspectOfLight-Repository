@@ -31,8 +31,6 @@ public class PlayerDashState : State
         float _xAxis = player.inputHandler.xAxis;
         float _yAxis = player.inputHandler.yAxis;
 
-        entity.rb.velocity = new Vector2(_xAxis, _yAxis) * stateData.dashSpeed;
-
         dashing = true;
     }
 
@@ -63,5 +61,7 @@ public class PlayerDashState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
+        entity.rb.velocity = player.axisMovement.normalized * stateData.dashSpeed;
     }
 }

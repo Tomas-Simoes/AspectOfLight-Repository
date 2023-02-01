@@ -50,12 +50,6 @@ public class Entity : MonoBehaviour
 
     public virtual void UpdateCooldowns() { }
 
-    public virtual void SetVelocity(float velocity)
-    {
-        velocityWorkspace.Set(facingDirection * velocity, rb.velocity.y);
-        rb.velocity = velocityWorkspace;
-    }
-
     public void GoTowardsPosition(Vector2 newPosition, float speed)
     {
         rb.MovePosition(
