@@ -32,7 +32,7 @@ public class SkeletonRecoveryState : EnemyRecoveryAttackState
     {
         base.Enter();
 
-        entity.SetVelocity(0f);
+        entity.rb.velocity = Vector2.zero;
     }
 
     public override void Exit()
