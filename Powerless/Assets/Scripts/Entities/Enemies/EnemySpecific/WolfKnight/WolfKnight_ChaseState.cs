@@ -19,9 +19,9 @@ public class WolfKnight_ChaseState : EnemyChaseState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
+        this.enemy = enemy;
         this.coolDownData = coolDownData;
         this.attackData = attackData;
-        this.enemy = enemy;
     }
 
     public override void Enter()

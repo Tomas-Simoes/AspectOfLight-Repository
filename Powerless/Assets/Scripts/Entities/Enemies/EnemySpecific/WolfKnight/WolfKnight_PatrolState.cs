@@ -40,7 +40,7 @@ public class WolfKnight_PatrolState : EnemyPatrolState
         base.LogicUpdate();
         currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
 
-        if (enemy.currentWaypoint >= enemy.path.vectorPath.Count)
+        if (enemy.path != null && enemy.currentWaypoint >= enemy.path.vectorPath.Count)
         {
             int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
             currentPatrolIndex = _newIndex;
