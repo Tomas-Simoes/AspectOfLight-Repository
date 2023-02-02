@@ -1,0 +1,102 @@
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    //TODO make a IBullet interface which contains the bullet speed or a scriptable object and make a reference to that scriptable object
+    [SerializeField]
+    public Entity bulletParent;
+
+    [Header("Bullet Stats")]
+    [SerializeField]
+    public float projectileSpeed = 3f;
+
+    [SerializeField]
+    public float lifeTime = 4f;
+
+    private float nextFireTime;
+
+    private GameObject bulletProjectile;
+
+    private Rigidbody2D rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        if (
+            InterceptionDirection(
+                a: bulletParent.target.transform.position,
+                b: transform.position,
+                vA: bulletParent.target.GetComponent<Rigidbody2D>().velocity,
+                projectileSpeed,
+                result: out var direction
+            )
+        )
+            rb.velocity = direction * projectileSpeed;
+        else
+            rb.velocity =
+                (bulletParent.target.transform.position - transform.position).normalized
+                * projectileSpeed;
+        nextFireTime = Time.time;
+    }
+
+    void Update()
+    {
+        Destroy(this.gameObject, lifeTime);
+    }
+
+    void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        Destroy(this.gameObject);
+    }
+
+    public bool InterceptionDirection(
+        Vector2 a,
+        Vector2 b,
+        Vector2 vA,
+        float sB,
+        out Vector2 result
+    )
+    {
+        var aToB = b - a;
+        var dC = aToB.magnitude;
+        var alpha = Vector2.Angle(aToB, vA) * Mathf.Deg2Rad;
+        var sA = vA.magnitude;
+        var r = sA / sB;
+        if (
+            MyMath.SolveQuadratic(
+                a: 1 - r * r,
+                b: 2 * r * dC * Mathf.Cos(alpha),
+                c: -(dC * dC),
+                out var root1,
+                out var root2
+            ) == 0
+        )
+        {
+            result = Vector2.zero;
+            return false;
+        }
+        var dA = Mathf.Max(a: root1, b: root2);
+        var t = dA / sB;
+        var c = a + vA * t;
+        result = (c - b).normalized;
+        return true;
+    }
+}
+
+public class MyMath
+{
+    public static int SolveQuadratic(float a, float b, float c, out float root1, out float root2)
+    {
+        var discriminant = b * b - 4 * a * c;
+        if (discriminant < 0)
+        {
+            root1 = Mathf.Infinity;
+            root2 = -root1;
+            return 0;
+        }
+
+        root1 = (-b + Mathf.Sqrt(discriminant)) / (2 * a);
+        root2 = (-b - Mathf.Sqrt(discriminant)) / (2 * a);
+        return discriminant > 0 ? 2 : 1;
+    }
+}

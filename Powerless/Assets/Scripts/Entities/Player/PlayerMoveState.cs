@@ -1,0 +1,44 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMoveState : State
+{
+    private Player player;
+    private D_PlayerMoveState stateData;
+
+    public PlayerMoveState(
+        Entity entity,
+        StateMachine stateMachine,
+        string animBoolName,
+        D_PlayerMoveState stateData,
+        Player player
+    )
+        : base(entity, stateMachine, animBoolName)
+    {
+        this.player = player;
+        this.stateData = stateData;
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+
+        entity.rb.velocity = player.axisMovement.normalized * stateData.movementSpeed;
+    }
+}

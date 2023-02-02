@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Drone
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -12,10 +14,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - Drone
+  - Wall
   - 
   - 
   - 
@@ -42,21 +44,36 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: 
-    uniqueID: 4264544739
+  - name: Background
+    uniqueID: 1001983481
     locked: 0
   - name: Ground
     uniqueID: 49304647
     locked: 0
   - name: Wall
-    uniqueID: 1048909065
+    uniqueID: 2586140241
     locked: 0
-  - name: Miscellaneous
+  - name: Foreground
+    uniqueID: 1275185391
+    locked: 0
+  - name: Props
+    uniqueID: 614146757
+    locked: 0
+  - name: Wall Miscellaneous
+    uniqueID: 4115434535
+    locked: 0
+  - name: Ground Miscellaneous
     uniqueID: 2309768223
+    locked: 0
+  - name: Interactable Miscellaneous
+    uniqueID: 3249303393
     locked: 0
   - name: Objects
     uniqueID: 2346837427
     locked: 0
   - name: Player
     uniqueID: 2556243619
+    locked: 0
+  - name: Particles
+    uniqueID: 487148141
     locked: 0
