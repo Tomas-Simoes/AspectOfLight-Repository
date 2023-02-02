@@ -24,9 +24,9 @@ public class WolfKnight_PatrolState : EnemyPatrolState
         enemy.target = enemy.patrolPoints[currentPatrolIndex];
 
         entity.CheckIfFlip(
-            enemy.facingDirection,
-            enemy.transform.position,
-            enemy.target.transform.position
+            entity.facingDirection,
+            entity.transform.position,
+            entity.target.transform.position
         );
     }
 
@@ -57,7 +57,8 @@ public class WolfKnight_PatrolState : EnemyPatrolState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (enemy.goTowardsOtherPatrolPoint && currentPatrolPoint != null)
+
+        if (enemy.path != null && enemy.currentWaypoint < enemy.path.vectorPath.Count)
         {
             Vector2 _direction =
                 enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;

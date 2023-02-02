@@ -100,9 +100,6 @@ public class WolfKnight : Enemy
                 pivot.transform.position,
                 meleeAttackData.minimumDistanceToAttack
             );
-
-            Gizmos.color = Color.black;
-            Gizmos.DrawLine(transform.position, recoveryAttackState.recoveryPointPosition);
         }
     }
 

@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfTank : Entity
+public class WolfTank : Enemy
 {
     public WolfTank_IdleState idleState { get; private set; }
-    public WolfTank_MoveState moveState { get; private set; }
+    public WolfTank_PatrolState patrolState { get; private set; }
     public WolfTank_ChaseState chaseState { get; private set; }
 
     [Header("State Data")]
@@ -18,18 +18,18 @@ public class WolfTank : Entity
     [SerializeField]
     private D_EnemyChaseState chaseStateData;
 
+    [Header("Cooldowns")]
+    public float timeSinceAttack;
+
     [Header("Informations")]
-    public bool goTowardsOtherPatrolPoint;
-    public GameObject[] patrolPoints;
     public GameObject attackPosition;
 
     public override void Start()
     {
         base.Start();
-        currentHealth = entityData.MAX_HEALTH;
 
         idleState = new WolfTank_IdleState(this, stateMachine, "idle", idleStateData, this);
-        moveState = new WolfTank_MoveState(this, stateMachine, "move", patrolStateData, this);
+        patrolState = new WolfTank_PatrolState(this, stateMachine, "move", patrolStateData, this);
         chaseState = new WolfTank_ChaseState(
             this,
             stateMachine,
@@ -37,7 +37,7 @@ public class WolfTank : Entity
             chaseStateData,
             this
         );
-        stateMachine.Init(moveState);
+        stateMachine.Init(patrolState);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -54,7 +54,7 @@ public class WolfTank : Entity
         if (other.CompareTag("Player"))
         {
             target = null;
-            stateMachine.ChangeState(moveState);
+            stateMachine.ChangeState(patrolState);
         }
     }
 }

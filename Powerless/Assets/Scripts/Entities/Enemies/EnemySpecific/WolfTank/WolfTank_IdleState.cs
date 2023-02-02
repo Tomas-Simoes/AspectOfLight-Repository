@@ -12,7 +12,8 @@ public class WolfTank_IdleState : EnemyIdleState
         string animBoolName,
         D_EnemyIdleState stateData,
         WolfTank enemy
-    ) : base(entity, stateMachine, animBoolName, stateData)
+    )
+        : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
     }
@@ -33,7 +34,7 @@ public class WolfTank_IdleState : EnemyIdleState
 
         if (isIdleTimeOver)
         {
-            stateMachine.ChangeState(enemy.moveState);
+            stateMachine.ChangeState(enemy.patrolState);
         }
     }
 

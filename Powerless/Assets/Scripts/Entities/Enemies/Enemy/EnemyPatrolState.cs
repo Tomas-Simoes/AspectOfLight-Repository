@@ -27,4 +27,14 @@ public class EnemyPatrolState : State
     {
         base.Exit();
     }
+
+    public override void LogicUpdate()
+    {
+        base.LogicUpdate();
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
+    }
 }

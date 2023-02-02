@@ -39,6 +39,7 @@ public class WolfKnight_ChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
         entity.CheckIfFlip(
             enemy.facingDirection,
             enemy.transform.position,
@@ -61,9 +62,12 @@ public class WolfKnight_ChaseState : EnemyChaseState
     {
         base.PhysicsUpdate();
 
-        Vector2 _direction =
-            enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+        if (enemy.path != null)
+        {
+            Vector2 _direction =
+                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
 
-        entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
+            entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
+        }
     }
 }

@@ -21,6 +21,7 @@ public class WolfTank_ChaseState : EnemyChaseState
     public override void Enter()
     {
         base.Enter();
+        enemy.target = enemy.playerReference;
     }
 
     public override void Exit()
@@ -42,6 +43,12 @@ public class WolfTank_ChaseState : EnemyChaseState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        entity.GoTowardsPosition(enemy.target.transform.position, stateData.chaseSpeed);
+        if (enemy.path != null)
+        {
+            Vector2 _direction =
+                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+
+            entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
+        }
     }
 }
