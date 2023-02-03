@@ -5,17 +5,23 @@ using UnityEngine;
 public class WolfTank_ChaseState : EnemyChaseState
 {
     private WolfTank enemy;
+    private D_EnemyRangedAttackState attackData;
+    private D_EnemyCoolDown coolDownData;
 
     public WolfTank_ChaseState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
         D_EnemyChaseState stateData,
-        WolfTank enemy
+        WolfTank enemy,
+        D_EnemyRangedAttackState attackData,
+        D_EnemyCoolDown coolDownData
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
+        this.coolDownData = coolDownData;
+        this.attackData = attackData;
     }
 
     public override void Enter()
@@ -38,6 +44,17 @@ public class WolfTank_ChaseState : EnemyChaseState
             enemy.transform.position,
             enemy.target.transform.position
         );
+
+        if (
+            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
+            <= attackData.minimumDistanceToAttack
+        )
+        {
+            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemy.attackState);
+            //else
+            //stateMachine.ChangeState(enemy.recoveryAttackState);
+        }
     }
 
     public override void PhysicsUpdate()

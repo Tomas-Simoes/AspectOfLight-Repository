@@ -5665,6 +5665,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1536770297}
     m_Modifications:
+    - target: {fileID: 1588696729, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
+      propertyPath: m_Radius
+      value: 4.017543
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588696729, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.11617428
+      objectReference: {fileID: 0}
     - target: {fileID: 1267277768789818660, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: m_SortingLayer
       value: 4
@@ -5722,9 +5730,29 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1267277768789818680, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
+      propertyPath: pivot
+      value: 
+      objectReference: {fileID: 1417981879}
+    - target: {fileID: 1267277768789818680, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
+      propertyPath: bulletPrefab
+      value: 
+      objectReference: {fileID: 1843742842366480047, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+    - target: {fileID: 1267277768789818680, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
+      propertyPath: coolDownData
+      value: 
+      objectReference: {fileID: 11400000, guid: de9e2e9e91ce8614da974b94e11a6a21, type: 2}
+    - target: {fileID: 1267277768789818680, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
+      propertyPath: bulletsParent
+      value: 
+      objectReference: {fileID: 1296244788}
+    - target: {fileID: 1267277768789818680, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: playerReference
       value: 
       objectReference: {fileID: 566540208}
+    - target: {fileID: 1267277768789818680, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
+      propertyPath: rangedAttackData
+      value: 
+      objectReference: {fileID: 11400000, guid: 57d4642939ab4eb48a31f1200a5237b3, type: 2}
     - target: {fileID: 1267277768789818680, guid: c62ed795d54b40341be0c9abc2e1c658, type: 3}
       propertyPath: patrolPoints.Array.data[0]
       value: 
