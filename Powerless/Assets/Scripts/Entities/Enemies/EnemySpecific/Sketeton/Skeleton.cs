@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Skeleton : Entity
+public class Skeleton : Enemy
 {
     public SkeletonidleState idleState { get; private set; }
     public SkeletonMoveState moveState { get; private set; }
@@ -38,9 +38,6 @@ public class Skeleton : Entity
 
     [SerializeField]
     public GameObject bulletsParent;
-
-    public bool goTowardsOtherPatrolPoint;
-    public GameObject[] patrolPoints;
     public GameObject attackPosition;
 
     //  public GameObject attackPosition;
