@@ -8,6 +8,8 @@ public class SkeletonChaseState : EnemyChaseState
     private D_EnemyRangedAttackState attackData;
     private D_EnemyCoolDown coolDownData;
 
+    RaycastHit hit;
+
     public SkeletonChaseState(
         Entity entity,
         StateMachine stateMachine,
@@ -57,6 +59,12 @@ public class SkeletonChaseState : EnemyChaseState
     {
         base.PhysicsUpdate();
 
-        entity.GoTowardsPosition(enemy.target.transform.position, stateData.chaseSpeed); //TODO update to folow the path and not the player
+        if (enemy.path != null)
+        {
+            Vector2 _direction =
+                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+
+            entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
+        }
     }
 }
