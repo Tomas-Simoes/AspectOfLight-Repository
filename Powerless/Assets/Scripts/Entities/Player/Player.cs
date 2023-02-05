@@ -6,6 +6,8 @@ public class Player : Entity
 {
     public PlayerMoveState moveState { get; private set; }
     public PlayerDashState dashState { get; private set; }
+    public PlayerDefaultRangedAttackState shootingState { get; private set; }
+    public PlayerDefaultMeleeAttackState meleeState { get; private set; }
     public PlayerNecromancerState necromancerState { get; private set; }
 
     [Header("States Data")]
@@ -21,6 +23,12 @@ public class Player : Entity
     [SerializeField]
     private D_PlayerNecromancerState necromancerStateData;
 
+    [SerializeField]
+    private D_PlayerMeleeState meleeStateData;
+
+    [SerializeField]
+    private D_PlayerShootingState shootingStateData;
+
     [Header("Cooldowns")]
     public float timeSinceDash;
     public float timeSinceNecromancer;
@@ -30,6 +38,16 @@ public class Player : Entity
     public GameObject[] dronesSpawnPoints;
 
     public InputHandler inputHandler { get; private set; }
+
+    [Header("OtherStuff")]
+    public int currentClip,
+        maxClipSize = 10,
+        CurrentAmmo,
+        maxAmmoSize = 100;
+    public GameObject bullet;
+    private float fireTimer;
+    public Transform Barrel;
+    public float fireRate;
 
     public override void Start()
     {
@@ -52,6 +70,23 @@ public class Player : Entity
             this,
             coolDownData
         );
+
+        shootingState = new PlayerDefaultRangedAttackState(
+            this,
+            stateMachine,
+            "shoot",
+            shootingStateData,
+            this
+        );
+
+        meleeState = new PlayerDefaultMeleeAttackState(
+            this,
+            stateMachine,
+            "shoot",
+            meleeStateData,
+            this
+        );
+
         necromancerState = new PlayerNecromancerState(
             this,
             stateMachine,
@@ -91,6 +126,38 @@ public class Player : Entity
         if (inputHandler.pressedAbilityOne && timeSinceNecromancer >= coolDownData.necromancerCD)
         {
             stateMachine.ChangeState(necromancerState);
+        }
+    }
+
+    private void Shoot()
+    {
+        if (currentClip > 0)
+        {
+            fireTimer = Time.time + fireRate;
+            Instantiate(bullet, Barrel.position, Barrel.rotation); // Intance of prefab's
+            currentClip--;
+        }
+    }
+
+    private bool CanShoot()
+    {
+        return Time.time > fireTimer; // Timer between bullets
+    }
+
+    public void reload()
+    {
+        int reloadAmount = maxClipSize - currentClip; //How many bullets to refill the clip
+        reloadAmount = (CurrentAmmo - reloadAmount) >= 0 ? reloadAmount : CurrentAmmo;
+        currentClip += reloadAmount;
+        CurrentAmmo -= reloadAmount;
+    }
+
+    public void addAmmo(int ammoAmount)
+    {
+        CurrentAmmo += ammoAmount;
+        if (CurrentAmmo > maxAmmoSize)
+        {
+            CurrentAmmo = maxAmmoSize;
         }
     }
 }
