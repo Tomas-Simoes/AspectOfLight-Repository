@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 313ac604aa0ad8d40a30b6b1bb280037
+guid: 81591c19dd72ce945b4feaa02a2ca498
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,115 +105,31 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_0
+      name: ExiledFlorest_Ground_0
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 280
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ac434730e7a5dc46bd854acf02894a8
+      internalID: 117086576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_1
       rect:
         serializedVersion: 2
         x: 320
-        y: 344
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1a95f2edd24cc8b45b5b31f5c81c3c54
-      internalID: 2107357885
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_2
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 344
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b1dfc020ab4dbee4f99be1cf345ff54b
-      internalID: 374977125
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_3
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 344
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d84a5db949a3561469d599180a821101
-      internalID: 1745347299
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_6
-      rect:
-        serializedVersion: 2
-        x: 480
-        y: 312
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a7eabb534e4165642afbe5dfb7c9fd68
-      internalID: -1756030665
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_7
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 312
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f4c559d529f5b4d409ba76f9812738f8
-      internalID: 1124742129
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_10
-      rect:
-        serializedVersion: 2
-        x: 480
         y: 280
         width: 32
         height: 32
@@ -224,35 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4cf80bcc188ddec46b7b65fae112dd96
-      internalID: -587123323
+      spriteID: 7e38f3dc1374a124e960ead9c7a84601
+      internalID: -418407408
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_11
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 280
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 25b9edf3fe3273f46a85d82f479cffbf
-      internalID: -765776113
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_12
+      name: ExiledFlorest_Ground_2
       rect:
         serializedVersion: 2
         x: 64
@@ -266,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dbdfd7fa77f9cca4ca9014aa7c7a6a98
-      internalID: 1461319733
+      spriteID: fa305167efd0a44459d13fb081760d34
+      internalID: 1851619300
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_13
+      name: ExiledFlorest_Ground_3
       rect:
         serializedVersion: 2
         x: 96
@@ -287,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68ef5b044cc763349b760d752ab908dc
-      internalID: 2003679709
+      spriteID: cb205cb7bcb1d844da0529fdd67af958
+      internalID: 1787760979
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_14
+      name: ExiledFlorest_Ground_4
       rect:
         serializedVersion: 2
         x: 64
@@ -308,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1ea4b0b2f0beefe469430356e1c7f987
-      internalID: -227454750
+      spriteID: f6621e42345bac44c83103ec315d39a6
+      internalID: 1826713199
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_15
+      name: ExiledFlorest_Ground_5
       rect:
         serializedVersion: 2
         x: 96
@@ -329,14 +224,77 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a2e0cc29c84a7c4db4c64ecd7ee36aa
-      internalID: -142710730
+      spriteID: 6ab6a9543be3a4840bff4fcf40925e23
+      internalID: -1064301071
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_16
+      name: ExiledFlorest_Ground_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 216
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d06b3b6379288947ab72bd8ecb363d7
+      internalID: -1515010066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_7
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 216
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d1c118bd6bd787048a15de710f43b79a
+      internalID: 190099551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_8
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 216
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ed6b374da45a354f9db34d9c19d7af6
+      internalID: -1558462917
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_9
       rect:
         serializedVersion: 2
         x: 320
@@ -350,14 +308,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 680fc3584c399374db8d86087a426605
-      internalID: -579650540
+      spriteID: 18cd6fce9662fe045947d60b412de10c
+      internalID: 31528729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_17
+      name: ExiledFlorest_Ground_10
       rect:
         serializedVersion: 2
         x: 352
@@ -371,14 +329,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a66137eb5be1dbe42947f74dce746d35
-      internalID: -493818679
+      spriteID: 127d39c90e519234ea3a759830e23269
+      internalID: 2060042008
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_18
+      name: ExiledFlorest_Ground_11
       rect:
         serializedVersion: 2
         x: 384
@@ -392,14 +350,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 775967bb34e8e8540958f26d9fb28fd2
-      internalID: -226571615
+      spriteID: 2fad5045d9209a9439f9b62596f26435
+      internalID: -1384298255
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_19
+      name: ExiledFlorest_Ground_12
       rect:
         serializedVersion: 2
         x: 448
@@ -413,14 +371,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7fa25b497fbb9f4a80c007c43a593e0
-      internalID: 522673611
+      spriteID: 0201f0e9f05f1304a9e70558de5a1a68
+      internalID: -260567352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_20
+      name: ExiledFlorest_Ground_13
       rect:
         serializedVersion: 2
         x: 480
@@ -434,56 +392,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d078797541907874dad8909534cfd583
-      internalID: 169353703
+      spriteID: b41c1116d4f3b8048a77d5b35e2a41ca
+      internalID: -1762936593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_21
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 216
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a597b42a143141846a7eb39b0eaed053
-      internalID: 1827495741
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_22
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 184
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6b94bfad6f74ab04a999943cc39d10e1
-      internalID: -1461897674
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_23
+      name: ExiledFlorest_Ground_14
       rect:
         serializedVersion: 2
         x: 192
@@ -497,14 +413,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d89d94c9ba328be419872dffef6e8674
-      internalID: 345162865
+      spriteID: 380bcef07f2cd1b48aade47619af024e
+      internalID: -703064759
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_24
+      name: ExiledFlorest_Ground_15
       rect:
         serializedVersion: 2
         x: 224
@@ -518,14 +434,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: df27a7608746e074cb1afa8478c06a16
-      internalID: 1407777882
+      spriteID: 93151e65dbaf4ae47bb6a840affffc2f
+      internalID: 1501025145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_25
+      name: ExiledFlorest_Ground_16
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 184
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7244f3241fce394bb86d4fd631762ef
+      internalID: -679008996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_17
       rect:
         serializedVersion: 2
         x: 320
@@ -539,14 +476,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1e4511d561c82247a43c4806965f0cd
-      internalID: 1582104502
+      spriteID: 09d95764cce1ccb4b9849a5080cc9fe0
+      internalID: 301780867
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_26
+      name: ExiledFlorest_Ground_18
       rect:
         serializedVersion: 2
         x: 352
@@ -560,14 +497,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a4b0420ef72a3524f82e899cef4156a8
-      internalID: 537070176
+      spriteID: 19c2bdc684052904a8c6ecfd7246dec1
+      internalID: 510605176
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_27
+      name: ExiledFlorest_Ground_19
       rect:
         serializedVersion: 2
         x: 384
@@ -581,14 +518,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4c22c93a41850c4ea8d90738aa4e07c
-      internalID: -1794932520
+      spriteID: 21b6fbe3853ad3e4f875234fc8e4675d
+      internalID: 1907325645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_28
+      name: ExiledFlorest_Ground_20
       rect:
         serializedVersion: 2
         x: 448
@@ -602,14 +539,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88af204a65032a94b88a24e3ae767c81
-      internalID: -129247197
+      spriteID: a5cf4a3a77dd3c347bca0acd79fa02cd
+      internalID: -742706679
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_29
+      name: ExiledFlorest_Ground_21
       rect:
         serializedVersion: 2
         x: 480
@@ -623,56 +560,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1a720820f3484b24196adb37e6a49b39
-      internalID: -751115439
+      spriteID: bd0165850015fea4b97f24e0399e4d56
+      internalID: -1852850437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_30
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 184
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f1c41556f9b47614baa86f9dc42743d2
-      internalID: -349375609
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_31
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 152
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8a2ebd973f1b8f4b85d41a63568f089
-      internalID: -21492195
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_32
+      name: ExiledFlorest_Ground_22
       rect:
         serializedVersion: 2
         x: 192
@@ -686,14 +581,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c58b238243815e64780fbdb93823497d
-      internalID: -898450384
+      spriteID: e10945d5fb7b50146b9bbbddd5687bed
+      internalID: 1109847402
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_33
+      name: ExiledFlorest_Ground_23
       rect:
         serializedVersion: 2
         x: 224
@@ -707,14 +602,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af3a6cebb34047a4c8112f8e14dcc27b
-      internalID: -1544491932
+      spriteID: 191c3dc2d3859b143b0f66ad894cfb30
+      internalID: 9148335
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_34
+      name: ExiledFlorest_Ground_24
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 152
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9806eb75d4d7a034cab7d1aa6353e8c0
+      internalID: 1916294866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_25
       rect:
         serializedVersion: 2
         x: 320
@@ -728,14 +644,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: af9a77e3534d30f4d84f244c4fc84d5d
-      internalID: -566436822
+      spriteID: 78ccc431c73d70d4e8ddb30f013dfed5
+      internalID: 1121205729
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_35
+      name: ExiledFlorest_Ground_26
       rect:
         serializedVersion: 2
         x: 352
@@ -749,14 +665,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f92f73d5e8c8e394ba325eaaee976e69
-      internalID: -782247996
+      spriteID: 8c3d7c7820a7fed48b45a28c2160e4b3
+      internalID: -1268694848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_36
+      name: ExiledFlorest_Ground_27
       rect:
         serializedVersion: 2
         x: 384
@@ -770,14 +686,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0dd5444daa86a7c42a11bd4e982641ec
-      internalID: -1796297831
+      spriteID: 66e068454b29f1d4da7bdee88d50b28e
+      internalID: 958600747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_37
+      name: ExiledFlorest_Ground_28
       rect:
         serializedVersion: 2
         x: 448
@@ -791,14 +707,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bf73ca588c411bd42b9fdc494ceb63fb
-      internalID: 1715379745
+      spriteID: 9f893d37172c9634985892a5a5f49b7d
+      internalID: -1025007693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_38
+      name: ExiledFlorest_Ground_29
       rect:
         serializedVersion: 2
         x: 480
@@ -812,35 +728,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6184abf293aceb42a28f0e87ff1d108
-      internalID: -170321884
+      spriteID: 72cb05bedc2c3734ea28ee8513cf1ce9
+      internalID: -1307272863
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_39
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 152
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 88e08cda52b1347478345ccf45c61f62
-      internalID: -880191038
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_40
+      name: ExiledFlorest_Ground_30
       rect:
         serializedVersion: 2
         x: 32
@@ -854,14 +749,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b348a8482f02c0c44ad3696c0a45333b
-      internalID: 1585954953
+      spriteID: a240279ddd6ddb94c820edc85d581466
+      internalID: -448586074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_41
+      name: ExiledFlorest_Ground_31
       rect:
         serializedVersion: 2
         x: 64
@@ -875,14 +770,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e20631855ae066741b1ba8a4b150e3ac
-      internalID: 92745525
+      spriteID: 4b76421617801d6439b469ef19cdab9b
+      internalID: -964464437
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_42
+      name: ExiledFlorest_Ground_32
       rect:
         serializedVersion: 2
         x: 96
@@ -896,35 +791,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6ba61e3224ca1a4a91c35384c6da1f6
-      internalID: -788094353
+      spriteID: a3a9c30795f3b6d48a2712c76beec652
+      internalID: 537799405
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_43
-      rect:
-        serializedVersion: 2
-        x: 160
-        y: 120
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc9e22a6aaf866e42a516b21cecac12c
-      internalID: 1991822631
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_44
+      name: ExiledFlorest_Ground_33
       rect:
         serializedVersion: 2
         x: 192
@@ -938,14 +812,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4c4448611d27a7745af695c1f9129ea5
-      internalID: 789558635
+      spriteID: fd25448be07b00a47a437975b3fbaf22
+      internalID: -654107715
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_45
+      name: ExiledFlorest_Ground_34
       rect:
         serializedVersion: 2
         x: 224
@@ -959,14 +833,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13317455050819f4c8368915ed2908ca
-      internalID: 807166047
+      spriteID: b5221dc1d863e1343b1a8ebef7a43f45
+      internalID: 1590213882
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_46
+      name: ExiledFlorest_Ground_35
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 120
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49b25a3555bc7914e95e3aa1fb3abf40
+      internalID: 224540312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_36
       rect:
         serializedVersion: 2
         x: 320
@@ -980,14 +875,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 78e5a920fd75de1438bf43ddff014dc5
-      internalID: 1966338228
+      spriteID: 806465e6492cf1240a7fa1ab52f83f11
+      internalID: 188552025
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_47
+      name: ExiledFlorest_Ground_37
       rect:
         serializedVersion: 2
         x: 352
@@ -1001,14 +896,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 172ca15d2ac4e39468fabe1493d51622
-      internalID: -1691204184
+      spriteID: 7735e532a13c24a4e966ca0333bdb56c
+      internalID: 1598014164
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_48
+      name: ExiledFlorest_Ground_38
       rect:
         serializedVersion: 2
         x: 384
@@ -1022,18 +917,81 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 498b4693d46ed844e98be0406e935760
-      internalID: 761979209
+      spriteID: 7c73ec90e2d26b54180a46d90b0d0ee6
+      internalID: 1725699264
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_49
+      name: ExiledFlorest_Ground_39
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 88
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ad3a8e880a475d041bf5737b653454f0
+      internalID: 683686057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_40
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 88
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4109986e32eae5043b7535f3e1fe4c63
+      internalID: 100373302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_41
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 88
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9560f2b9bcda5e94c8f3abc102d6b995
+      internalID: -1431884910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_42
       rect:
         serializedVersion: 2
         x: 448
-        y: 120
+        y: 88
         width: 32
         height: 32
       alignment: 0
@@ -1043,18 +1001,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 76a44ece6b250fd4aa67988510149b1f
-      internalID: -328121050
+      spriteID: 6d7a8a49cb54deb43843ab57c99ab0b4
+      internalID: -1137470407
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_50
+      name: ExiledFlorest_Ground_43
       rect:
         serializedVersion: 2
         x: 480
-        y: 120
+        y: 88
         width: 32
         height: 32
       alignment: 0
@@ -1064,18 +1022,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0bfff265a1956754386899e9bcd75331
-      internalID: -1079757402
+      spriteID: fcd2e03c7924f5b47a554fae960a107c
+      internalID: -2011918802
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_51
+      name: ExiledFlorest_Ground_44
       rect:
         serializedVersion: 2
-        x: 512
-        y: 120
+        x: 32
+        y: 56
         width: 32
         height: 32
       alignment: 0
@@ -1085,14 +1043,98 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 484fb403435a2944c98393ddc12c742d
-      internalID: -588837776
+      spriteID: f48f1c2f0edb3134c9a0376fd0788ff5
+      internalID: -695983918
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_52
+      name: ExiledFlorest_Ground_45
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 56
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0cda22096c23184daf2ac19514656ef
+      internalID: -1730675812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_46
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 56
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 516bbe317b62ce7428ed17badf8914f3
+      internalID: 2075810689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_47
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 56
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36136ac4fa407c44090d16e5cc10a7fe
+      internalID: -1195965836
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_48
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 56
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13e7d9302cd4402479f0d96dbcbaf87f
+      internalID: -880715233
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_49
       rect:
         serializedVersion: 2
         x: 352
@@ -1106,14 +1148,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: adeaa768c5b69cd4f93e0759ee4fd9ff
-      internalID: 475650619
+      spriteID: 83a82f9d1412ade44928e46b1ec9aeec
+      internalID: -1269790468
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_53
+      name: ExiledFlorest_Ground_50
       rect:
         serializedVersion: 2
         x: 384
@@ -1127,14 +1169,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3c80599613f2cd94ba31d45f10b62560
-      internalID: -2135733264
+      spriteID: a6ebc7379507f3b4397d4bf882d0fb66
+      internalID: 1647653588
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_54
+      name: ExiledFlorest_Ground_51
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 56
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e721e1a603244d247b150b02290462c5
+      internalID: -634630457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_52
       rect:
         serializedVersion: 2
         x: 480
@@ -1148,18 +1211,18 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c31f951f6806ca448dfa78cf91eecc3
-      internalID: -246863452
+      spriteID: 1d396f33aa097664dbfb03014f4089d5
+      internalID: 816489226
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_55
+      name: ExiledFlorest_Ground_53
       rect:
         serializedVersion: 2
-        x: 512
-        y: 56
+        x: 32
+        y: 24
         width: 32
         height: 32
       alignment: 0
@@ -1169,14 +1232,98 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f84d878e6b826ae4aac8b8cd81d3361c
-      internalID: -1591542649
+      spriteID: 89e5989c5b2a7f541a0c9c3d23552d3f
+      internalID: -755272486
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_56
+      name: ExiledFlorest_Ground_54
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 24
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e83c7f66202c42438cc0206cad3c78c
+      internalID: -312977191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_55
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 24
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a1c6160612c390f45af8386eef241fa6
+      internalID: -865871180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_56
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 24
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7001a358b4225b04bbe8654d21a23653
+      internalID: -23151747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_57
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 24
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93249e62bdbb2bc44a0f7cad029bf858
+      internalID: -10695878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_58
       rect:
         serializedVersion: 2
         x: 352
@@ -1190,14 +1337,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c289732636555304492f46ad1faf4874
-      internalID: 1019559018
+      spriteID: c17e0c19191673449b7c2e0248422665
+      internalID: -521368604
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_57
+      name: ExiledFlorest_Ground_59
       rect:
         serializedVersion: 2
         x: 384
@@ -1211,14 +1358,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3f6c3a49a0287e943a97d3d69d7e3b20
-      internalID: -1562568565
+      spriteID: 03f817d31210ded40a7cb6be5d306d84
+      internalID: 1608296268
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_tileset_58
+      name: ExiledFlorest_Ground_60
+      rect:
+        serializedVersion: 2
+        x: 448
+        y: 24
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 21becea5940ae6a4491f367cbdaa0684
+      internalID: 1160415596
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Ground_61
       rect:
         serializedVersion: 2
         x: 480
@@ -1232,29 +1400,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8c93c73cec885a45a46ac289a7a92fe
-      internalID: -641928606
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_tileset_59
-      rect:
-        serializedVersion: 2
-        x: 512
-        y: 24
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cdc28572bcfef0147a0e490f0e94f94b
-      internalID: 625501196
+      spriteID: 0565577f23757c74aad6d639e293d6a7
+      internalID: -1074908674
       vertices: []
       indices: 
       edges: []
@@ -1270,66 +1417,68 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ExiledFlorest_tileset_13: 2003679709
-      ExiledFlorest_tileset_33: -1544491932
-      ExiledFlorest_tileset_36: -1796297831
-      ExiledFlorest_tileset_37: 1715379745
-      ExiledFlorest_tileset_12: 1461319733
-      ExiledFlorest_tileset_14: -227454750
-      ExiledFlorest_tileset_23: 345162865
-      ExiledFlorest_tileset_32: -898450384
-      ExiledFlorest_tileset_40: 1585954953
-      ExiledFlorest_tileset_41: 92745525
-      ExiledFlorest_tileset_18: -226571615
-      ExiledFlorest_tileset_10: -587123323
-      ExiledFlorest_tileset_38: -170321884
-      ExiledFlorest_tileset_0: 2107357885
-      ExiledFlorest_tileset_50: -1079757402
-      ExiledFlorest_tileset_42: -788094353
-      ExiledFlorest_tileset_22: -1461897674
-      ExiledFlorest_tileset_9: 2133624419
-      ExiledFlorest_tileset_24: 1407777882
-      ExiledFlorest_tileset_57: -1562568565
-      ExiledFlorest_tileset_6: -1756030665
-      ExiledFlorest_tileset_5: -415633840
-      ExiledFlorest_tileset_54: -246863452
-      ExiledFlorest_tileset_15: -142710730
-      ExiledFlorest_tileset_30: -349375609
-      ExiledFlorest_tileset_59: 625501196
-      ExiledFlorest_tileset_17: -493818679
-      ExiledFlorest_tileset_4: -1317494975
-      ExiledFlorest_tileset_46: 1966338228
-      ExiledFlorest_tileset_52: 475650619
-      ExiledFlorest_tileset_47: -1691204184
-      ExiledFlorest_tileset_39: -880191038
-      ExiledFlorest_tileset_11: -765776113
-      ExiledFlorest_tileset_21: 1827495741
-      ExiledFlorest_tileset_8: -2009741576
-      ExiledFlorest_tileset_29: -751115439
-      ExiledFlorest_tileset_7: 1124742129
-      ExiledFlorest_tileset_31: -21492195
-      ExiledFlorest_tileset_45: 807166047
-      ExiledFlorest_tileset_1: 72659584
-      ExiledFlorest_tileset_55: -1591542649
-      ExiledFlorest_tileset_43: 1991822631
-      ExiledFlorest_tileset_25: 1582104502
-      ExiledFlorest_tileset_58: -641928606
-      ExiledFlorest_tileset_53: -2135733264
-      ExiledFlorest_tileset_28: -129247197
-      ExiledFlorest_tileset_48: 761979209
-      ExiledFlorest_tileset_49: -328121050
-      ExiledFlorest_tileset_56: 1019559018
-      ExiledFlorest_tileset_26: 537070176
-      ExiledFlorest_tileset_44: 789558635
-      ExiledFlorest_tileset_34: -566436822
-      ExiledFlorest_tileset_19: 522673611
-      ExiledFlorest_tileset_27: -1794932520
-      ExiledFlorest_tileset_51: -588837776
-      ExiledFlorest_tileset_2: 374977125
-      ExiledFlorest_tileset_20: 169353703
-      ExiledFlorest_tileset_35: -782247996
-      ExiledFlorest_tileset_3: 1745347299
-      ExiledFlorest_tileset_16: -579650540
+      ExiledFlorest_Ground_44: -695983918
+      ExiledFlorest_Ground_22: 1109847402
+      ExiledFlorest_Ground_24: 1916294866
+      ExiledFlorest_Ground_34: 1590213882
+      ExiledFlorest_Ground_38: 1725699264
+      ExiledFlorest_Ground_60: 1160415596
+      ExiledFlorest_Ground_36: 188552025
+      ExiledFlorest_Ground_17: 301780867
+      ExiledFlorest_Ground_57: -10695878
+      ExiledFlorest_Ground_43: -2011918802
+      ExiledFlorest_Ground_8: -1558462917
+      ExiledFlorest_Ground_26: -1268694848
+      ExiledFlorest_Ground_5: -1064301071
+      ExiledFlorest_Ground_40: 100373302
+      ExiledFlorest_Ground_2: 1851619300
+      ExiledFlorest_Ground_56: -23151747
+      ExiledFlorest_Ground_1: -418407408
+      ExiledFlorest_Ground_59: 1608296268
+      ExiledFlorest_Ground_54: -312977191
+      ExiledFlorest_Ground_58: -521368604
+      ExiledFlorest_Ground_23: 9148335
+      ExiledFlorest_Ground_53: -755272486
+      ExiledFlorest_Ground_45: -1730675812
+      ExiledFlorest_Ground_12: -260567352
+      ExiledFlorest_Ground_18: 510605176
+      ExiledFlorest_Ground_7: 190099551
+      ExiledFlorest_Ground_3: 1787760979
+      ExiledFlorest_Ground_0: 117086576
+      ExiledFlorest_Ground_6: -1515010066
+      ExiledFlorest_Ground_61: -1074908674
+      ExiledFlorest_Ground_39: 683686057
+      ExiledFlorest_Ground_21: -1852850437
+      ExiledFlorest_Ground_32: 537799405
+      ExiledFlorest_Ground_31: -964464437
+      ExiledFlorest_Ground_46: 2075810689
+      ExiledFlorest_Ground_4: 1826713199
+      ExiledFlorest_Ground_9: 31528729
+      ExiledFlorest_Ground_42: -1137470407
+      ExiledFlorest_Ground_11: -1384298255
+      ExiledFlorest_Ground_47: -1195965836
+      ExiledFlorest_Ground_35: 224540312
+      ExiledFlorest_Ground_19: 1907325645
+      ExiledFlorest_Ground_37: 1598014164
+      ExiledFlorest_Ground_15: 1501025145
+      ExiledFlorest_Ground_33: -654107715
+      ExiledFlorest_Ground_10: 2060042008
+      ExiledFlorest_Ground_51: -634630457
+      ExiledFlorest_Ground_27: 958600747
+      ExiledFlorest_Ground_55: -865871180
+      ExiledFlorest_Ground_13: -1762936593
+      ExiledFlorest_Ground_14: -703064759
+      ExiledFlorest_Ground_41: -1431884910
+      ExiledFlorest_Ground_52: 816489226
+      ExiledFlorest_Ground_29: -1307272863
+      ExiledFlorest_Ground_50: 1647653588
+      ExiledFlorest_Ground_25: 1121205729
+      ExiledFlorest_Ground_30: -448586074
+      ExiledFlorest_Ground_28: -1025007693
+      ExiledFlorest_Ground_20: -742706679
+      ExiledFlorest_Ground_48: -880715233
+      ExiledFlorest_Ground_16: -679008996
+      ExiledFlorest_Ground_49: -1269790468
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
