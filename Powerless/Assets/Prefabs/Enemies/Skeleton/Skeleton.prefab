@@ -189,7 +189,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1738723677
-  m_SortingLayer: 5
+  m_SortingLayer: 10
   m_SortingOrder: 0
   m_Sprite: {fileID: -135328805, guid: d95e137c0d3d67f4a86ffa756a827076, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -224,10 +224,11 @@ MonoBehaviour:
   patrolStateData: {fileID: 11400000, guid: 979ecb811b000dd45bc37ab4fe0f0b2c, type: 2}
   chaseStateData: {fileID: 11400000, guid: d267c02e27fd0af478a31820b2f5108e, type: 2}
   rangedStateData: {fileID: 11400000, guid: f056717ef5890dc48b3bd144e403dbec, type: 2}
+  recoveryAttackData: {fileID: 0}
   coolDownData: {fileID: 11400000, guid: 6795d4ace07963b43887db2a90584f9d, type: 2}
   timeSinceAttack: 0
   bulletPrefab: {fileID: 1843742842366480047, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-  bulletsParent: {fileID: 0}
+  bulletsParent: {fileID: 7000588727279769454}
   goTowardsOtherPatrolPoint: 0
   patrolPoints:
   - {fileID: 0}
