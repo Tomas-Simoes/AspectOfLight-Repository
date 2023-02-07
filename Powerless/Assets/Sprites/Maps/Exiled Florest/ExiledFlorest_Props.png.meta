@@ -105,90 +105,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ExiledFlorest_Props_0
-      rect:
-        serializedVersion: 2
-        x: 144
-        y: 228
-        width: 32
-        height: 19
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 47dd283ae4999eb4db76d85c628a297c
-      internalID: 1976134453
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_Props_1
-      rect:
-        serializedVersion: 2
-        x: 207
-        y: 228
-        width: 36
-        height: 19
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 330ccc8289b4d374694bb74abb77d932
-      internalID: -154086550
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_Props_2
-      rect:
-        serializedVersion: 2
-        x: 298
-        y: 225
-        width: 42
-        height: 24
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 02057a5e92678bc46a55f0646b5f4ad3
-      internalID: -1250493311
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_Props_3
-      rect:
-        serializedVersion: 2
-        x: 386
-        y: 224
-        width: 57
-        height: 25
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 8eb07df6bbc4c9a48b5b92dacaefc0c0
-      internalID: 683487503
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ExiledFlorest_Props_4
       rect:
         serializedVersion: 2
@@ -213,8 +129,8 @@ TextureImporter:
       name: ExiledFlorest_Props_5
       rect:
         serializedVersion: 2
-        x: 36
-        y: 137
+        x: 18
+        y: 133
         width: 22
         height: 18
       alignment: 0
@@ -234,8 +150,8 @@ TextureImporter:
       name: ExiledFlorest_Props_6
       rect:
         serializedVersion: 2
-        x: 42
-        y: 174
+        x: 24
+        y: 170
         width: 10
         height: 5
       alignment: 0
@@ -252,53 +168,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_Props_7
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 170
-        width: 14
-        height: 10
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f3df67eb730bba043a5ef1a39d139d90
-      internalID: -120691854
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_Props_9
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 167
-        width: 18
-        height: 16
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ef4827ec9f200e469e1c8a3d57325b0
-      internalID: 110177585
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ExiledFlorest_Props_14
       rect:
         serializedVersion: 2
-        x: 36
-        y: 103
+        x: 18
+        y: 99
         width: 22
         height: 25
       alignment: 0
@@ -318,8 +192,8 @@ TextureImporter:
       name: ExiledFlorest_Props_15
       rect:
         serializedVersion: 2
-        x: 74
-        y: 73
+        x: 56
+        y: 69
         width: 14
         height: 14
       alignment: 0
@@ -336,55 +210,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_Props_16
-      rect:
-        serializedVersion: 2
-        x: 103
-        y: 109
-        width: 9
-        height: 11
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 688dba78b9d2c354994ea654a3946e6f
-      internalID: -1664273006
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_Props_18
-      rect:
-        serializedVersion: 2
-        x: 115
-        y: 104
-        width: 7
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9edecfdc58aaee046906b7d80c8539f3
-      internalID: -647412850
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ExiledFlorest_Props_19
       rect:
         serializedVersion: 2
-        x: 135
-        y: 72
-        width: 9
-        height: 11
+        x: 128
+        y: 75
+        width: 8
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -399,36 +231,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_Props_20
-      rect:
-        serializedVersion: 2
-        x: 146
-        y: 79
-        width: 8
-        height: 9
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a0318e642f1c86e42b0c95d4adc290be
-      internalID: 1326139328
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ExiledFlorest_Props_21
       rect:
         serializedVersion: 2
-        x: 149
-        y: 99
+        x: 131
+        y: 95
         width: 20
         height: 25
       alignment: 9
-      pivot: {x: 0.52645874, y: 0.47618744}
+      pivot: {x: 0.5201149, y: 0.47425476}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -444,12 +255,12 @@ TextureImporter:
       name: ExiledFlorest_Props_22
       rect:
         serializedVersion: 2
-        x: 214
-        y: 99
+        x: 196
+        y: 95
         width: 22
         height: 20
       alignment: 9
-      pivot: {x: 0.54643804, y: 0.606094}
+      pivot: {x: 0.5364595, y: 0.59941787}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -465,12 +276,12 @@ TextureImporter:
       name: ExiledFlorest_Props_23
       rect:
         serializedVersion: 2
-        x: 308
-        y: 68
+        x: 290
+        y: 64
         width: 23
         height: 36
       alignment: 9
-      pivot: {x: 0.6097279, y: 0.35978997}
+      pivot: {x: 0.6025311, y: 0.47379726}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -486,12 +297,12 @@ TextureImporter:
       name: ExiledFlorest_Props_24
       rect:
         serializedVersion: 2
-        x: 404
-        y: 67
+        x: 386
+        y: 63
         width: 28
         height: 34
       alignment: 9
-      pivot: {x: 0.516364, y: 0.35851982}
+      pivot: {x: 0.51363266, y: 0.44005}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -507,8 +318,8 @@ TextureImporter:
       name: ExiledFlorest_Props_25
       rect:
         serializedVersion: 2
-        x: 36
-        y: 34
+        x: 18
+        y: 30
         width: 28
         height: 30
       alignment: 0
@@ -525,74 +336,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ExiledFlorest_Props_26
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 36
-        width: 10
-        height: 12
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 65faf857c2e2b5845a30621437175d07
-      internalID: -359746480
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_Props_29
-      rect:
-        serializedVersion: 2
-        x: 40
-        y: 9
-        width: 17
-        height: 18
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 045a07dd6b91c864d8f8b514b8fe0de4
-      internalID: 1287074396
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ExiledFlorest_Props_10
-      rect:
-        serializedVersion: 2
-        x: 72
-        y: 107
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76d86fa78ed00a24e8931eb8d8599e2e
-      internalID: 699606504
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: ExiledFlorest_Props_11
       rect:
         serializedVersion: 2
-        x: 64
-        y: 137
+        x: 46
+        y: 133
         width: 31
         height: 18
       alignment: 0
@@ -604,6 +352,300 @@ TextureImporter:
       bones: []
       spriteID: 350d16f0f8d17954e8702ac487bfd767
       internalID: 469657126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_8
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 192
+        width: 32
+        height: 19
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f2e26b2bda5aba44c95bd5b8eb7e7427
+      internalID: -277693243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_12
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 192
+        width: 36
+        height: 19
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efb71d968fc929c4bb6a326fbeb91370
+      internalID: 134200098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_13
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 166
+        width: 14
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b3bb316bb7749247a8931fc5dfe2eff
+      internalID: 1212091350
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_27
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 163
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce1fd89e29f6ca749a8cf27d8d8e25aa
+      internalID: 1842778089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_28
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 157
+        width: 42
+        height: 24
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4f90c12010844df4faf6bea43530eb31
+      internalID: -483588046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_30
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 156
+        width: 57
+        height: 25
+      alignment: 2
+      pivot: {x: 0.5, y: 1}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf1095dd562d6eb42ac613f416f03264
+      internalID: -1428477288
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_31
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 68
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce23b5b0c6453d346b6da8ad8f6301f8
+      internalID: 497105871
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_32
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 100
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc27bcdefca4a024caac6816386d12dd
+      internalID: -1090327079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_33
+      rect:
+        serializedVersion: 2
+        x: 117
+        y: 68
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2b7b37b54abc664e888842662c0b642
+      internalID: -318792937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_34
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 32
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e6e5fdbda35927e4a9d42f6c0b6c5003
+      internalID: 1995615838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_35
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 39
+        width: 9
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c848aad74c7eb1d4bba5b62ab55ad861
+      internalID: 526970044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_36
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 35
+        width: 25
+        height: 18
+      alignment: 9
+      pivot: {x: 0.54029053, y: 0.5528499}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb320ab369605f140b603c4db9abd01a
+      internalID: -448563142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_37
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 5
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 224acd59319f57c4b8d346cb4080617f
+      internalID: -462859518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledFlorest_Props_40
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 103
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b38845c73ccbda143a85d1f9c7d85eee
+      internalID: 1738748831
       vertices: []
       indices: 
       edges: []
@@ -620,6 +662,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       ExiledFlorest_Props_25: 904529594
+      ExiledFlorest_Props_36: -448563142
       ExiledFlorest_Props_10: 699606504
       ExiledFlorest_Props_4: -1445532095
       ExiledFlorest_Props_18: -647412850
@@ -628,18 +671,23 @@ TextureImporter:
       ExiledFlorest_Props_2: -1250493311
       ExiledFlorest_Props_22: -15470793
       ExiledFlorest_Props_24: -1155551253
+      ExiledFlorest_Props_37: -462859518
       ExiledFlorest_Props_20: 1326139328
       ExiledFlorest_Props_14: 1188508997
+      ExiledFlorest_Props_34: 1995615838
       ExiledFlorest_Props_17: -1584824808
       ExiledFlorest_Props_31: 497105871
       ExiledFlorest_Props_9: 110177585
       ExiledFlorest_Props_23: -1216476785
+      ExiledFlorest_Props_39: 751759233
       ExiledFlorest_Props_12: 134200098
+      ExiledFlorest_Props_40: 1738748831
       ExiledFlorest_Props_6: 1041121521
       ExiledFlorest_Props_27: 1842778089
       ExiledFlorest_Props_29: 1287074396
       ExiledFlorest_Props_30: -1428477288
       ExiledFlorest_Props_1: -154086550
+      ExiledFlorest_Props_38: -1187315448
       ExiledFlorest_Props_19: -1854746457
       ExiledFlorest_Props_7: -120691854
       ExiledFlorest_Props_0: 1976134453
@@ -647,7 +695,10 @@ TextureImporter:
       ExiledFlorest_Props_3: 683487503
       ExiledFlorest_Props_13: 1212091350
       ExiledFlorest_Props_26: -359746480
+      ExiledFlorest_Props_33: -318792937
       ExiledFlorest_Props_28: -483588046
+      ExiledFlorest_Props_35: 526970044
+      ExiledFlorest_Props_32: -1090327079
       ExiledFlorest_Props_5: -1798429013
       ExiledFlorest_Props_16: -1664273006
       ExiledFlorest_Props_15: -2096862157
