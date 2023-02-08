@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
-  m_Name: Water 7
+  m_Name: River 6
   m_EditorClassIdentifier: 
   m_AnimatedSprites:
-  - {fileID: -1343181856, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
-  - {fileID: -203600879, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
-  - {fileID: -1562424027, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
-  - {fileID: 362632030, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
+  - {fileID: 815740896, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
+  - {fileID: -659062175, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
+  - {fileID: -1276999386, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
+  - {fileID: -442432784, guid: 072b26ef5b7c5dd498984ce51bc2d123, type: 3}
   m_MinSpeed: 0.7
   m_MaxSpeed: 0.7
   m_AnimationStartTime: 0
