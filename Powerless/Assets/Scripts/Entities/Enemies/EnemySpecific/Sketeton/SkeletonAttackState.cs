@@ -30,10 +30,8 @@ public class SkeletonAttackState : EnemyRangedAttackState
             enemy.bulletsParent
         );
 
-        if (_bullet.GetComponent<Bullet>().bulletParent = enemy)
-        {
-            stateMachine.ChangeState(enemy.recoveryState);
-        }
+        _bullet.GetComponent<Bullet>().bulletParent = enemy;
+        stateMachine.ChangeState(enemy.recoveryState);
     }
 
     public override void Exit()

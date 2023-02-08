@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab4c9169bb346a34aaa782ae4f4db936, type: 3}
   m_Name: Player_CoolDownData
   m_EditorClassIdentifier: Assembly-CSharp::D_PlayerCoolDownData
-  dashCD: 4
-  timeSinceDash: 4.7453823
+  dashCD: 0.5
+  necromancerCD: 10

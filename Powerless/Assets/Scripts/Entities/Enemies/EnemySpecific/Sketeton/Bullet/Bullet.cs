@@ -44,9 +44,12 @@ public class Bullet : MonoBehaviour
         Destroy(this.gameObject, lifeTime);
     }
 
-    void OnTriggerEnter2D(Collider2D collider2D)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(this.gameObject);
+        if (other.CompareTag("Player") || other.CompareTag("Wall"))
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     public bool InterceptionDirection(
