@@ -37,17 +37,16 @@ public class Player : Entity
     public Vector2 axisMovement;
     public GameObject[] dronesSpawnPoints;
 
-    public InputHandler inputHandler { get; private set; }
+    [SerializeField]
+    private Transform Barrel;
 
-    [Header("OtherStuff")]
-    public int currentClip,
-        maxClipSize = 10,
-        CurrentAmmo,
-        maxAmmoSize = 100;
-    public GameObject bullet;
-    private float fireTimer;
-    public Transform Barrel;
-    public float fireRate;
+    [SerializeField]
+    private float fireRate;
+
+    [SerializeField]
+    private GameObject bullet;
+
+    public InputHandler inputHandler { get; private set; }
 
     public override void Start()
     {
@@ -101,7 +100,6 @@ public class Player : Entity
     public override void Update()
     {
         base.Update();
-
         GetInputs();
     }
 
@@ -129,35 +127,8 @@ public class Player : Entity
         }
     }
 
-    private void Shoot()
+    public void bulletTest()
     {
-        if (currentClip > 0)
-        {
-            fireTimer = Time.time + fireRate;
-            Instantiate(bullet, Barrel.position, Barrel.rotation); // Intance of prefab's
-            currentClip--;
-        }
-    }
-
-    private bool CanShoot()
-    {
-        return Time.time > fireTimer; // Timer between bullets
-    }
-
-    public void reload()
-    {
-        int reloadAmount = maxClipSize - currentClip; //How many bullets to refill the clip
-        reloadAmount = (CurrentAmmo - reloadAmount) >= 0 ? reloadAmount : CurrentAmmo;
-        currentClip += reloadAmount;
-        CurrentAmmo -= reloadAmount;
-    }
-
-    public void addAmmo(int ammoAmount)
-    {
-        CurrentAmmo += ammoAmount;
-        if (CurrentAmmo > maxAmmoSize)
-        {
-            CurrentAmmo = maxAmmoSize;
-        }
+        Instantiate(bullet, Barrel.transform.position, Barrel.transform.rotation);
     }
 }

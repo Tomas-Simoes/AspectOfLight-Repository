@@ -30,7 +30,7 @@ public class WolfTank_AttackState : EnemyRangedAttackState
             enemy.bulletsParent
         );
 
-        _bullet.GetComponent<Bullet>().bulletParent = enemy;
+        _bullet.GetComponent<bulletForEnemy>().bulletParent = enemy;
 
         //stateMachine.ChangeState(enemy.recoveryState);
     }

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonMoveState : EnemyPatrolState
+public class Skeleton_PatrolState : EnemyPatrolState
 {
     private Skeleton enemy;
     private GameObject _currentPatrolPoint;
 
-    public SkeletonMoveState(
+    public Skeleton_PatrolState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
@@ -22,6 +22,13 @@ public class SkeletonMoveState : EnemyPatrolState
     public override void Enter()
     {
         base.Enter();
+        enemy.target = enemy.patrolPoints[currentPatrolIndex];
+
+        entity.CheckIfFlip(
+            entity.facingDirection,
+            entity.transform.position,
+            entity.target.transform.position
+        );
     }
 
     public override void Exit()
@@ -32,22 +39,14 @@ public class SkeletonMoveState : EnemyPatrolState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        _currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
+        currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
 
-        if (
-            Vector3.Distance(enemy.transform.position, _currentPatrolPoint.transform.position)
-            < 0.5f
-        )
+        if (enemy.path != null && enemy.currentWaypoint >= enemy.path.vectorPath.Count)
         {
             int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
-
             currentPatrolIndex = _newIndex;
-            entity.CheckIfFlip(
-                enemy.facingDirection,
-                _currentPatrolPoint.transform.position,
-                enemy.patrolPoints[_newIndex].transform.position
-            );
 
+            enemy.target = enemy.patrolPoints[currentPatrolIndex];
             stateMachine.ChangeState(enemy.idleState);
         }
         else
@@ -59,12 +58,12 @@ public class SkeletonMoveState : EnemyPatrolState
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (enemy.goTowardsOtherPatrolPoint && _currentPatrolPoint != null)
+        if (enemy.path != null && enemy.currentWaypoint < enemy.path.vectorPath.Count)
         {
-            entity.GoTowardsPosition(
-                _currentPatrolPoint.transform.position,
-                stateData.movementSpeed
-            );
+            Vector2 _direction =
+                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+
+            entity.rb.velocity = _direction.normalized * stateData.movementSpeed;
         }
     }
 }

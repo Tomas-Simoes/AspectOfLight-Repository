@@ -265,6 +265,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 480230100939751979, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
   m_PrefabInstance: {fileID: 1426838664}
   m_PrefabAsset: {fileID: 0}
+--- !u!212 &566540215 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 480230100939751990, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+  m_PrefabInstance: {fileID: 1426838664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &632262691
 GameObject:
   m_ObjectHideFlags: 0
@@ -4900,9 +4905,33 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 480230100939751977, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: Barrel
+      value: 
+      objectReference: {fileID: 2054020128}
+    - target: {fileID: 480230100939751977, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 6784480819947871758, guid: 6d983ee41a02f084da1499af07d4963b, type: 3}
+    - target: {fileID: 480230100939751977, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: shootingStateData
+      value: 
+      objectReference: {fileID: 11400000, guid: ca4fc13b9019cd44aa8e06eec3745741, type: 2}
     - target: {fileID: 480230100939751979, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 480230100939751988, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: m_Size.x
+      value: 3.3138804
+      objectReference: {fileID: 0}
+    - target: {fileID: 480230100939751988, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: m_Size.y
+      value: 3.3138804
+      objectReference: {fileID: 0}
+    - target: {fileID: 480230100939751988, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.11342552
       objectReference: {fileID: 0}
     - target: {fileID: 480230100939751990, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
       propertyPath: m_Sprite
@@ -4952,7 +4981,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 480230101691718370, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.07
+      objectReference: {fileID: 0}
+    - target: {fileID: 480230101691718370, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 1156602308872860786, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7688322277651046726, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: offset
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7688322277651046726, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: GunRenderer
+      value: 
+      objectReference: {fileID: 1754818652}
+    - target: {fileID: 7688322277651046726, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+      propertyPath: PlayerRenderer
+      value: 
+      objectReference: {fileID: 566540215}
+    m_RemovedComponents:
+    - {fileID: 1156602308872860786, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
 --- !u!1001 &1467548310
 PrefabInstance:
@@ -5055,7 +5109,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1536770297
 Transform:
   m_ObjectHideFlags: 0
@@ -5127,7 +5181,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 47
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -5153,7 +5207,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1546927191}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.28, z: -10.3}
+  m_LocalPosition: {x: 2.25, y: -0.28, z: -10.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5371,6 +5425,11 @@ PrefabInstance:
       objectReference: {fileID: 1811157315}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e78bd79b18bade4cb4aff994d5e8d0e, type: 3}
+--- !u!212 &1754818652 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 8560757845154539589, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+  m_PrefabInstance: {fileID: 1426838664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1811157315
 GameObject:
   m_ObjectHideFlags: 0
@@ -5631,6 +5690,11 @@ MonoBehaviour:
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
+--- !u!4 &2054020128 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7409764734610263432, guid: 7ebb7ca17e7e7aa4d9fdf1a93f7f3d33, type: 3}
+  m_PrefabInstance: {fileID: 1426838664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2063269988
 GameObject:
   m_ObjectHideFlags: 0

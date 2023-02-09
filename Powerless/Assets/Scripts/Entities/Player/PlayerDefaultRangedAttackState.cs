@@ -33,10 +33,8 @@ public class PlayerDefaultRangedAttackState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
+        stateMachine.ChangeState(player.moveState);
+        Debug.Log("it was here");
+        player.bulletTest();
     }
 }

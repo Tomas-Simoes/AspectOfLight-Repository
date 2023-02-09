@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Skeleton : Enemy
 {
-    public SkeletonidleState idleState { get; private set; }
-    public SkeletonMoveState moveState { get; private set; }
-    public SkeletonChaseState chaseState { get; private set; }
-    public SkeletonAttackState attackState { get; private set; }
-    public SkeletonRecoveryState recoveryState { get; private set; }
+    public Skeleton_IdleState idleState { get; private set; }
+    public Skeleton_PatrolState patrolState { get; private set; }
+    public Skeleton_ChaseState chaseState { get; private set; }
+    public Skeleton_AttackState attackState { get; private set; }
+    public Skeleton_RecoveryState recoveryState { get; private set; }
 
     [Header("State Data")]
     [SerializeField]
@@ -47,9 +47,9 @@ public class Skeleton : Enemy
         currentHealth = entityData.MAX_HEALTH;
         timeSinceAttack = coolDownData.normalAttackCD;
 
-        idleState = new SkeletonidleState(this, stateMachine, "idle", idleStateData, this);
-        moveState = new SkeletonMoveState(this, stateMachine, "move", patrolStateData, this);
-        chaseState = new SkeletonChaseState(
+        idleState = new Skeleton_IdleState(this, stateMachine, "idle", idleStateData, this);
+        patrolState = new Skeleton_PatrolState(this, stateMachine, "move", patrolStateData, this);
+        chaseState = new Skeleton_ChaseState(
             this,
             stateMachine,
             "move", // this can change if we want to have a "chace" animation aswell
@@ -59,9 +59,9 @@ public class Skeleton : Enemy
             coolDownData
         );
 
-        attackState = new SkeletonAttackState(this, stateMachine, "attack", rangedStateData, this);
+        attackState = new Skeleton_AttackState(this, stateMachine, "attack", rangedStateData, this);
 
-        recoveryState = new SkeletonRecoveryState(
+        recoveryState = new Skeleton_RecoveryState(
             this,
             stateMachine,
             "idle",
@@ -72,7 +72,7 @@ public class Skeleton : Enemy
             patrolStateData
         );
 
-        stateMachine.Init(moveState);
+        stateMachine.Init(patrolState);
     }
 
     public override void Update()
@@ -111,7 +111,7 @@ public class Skeleton : Enemy
         if (other.CompareTag("Player"))
         {
             target = null;
-            stateMachine.ChangeState(moveState);
+            stateMachine.ChangeState(patrolState);
         }
     }
 }

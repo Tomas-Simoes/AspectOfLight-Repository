@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonAttackState : EnemyRangedAttackState
+public class Skeleton_AttackState : EnemyRangedAttackState
 {
     private Skeleton enemy;
     private D_EnemyCoolDown coolDownData;
 
-    public SkeletonAttackState(
+    public Skeleton_AttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
@@ -29,8 +29,7 @@ public class SkeletonAttackState : EnemyRangedAttackState
             enemy.attackPosition.transform.position,
             enemy.bulletsParent
         );
-        _bullet.GetComponent<Bullet>().bulletParent = enemy;
-
+        _bullet.GetComponent<bulletForEnemy>().bulletParent = enemy;
         stateMachine.ChangeState(enemy.recoveryState);
     }
 

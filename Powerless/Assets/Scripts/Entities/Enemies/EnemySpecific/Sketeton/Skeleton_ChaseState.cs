@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonChaseState : EnemyChaseState
+public class Skeleton_ChaseState : EnemyChaseState
 {
     private Skeleton enemy;
     private D_EnemyRangedAttackState attackData;
@@ -10,7 +10,7 @@ public class SkeletonChaseState : EnemyChaseState
 
     RaycastHit hit;
 
-    public SkeletonChaseState(
+    public Skeleton_ChaseState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
@@ -29,6 +29,7 @@ public class SkeletonChaseState : EnemyChaseState
     public override void Enter()
     {
         base.Enter();
+        enemy.target = enemy.playerReference;
     }
 
     public override void Exit()
@@ -39,6 +40,13 @@ public class SkeletonChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        entity.CheckIfFlip(
+            enemy.facingDirection,
+            enemy.transform.position,
+            enemy.target.transform.position
+        );
+
         if (
             Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
                 <= attackData.minimumDistanceToAttack
@@ -47,12 +55,6 @@ public class SkeletonChaseState : EnemyChaseState
         {
             stateMachine.ChangeState(enemy.attackState);
         }
-
-        entity.CheckIfFlip(
-            enemy.facingDirection,
-            enemy.transform.position,
-            enemy.target.transform.position
-        );
     }
 
     public override void PhysicsUpdate()
