@@ -6,6 +6,7 @@ public class WolfTank : Enemy
     public WolfTank_PatrolState patrolState { get; private set; }
     public WolfTank_ChaseState chaseState { get; private set; }
     public WolfTank_AttackState attackState { get; private set; }
+    public WolfTank_RecoveryAttackState recoveryAttackState { get; private set; }
 
     [Header("State Data")]
     [SerializeField]
@@ -22,6 +23,9 @@ public class WolfTank : Enemy
 
     [SerializeField]
     private D_EnemyCoolDown coolDownData;
+
+    [SerializeField]
+    private D_EnemyRecoveryAttackState recoveryAttackData;
 
     [Header("Cooldowns")]
     public float timeSinceAttack;
@@ -58,6 +62,17 @@ public class WolfTank : Enemy
             rangedAttackData,
             this
         );
+
+        recoveryAttackState = new WolfTank_RecoveryAttackState(
+            this,
+            stateMachine,
+            "attack",
+            recoveryAttackData,
+            this,
+            rangedAttackData,
+            coolDownData
+        );
+
         stateMachine.Init(patrolState);
     }
 

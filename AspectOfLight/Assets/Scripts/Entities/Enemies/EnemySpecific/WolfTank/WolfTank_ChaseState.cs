@@ -28,6 +28,7 @@ public class WolfTank_ChaseState : EnemyChaseState
     {
         base.Enter();
         enemy.target = enemy.playerReference;
+        enemy.timeSinceAttack = coolDownData.normalAttackCD;
     }
 
     public override void Exit()
@@ -52,8 +53,8 @@ public class WolfTank_ChaseState : EnemyChaseState
         {
             if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
                 stateMachine.ChangeState(enemy.attackState);
-            //else
-            //stateMachine.ChangeState(enemy.recoveryAttackState);
+            else
+                stateMachine.ChangeState(enemy.recoveryAttackState);
         }
     }
 

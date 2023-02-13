@@ -68,8 +68,7 @@ public class WolfKnight : Enemy
             recoveryAttackData,
             this,
             meleeAttackData,
-            coolDownData,
-            patrolStateData
+            coolDownData
         );
 
         stateMachine.Init(patrolState);

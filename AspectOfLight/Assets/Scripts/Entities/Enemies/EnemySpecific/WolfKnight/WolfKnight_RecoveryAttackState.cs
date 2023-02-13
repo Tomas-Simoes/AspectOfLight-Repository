@@ -7,13 +7,6 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
     private WolfKnight enemy;
     private D_EnemyMeleeAttackState attackData;
     private D_EnemyCoolDown coolDownData;
-    private D_EnemyPatrolState patrolStateData;
-
-    private bool goTowardsTarget;
-    private bool goingTowardsRecoveryPoint;
-    private Collider2D _collider;
-    public Vector2 recoveryPointPosition;
-    public bool firstTimeInState;
 
     public WolfKnight_RecoveryAttackState(
         Entity entity,
@@ -22,15 +15,13 @@ public class WolfKnight_RecoveryAttackState : EnemyRecoveryAttackState
         D_EnemyRecoveryAttackState stateData,
         WolfKnight enemy,
         D_EnemyMeleeAttackState attackData,
-        D_EnemyCoolDown coolDownData,
-        D_EnemyPatrolState patrolStateData
+        D_EnemyCoolDown coolDownData
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
         this.enemy = enemy;
         this.attackData = attackData;
         this.coolDownData = coolDownData;
-        this.patrolStateData = patrolStateData;
     }
 
     public override void Enter()

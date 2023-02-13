@@ -21,9 +21,11 @@ public class WolfTank_AttackState : EnemyRangedAttackState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Attack");
+        //float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
         enemy.timeSinceAttack = 0;
 
+        //if(_animationTime >= 1f){
         GameObject _bullet = entity.CreatePrefab(
             enemy.bulletPrefab,
             enemy.attackPosition.transform.position,
@@ -31,6 +33,9 @@ public class WolfTank_AttackState : EnemyRangedAttackState
         );
 
         _bullet.GetComponent<Bullet>().bulletParent = enemy;
+        stateMachine.ChangeState(enemy.recoveryAttackState);
+        //}
+
 
         //stateMachine.ChangeState(enemy.recoveryState);
     }
