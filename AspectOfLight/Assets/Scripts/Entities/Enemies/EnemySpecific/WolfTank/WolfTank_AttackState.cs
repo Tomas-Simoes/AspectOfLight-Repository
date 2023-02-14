@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WolfTank_AttackState : EnemyRangedAttackState
@@ -21,23 +19,6 @@ public class WolfTank_AttackState : EnemyRangedAttackState
     public override void Enter()
     {
         base.Enter();
-        //float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-
-        enemy.timeSinceAttack = 0;
-
-        //if(_animationTime >= 1f){
-        GameObject _bullet = entity.CreatePrefab(
-            enemy.bulletPrefab,
-            enemy.attackPosition.transform.position,
-            enemy.bulletsParent
-        );
-
-        _bullet.GetComponent<Bullet>().bulletParent = enemy;
-        stateMachine.ChangeState(enemy.recoveryAttackState);
-        //}
-
-
-        //stateMachine.ChangeState(enemy.recoveryState);
     }
 
     public override void Exit()
@@ -48,6 +29,27 @@ public class WolfTank_AttackState : EnemyRangedAttackState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+        if (_animationTime >= 0.77f && !attackedOnce)
+        {
+            GameObject _bullet = entity.CreatePrefab(
+                enemy.bulletPrefab,
+                enemy.attackPosition.transform.position,
+                enemy.bulletsParent
+            );
+
+            _bullet.GetComponent<Bullet>().bulletParent = enemy;
+
+            attackedOnce = true;
+        }
+
+        if (_animationTime >= 1f)
+        {
+            enemy.timeSinceAttack = 0;
+            stateMachine.ChangeState(enemy.recoveryAttackState);
+        }
     }
 
     public override void PhysicsUpdate()

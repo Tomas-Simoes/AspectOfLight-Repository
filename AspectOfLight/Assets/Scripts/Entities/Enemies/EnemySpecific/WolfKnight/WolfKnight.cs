@@ -27,9 +27,6 @@ public class WolfKnight : Enemy
     [SerializeField]
     private D_EnemyCoolDown coolDownData;
 
-    [SerializeField]
-    private D_EnemyRecoveryAttackState recoveryAttackData;
-
     [Header("Cooldowns")]
     public float timeSinceAttack;
 
@@ -65,7 +62,6 @@ public class WolfKnight : Enemy
             this,
             stateMachine,
             "idle",
-            recoveryAttackData,
             this,
             meleeAttackData,
             coolDownData

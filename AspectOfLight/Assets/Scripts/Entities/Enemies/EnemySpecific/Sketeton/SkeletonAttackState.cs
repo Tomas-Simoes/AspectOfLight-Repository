@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SkeletonAttackState : EnemyRangedAttackState
 {
     private Skeleton enemy;
-    private D_EnemyCoolDown coolDownData;
 
     public SkeletonAttackState(
         Entity entity,

@@ -49,6 +49,9 @@ public class Enemy : Entity
 
     private void UpdateWaypoints()
     {
+        if (path == null)
+            return;
+
         if (currentWaypoint >= path.vectorPath.Count)
             return;
 

@@ -22,6 +22,7 @@ public class EnemyMeleeAttackState : State
     {
         base.Enter();
         entity.rb.velocity = Vector2.zero;
+        attackedOnce = false;
     }
 
     public override void Exit()

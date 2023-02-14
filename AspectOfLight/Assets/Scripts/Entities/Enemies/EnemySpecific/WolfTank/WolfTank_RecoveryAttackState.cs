@@ -5,22 +5,18 @@ using UnityEngine;
 public class WolfTank_RecoveryAttackState : EnemyRecoveryAttackState
 {
     private WolfTank enemy;
-    private D_EnemyRangedAttackState attackData;
     private D_EnemyCoolDown coolDownData;
 
     public WolfTank_RecoveryAttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyRecoveryAttackState stateData,
         WolfTank enemy,
-        D_EnemyRangedAttackState attackData,
         D_EnemyCoolDown coolDownData
     )
-        : base(entity, stateMachine, animBoolName, stateData)
+        : base(entity, stateMachine, animBoolName)
     {
         this.enemy = enemy;
-        this.attackData = attackData;
         this.coolDownData = coolDownData;
     }
 

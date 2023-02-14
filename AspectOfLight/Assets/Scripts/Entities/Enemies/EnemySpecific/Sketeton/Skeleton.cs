@@ -65,7 +65,6 @@ public class Skeleton : Enemy
             this,
             stateMachine,
             "idle",
-            recoveryAttackData,
             this,
             rangedStateData,
             coolDownData,

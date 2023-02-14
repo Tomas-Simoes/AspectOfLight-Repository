@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2c0d5da4aa767b498893015a7897e8a, type: 3}
   m_Name: WolfTank_RangedAttackStateData
   m_EditorClassIdentifier: 
-  minimumDistanceToAttack: 4
+  minimumDistanceToAttack: 5.5
   attackableLayer:
     serializedVersion: 2
     m_Bits: 64

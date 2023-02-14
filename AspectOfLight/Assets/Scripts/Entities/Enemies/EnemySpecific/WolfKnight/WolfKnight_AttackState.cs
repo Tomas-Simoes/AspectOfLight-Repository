@@ -22,7 +22,6 @@ public class WolfKnight_AttackState : EnemyMeleeAttackState
     {
         base.Enter();
         enemy.timeSinceAttack = 0;
-        attackedOnce = false;
     }
 
     public override void Exit()
@@ -52,7 +51,7 @@ public class WolfKnight_AttackState : EnemyMeleeAttackState
             attackedOnce = true;
         }
 
-        if (_animationTime > 1f)
+        if (_animationTime >= 1f)
         {
             stateMachine.ChangeState(enemy.recoveryAttackState);
         }

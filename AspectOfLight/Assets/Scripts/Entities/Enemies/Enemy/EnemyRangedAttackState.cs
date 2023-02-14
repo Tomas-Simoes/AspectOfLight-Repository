@@ -6,6 +6,7 @@ using UnityEngine;
 public class EnemyRangedAttackState : State
 {
     protected D_EnemyRangedAttackState stateData;
+    protected bool attackedOnce = false;
 
     public EnemyRangedAttackState(
         Entity entity,
@@ -22,6 +23,7 @@ public class EnemyRangedAttackState : State
     {
         base.Enter();
         entity.rb.velocity = Vector2.zero;
+        attackedOnce = false;
     }
 
     public override void Exit()

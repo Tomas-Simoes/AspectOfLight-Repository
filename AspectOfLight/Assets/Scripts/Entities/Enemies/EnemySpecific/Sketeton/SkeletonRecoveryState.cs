@@ -14,13 +14,12 @@ public class SkeletonRecoveryState : EnemyRecoveryAttackState
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyRecoveryAttackState stateData,
         Skeleton enemy,
         D_EnemyRangedAttackState attackData,
         D_EnemyCoolDown coolDownData,
         D_EnemyPatrolState patrolStateData
     )
-        : base(entity, stateMachine, animBoolName, stateData)
+        : base(entity, stateMachine, animBoolName)
     {
         this.enemy = enemy;
         this.attackData = attackData;

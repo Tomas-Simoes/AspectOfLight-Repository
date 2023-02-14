@@ -24,9 +24,6 @@ public class WolfTank : Enemy
     [SerializeField]
     private D_EnemyCoolDown coolDownData;
 
-    [SerializeField]
-    private D_EnemyRecoveryAttackState recoveryAttackData;
-
     [Header("Cooldowns")]
     public float timeSinceAttack;
 
@@ -66,10 +63,8 @@ public class WolfTank : Enemy
         recoveryAttackState = new WolfTank_RecoveryAttackState(
             this,
             stateMachine,
-            "attack",
-            recoveryAttackData,
+            "idle",
             this,
-            rangedAttackData,
             coolDownData
         );
 
