@@ -76,4 +76,9 @@ public class InputHandler : MonoBehaviour
     {
         pressedAbilityOne = ctx.started;
     }
+
+    private void SetfireBowM2(InputAction.CallbackContext ctx)
+    {
+        pressedAbilityOne = ctx.started;
+    }
 }

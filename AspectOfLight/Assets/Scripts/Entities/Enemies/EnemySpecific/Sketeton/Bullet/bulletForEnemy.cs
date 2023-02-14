@@ -17,6 +17,8 @@ public class bulletForEnemy : MonoBehaviour
 
     private GameObject bulletProjectile;
 
+    public D_EnemyRangedAttackState stateData;
+
     private Rigidbody2D rb;
 
     void Start()
@@ -45,6 +47,16 @@ public class bulletForEnemy : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D collider2D)
+    {
+        if (collider2D.GetComponent<Player>() != null)
+        {
+            Debug.Log("HIT");
+            collider2D.GetComponent<Player>().TakeDamage(stateData.damage);
+            Destroy(this.gameObject);
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(this.gameObject);
     }

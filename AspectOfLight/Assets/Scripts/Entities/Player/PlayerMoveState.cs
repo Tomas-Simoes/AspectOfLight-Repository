@@ -42,20 +42,5 @@ public class PlayerMoveState : State
         base.PhysicsUpdate();
 
         entity.rb.velocity = player.axisMovement.normalized * stateData.movementSpeed;
-
-        Vector2 dir =
-            Input.mousePosition - Camera.main.WorldToScreenPoint(player.transform.position);
-
-        //Check "Direction" (dir), and the flips.
-        if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
-        {
-            CheckForFlipping();
-        }
-    }
-
-    private void CheckForFlipping()
-    {
-        FacingRight = !FacingRight;
-        player.transform.Rotate(0f, 180f, 0f);
     }
 }

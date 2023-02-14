@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,11 @@ public class PlayerDefaultRangedAttackState : State
     public override void Enter()
     {
         base.Enter();
+        GameObject _bullet = entity.CreatePrefab(
+            stateData.bulletPrefab,
+            stateData.barrel.transform.position,
+            stateData.bulletsParent
+        );
     }
 
     public override void Exit()
@@ -34,7 +40,10 @@ public class PlayerDefaultRangedAttackState : State
     {
         base.LogicUpdate();
         stateMachine.ChangeState(player.moveState);
-        Debug.Log("it was here");
-        player.bulletTest();
+    }
+
+    public override void PhysicsUpdate()
+    {
+        base.PhysicsUpdate();
     }
 }
