@@ -37,7 +37,14 @@ public class Player : Entity
     public Vector2 axisMovement;
     public GameObject[] dronesSpawnPoints;
 
-    private bool FacingRight = true; //Flip stuff
+    [SerializeField]
+    private Transform Barrel;
+
+    [SerializeField]
+    private float fireRate;
+
+    [SerializeField]
+    private GameObject bullet;
 
     public InputHandler inputHandler { get; private set; }
 
@@ -94,14 +101,6 @@ public class Player : Entity
     {
         base.Update();
         GetInputs();
-
-        Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-
-        //Check "Direction" (dir), and the flips.
-        if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
-        {
-            CheckForFlipping();
-        }
     }
 
     public override void UpdateCooldowns()
@@ -128,9 +127,8 @@ public class Player : Entity
         }
     }
 
-    private void CheckForFlipping()
+    public void bulletTest()
     {
-        FacingRight = !FacingRight;
-        transform.Rotate(0f, 180f, 0f);
+        Instantiate(bullet, Barrel.transform.position, Barrel.transform.rotation);
     }
 }

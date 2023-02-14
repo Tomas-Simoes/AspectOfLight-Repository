@@ -8,5 +8,4 @@ public class D_EnemyRangedAttackState : ScriptableObject
 {
     public float minimumDistanceToAttack;
     public LayerMask attackableLayer;
-    public float damage;
 }

@@ -12,7 +12,7 @@ public class bulletForPlayer : MonoBehaviour
 
     [SerializeField]
     public float lifeTime = 4f;
-    public D_EnemyMeleeAttackState stateData;
+
     private Rigidbody2D rb;
 
     public void Update()
