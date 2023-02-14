@@ -1,15 +1,16 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyIdleState : State
+public class Enemy_IdleState : State
 {
     protected D_EnemyIdleState stateData;
     protected bool flipAfterIdle;
     protected bool isIdleTimeOver;
     protected float idleTime;
 
-    public EnemyIdleState(
+    public Enemy_IdleState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonRecoveryState : EnemyRecoveryAttackState
+public class Skeleton_RecoveryState : Enemy_RecoveryAttackState
 {
     private Skeleton enemy;
 
@@ -10,7 +10,7 @@ public class SkeletonRecoveryState : EnemyRecoveryAttackState
     private D_EnemyCoolDown coolDownData;
     private D_EnemyPatrolState patrolStateData;
 
-    public SkeletonRecoveryState(
+    public Skeleton_RecoveryState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,

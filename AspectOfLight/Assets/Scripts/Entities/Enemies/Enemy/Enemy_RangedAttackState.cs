@@ -1,16 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyChaseState : State
+public class Enemy_RangedAttackState : State
 {
-    protected D_EnemyChaseState stateData;
+    protected D_EnemyRangedAttackState stateData;
+    protected bool attackedOnce = false;
 
-    public EnemyChaseState(
+    public Enemy_RangedAttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyChaseState stateData
+        D_EnemyRangedAttackState stateData
     )
         : base(entity, stateMachine, animBoolName)
     {
@@ -20,6 +22,8 @@ public class EnemyChaseState : State
     public override void Enter()
     {
         base.Enter();
+        entity.rb.velocity = Vector2.zero;
+        attackedOnce = false;
     }
 
     public override void Exit()

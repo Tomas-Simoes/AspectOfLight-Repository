@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonidleState : EnemyIdleState
+public class Skeleton_idleState : Enemy_IdleState
 {
   private Skeleton enemySkeleton;
 
-  public SkeletonidleState(
+  public Skeleton_idleState(
       Entity entity,
       StateMachine stateMachine,
       string animBoolName,
@@ -25,6 +25,13 @@ public class SkeletonidleState : EnemyIdleState
   public override void Exit()
   {
     base.Exit();
+
+            entity.CheckIfFlip(
+            enemySkeleton.facingDirection,
+            enemySkeleton.transform.position,
+            enemySkeleton.target.transform.position
+        );
+    
   }
 
   public override void LogicUpdate()
@@ -33,7 +40,7 @@ public class SkeletonidleState : EnemyIdleState
 
     if (isIdleTimeOver)
     {
-      stateMachine.ChangeState(enemySkeleton.moveState);
+      stateMachine.ChangeState(enemySkeleton.patrolState);
     }
   }
 

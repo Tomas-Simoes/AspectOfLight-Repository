@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyPatrolState : State
+public class Enemy_PatrolState : State
 {
     protected D_EnemyPatrolState stateData;
     protected int currentPatrolIndex = 0;
     protected GameObject currentPatrolPoint;
 
-    public EnemyPatrolState(
+    public Enemy_PatrolState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,

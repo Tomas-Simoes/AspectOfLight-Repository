@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfTank_IdleState : EnemyIdleState
+public class WolfTank_IdleState : Enemy_IdleState
 {
-    private WolfTank enemy;
+    private WolfTank enemyWolfTank;
 
     public WolfTank_IdleState(
         Entity entity,
@@ -15,7 +15,7 @@ public class WolfTank_IdleState : EnemyIdleState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemy = enemy;
+        this.enemyWolfTank = enemy;
     }
 
     public override void Enter()
@@ -34,7 +34,7 @@ public class WolfTank_IdleState : EnemyIdleState
 
         if (isIdleTimeOver)
         {
-            stateMachine.ChangeState(enemy.patrolState);
+            stateMachine.ChangeState(enemyWolfTank.patrolState);
         }
     }
 

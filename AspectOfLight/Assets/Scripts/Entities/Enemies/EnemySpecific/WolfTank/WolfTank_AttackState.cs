@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class WolfTank_AttackState : EnemyRangedAttackState
+public class WolfTank_AttackState : Enemy_RangedAttackState
 {
-    private WolfTank enemy;
+    private WolfTank enemyWolfTank;
 
     public WolfTank_AttackState(
         Entity entity,
@@ -13,7 +13,7 @@ public class WolfTank_AttackState : EnemyRangedAttackState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemy = enemy;
+        this.enemyWolfTank = enemy;
     }
 
     public override void Enter()
@@ -35,20 +35,20 @@ public class WolfTank_AttackState : EnemyRangedAttackState
         if (_animationTime >= 0.77f && !attackedOnce)
         {
             GameObject _bullet = entity.CreatePrefab(
-                enemy.bulletPrefab,
-                enemy.attackPosition.transform.position,
-                enemy.bulletsParent
+                enemyWolfTank.bulletPrefab,
+                enemyWolfTank.attackPosition.transform.position,
+                enemyWolfTank.bulletsParent
             );
 
-            _bullet.GetComponent<Bullet>().bulletParent = enemy;
+            _bullet.GetComponent<Bullet>().bulletParent = enemyWolfTank;
 
             attackedOnce = true;
         }
 
         if (_animationTime >= 1f)
         {
-            enemy.timeSinceAttack = 0;
-            stateMachine.ChangeState(enemy.recoveryAttackState);
+            enemyWolfTank.timeSinceAttack = 0;
+            stateMachine.ChangeState(enemyWolfTank.recoveryAttackState);
         }
     }
 
