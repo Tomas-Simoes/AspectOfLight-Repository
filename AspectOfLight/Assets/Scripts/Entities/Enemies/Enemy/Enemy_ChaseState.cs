@@ -2,16 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMeleeAttackState : State
+public class Enemy_ChaseState : State
 {
-    protected D_EnemyMeleeAttackState stateData;
-    protected bool attackedOnce = false;
+    protected D_EnemyChaseState stateData;
 
-    public EnemyMeleeAttackState(
+    public Enemy_ChaseState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyMeleeAttackState stateData
+        D_EnemyChaseState stateData
     )
         : base(entity, stateMachine, animBoolName)
     {
@@ -21,8 +20,6 @@ public class EnemyMeleeAttackState : State
     public override void Enter()
     {
         base.Enter();
-        entity.rb.velocity = Vector2.zero;
-        attackedOnce = false;
     }
 
     public override void Exit()

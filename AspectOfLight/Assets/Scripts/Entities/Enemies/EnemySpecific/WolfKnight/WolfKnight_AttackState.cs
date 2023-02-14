@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfKnight_AttackState : EnemyMeleeAttackState
+public class WolfKnight_AttackState : Enemy_MeleeAttackState
 {
-    private WolfKnight enemy;
+    private WolfKnight enemyWolfKnight;
 
     public WolfKnight_AttackState(
         Entity entity,
@@ -15,13 +15,13 @@ public class WolfKnight_AttackState : EnemyMeleeAttackState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemy = enemy;
+        this.enemyWolfKnight = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.timeSinceAttack = 0;
+        enemyWolfKnight.timeSinceAttack = 0;
     }
 
     public override void Exit()
@@ -37,7 +37,7 @@ public class WolfKnight_AttackState : EnemyMeleeAttackState
         if (_animationTime > 0.40f && !attackedOnce)
         {
             Collider2D[] objectsOverlaped = Physics2D.OverlapCircleAll(
-                enemy.attackPosition.transform.position,
+                enemyWolfKnight.attackPosition.transform.position,
                 stateData.attackRadius,
                 stateData.attackableLayer
             );
@@ -53,7 +53,7 @@ public class WolfKnight_AttackState : EnemyMeleeAttackState
 
         if (_animationTime >= 1f)
         {
-            stateMachine.ChangeState(enemy.recoveryAttackState);
+            stateMachine.ChangeState(enemyWolfKnight.recoveryAttackState);
         }
     }
 

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfKnight_PatrolState : EnemyPatrolState
+public class WolfKnight_PatrolState : Enemy_PatrolState
 {
-    private WolfKnight enemy;
+    private WolfKnight enemyWolfKnight;
 
     public WolfKnight_PatrolState(
         Entity entity,
@@ -15,13 +15,13 @@ public class WolfKnight_PatrolState : EnemyPatrolState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemy = enemy;
+        this.enemyWolfKnight = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.target = enemy.patrolPoints[currentPatrolIndex];
+        enemyWolfKnight.target = enemyWolfKnight.patrolPoints[currentPatrolIndex];
 
         entity.CheckIfFlip(
             entity.facingDirection,
@@ -38,19 +38,19 @@ public class WolfKnight_PatrolState : EnemyPatrolState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
+        currentPatrolPoint = enemyWolfKnight.patrolPoints[currentPatrolIndex];
 
-        if (enemy.path != null && enemy.currentWaypoint >= enemy.path.vectorPath.Count)
+        if (enemyWolfKnight.path != null && enemyWolfKnight.currentWaypoint >= enemyWolfKnight.path.vectorPath.Count)
         {
-            int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
+            int _newIndex = (currentPatrolIndex + 1) % enemyWolfKnight.patrolPoints.Length;
             currentPatrolIndex = _newIndex;
 
-            enemy.target = enemy.patrolPoints[currentPatrolIndex];
-            stateMachine.ChangeState(enemy.idleState);
+            enemyWolfKnight.target = enemyWolfKnight.patrolPoints[currentPatrolIndex];
+            stateMachine.ChangeState(enemyWolfKnight.idleState);
         }
         else
         {
-            enemy.goTowardsOtherPatrolPoint = true;
+            enemyWolfKnight.goTowardsOtherPatrolPoint = true;
         }
     }
 
@@ -58,10 +58,10 @@ public class WolfKnight_PatrolState : EnemyPatrolState
     {
         base.PhysicsUpdate();
 
-        if (enemy.path != null && enemy.currentWaypoint < enemy.path.vectorPath.Count)
+        if (enemyWolfKnight.path != null && enemyWolfKnight.currentWaypoint < enemyWolfKnight.path.vectorPath.Count)
         {
             Vector2 _direction =
-                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+                enemyWolfKnight.path.vectorPath[enemyWolfKnight.currentWaypoint] - enemyWolfKnight.transform.position;
 
             entity.rb.velocity = _direction.normalized * stateData.movementSpeed;
         }

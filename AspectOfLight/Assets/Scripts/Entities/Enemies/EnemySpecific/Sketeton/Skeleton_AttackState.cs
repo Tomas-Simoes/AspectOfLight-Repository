@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class SkeletonAttackState : EnemyRangedAttackState
+public class Skeleton_AttackState : Enemy_RangedAttackState
 {
     private Skeleton enemy;
 
-    public SkeletonAttackState(
+    public Skeleton_AttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,

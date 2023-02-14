@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonChaseState : EnemyChaseState
+public class Skeleton_ChaseState : Enemy_ChaseState
 {
-    private Skeleton enemy;
+    private Skeleton enemySkeleton;
     private D_EnemyRangedAttackState attackData;
     private D_EnemyCoolDown coolDownData;
 
     RaycastHit hit;
 
-    public SkeletonChaseState(
+    public Skeleton_ChaseState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
@@ -23,7 +23,7 @@ public class SkeletonChaseState : EnemyChaseState
     {
         this.coolDownData = coolDownData;
         this.attackData = attackData;
-        this.enemy = enemy;
+        this.enemySkeleton = enemy;
     }
 
     public override void Enter()
@@ -39,30 +39,33 @@ public class SkeletonChaseState : EnemyChaseState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (
-            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
-                <= attackData.minimumDistanceToAttack
-            && enemy.timeSinceAttack >= coolDownData.normalAttackCD
-        )
-        {
-            stateMachine.ChangeState(enemy.attackState);
-        }
 
         entity.CheckIfFlip(
-            enemy.facingDirection,
-            enemy.transform.position,
-            enemy.target.transform.position
+            enemySkeleton.facingDirection,
+            enemySkeleton.transform.position,
+            enemySkeleton.target.transform.position
         );
+
+        if (
+            Vector2.Distance(enemySkeleton.transform.position, enemySkeleton.target.transform.position)
+            <= attackData.minimumDistanceToAttack
+        )
+        {
+            if (enemySkeleton.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemySkeleton.attackState);
+            else
+                stateMachine.ChangeState(enemySkeleton.recoveryState);
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
 
-        if (enemy.path != null)
+        if (enemySkeleton.path != null)
         {
             Vector2 _direction =
-                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+                enemySkeleton.path.vectorPath[enemySkeleton.currentWaypoint] - enemySkeleton.transform.position;
 
             entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
         }

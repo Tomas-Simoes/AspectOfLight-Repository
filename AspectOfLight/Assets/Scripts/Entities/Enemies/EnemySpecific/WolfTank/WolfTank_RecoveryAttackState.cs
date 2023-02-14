@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolfTank_RecoveryAttackState : EnemyRecoveryAttackState
+public class WolfTank_RecoveryAttackState : Enemy_RecoveryAttackState
 {
-    private WolfTank enemy;
+    private WolfTank enemyWolfTank;
     private D_EnemyCoolDown coolDownData;
 
     public WolfTank_RecoveryAttackState(
@@ -16,7 +16,7 @@ public class WolfTank_RecoveryAttackState : EnemyRecoveryAttackState
     )
         : base(entity, stateMachine, animBoolName)
     {
-        this.enemy = enemy;
+        this.enemyWolfTank = enemy;
         this.coolDownData = coolDownData;
     }
 
@@ -36,8 +36,8 @@ public class WolfTank_RecoveryAttackState : EnemyRecoveryAttackState
     {
         base.LogicUpdate();
 
-        if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
-            stateMachine.ChangeState(enemy.chaseState);
+        if (enemyWolfTank.timeSinceAttack >= coolDownData.normalAttackCD)
+            stateMachine.ChangeState(enemyWolfTank.chaseState);
     }
 
     public override void PhysicsUpdate()

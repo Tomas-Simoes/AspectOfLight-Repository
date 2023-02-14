@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRecoveryAttackState : State
+public class Enemy_RecoveryAttackState : State
 {
-    public EnemyRecoveryAttackState(Entity entity, StateMachine stateMachine, string animBoolName)
+    public Enemy_RecoveryAttackState(Entity entity, StateMachine stateMachine, string animBoolName)
         : base(entity, stateMachine, animBoolName) { }
 
     public override void Enter()

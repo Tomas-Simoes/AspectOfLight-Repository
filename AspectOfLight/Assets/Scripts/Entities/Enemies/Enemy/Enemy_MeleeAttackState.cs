@@ -1,18 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyRangedAttackState : State
+public class Enemy_MeleeAttackState : State
 {
-    protected D_EnemyRangedAttackState stateData;
+    protected D_EnemyMeleeAttackState stateData;
     protected bool attackedOnce = false;
 
-    public EnemyRangedAttackState(
+    public Enemy_MeleeAttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_EnemyRangedAttackState stateData
+        D_EnemyMeleeAttackState stateData
     )
         : base(entity, stateMachine, animBoolName)
     {
