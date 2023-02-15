@@ -47,7 +47,8 @@ public class Drone : Entity
 
         foreach (Collider2D _enemy in _enemiesToDamage)
         {
-            _enemy.GetComponent<Entity>().TakeDamage(attackStateData.damage);
+            if (_enemy != null)
+                _enemy.gameObject.GetComponent<Entity>().TakeDamage(attackStateData.damage);
         }
 
         base.Die();

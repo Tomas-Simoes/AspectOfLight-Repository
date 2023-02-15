@@ -49,10 +49,7 @@ public class Enemy : Entity
 
     private void UpdateWaypoints()
     {
-        if (path == null)
-            return;
-
-        if (currentWaypoint >= path.vectorPath.Count)
+        if (path == null || currentWaypoint >= path.vectorPath.Count)
             return;
 
         if (Vector2.Distance(transform.position, path.vectorPath[currentWaypoint]) < 0.1f)
