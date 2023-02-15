@@ -38,6 +38,7 @@ public class Skeleton : Enemy
 
     [SerializeField]
     public GameObject bulletsParent;
+    [SerializeField]
     public GameObject attackPosition;
 
     //  public GameObject attackPosition;
