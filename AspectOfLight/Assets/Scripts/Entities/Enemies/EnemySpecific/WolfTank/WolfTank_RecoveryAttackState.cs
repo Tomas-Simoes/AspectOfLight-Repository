@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WolfTank_RecoveryAttackState : Enemy_RecoveryAttackState
 {
-    private WolfTank enemyWolfTank;
+    private WolfTank enemy;
     private D_EnemyCoolDown coolDownData;
 
     public WolfTank_RecoveryAttackState(
@@ -16,7 +16,7 @@ public class WolfTank_RecoveryAttackState : Enemy_RecoveryAttackState
     )
         : base(entity, stateMachine, animBoolName)
     {
-        this.enemyWolfTank = enemy;
+        this.enemy = enemy;
         this.coolDownData = coolDownData;
     }
 
@@ -36,8 +36,8 @@ public class WolfTank_RecoveryAttackState : Enemy_RecoveryAttackState
     {
         base.LogicUpdate();
 
-        if (enemyWolfTank.timeSinceAttack >= coolDownData.normalAttackCD)
-            stateMachine.ChangeState(enemyWolfTank.chaseState);
+        if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+            stateMachine.ChangeState(enemy.chaseState);
     }
 
     public override void PhysicsUpdate()

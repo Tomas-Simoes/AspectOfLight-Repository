@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField]
-    public Entity bulletParent;
+    public Vector3 targetPosition;
 
     [Header("Bullet Stats")]
     [SerializeField]
@@ -24,8 +23,13 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
+
+        Debug.Log("Target position: " + targetPosition);
+        Debug.Log("This position: " + transform.position);
+        Debug.Log("Vector normalized: " + (targetPosition - transform.position).normalized);
+
         rb.velocity =
-            (bulletParent.target.transform.position - transform.position).normalized * speed;
+            (targetPosition - transform.position).normalized * speed;
 
         Destroy(this.gameObject, lifeTime);
     }

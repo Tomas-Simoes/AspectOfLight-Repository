@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skeleton_RecoveryState : Enemy_RecoveryAttackState
 {
-    private Skeleton enemySkeleton;
+    private Skeleton enemy;
 
     private D_EnemyRangedAttackState attackData;
     private D_EnemyCoolDown coolDownData;
@@ -21,7 +21,7 @@ public class Skeleton_RecoveryState : Enemy_RecoveryAttackState
     )
         : base(entity, stateMachine, animBoolName)
     {
-        this.enemySkeleton = enemy;
+        this.enemy = enemy;
         this.attackData = attackData;
         this.coolDownData = coolDownData;
         this.patrolStateData = patrolStateData;
@@ -43,8 +43,8 @@ public class Skeleton_RecoveryState : Enemy_RecoveryAttackState
     {
         base.LogicUpdate();
 
-        if (enemySkeleton.timeSinceAttack >= coolDownData.normalAttackCD)
-            stateMachine.ChangeState(enemySkeleton.chaseState);
+        if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+            stateMachine.ChangeState(enemy.chaseState);
     }
 
     public override void PhysicsUpdate()
