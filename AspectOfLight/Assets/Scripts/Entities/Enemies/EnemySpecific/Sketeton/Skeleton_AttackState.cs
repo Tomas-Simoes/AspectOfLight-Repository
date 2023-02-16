@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Skeleton_AttackState : Enemy_RangedAttackState
 {
-    private Skeleton enemySkeleton;
+    private Skeleton enemy;
 
     public Skeleton_AttackState(
         Entity entity,
@@ -13,22 +13,22 @@ public class Skeleton_AttackState : Enemy_RangedAttackState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemySkeleton = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemySkeleton.timeSinceAttack = 0;
+        enemy.timeSinceAttack = 0;
 
         GameObject _bullet = entity.CreatePrefab(
-            enemySkeleton.bulletPrefab,
-            enemySkeleton.attackPosition.transform.position,
-            enemySkeleton.bulletsParent
+            enemy.bulletPrefab,
+            enemy.attackPosition.transform.position,
+            enemy.bulletsParent
         );
 
-        _bullet.GetComponent<Bullet>().bulletParent = enemySkeleton;
-        stateMachine.ChangeState(enemySkeleton.recoveryState);
+        _bullet.GetComponent<Bullet>().targetPosition = enemy.target.transform.position;
+        stateMachine.ChangeState(enemy.recoveryState);
     }
 
     public override void Exit()

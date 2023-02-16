@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WolfKnight_RecoveryAttackState : Enemy_RecoveryAttackState
 {
-    private WolfKnight enemyWolfKnight;
+    private WolfKnight enemy;
     private D_EnemyMeleeAttackState attackData;
     private D_EnemyCoolDown coolDownData;
 
@@ -18,7 +18,7 @@ public class WolfKnight_RecoveryAttackState : Enemy_RecoveryAttackState
     )
         : base(entity, stateMachine, animBoolName)
     {
-        this.enemyWolfKnight = enemy;
+        this.enemy = enemy;
         this.attackData = attackData;
         this.coolDownData = coolDownData;
     }
@@ -39,8 +39,8 @@ public class WolfKnight_RecoveryAttackState : Enemy_RecoveryAttackState
     {
         base.LogicUpdate();
 
-        if (enemyWolfKnight.timeSinceAttack >= coolDownData.normalAttackCD)
-            stateMachine.ChangeState(enemyWolfKnight.chaseState);
+        if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+            stateMachine.ChangeState(enemy.chaseState);
     }
 
     public override void PhysicsUpdate()

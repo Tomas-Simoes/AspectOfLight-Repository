@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WolfKnight_IdleState : Enemy_IdleState
 {
-    private WolfKnight enemyWolfKnight;
+    private WolfKnight enemy;
 
     public WolfKnight_IdleState(
         Entity entity,
@@ -15,7 +15,7 @@ public class WolfKnight_IdleState : Enemy_IdleState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemyWolfKnight = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
@@ -28,9 +28,9 @@ public class WolfKnight_IdleState : Enemy_IdleState
         base.Exit();
 
         entity.CheckIfFlip(
-            enemyWolfKnight.facingDirection,
-            enemyWolfKnight.transform.position,
-            enemyWolfKnight.target.transform.position
+            enemy.facingDirection,
+            enemy.transform.position,
+            enemy.target.transform.position
         );
     }
 
@@ -40,7 +40,7 @@ public class WolfKnight_IdleState : Enemy_IdleState
 
         if (isIdleTimeOver)
         {
-            stateMachine.ChangeState(enemyWolfKnight.patrolState);
+            stateMachine.ChangeState(enemy.patrolState);
         }
     }
 

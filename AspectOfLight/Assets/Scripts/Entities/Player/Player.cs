@@ -34,7 +34,7 @@ public class Player : Entity
     public Vector2 axisMovement;
     public GameObject[] dronesSpawnPoints;
     [SerializeField]
-    private bool FacingRight = true;
+    private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
     
     [SerializeField]
     public GameObject bulletPrefab;
