@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player_AttackState : State
 {
@@ -30,6 +29,16 @@ public class Player_AttackState : State
         player.timeSinceAttack = 0;
 
         entity.rb.velocity = Vector2.zero;
+
+        
+        /*
+        GameObject _bullet = entity.CreatePrefab(
+            player.bulletPrefab,
+            player.attackPosition.transform.position,
+            player.bulletsParent
+        );
+        _bullet.GetComponent<Bullet>().bulletParent = player;
+        */
     }
 
     public override void Exit()
@@ -43,26 +52,16 @@ public class Player_AttackState : State
 
         if(attackTime >= stateData.maxAttackTime){
             // can't charge more
-            Debug.Log("Can't charge more");
             stateMachine.ChangeState(player.moveState);
         } else {
             // still charging
             attackTime += Time.deltaTime;
-            Debug.Log("still charging");
         }
 
         if(!player.inputHandler.pressingAttack){          
-            GameObject _bullet = entity.CreatePrefab(
-            player.bulletPrefab,
-            player.attackPosition.transform.position,
-            player.bulletsParent
-        );
-
-        Vector3 mousePosition = Mouse.current.position.ReadValue();
-        mousePosition.z = 10;
-
-        _bullet.GetComponent<Bullet>().targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        stateMachine.ChangeState(player.moveState);
+            Debug.Log("Attack!");
+            
+            stateMachine.ChangeState(player.moveState);
         }
         
     }

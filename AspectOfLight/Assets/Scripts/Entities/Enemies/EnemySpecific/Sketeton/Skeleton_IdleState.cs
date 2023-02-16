@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skeleton_idleState : Enemy_IdleState
 {
-  private Skeleton enemy;
+  private Skeleton enemySkeleton;
 
   public Skeleton_idleState(
       Entity entity,
@@ -14,7 +14,7 @@ public class Skeleton_idleState : Enemy_IdleState
       Skeleton enemy
   ) : base(entity, stateMachine, animBoolName, stateData)
   {
-    this.enemy = enemy;
+    this.enemySkeleton = enemy;
   }
 
   public override void Enter()
@@ -27,9 +27,9 @@ public class Skeleton_idleState : Enemy_IdleState
     base.Exit();
 
             entity.CheckIfFlip(
-            enemy.facingDirection,
-            enemy.transform.position,
-            enemy.target.transform.position
+            enemySkeleton.facingDirection,
+            enemySkeleton.transform.position,
+            enemySkeleton.target.transform.position
         );
     
   }
@@ -40,7 +40,7 @@ public class Skeleton_idleState : Enemy_IdleState
 
     if (isIdleTimeOver)
     {
-      stateMachine.ChangeState(enemy.patrolState);
+      stateMachine.ChangeState(enemySkeleton.patrolState);
     }
   }
 
