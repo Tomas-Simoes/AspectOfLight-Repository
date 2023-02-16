@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WolfTank_ChaseState : Enemy_ChaseState
 {
-    private WolfTank enemy;
+    private WolfTank enemyWolfTank;
     private D_EnemyRangedAttackState attackData;
     private D_EnemyCoolDown coolDownData;
 
@@ -19,7 +19,7 @@ public class WolfTank_ChaseState : Enemy_ChaseState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemy = enemy;
+        this.enemyWolfTank = enemy;
         this.coolDownData = coolDownData;
         this.attackData = attackData;
     }
@@ -27,8 +27,8 @@ public class WolfTank_ChaseState : Enemy_ChaseState
     public override void Enter()
     {
         base.Enter();
-        enemy.target = enemy.playerReference;
-        enemy.timeSinceAttack = coolDownData.normalAttackCD;
+        enemyWolfTank.target = enemyWolfTank.playerReference;
+        enemyWolfTank.timeSinceAttack = coolDownData.normalAttackCD;
     }
 
     public override void Exit()
@@ -41,30 +41,30 @@ public class WolfTank_ChaseState : Enemy_ChaseState
         base.LogicUpdate();
 
         entity.CheckIfFlip(
-            enemy.facingDirection,
-            enemy.transform.position,
-            enemy.target.transform.position
+            enemyWolfTank.facingDirection,
+            enemyWolfTank.transform.position,
+            enemyWolfTank.target.transform.position
         );
 
         if (
-            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
+            Vector2.Distance(enemyWolfTank.transform.position, enemyWolfTank.target.transform.position)
             <= attackData.minimumDistanceToAttack
         )
         {
-            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
-                stateMachine.ChangeState(enemy.attackState);
+            if (enemyWolfTank.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemyWolfTank.attackState);
             else
-                stateMachine.ChangeState(enemy.recoveryAttackState);
+                stateMachine.ChangeState(enemyWolfTank.recoveryAttackState);
         }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (enemy.path != null)
+        if (enemyWolfTank.path != null)
         {
             Vector2 _direction =
-                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+                enemyWolfTank.path.vectorPath[enemyWolfTank.currentWaypoint] - enemyWolfTank.transform.position;
 
             entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
         }

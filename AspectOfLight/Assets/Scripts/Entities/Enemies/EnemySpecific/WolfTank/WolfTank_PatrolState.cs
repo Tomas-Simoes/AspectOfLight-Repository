@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class WolfTank_PatrolState : Enemy_PatrolState
 {
-    private WolfTank enemy;
+    private WolfTank enemyWolfTank;
 
     public WolfTank_PatrolState(
         Entity entity,
@@ -13,13 +13,13 @@ public class WolfTank_PatrolState : Enemy_PatrolState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemy = enemy;
+        this.enemyWolfTank = enemy;
     }
 
     public override void Enter()
     {
         base.Enter();
-        enemy.target = enemy.patrolPoints[currentPatrolIndex];
+        enemyWolfTank.target = enemyWolfTank.patrolPoints[currentPatrolIndex];
 
         entity.CheckIfFlip(
             entity.facingDirection,
@@ -36,29 +36,29 @@ public class WolfTank_PatrolState : Enemy_PatrolState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        currentPatrolPoint = enemy.patrolPoints[currentPatrolIndex];
+        currentPatrolPoint = enemyWolfTank.patrolPoints[currentPatrolIndex];
 
-        if (enemy.path != null && enemy.currentWaypoint >= enemy.path.vectorPath.Count)
+        if (enemyWolfTank.path != null && enemyWolfTank.currentWaypoint >= enemyWolfTank.path.vectorPath.Count)
         {
-            int _newIndex = (currentPatrolIndex + 1) % enemy.patrolPoints.Length;
+            int _newIndex = (currentPatrolIndex + 1) % enemyWolfTank.patrolPoints.Length;
             currentPatrolIndex = _newIndex;
 
-            enemy.target = enemy.patrolPoints[currentPatrolIndex];
-            stateMachine.ChangeState(enemy.idleState);
+            enemyWolfTank.target = enemyWolfTank.patrolPoints[currentPatrolIndex];
+            stateMachine.ChangeState(enemyWolfTank.idleState);
         }
         else
         {
-            enemy.goTowardsOtherPatrolPoint = true;
+            enemyWolfTank.goTowardsOtherPatrolPoint = true;
         }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-        if (enemy.path != null && enemy.currentWaypoint < enemy.path.vectorPath.Count)
+        if (enemyWolfTank.path != null && enemyWolfTank.currentWaypoint < enemyWolfTank.path.vectorPath.Count)
         {
             Vector2 _direction =
-                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+                enemyWolfTank.path.vectorPath[enemyWolfTank.currentWaypoint] - enemyWolfTank.transform.position;
 
             entity.rb.velocity = _direction.normalized * stateData.movementSpeed;
         }

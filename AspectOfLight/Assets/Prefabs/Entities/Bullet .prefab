@@ -137,7 +137,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletParent: {fileID: 0}
-  speed: 3
-  damage: 2
+  projectileSpeed: 10
   lifeTime: 1
-  targatableTag: 

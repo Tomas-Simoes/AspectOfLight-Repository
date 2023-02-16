@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WolfKnight_ChaseState : Enemy_ChaseState
 {
-    private WolfKnight enemy;
+    private WolfKnight enemyWolfKnight;
     private D_EnemyMeleeAttackState attackData;
     private D_EnemyCoolDown coolDownData;
 
@@ -19,7 +19,7 @@ public class WolfKnight_ChaseState : Enemy_ChaseState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemy = enemy;
+        this.enemyWolfKnight = enemy;
         this.coolDownData = coolDownData;
         this.attackData = attackData;
     }
@@ -27,8 +27,8 @@ public class WolfKnight_ChaseState : Enemy_ChaseState
     public override void Enter()
     {
         base.Enter();
-        enemy.target = enemy.playerReference;
-        enemy.timeSinceAttack = coolDownData.normalAttackCD;
+        enemyWolfKnight.target = enemyWolfKnight.playerReference;
+        enemyWolfKnight.timeSinceAttack = coolDownData.normalAttackCD;
     }
 
     public override void Exit()
@@ -41,20 +41,20 @@ public class WolfKnight_ChaseState : Enemy_ChaseState
         base.LogicUpdate();
 
         entity.CheckIfFlip(
-            enemy.facingDirection,
-            enemy.transform.position,
-            enemy.target.transform.position
+            enemyWolfKnight.facingDirection,
+            enemyWolfKnight.transform.position,
+            enemyWolfKnight.target.transform.position
         );
 
         if (
-            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
+            Vector2.Distance(enemyWolfKnight.transform.position, enemyWolfKnight.target.transform.position)
             <= attackData.minimumDistanceToAttack
         )
         {
-            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
-                stateMachine.ChangeState(enemy.attackState);
+            if (enemyWolfKnight.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemyWolfKnight.attackState);
             else
-                stateMachine.ChangeState(enemy.recoveryAttackState);
+                stateMachine.ChangeState(enemyWolfKnight.recoveryAttackState);
         }
     }
 
@@ -62,10 +62,10 @@ public class WolfKnight_ChaseState : Enemy_ChaseState
     {
         base.PhysicsUpdate();
 
-        if (enemy.path != null)
+        if (enemyWolfKnight.path != null)
         {
             Vector2 _direction =
-                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
+                enemyWolfKnight.path.vectorPath[enemyWolfKnight.currentWaypoint] - enemyWolfKnight.transform.position;
 
             entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
         }
