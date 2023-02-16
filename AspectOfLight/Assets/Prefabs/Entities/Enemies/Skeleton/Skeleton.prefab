@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1048324993}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Pivot
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -76,9 +76,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.5961047, y: 0}
   serializedVersion: 2
-  m_Radius: 20
+  m_Radius: 13.792788
 --- !u!1 &7000588726111749095
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,7 +88,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7000588726111749094}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,8 +124,8 @@ GameObject:
   - component: {fileID: 7000588727279769449}
   - component: {fileID: 7000588727279769450}
   - component: {fileID: 7000588727279769448}
-  - component: {fileID: 1911235901}
-  m_Layer: 7
+  - component: {fileID: 2078624901}
+  m_Layer: 0
   m_Name: Skeleton
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -232,7 +232,7 @@ MonoBehaviour:
   patrolStateData: {fileID: 11400000, guid: 979ecb811b000dd45bc37ab4fe0f0b2c, type: 2}
   chaseStateData: {fileID: 11400000, guid: d267c02e27fd0af478a31820b2f5108e, type: 2}
   rangedStateData: {fileID: 11400000, guid: f056717ef5890dc48b3bd144e403dbec, type: 2}
-  recoveryAttackData: {fileID: 11400000, guid: 1d8fa493509870e42a7cdfc89e49ad11, type: 2}
+  recoveryAttackData: {fileID: 0}
   coolDownData: {fileID: 11400000, guid: 6795d4ace07963b43887db2a90584f9d, type: 2}
   timeSinceAttack: 0
   bulletPrefab: {fileID: 6293206818282807630, guid: 2d79fd0ab79aac940855176d26bd11fc, type: 3}
@@ -272,8 +272,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.12742281, y: -0.5163896}
-  m_Size: {x: 1.8960966, y: 2.6478405}
+  m_Offset: {x: 0, y: -0.000000059604645}
+  m_Size: {x: 0.99999994, y: 1.9999999}
   m_Direction: 0
 --- !u!95 &7000588727279769448
 Animator:
@@ -295,7 +295,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
---- !u!114 &1911235901
+--- !u!114 &2078624901
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4522705296350534004}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -347,7 +347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7880402948321065120}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.52, z: 0}
+  m_LocalPosition: {x: 1.24, y: -0.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
