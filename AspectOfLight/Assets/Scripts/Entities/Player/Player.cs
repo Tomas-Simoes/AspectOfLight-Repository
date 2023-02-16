@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public PlayerMoveState moveState { get; private set; }
-    public PlayerDashState dashState { get; private set; }
-    public PlayerNecromancerState necromancerState { get; private set; }
+    public Player_MoveState moveState { get; private set; }
+    public Player_DashState dashState { get; private set; }
+    public Player_NecromancerState necromancerState { get; private set; }
+    public Player_AttackState attackState {get; private set;}
 
     [Header("States Data")]
     [SerializeField]
@@ -21,13 +22,28 @@ public class Player : Entity
     [SerializeField]
     private D_PlayerNecromancerState necromancerStateData;
 
+    [SerializeField]
+    private D_PlayerAttackState attackStateData;
+
     [Header("Cooldowns")]
+    public float timeSinceAttack;
     public float timeSinceDash;
     public float timeSinceNecromancer;
 
     [Header("Information")]
     public Vector2 axisMovement;
     public GameObject[] dronesSpawnPoints;
+    [SerializeField]
+    private bool FacingRight = true;
+    
+    [SerializeField]
+    public GameObject bulletPrefab;
+
+    [SerializeField]
+    public GameObject bulletsParent;
+    [SerializeField]
+    public GameObject attackPosition;
+
 
     public InputHandler inputHandler { get; private set; }
 
@@ -43,8 +59,8 @@ public class Player : Entity
             inputHandler = this.GetComponent<InputHandler>();
         }
 
-        moveState = new PlayerMoveState(this, stateMachine, "move", moveStateData, this);
-        dashState = new PlayerDashState(
+        moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
+        dashState = new Player_DashState(
             this,
             stateMachine,
             "dash",
@@ -52,7 +68,8 @@ public class Player : Entity
             this,
             coolDownData
         );
-        necromancerState = new PlayerNecromancerState(
+
+        necromancerState = new Player_NecromancerState(
             this,
             stateMachine,
             "necromancer",
@@ -60,14 +77,24 @@ public class Player : Entity
             this,
             coolDownData
         );
+
+        attackState = new Player_AttackState(this, stateMachine, "attack", attackStateData, this,coolDownData);
         stateMachine.Init(moveState);
     }
 
     public override void Update()
     {
         base.Update();
-
         GetInputs();
+        
+        Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+
+        //Check "Direction" (dir), and the flips.
+        if(dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
+        {
+           CheckForFlipping();
+        }
+
     }
 
     public override void UpdateCooldowns()
@@ -76,6 +103,7 @@ public class Player : Entity
 
         timeSinceDash += Time.deltaTime;
         timeSinceNecromancer += Time.deltaTime;
+        timeSinceAttack += Time.deltaTime;
     }
 
     private void GetInputs()
@@ -92,5 +120,16 @@ public class Player : Entity
         {
             stateMachine.ChangeState(necromancerState);
         }
+
+        if(inputHandler.pressingAttack && timeSinceAttack >= coolDownData.attackCD && stateMachine.currentState != attackState)
+        {
+            stateMachine.ChangeState(attackState);
+        }
+    }
+
+    private void CheckForFlipping()
+    {
+        FacingRight = !FacingRight;
+        transform.Rotate(0f, 180f, 0f);
     }
 }

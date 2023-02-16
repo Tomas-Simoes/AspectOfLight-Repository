@@ -13,6 +13,7 @@ public class InputHandler : MonoBehaviour
     public float yAxis;
 
     [Header("Abilities Input")]
+    public bool pressingAttack;
     public bool pressedDash;
     public bool pressedAbilityOne; //? now it's the necromancer ability 
 
@@ -36,7 +37,9 @@ public class InputHandler : MonoBehaviour
 
         inputActions.Player.AbilityOne.started += SetAbilityOne;
         inputActions.Player.AbilityOne.canceled += SetAbilityOne;
-        
+
+        inputActions.Player.Attack.performed += SetAttack;
+        inputActions.Player.Attack.canceled += SetAttack;
     }
 
     private void OnDisable()
@@ -53,6 +56,8 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.AbilityOne.started -= SetAbilityOne;
         inputActions.Player.AbilityOne.canceled += SetAbilityOne;
 
+        inputActions.Player.Attack.performed -= SetAttack;
+        inputActions.Player.Attack.canceled -= SetAttack;
 
         inputActions.Disable();
     }
@@ -74,5 +79,9 @@ public class InputHandler : MonoBehaviour
 
     private void SetAbilityOne(InputAction.CallbackContext ctx){
         pressedAbilityOne = ctx.started;
+    }
+
+    private void SetAttack(InputAction.CallbackContext ctx){
+        pressingAttack = ctx.performed;
     }
 }
