@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveState : State
+public class Player_MoveState : State
 {
     private Player player;
     private D_PlayerMoveState stateData;
 
-    public PlayerMoveState(
+    public Player_MoveState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,

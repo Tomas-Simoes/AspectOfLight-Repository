@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WolfTank_IdleState : Enemy_IdleState
 {
-    private WolfTank enemyWolfTank;
+    private WolfTank enemy;
 
     public WolfTank_IdleState(
         Entity entity,
@@ -15,7 +15,7 @@ public class WolfTank_IdleState : Enemy_IdleState
     )
         : base(entity, stateMachine, animBoolName, stateData)
     {
-        this.enemyWolfTank = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
@@ -34,7 +34,7 @@ public class WolfTank_IdleState : Enemy_IdleState
 
         if (isIdleTimeOver)
         {
-            stateMachine.ChangeState(enemyWolfTank.patrolState);
+            stateMachine.ChangeState(enemy.patrolState);
         }
     }
 

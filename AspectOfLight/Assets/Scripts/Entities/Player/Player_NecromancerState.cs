@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerNecromancerState : State
+public class Player_NecromancerState : State
 {
     public Player player;
     private D_PlayerNecromancerState stateData;
 
-    public PlayerNecromancerState(
+    public Player_NecromancerState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Skeleton_ChaseState : Enemy_ChaseState
 {
-    private Skeleton enemySkeleton;
+    private Skeleton enemy;
     private D_EnemyRangedAttackState attackData;
     private D_EnemyCoolDown coolDownData;
 
@@ -23,7 +23,7 @@ public class Skeleton_ChaseState : Enemy_ChaseState
     {
         this.coolDownData = coolDownData;
         this.attackData = attackData;
-        this.enemySkeleton = enemy;
+        this.enemy = enemy;
     }
 
     public override void Enter()
@@ -41,20 +41,20 @@ public class Skeleton_ChaseState : Enemy_ChaseState
         base.LogicUpdate();
 
         entity.CheckIfFlip(
-            enemySkeleton.facingDirection,
-            enemySkeleton.transform.position,
-            enemySkeleton.target.transform.position
+            enemy.facingDirection,
+            enemy.transform.position,
+            enemy.target.transform.position
         );
 
         if (
-            Vector2.Distance(enemySkeleton.transform.position, enemySkeleton.target.transform.position)
+            Vector2.Distance(enemy.transform.position, enemy.target.transform.position)
             <= attackData.minimumDistanceToAttack
         )
         {
-            if (enemySkeleton.timeSinceAttack >= coolDownData.normalAttackCD)
-                stateMachine.ChangeState(enemySkeleton.attackState);
+            if (enemy.timeSinceAttack >= coolDownData.normalAttackCD)
+                stateMachine.ChangeState(enemy.attackState);
             else
-                stateMachine.ChangeState(enemySkeleton.recoveryState);
+                stateMachine.ChangeState(enemy.recoveryState);
         }
     }
 
@@ -62,10 +62,10 @@ public class Skeleton_ChaseState : Enemy_ChaseState
     {
         base.PhysicsUpdate();
 
-        if (enemySkeleton.path != null)
+        if (enemy.path != null)
         {
             Vector2 _direction =
-                enemySkeleton.path.vectorPath[enemySkeleton.currentWaypoint] - enemySkeleton.transform.position;
+                enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
 
             entity.rb.velocity = _direction.normalized * stateData.chaseSpeed;
         }

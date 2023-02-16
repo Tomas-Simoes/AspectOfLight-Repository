@@ -27,7 +27,7 @@ public class Skeleton_AttackState : Enemy_RangedAttackState
             enemy.bulletsParent
         );
 
-        _bullet.GetComponent<Bullet>().bulletParent = enemy;
+        _bullet.GetComponent<Bullet>().targetPosition = enemy.target.transform.position;
         stateMachine.ChangeState(enemy.recoveryState);
     }
 

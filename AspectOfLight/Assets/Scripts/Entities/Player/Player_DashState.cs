@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDashState : State
+public class Player_DashState : State
 {
     private Player player;
     protected D_PlayerDashState stateData;
@@ -10,7 +10,7 @@ public class PlayerDashState : State
     private bool dashing;
     private float timeDashing = 0;
 
-    public PlayerDashState(
+    public Player_DashState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
