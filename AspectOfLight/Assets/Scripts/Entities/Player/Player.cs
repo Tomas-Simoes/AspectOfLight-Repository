@@ -7,7 +7,10 @@ public class Player : Entity
     public Player_MoveState moveState { get; private set; }
     public Player_DashState dashState { get; private set; }
     public Player_NecromancerState necromancerState { get; private set; }
-    public Player_AttackState attackState {get; private set;}
+    public Player_AttackState attackState { get; private set; }
+
+    [SerializeField]
+    public Ability specific1 { get; private set; }
 
     [Header("States Data")]
     [SerializeField]
@@ -32,24 +35,34 @@ public class Player : Entity
 
     [Header("Information")]
     public Vector2 axisMovement;
-    public GameObject[] dronesSpawnPoints;
+
     [SerializeField]
     private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
-    
+
+    [Header("Abilities Information")]
+    AbilityManager abilityManager;
+
+    [SerializeField]
+    public Ability[] availableAbilities;
+
+    public GameObject[] dronesSpawnPoints;
+
     [SerializeField]
     public GameObject bulletPrefab;
 
     [SerializeField]
     public GameObject bulletsParent;
+
     [SerializeField]
     public GameObject attackPosition;
-
 
     public InputHandler inputHandler { get; private set; }
 
     public override void Start()
     {
         base.Start();
+        abilityManager = new AbilityManager();
+
         currentHealth = entityData.MAX_HEALTH;
         timeSinceDash = coolDownData.dashCD;
         timeSinceNecromancer = coolDownData.necromancerCD;
@@ -78,23 +91,37 @@ public class Player : Entity
             coolDownData
         );
 
-        attackState = new Player_AttackState(this, stateMachine, "attack", attackStateData, this,coolDownData);
+        attackState = new Player_AttackState(
+            this,
+            stateMachine,
+            "attack",
+            attackStateData,
+            this,
+            coolDownData
+        );
+
+        abilityManager.InitAbilities();
         stateMachine.Init(moveState);
+
+        abilityManager.AddPlayerAbility(1, "Specific1");
+        abilityManager.AddPlayerAbility(2, "Specific2");
+
+        abilityManager.CastAbility(1);
+        abilityManager.CastAbility(2);
     }
 
     public override void Update()
     {
         base.Update();
         GetInputs();
-        
+
         Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
 
         //Check "Direction" (dir), and the flips.
-        if(dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
+        if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
         {
-           CheckForFlipping();
+            CheckForFlipping();
         }
-
     }
 
     public override void UpdateCooldowns()
@@ -121,7 +148,11 @@ public class Player : Entity
             stateMachine.ChangeState(necromancerState);
         }
 
-        if(inputHandler.pressingAttack && timeSinceAttack >= coolDownData.attackCD && stateMachine.currentState != attackState)
+        if (
+            inputHandler.pressingAttack
+            && timeSinceAttack >= coolDownData.attackCD
+            && stateMachine.currentState != attackState
+        )
         {
             stateMachine.ChangeState(attackState);
         }
