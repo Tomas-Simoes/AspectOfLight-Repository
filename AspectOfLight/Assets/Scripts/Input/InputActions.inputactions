@@ -224,6 +224,15 @@
             "id": "2adec513-3fcb-48d4-80a6-427003771115",
             "actions": [
                 {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "2e54ed42-88f4-4fb0-a511-91e6a4526e57",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "9dfc900e-6487-4534-bf43-98decb0f2d9e",
@@ -421,6 +430,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "ScrollWheel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9acffae0-663a-4c3e-9add-4500ad6d4ac4",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

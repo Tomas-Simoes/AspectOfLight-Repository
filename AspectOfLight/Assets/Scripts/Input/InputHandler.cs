@@ -15,7 +15,11 @@ public class InputHandler : MonoBehaviour
     [Header("Abilities Input")]
     public bool pressingAttack;
     public bool pressedDash;
-    public bool pressedAbilityOne; //? now it's the necromancer ability 
+    public bool pressedAbilityOne; //? now it's the necromancer ability
+
+    [Header("Pause Input")]
+    [SerializeField]
+    PauseMenu pauseMenuHandler;
 
     void Awake()
     {
@@ -40,6 +44,8 @@ public class InputHandler : MonoBehaviour
 
         inputActions.Player.Attack.performed += SetAttack;
         inputActions.Player.Attack.canceled += SetAttack;
+
+        inputActions.UI.Pause.performed += SetPause;
     }
 
     private void OnDisable()
@@ -59,6 +65,8 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;
 
+        inputActions.UI.Pause.performed -= SetPause;
+
         inputActions.Disable();
     }
 
@@ -77,11 +85,25 @@ public class InputHandler : MonoBehaviour
         pressedDash = ctx.started;
     }
 
-    private void SetAbilityOne(InputAction.CallbackContext ctx){
+    private void SetAbilityOne(InputAction.CallbackContext ctx)
+    {
         pressedAbilityOne = ctx.started;
     }
 
-    private void SetAttack(InputAction.CallbackContext ctx){
+    private void SetAttack(InputAction.CallbackContext ctx)
+    {
         pressingAttack = ctx.performed;
+    }
+
+    private void SetPause(InputAction.CallbackContext ctx)
+    {
+        if (!pauseMenuHandler.isPaused)
+        {
+            pauseMenuHandler.PauseGame();
+        }
+        else
+        {
+            pauseMenuHandler.ResumeGame();
+        }
     }
 }

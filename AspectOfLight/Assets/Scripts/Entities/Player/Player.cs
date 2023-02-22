@@ -98,12 +98,6 @@ public class Player : Entity
 
         abilityManager.InitAbilities();
         stateMachine.Init(moveState);
-
-        abilityManager.AddPlayerAbility(1, "MagicSeed");
-        abilityManager.AddPlayerAbility(2, "Specific2");
-
-        abilityManager.CastAbility(1);
-        abilityManager.CastAbility(2);
     }
 
     public override void Update()

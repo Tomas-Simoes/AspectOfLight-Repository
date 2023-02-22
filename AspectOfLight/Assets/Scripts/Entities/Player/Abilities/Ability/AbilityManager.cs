@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
-public class AbilityManager : MonoBehaviour
+public class AbilityManager : Menu
 {
     [Header("Ability Data")]
     [SerializeField]
@@ -30,7 +31,19 @@ public class AbilityManager : MonoBehaviour
         *                   "..."        SpecificAbility3
     */
 
+    [Header("Ability Slots")]
+    [SerializeField]
+    private GameObject firstSlot;
+
+    [SerializeField]
+    private GameObject secondSlot;
+
+    [SerializeField]
+    private GameObject thirdSlot;
+
     [Header("Others")]
+    private bool abilityListAlreadyHasData;
+
     [SerializeField]
     private GameObject abilityPrefab;
 
@@ -47,14 +60,41 @@ public class AbilityManager : MonoBehaviour
 
         allAbilities = new Dictionary<string, Ability>()
         {
-            { "MagicSeed", magicSeed },
-            { "Specific2", specific2 }
+            { magicSeedData.abilityName, magicSeed },
+            { abilityTwoData.abilityName, specific2 }
         };
     }
 
     public void AddPlayerAbility(int abilitySlot, string abilityName)
     {
-        playerAbilities.Add(abilitySlot, allAbilities[abilityName]);
+        if (playerAbilities.ContainsKey(abilitySlot))
+            playerAbilities[abilitySlot] = allAbilities[abilityName];
+        else
+            playerAbilities.Add(abilitySlot, allAbilities[abilityName]);
+
+        foreach (Ability ability in playerAbilities.Values)
+        {
+            Debug.Log(ability.abilityData.abilityName);
+        }
+
+        GameObject _slotToUpdate;
+        switch (abilitySlot)
+        {
+            case 1:
+                _slotToUpdate = firstSlot;
+                break;
+            case 2:
+                _slotToUpdate = secondSlot;
+                break;
+            case 3:
+                _slotToUpdate = thirdSlot;
+                break;
+            default:
+                _slotToUpdate = null;
+                break;
+        }
+
+        UpdateAbilityObject(_slotToUpdate, playerAbilities[abilitySlot].abilityData.abilityName);
     }
 
     public void RemovePlayerAbility(int abilitySlot)
@@ -67,18 +107,50 @@ public class AbilityManager : MonoBehaviour
         playerAbilities[abilitySlot].Cast();
     }
 
-    public void ListItems()
+    public void ListAbilities()
     {
-        foreach (Ability ability in allAbilities.Values)
+        if (!abilityListAlreadyHasData)
         {
-            var newAbilityObj = Instantiate(abilityPrefab);
+            foreach (Ability ability in allAbilities.Values)
+            {
+                GameObject _newAbilityObj = Instantiate(abilityPrefab);
+                UpdateAbilityObject(_newAbilityObj, ability.abilityData.abilityName);
 
-            newAbilityObj.transform.Find("Label").GetComponent<TextMeshProUGUI>().text = ability
-                .abilityData
-                .abilityName;
+                _newAbilityObj.transform.SetParent(abilitiesParent.transform);
+                _newAbilityObj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 
-            newAbilityObj.transform.SetParent(abilitiesParent.transform);
-            newAbilityObj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+                _newAbilityObj
+                    .GetComponent<Button>()
+                    .onClick.AddListener(
+                        delegate
+                        {
+                            AddPlayerAbility(1, ability.abilityData.abilityName);
+                        }
+                    );
+            }
         }
+    }
+
+    private void UpdatePlayerAbilitySlots()
+    {
+        UpdateAbilityObject(firstSlot, playerAbilities[1].abilityData.abilityName);
+        UpdateAbilityObject(secondSlot, playerAbilities[2].abilityData.abilityName);
+        UpdateAbilityObject(thirdSlot, playerAbilities[3].abilityData.abilityName);
+    }
+
+    private void UpdateAbilityObject(GameObject abilityObj, string text)
+    {
+        abilityObj.transform.Find("Label").GetComponent<TextMeshProUGUI>().text = text;
+    }
+
+    //? JUST FOR TESTS
+    public void StopBackground()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeBackground()
+    {
+        Time.timeScale = 1f;
     }
 }

@@ -23,13 +23,7 @@ public class Bullet : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
 
-
-        Debug.Log("Target position: " + targetPosition);
-        Debug.Log("This position: " + transform.position);
-        Debug.Log("Vector normalized: " + (targetPosition - transform.position).normalized);
-
-        rb.velocity =
-            (targetPosition - transform.position).normalized * speed;
+        rb.velocity = (targetPosition - transform.position).normalized * speed;
 
         Destroy(this.gameObject, lifeTime);
     }

@@ -246,6 +246,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             ""id"": ""2adec513-3fcb-48d4-80a6-427003771115"",
             ""actions"": [
                 {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""2e54ed42-88f4-4fb0-a511-91e6a4526e57"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Move"",
                     ""type"": ""Value"",
                     ""id"": ""9dfc900e-6487-4534-bf43-98decb0f2d9e"",
@@ -445,6 +454,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""ScrollWheel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9acffae0-663a-4c3e-9add-4500ad6d4ac4"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -466,6 +486,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
         m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
@@ -595,6 +616,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private IUIActions m_UIActionsCallbackInterface;
+    private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_Move;
     private readonly InputAction m_UI_Select;
     private readonly InputAction m_UI_Click;
@@ -604,6 +626,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         private @InputActions m_Wrapper;
         public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @Move => m_Wrapper.m_UI_Move;
         public InputAction @Select => m_Wrapper.m_UI_Select;
         public InputAction @Click => m_Wrapper.m_UI_Click;
@@ -618,6 +641,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_UIActionsCallbackInterface != null)
             {
+                @Pause.started -= m_Wrapper.m_UIActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnPause;
                 @Move.started -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnMove;
@@ -637,6 +663,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
             {
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
@@ -675,6 +704,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     }
     public interface IUIActions
     {
+        void OnPause(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);

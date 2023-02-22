@@ -21,9 +21,9 @@ public class Player_AttackState : State
     {
         this.player = player;
         this.stateData = stateData;
-    }   
+    }
 
-     public override void Enter()
+    public override void Enter()
     {
         base.Enter();
         attackTime = 0;
@@ -41,30 +41,33 @@ public class Player_AttackState : State
     {
         base.LogicUpdate();
 
-        if(attackTime >= stateData.maxAttackTime){
+        if (attackTime >= stateData.maxAttackTime)
+        {
             // can't charge more
-            Debug.Log("Can't charge more");
             stateMachine.ChangeState(player.moveState);
-        } else {
+        }
+        else
+        {
             // still charging
             attackTime += Time.deltaTime;
-            Debug.Log("still charging");
         }
 
-        if(!player.inputHandler.pressingAttack){          
+        if (!player.inputHandler.pressingAttack)
+        {
             GameObject _bullet = entity.CreatePrefab(
-            player.bulletPrefab,
-            player.attackPosition.transform.position,
-            player.bulletsParent
-        );
+                player.bulletPrefab,
+                player.attackPosition.transform.position,
+                player.bulletsParent
+            );
 
-        Vector3 mousePosition = Mouse.current.position.ReadValue();
-        mousePosition.z = 10;
+            Vector3 mousePosition = Mouse.current.position.ReadValue();
+            mousePosition.z = 10;
 
-        _bullet.GetComponent<Bullet>().targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        stateMachine.ChangeState(player.moveState);
+            _bullet.GetComponent<Bullet>().targetPosition = Camera.main.ScreenToWorldPoint(
+                mousePosition
+            );
+            stateMachine.ChangeState(player.moveState);
         }
-        
     }
 
     public override void PhysicsUpdate()
