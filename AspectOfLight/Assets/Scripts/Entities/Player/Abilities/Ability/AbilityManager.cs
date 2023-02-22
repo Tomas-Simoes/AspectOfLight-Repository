@@ -1,9 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
-public class AbilityManager
+public class AbilityManager : MonoBehaviour
 {
+    [Header("Ability Data")]
+    [SerializeField]
+    private D_Ability magicSeedData;
+
+    [SerializeField]
+    private D_Ability abilityTwoData;
+
     public Dictionary<int, Ability> playerAbilities = new Dictionary<int, Ability>();
 
     /*
@@ -22,17 +30,24 @@ public class AbilityManager
         *                   "..."        SpecificAbility3
     */
 
-    public AbilitySpecific1 specific1 { get; private set; }
-    public AbilitySpecific2 specific2 { get; private set; }
+    [Header("Others")]
+    [SerializeField]
+    private GameObject abilityPrefab;
+
+    [SerializeField]
+    private GameObject abilitiesParent;
+
+    public Ability magicSeed { get; private set; }
+    public Ability specific2 { get; private set; }
 
     public void InitAbilities()
     {
-        specific1 = new AbilitySpecific1(1);
-        specific2 = new AbilitySpecific2(2);
+        magicSeed = new AbilitySpecific1(1, magicSeedData);
+        specific2 = new AbilitySpecific2(2, abilityTwoData);
 
         allAbilities = new Dictionary<string, Ability>()
         {
-            { "Specific1", specific1 },
+            { "MagicSeed", magicSeed },
             { "Specific2", specific2 }
         };
     }
@@ -50,5 +65,20 @@ public class AbilityManager
     public void CastAbility(int abilitySlot)
     {
         playerAbilities[abilitySlot].Cast();
+    }
+
+    public void ListItems()
+    {
+        foreach (Ability ability in allAbilities.Values)
+        {
+            var newAbilityObj = Instantiate(abilityPrefab);
+
+            newAbilityObj.transform.Find("Label").GetComponent<TextMeshProUGUI>().text = ability
+                .abilityData
+                .abilityName;
+
+            newAbilityObj.transform.SetParent(abilitiesParent.transform);
+            newAbilityObj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+        }
     }
 }

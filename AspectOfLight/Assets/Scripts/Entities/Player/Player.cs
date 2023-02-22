@@ -9,9 +9,6 @@ public class Player : Entity
     public Player_NecromancerState necromancerState { get; private set; }
     public Player_AttackState attackState { get; private set; }
 
-    [SerializeField]
-    public Ability specific1 { get; private set; }
-
     [Header("States Data")]
     [SerializeField]
     private D_PlayerCoolDown coolDownData;
@@ -40,6 +37,7 @@ public class Player : Entity
     private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
 
     [Header("Abilities Information")]
+    [SerializeField]
     AbilityManager abilityManager;
 
     [SerializeField]
@@ -61,8 +59,6 @@ public class Player : Entity
     public override void Start()
     {
         base.Start();
-        abilityManager = new AbilityManager();
-
         currentHealth = entityData.MAX_HEALTH;
         timeSinceDash = coolDownData.dashCD;
         timeSinceNecromancer = coolDownData.necromancerCD;
@@ -103,7 +99,7 @@ public class Player : Entity
         abilityManager.InitAbilities();
         stateMachine.Init(moveState);
 
-        abilityManager.AddPlayerAbility(1, "Specific1");
+        abilityManager.AddPlayerAbility(1, "MagicSeed");
         abilityManager.AddPlayerAbility(2, "Specific2");
 
         abilityManager.CastAbility(1);

@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AbilitySpecific2 : Ability
 {
-    public AbilitySpecific2(float abilityCD)
-        : base(abilityCD) { }
+    public AbilitySpecific2(float abilityCD, D_Ability abilityData)
+        : base(abilityCD, abilityData) { }
 
     public override void Cast()
     {
