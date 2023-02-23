@@ -4,153 +4,153 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public Player_MoveState moveState { get; private set; }
-    public Player_DashState dashState { get; private set; }
-    public Player_NecromancerState necromancerState { get; private set; }
-    public Player_AttackState attackState { get; private set; }
+  public Player_MoveState moveState { get; private set; }
+  public Player_DashState dashState { get; private set; }
+  public Player_NecromancerState necromancerState { get; private set; }
+  public Player_AttackState attackState { get; private set; }
 
-    [Header("States Data")]
-    [SerializeField]
-    private D_PlayerCoolDown coolDownData;
+  [Header("States Data")]
+  [SerializeField]
+  private D_PlayerCoolDown coolDownData;
 
-    [SerializeField]
-    private D_PlayerMoveState moveStateData;
+  [SerializeField]
+  private D_PlayerMoveState moveStateData;
 
-    [SerializeField]
-    private D_PlayerDashState dashStateData;
+  [SerializeField]
+  private D_PlayerDashState dashStateData;
 
-    [SerializeField]
-    private D_PlayerNecromancerState necromancerStateData;
+  [SerializeField]
+  private D_PlayerNecromancerState necromancerStateData;
 
-    [SerializeField]
-    private D_PlayerAttackState attackStateData;
+  [SerializeField]
+  private D_PlayerAttackState attackStateData;
 
-    [Header("Cooldowns")]
-    public float timeSinceAttack;
-    public float timeSinceDash;
-    public float timeSinceNecromancer;
+  [Header("Cooldowns")]
+  public float timeSinceAttack;
+  public float timeSinceDash;
+  public float timeSinceNecromancer;
 
-    [Header("Information")]
-    public Vector2 axisMovement;
+  [Header("Information")]
+  public Vector2 axisMovement;
 
-    [SerializeField]
-    private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
+  [SerializeField]
+  private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
 
-    [Header("Abilities Information")]
-    [SerializeField]
-    AbilityManager abilityManager;
+  [Header("Abilities Information")]
+  [SerializeField]
+  AbilityManager abilityManager;
 
-    [SerializeField]
-    public Ability[] availableAbilities;
+  [SerializeField]
+  public Ability[] availableAbilities;
 
-    public GameObject[] dronesSpawnPoints;
+  public GameObject[] dronesSpawnPoints;
 
-    [SerializeField]
-    public GameObject bulletPrefab;
+  [SerializeField]
+  public GameObject bulletPrefab;
 
-    [SerializeField]
-    public GameObject bulletsParent;
+  [SerializeField]
+  public GameObject bulletsParent;
 
-    [SerializeField]
-    public GameObject attackPosition;
+  [SerializeField]
+  public GameObject attackPosition;
 
-    public InputHandler inputHandler { get; private set; }
+  public InputHandler inputHandler { get; private set; }
 
-    public override void Start()
+  public override void Start()
+  {
+    base.Start();
+    currentHealth = entityData.MAX_HEALTH;
+    timeSinceDash = coolDownData.dashCD;
+    timeSinceNecromancer = coolDownData.necromancerCD;
+
+    if (inputHandler == null)
     {
-        base.Start();
-        currentHealth = entityData.MAX_HEALTH;
-        timeSinceDash = coolDownData.dashCD;
-        timeSinceNecromancer = coolDownData.necromancerCD;
-
-        if (inputHandler == null)
-        {
-            inputHandler = this.GetComponent<InputHandler>();
-        }
-
-        moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
-        dashState = new Player_DashState(
-            this,
-            stateMachine,
-            "dash",
-            dashStateData,
-            this,
-            coolDownData
-        );
-
-        necromancerState = new Player_NecromancerState(
-            this,
-            stateMachine,
-            "necromancer",
-            necromancerStateData,
-            this,
-            coolDownData
-        );
-
-        attackState = new Player_AttackState(
-            this,
-            stateMachine,
-            "attack",
-            attackStateData,
-            this,
-            coolDownData
-        );
-
-        abilityManager.InitAbilities();
-        stateMachine.Init(moveState);
+      inputHandler = this.GetComponent<InputHandler>();
     }
 
-    public override void Update()
+    moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
+    dashState = new Player_DashState(
+        this,
+        stateMachine,
+        "dash",
+        dashStateData,
+        this,
+        coolDownData
+    );
+
+    necromancerState = new Player_NecromancerState(
+        this,
+        stateMachine,
+        "necromancer",
+        necromancerStateData,
+        this,
+        coolDownData
+    );
+
+    attackState = new Player_AttackState(
+        this,
+        stateMachine,
+        "attack",
+        attackStateData,
+        this,
+        coolDownData
+    );
+
+    abilityManager.InitAbilities();
+    stateMachine.Init(moveState);
+  }
+
+  public override void Update()
+  {
+    base.Update();
+    GetInputs();
+
+    Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+
+    //Check "Direction" (dir), and the flips.
+    if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
     {
-        base.Update();
-        GetInputs();
+      CheckForFlipping();
+    }
+  }
 
-        Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+  public override void UpdateCooldowns()
+  {
+    base.UpdateCooldowns();
 
-        //Check "Direction" (dir), and the flips.
-        if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
-        {
-            CheckForFlipping();
-        }
+    timeSinceDash += Time.deltaTime;
+    timeSinceNecromancer += Time.deltaTime;
+    timeSinceAttack += Time.deltaTime;
+  }
+
+  private void GetInputs()
+  {
+    axisMovement.x = inputHandler.xAxis;
+    axisMovement.y = inputHandler.yAxis;
+
+    if (inputHandler.pressedDash && timeSinceDash >= coolDownData.dashCD)
+    {
+      stateMachine.ChangeState(dashState);
     }
 
-    public override void UpdateCooldowns()
+    if (inputHandler.pressedAbilityOne && timeSinceNecromancer >= coolDownData.necromancerCD)
     {
-        base.UpdateCooldowns();
-
-        timeSinceDash += Time.deltaTime;
-        timeSinceNecromancer += Time.deltaTime;
-        timeSinceAttack += Time.deltaTime;
+      stateMachine.ChangeState(necromancerState);
     }
 
-    private void GetInputs()
+    if (
+        inputHandler.pressingAttack
+        && timeSinceAttack >= coolDownData.attackCD
+        && stateMachine.currentState != attackState
+    )
     {
-        axisMovement.x = inputHandler.xAxis;
-        axisMovement.y = inputHandler.yAxis;
-
-        if (inputHandler.pressedDash && timeSinceDash >= coolDownData.dashCD)
-        {
-            stateMachine.ChangeState(dashState);
-        }
-
-        if (inputHandler.pressedAbilityOne && timeSinceNecromancer >= coolDownData.necromancerCD)
-        {
-            stateMachine.ChangeState(necromancerState);
-        }
-
-        if (
-            inputHandler.pressingAttack
-            && timeSinceAttack >= coolDownData.attackCD
-            && stateMachine.currentState != attackState
-        )
-        {
-            stateMachine.ChangeState(attackState);
-        }
+      stateMachine.ChangeState(attackState);
     }
+  }
 
-    private void CheckForFlipping()
-    {
-        FacingRight = !FacingRight;
-        transform.Rotate(0f, 180f, 0f);
-    }
+  private void CheckForFlipping()
+  {
+    FacingRight = !FacingRight;
+    transform.Rotate(0f, 180f, 0f);
+  }
 }
