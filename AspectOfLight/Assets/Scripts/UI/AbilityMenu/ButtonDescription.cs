@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonDescription : MonoBehaviour, ISelectHandler
+public class ButtonDescription : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     [Header("Ability Manager")]
     public string description;
 
     [SerializeField]
-    private AbilityManager abilityManager;
+    public AbilityManager abilityManager;
 
     public void OnSelect(BaseEventData eventData)
     {
-        Debug.Log(description + " ------ ");
-        abilityManager.ChangeDescription(description);
+        abilityManager.ChangeAbilityDescription(description);
     }
 
     public void OnDeselect(BaseEventData eventData)
     {
-        //abilityManager.ChangeDescription(" ");
+        abilityManager.ChangeAbilityDescription(" ");
     }
 }

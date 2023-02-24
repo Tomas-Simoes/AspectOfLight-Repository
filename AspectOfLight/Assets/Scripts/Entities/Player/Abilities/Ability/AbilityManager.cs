@@ -71,8 +71,10 @@ public class AbilityManager : Menu
     [Header("Others")]
     private bool abilityListAlreadyHasData;
 
-    [SerializeField]
-    InputHandler inputHandler;
+    void OnEnabled()
+    {
+        ChangeAbilityDescription(" ");
+    }
 
     public void InitAbilities()
     {
@@ -86,7 +88,17 @@ public class AbilityManager : Menu
         };
     }
 
-    public void SelectPlayerAbility(string abilityName)
+    public void RemovePlayerAbility(int abilitySlot)
+    {
+        playerAbilities.Remove(abilitySlot);
+    }
+
+    public void CastAbility(int abilitySlot)
+    {
+        playerAbilities[abilitySlot].Cast();
+    }
+
+    public void SelectUIAbility(string abilityName)
     {
         if (isChangingPlayerAbility)
         {
@@ -118,10 +130,12 @@ public class AbilityManager : Menu
                     break;
             }
 
-            UpdateAbilityObject(
-                _slotToUpdate.gameObject,
-                playerAbilities[slotToChange].abilityData.abilityName
-            );
+            D_Ability _newPlayerAbilityData = playerAbilities[slotToChange].abilityData;
+
+            UpdateAbilityObject(_slotToUpdate.gameObject, _newPlayerAbilityData.abilityName);
+
+            _slotToUpdate.GetComponent<ButtonDescription>().description =
+                _newPlayerAbilityData.description;
 
             ChangeInteractablePlayerAbilitySlots(true);
             closeButton.interactable = true;
@@ -134,17 +148,18 @@ public class AbilityManager : Menu
         else { }
     }
 
-    public void RemovePlayerAbility(int abilitySlot)
+    public void SelectUIPlayerAbility(int slot)
     {
-        playerAbilities.Remove(abilitySlot);
+        abilitiesParent.transform.GetChild(0).GetComponent<Button>().Select();
+
+        ChangeInteractablePlayerAbilitySlots(false);
+        closeButton.interactable = false;
+
+        isChangingPlayerAbility = true;
+        slotToChange = slot;
     }
 
-    public void CastAbility(int abilitySlot)
-    {
-        playerAbilities[abilitySlot].Cast();
-    }
-
-    public void ListAbilities()
+    public void ListUIAbilities()
     {
         if (!abilityListAlreadyHasData)
         {
@@ -153,9 +168,11 @@ public class AbilityManager : Menu
                 GameObject _newAbilityObj = Instantiate(abilityPrefab);
                 UpdateAbilityObject(_newAbilityObj, ability.abilityData.abilityName);
 
-                _newAbilityObj.GetComponent<ButtonDescription>().description = ability
-                    .abilityData
-                    .description;
+                ButtonDescription descriptionComponent =
+                    _newAbilityObj.GetComponent<ButtonDescription>();
+
+                descriptionComponent.description = ability.abilityData.description;
+                descriptionComponent.abilityManager = this;
 
                 _newAbilityObj.transform.SetParent(abilitiesParent.transform);
                 _newAbilityObj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
@@ -165,26 +182,13 @@ public class AbilityManager : Menu
                     .onClick.AddListener(
                         delegate
                         {
-                            SelectPlayerAbility(ability.abilityData.abilityName);
+                            SelectUIAbility(ability.abilityData.abilityName);
                         }
                     );
             }
 
             abilityListAlreadyHasData = true;
         }
-    }
-
-    public void UpdatePlayerAbilitySlot(int slot)
-    {
-        informationText.text = "Choose an ability";
-
-        abilitiesParent.transform.GetChild(0).GetComponent<Button>().Select();
-
-        ChangeInteractablePlayerAbilitySlots(false);
-        closeButton.interactable = false;
-
-        isChangingPlayerAbility = true;
-        slotToChange = slot;
     }
 
     private void ChangeInteractablePlayerAbilitySlots(bool state)
@@ -199,15 +203,9 @@ public class AbilityManager : Menu
         abilityObj.transform.Find("Label").GetComponent<TextMeshProUGUI>().text = text;
     }
 
-    public void ChangeDescription(string description)
+    public void ChangeAbilityDescription(string description)
     {
         abilityDescription.text = description;
-        Debug.Log("pov" + abilityDescription.text);
-    }
-
-    void Update()
-    {
-        Debug.Log(abilityDescription.text);
     }
 
     //? JUST FOR TESTS
