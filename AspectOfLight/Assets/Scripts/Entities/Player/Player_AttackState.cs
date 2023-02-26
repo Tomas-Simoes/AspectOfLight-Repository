@@ -83,10 +83,11 @@ public class Player_AttackState : State
       {
         _bulletComponent.damage = 3;
       }
-      if (attackTime >= 5)
+      if (attackTime >= 3)
       {
         _bulletComponent.damage = 5;
       }
+      // Debug.Log(attackTime);
       Debug.Log(_bulletComponent.damage);
       stateMachine.ChangeState(player.moveState);
     }
