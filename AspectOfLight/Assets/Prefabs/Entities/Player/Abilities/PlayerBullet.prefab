@@ -61,7 +61,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1843742842366480047, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: m_Name
-      value: 'Bullet '
+      value: PlayerBullet
       objectReference: {fileID: 0}
     - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: speed
@@ -69,7 +69,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: damage
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: lifeTime
