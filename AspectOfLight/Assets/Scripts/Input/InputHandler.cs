@@ -6,82 +6,120 @@ using UnityEngine.InputSystem.Interactions;
 
 public class InputHandler : MonoBehaviour
 {
-    InputActions inputActions;
+  InputActions inputActions;
 
-    [Header("Walking Input")]
-    public float xAxis;
-    public float yAxis;
+  [Header("Walking Input")]
+  public float xAxis;
+  public float yAxis;
 
-    [Header("Abilities Input")]
-    public bool pressingAttack;
-    public bool pressedDash;
-    public bool pressedAbilityOne; //? now it's the necromancer ability 
+  [Header("Abilities Input")]
+  public bool pressingAttack;
+  public bool pressedDash;
+  public bool pressedAbilityOne; //? now it's the necromancer ability
 
-    void Awake()
+  [Header("Pause Input")]
+  [SerializeField]
+  PauseMenu pauseMenuHandler;
+
+  [Header("UI Input")]
+  [SerializeField]
+  public bool pressedSelect;
+  void Awake()
+  {
+    inputActions = new InputActions();
+  }
+
+  private void OnEnable()
+  {
+    inputActions.Enable();
+
+    inputActions.Player.XAxisMovement.performed += SetXAxisMovement;
+    inputActions.Player.XAxisMovement.canceled += SetXAxisMovement;
+
+    inputActions.Player.YAxisMovement.performed += SetYAxisMovement;
+    inputActions.Player.YAxisMovement.canceled += SetYAxisMovement;
+
+    inputActions.Player.Dash.started += SetDashing;
+    inputActions.Player.Dash.canceled += SetDashing;
+
+    inputActions.Player.AbilityOne.started += SetAbilityOne;
+    inputActions.Player.AbilityOne.canceled += SetAbilityOne;
+
+    inputActions.Player.Attack.performed += SetAttack;
+    inputActions.Player.Attack.canceled += SetAttack;
+
+    inputActions.UI.Pause.performed += SetPause;
+
+    inputActions.UI.Select.started += SetSelect;
+    inputActions.UI.Select.canceled += SetSelect;
+
+  }
+
+  private void OnDisable()
+  {
+    inputActions.Player.XAxisMovement.performed -= SetXAxisMovement;
+    inputActions.Player.XAxisMovement.canceled -= SetXAxisMovement;
+
+    inputActions.Player.XAxisMovement.performed -= SetYAxisMovement;
+    inputActions.Player.XAxisMovement.canceled -= SetYAxisMovement;
+
+    inputActions.Player.Dash.started -= SetDashing;
+    inputActions.Player.Dash.canceled -= SetDashing;
+
+    inputActions.Player.AbilityOne.started -= SetAbilityOne;
+    inputActions.Player.AbilityOne.canceled += SetAbilityOne;
+
+    inputActions.Player.Attack.performed -= SetAttack;
+    inputActions.Player.Attack.canceled -= SetAttack;
+
+    inputActions.UI.Pause.performed -= SetPause;
+
+    inputActions.UI.Select.started -= SetSelect;
+    inputActions.UI.Select.canceled += SetSelect;
+
+    inputActions.Disable();
+  }
+
+  private void SetXAxisMovement(InputAction.CallbackContext ctx)
+  {
+    xAxis = ctx.ReadValue<Vector2>().x;
+  }
+
+  private void SetYAxisMovement(InputAction.CallbackContext ctx)
+  {
+    yAxis = ctx.ReadValue<Vector2>().y;
+  }
+
+  private void SetDashing(InputAction.CallbackContext ctx)
+  {
+    pressedDash = ctx.started;
+  }
+
+  private void SetAbilityOne(InputAction.CallbackContext ctx)
+  {
+    pressedAbilityOne = ctx.started;
+  }
+
+  private void SetAttack(InputAction.CallbackContext ctx)
+  {
+    pressingAttack = ctx.performed;
+  }
+
+  private void SetPause(InputAction.CallbackContext ctx)
+  {
+    if (!pauseMenuHandler.isPaused)
     {
-        inputActions = new InputActions();
+      pauseMenuHandler.PauseGame();
     }
-
-    private void OnEnable()
+    else
     {
-        inputActions.Enable();
-
-        inputActions.Player.XAxisMovement.performed += SetXAxisMovement;
-        inputActions.Player.XAxisMovement.canceled += SetXAxisMovement;
-
-        inputActions.Player.YAxisMovement.performed += SetYAxisMovement;
-        inputActions.Player.YAxisMovement.canceled += SetYAxisMovement;
-
-        inputActions.Player.Dash.started += SetDashing;
-        inputActions.Player.Dash.canceled += SetDashing;
-
-        inputActions.Player.AbilityOne.started += SetAbilityOne;
-        inputActions.Player.AbilityOne.canceled += SetAbilityOne;
-
-        inputActions.Player.Attack.performed += SetAttack;
-        inputActions.Player.Attack.canceled += SetAttack;
+      pauseMenuHandler.ResumeGame();
     }
+  }
 
-    private void OnDisable()
-    {
-        inputActions.Player.XAxisMovement.performed -= SetXAxisMovement;
-        inputActions.Player.XAxisMovement.canceled -= SetXAxisMovement;
+  private void SetSelect(InputAction.CallbackContext ctx)
+  {
+    pressedSelect = ctx.started;
 
-        inputActions.Player.XAxisMovement.performed -= SetYAxisMovement;
-        inputActions.Player.XAxisMovement.canceled -= SetYAxisMovement;
-
-        inputActions.Player.Dash.started -= SetDashing;
-        inputActions.Player.Dash.canceled -= SetDashing;
-
-        inputActions.Player.AbilityOne.started -= SetAbilityOne;
-        inputActions.Player.AbilityOne.canceled += SetAbilityOne;
-
-        inputActions.Player.Attack.performed -= SetAttack;
-        inputActions.Player.Attack.canceled -= SetAttack;
-
-        inputActions.Disable();
-    }
-
-    private void SetXAxisMovement(InputAction.CallbackContext ctx)
-    {
-        xAxis = ctx.ReadValue<Vector2>().x;
-    }
-
-    private void SetYAxisMovement(InputAction.CallbackContext ctx)
-    {
-        yAxis = ctx.ReadValue<Vector2>().y;
-    }
-
-    private void SetDashing(InputAction.CallbackContext ctx)
-    {
-        pressedDash = ctx.started;
-    }
-
-    private void SetAbilityOne(InputAction.CallbackContext ctx){
-        pressedAbilityOne = ctx.started;
-    }
-
-    private void SetAttack(InputAction.CallbackContext ctx){
-        pressingAttack = ctx.performed;
-    }
+  }
 }

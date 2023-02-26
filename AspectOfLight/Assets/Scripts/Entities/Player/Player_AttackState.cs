@@ -3,10 +3,12 @@ using UnityEngine.InputSystem;
 
 public class Player_AttackState : State
 {
+
   public Player player;
   public D_PlayerAttackState stateData;
 
   public Bullet _bullet;
+
 
   [SerializeField]
   private float attackTime;
