@@ -53,6 +53,9 @@ public class DroneChaseState : State
     {
         base.LogicUpdate();
 
+        if (drone.closestEnemy == null)
+            return;
+
         if (
             Vector3.Distance(drone.transform.position, drone.closestEnemy.transform.position)
             <= attackStateData.minimumDistanceToAttack
@@ -71,6 +74,9 @@ public class DroneChaseState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        if (drone.closestEnemy == null)
+            return;
+
         entity.GoTowardsPosition(drone.closestEnemy.transform.position, stateData.movementSpeed);
     }
 }

@@ -2,13 +2,13 @@ using UnityEngine;
 
 public class Ability
 {
-    public D_Ability abilityData;
-    protected float abilityCD;
+    public D_BaseAbility baseAbilityData;
+    protected Player player;
 
-    public Ability(float abilityCD, D_Ability abilityData)
+    public Ability(Player player, D_BaseAbility baseAbilityData)
     {
-        this.abilityCD = abilityCD;
-        this.abilityData = abilityData;
+        this.player = player;
+        this.baseAbilityData = baseAbilityData;
     }
 
     public virtual void Cast() { }

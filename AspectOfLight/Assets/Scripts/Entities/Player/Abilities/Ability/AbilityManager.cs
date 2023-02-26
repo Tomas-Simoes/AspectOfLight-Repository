@@ -7,13 +7,6 @@ using UnityEngine.EventSystems;
 
 public class AbilityManager : Menu
 {
-    [Header("Ability Data")]
-    [SerializeField]
-    private D_Ability magicSeedData;
-
-    [SerializeField]
-    private D_Ability abilityTwoData;
-
     public Dictionary<int, Ability> playerAbilities = new Dictionary<int, Ability>();
 
     /*
@@ -46,6 +39,9 @@ public class AbilityManager : Menu
     private Button closeButton;
 
     [SerializeField]
+    private Button cancelButton;
+
+    [SerializeField]
     private TextMeshProUGUI informationText;
 
     [SerializeField]
@@ -62,13 +58,34 @@ public class AbilityManager : Menu
     private GameObject abilitiesParent;
 
     public Ability magicSeed { get; private set; }
+    public Ability summonPlague { get; private set; }
     public Ability specific2 { get; private set; }
+
+    [Header("Ability Data")]
+    [SerializeField]
+    private D_BaseAbility magicSeedBaseData;
+
+    [SerializeField]
+    private D_MagicSeedAbility magicSeedData;
+
+    [Space(5)]
+    [SerializeField]
+    private D_BaseAbility summonPlagueBaseData;
+
+    [SerializeField]
+    private D_SummonPlagueAbility summonPlagueData;
+
+    [Space(5)]
+    [SerializeField]
+    private D_BaseAbility abilityTwoBaseData;
 
     [Header("Change Ability Information")]
     private bool isChangingPlayerAbility;
     private int slotToChange;
 
     [Header("Others")]
+    [SerializeField]
+    private Player player;
     private bool abilityListAlreadyHasData;
 
     void OnEnabled()
@@ -78,13 +95,15 @@ public class AbilityManager : Menu
 
     public void InitAbilities()
     {
-        magicSeed = new AbilitySpecific1(1, magicSeedData);
-        specific2 = new AbilitySpecific2(2, abilityTwoData);
+        magicSeed = new MagicSeedAbility(player, magicSeedBaseData, magicSeedData);
+        specific2 = new AbilitySpecific2(player, abilityTwoBaseData);
+        summonPlague = new SummonPlagueAbility(player, summonPlagueBaseData, summonPlagueData);
 
         allAbilities = new Dictionary<string, Ability>()
         {
-            { magicSeedData.abilityName, magicSeed },
-            { abilityTwoData.abilityName, specific2 }
+            { magicSeedBaseData.abilityName, magicSeed },
+            { summonPlagueBaseData.abilityName, summonPlague },
+            { abilityTwoBaseData.abilityName, specific2 }
         };
     }
 
@@ -93,9 +112,25 @@ public class AbilityManager : Menu
         playerAbilities.Remove(abilitySlot);
     }
 
-    public void CastAbility(int abilitySlot)
+    public void CastAbility(int abilitySlot, float timeSinceAbility)
     {
-        playerAbilities[abilitySlot].Cast();
+        if (timeSinceAbility >= playerAbilities[abilitySlot].baseAbilityData.abilityCD)
+        {
+            switch (abilitySlot)
+            {
+                case 1:
+                    player.timeSinceAbilityOne = 0;
+                    break;
+                case 2:
+                    player.timeSinceAbilityTwo = 0;
+                    break;
+                case 3:
+                    player.timeSinceAbilityThree = 0;
+                    break;
+            }
+
+            playerAbilities[abilitySlot].Cast();
+        }
     }
 
     public void SelectUIAbility(string abilityName)
@@ -113,24 +148,9 @@ public class AbilityManager : Menu
             else
                 playerAbilities.Add(slotToChange, allAbilities[abilityName]);
 
-            Button _slotToUpdate;
-            switch (slotToChange)
-            {
-                case 1:
-                    _slotToUpdate = firstSlot;
-                    break;
-                case 2:
-                    _slotToUpdate = secondSlot;
-                    break;
-                case 3:
-                    _slotToUpdate = thirdSlot;
-                    break;
-                default:
-                    _slotToUpdate = null;
-                    break;
-            }
+            Button _slotToUpdate = GetPlayerSlotButton(slotToChange);
 
-            D_Ability _newPlayerAbilityData = playerAbilities[slotToChange].abilityData;
+            D_BaseAbility _newPlayerAbilityData = playerAbilities[slotToChange].baseAbilityData;
 
             UpdateAbilityObject(_slotToUpdate.gameObject, _newPlayerAbilityData.abilityName);
 
@@ -140,6 +160,9 @@ public class AbilityManager : Menu
             ChangeInteractablePlayerAbilitySlots(true);
             closeButton.interactable = true;
 
+            cancelButton.gameObject.SetActive(false);
+            closeButton.gameObject.SetActive(true);
+
             isChangingPlayerAbility = false;
             _slotToUpdate.Select();
 
@@ -148,15 +171,37 @@ public class AbilityManager : Menu
         else { }
     }
 
+    private Button GetPlayerSlotButton(int slotToChange)
+    {
+        switch (slotToChange)
+        {
+            case 1:
+                return firstSlot;
+            case 2:
+                return secondSlot;
+            case 3:
+                return thirdSlot;
+            default:
+                return null;
+        }
+    }
+
     public void SelectUIPlayerAbility(int slot)
     {
         abilitiesParent.transform.GetChild(0).GetComponent<Button>().Select();
 
         ChangeInteractablePlayerAbilitySlots(false);
-        closeButton.interactable = false;
 
         isChangingPlayerAbility = true;
         slotToChange = slot;
+    }
+
+    public void CancelChangingPlayerAbility()
+    {
+        ChangeInteractablePlayerAbilitySlots(true);
+        GetPlayerSlotButton(slotToChange).GetComponent<Button>().Select();
+
+        isChangingPlayerAbility = false;
     }
 
     public void ListUIAbilities()
@@ -166,12 +211,12 @@ public class AbilityManager : Menu
             foreach (Ability ability in allAbilities.Values)
             {
                 GameObject _newAbilityObj = Instantiate(abilityPrefab);
-                UpdateAbilityObject(_newAbilityObj, ability.abilityData.abilityName);
+                UpdateAbilityObject(_newAbilityObj, ability.baseAbilityData.abilityName);
 
                 ButtonDescription descriptionComponent =
                     _newAbilityObj.GetComponent<ButtonDescription>();
 
-                descriptionComponent.description = ability.abilityData.description;
+                descriptionComponent.description = ability.baseAbilityData.description;
                 descriptionComponent.abilityManager = this;
 
                 _newAbilityObj.transform.SetParent(abilitiesParent.transform);
@@ -182,7 +227,7 @@ public class AbilityManager : Menu
                     .onClick.AddListener(
                         delegate
                         {
-                            SelectUIAbility(ability.abilityData.abilityName);
+                            SelectUIAbility(ability.baseAbilityData.abilityName);
                         }
                     );
             }

@@ -24,14 +24,13 @@ public class Player_NecromancerState : State
     public override void Enter()
     {
         base.Enter();
-        player.timeSinceNecromancer = 0;
 
         foreach (GameObject spawnpoint in player.dronesSpawnPoints)
         {
             player.CreatePrefab(
                 stateData.drone,
                 spawnpoint.transform.position,
-                GameObject.Find("Drones")
+                GameObject.Find("AbilityInstances")
             );
         }
 
