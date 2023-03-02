@@ -7,7 +7,7 @@ public class Player_AttackState : State
   public Player player;
   public D_PlayerAttackState stateData;
 
-  public Bullet _bullet;
+  public DefaultBullet _bullet;
 
 
   [SerializeField]
@@ -71,7 +71,7 @@ public class Player_AttackState : State
       Vector3 mousePosition = Mouse.current.position.ReadValue();
       mousePosition.z = 10;
 
-      Bullet _bulletComponent = _bullet.GetComponent<Bullet>();
+      DefaultBullet _bulletComponent = _bullet.GetComponent<DefaultBullet>();
 
       _bulletComponent.targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
@@ -85,7 +85,7 @@ public class Player_AttackState : State
       {
         _bulletComponent.damage = 3;
       }
-      if (attackTime >= 3)
+      if (attackTime >= 4)
       {
         _bulletComponent.damage = 5;
       }
