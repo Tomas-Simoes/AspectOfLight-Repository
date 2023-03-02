@@ -1975,6 +1975,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1598584554}
     m_Modifications:
+    - target: {fileID: 9171508923865580923, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171508923865580923, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171508923865580923, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.00000011920929
+      objectReference: {fileID: 0}
     - target: {fileID: 9171508925066925299, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
       propertyPath: m_Name
       value: Abilities
@@ -2062,6 +2074,26 @@ PrefabInstance:
     - target: {fileID: 9171508925066925308, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171508925182113675, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171508925182113675, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171508925182113675, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 839.1389
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171508925182113675, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 645.21204
+      objectReference: {fileID: 0}
+    - target: {fileID: 9171508925182113675, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88fde471cf1fd674bb2d76302c8c199f, type: 3}
@@ -5490,7 +5522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1598584551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5548,7 +5580,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

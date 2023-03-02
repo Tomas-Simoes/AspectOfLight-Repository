@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1843742842366480047, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: m_Name
-      value: Bullet  Variant
+      value: Skeleton_Bullet
       objectReference: {fileID: 0}
     - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: speed
@@ -83,5 +83,28 @@ PrefabInstance:
       propertyPath: targatableTag
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+--- !u!1 &6293206818282807630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1843742842366480047, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+  m_PrefabInstance: {fileID: 5675586777918500833}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8036361534767028104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6293206818282807630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da1ca5cc8f84344289f986fbc99fabf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0, z: 0}
+  speed: 3
+  damage: 2
+  lifeTime: 4
+  targatableTag: Player
