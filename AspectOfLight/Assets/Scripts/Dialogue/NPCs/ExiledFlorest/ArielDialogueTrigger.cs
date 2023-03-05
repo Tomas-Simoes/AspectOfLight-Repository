@@ -6,19 +6,52 @@ public class ArielDialogueTrigger : DialogueTrigger
 {
     [Header("Ariel Dialogue Informations")]
     [SerializeField]
-    private float minimumDistanceToTalk = 6;
-    private float[] newDialogueDistance;
+    private float newNodeStep = 1;
 
-    protected virtual void OnTriggerStay2D()
+    [SerializeField]
+    private float newNodeMinimumDistance = 5;
+
+    public override void OnTriggerStay2D(Collider2D other)
     {
-        if (!dialogueManager.inDialogueMode)
-            dialogueManager.StartDialogueMode(dialogue);
-        else
-            dialogueManager.TryGoToNextNode();
+        base.OnTriggerStay2D(other);
+
+        if (other.CompareTag("Player"))
+        {
+            if (!dialogueManager.inDialogueMode && !dialogueManager.hasDialogueInStandBy)
+            {
+                dialogueManager.StartDialogueMode(dialogue);
+                return;
+            }
+
+            if (player.inputHandler.pressedInteract)
+            {
+                dialogueManager.TryToStandByCurrentDialogue();
+            }
+        }
     }
 
     void Update()
     {
-        if (dialogueManager.inDialogueMode) { }
+        if (dialogueManager.hasDialogueInStandBy)
+        {
+            Debug.Log(
+                Mathf.Round(
+                    Mathf.Abs(player.transform.position.x - gameObject.transform.position.x)
+                )
+            );
+            if (
+                Mathf.Round(
+                    Mathf.Abs(player.transform.position.x - gameObject.transform.position.x)
+                ) <= newNodeMinimumDistance
+            )
+            {
+                dialogueManager.ResumeStandByDialogue();
+
+                if (newNodeMinimumDistance == 2)
+                    newNodeStep++;
+
+                newNodeMinimumDistance -= newNodeStep;
+            }
+        }
     }
 }

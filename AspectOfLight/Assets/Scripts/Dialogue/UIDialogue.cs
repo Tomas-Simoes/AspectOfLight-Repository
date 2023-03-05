@@ -38,7 +38,11 @@ public class UIDialogue : MonoBehaviour
         }
     }
 
-    public void UpdateUI(string speaker, string newNode)
+    public void UpdateUI(
+        string speaker,
+        string newNode,
+        List<D_Dialogue.DialogueChoise> dialogueChoises
+    )
     {
         nodeIsFinish = false;
         isReadyForNewNode = false;
@@ -76,7 +80,6 @@ public class UIDialogue : MonoBehaviour
 
     public void ExitUIDialogue()
     {
-        Debug.Log("pov");
         gameObject.SetActive(false);
     }
 }

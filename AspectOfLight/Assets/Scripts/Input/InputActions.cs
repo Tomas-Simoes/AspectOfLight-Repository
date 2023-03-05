@@ -46,15 +46,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""f6ef5313-8319-44ac-8924-8f59cb8ff496"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""fdbdd11b-33d5-4f8b-8cf7-835436a88eea"",
@@ -287,17 +278,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""AbilityThree"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""57988b99-6200-4fed-b013-df05965a4c82"",
-                    ""path"": ""<Keyboard>/q"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -327,6 +307,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""name"": ""Select"",
                     ""type"": ""Button"",
                     ""id"": ""a192ad57-bf22-4b7e-80a3-198083b33a5b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c262ddd-3215-43cc-b538-94e76a56fba7"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -525,6 +514,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2cf3600-0030-4b70-b37b-8721f647490c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -541,7 +541,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_XAxisMovement = m_Player.FindAction("XAxisMovement", throwIfNotFound: true);
         m_Player_YAxisMovement = m_Player.FindAction("YAxisMovement", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_AbilityOne = m_Player.FindAction("AbilityOne", throwIfNotFound: true);
         m_Player_AbilityTwo = m_Player.FindAction("AbilityTwo", throwIfNotFound: true);
@@ -552,6 +551,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
         m_UI_Move = m_UI.FindAction("Move", throwIfNotFound: true);
         m_UI_Select = m_UI.FindAction("Select", throwIfNotFound: true);
+        m_UI_Interact = m_UI.FindAction("Interact", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
@@ -616,7 +616,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_XAxisMovement;
     private readonly InputAction m_Player_YAxisMovement;
-    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_AbilityOne;
     private readonly InputAction m_Player_AbilityTwo;
@@ -628,7 +627,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @XAxisMovement => m_Wrapper.m_Player_XAxisMovement;
         public InputAction @YAxisMovement => m_Wrapper.m_Player_YAxisMovement;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @AbilityOne => m_Wrapper.m_Player_AbilityOne;
         public InputAction @AbilityTwo => m_Wrapper.m_Player_AbilityTwo;
@@ -649,9 +647,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @YAxisMovement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYAxisMovement;
                 @YAxisMovement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYAxisMovement;
                 @YAxisMovement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYAxisMovement;
-                @Interact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
-                @Interact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInteract;
                 @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
@@ -677,9 +672,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @YAxisMovement.started += instance.OnYAxisMovement;
                 @YAxisMovement.performed += instance.OnYAxisMovement;
                 @YAxisMovement.canceled += instance.OnYAxisMovement;
-                @Interact.started += instance.OnInteract;
-                @Interact.performed += instance.OnInteract;
-                @Interact.canceled += instance.OnInteract;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
@@ -706,6 +698,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Pause;
     private readonly InputAction m_UI_Move;
     private readonly InputAction m_UI_Select;
+    private readonly InputAction m_UI_Interact;
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_ScrollWheel;
@@ -716,6 +709,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputAction @Move => m_Wrapper.m_UI_Move;
         public InputAction @Select => m_Wrapper.m_UI_Select;
+        public InputAction @Interact => m_Wrapper.m_UI_Interact;
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
@@ -737,6 +731,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Select.started -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
                 @Select.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
                 @Select.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnSelect;
+                @Interact.started -= m_Wrapper.m_UIActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnInteract;
                 @Click.started -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
                 @Click.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
                 @Click.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnClick;
@@ -759,6 +756,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Select.started += instance.OnSelect;
                 @Select.performed += instance.OnSelect;
                 @Select.canceled += instance.OnSelect;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
                 @Click.started += instance.OnClick;
                 @Click.performed += instance.OnClick;
                 @Click.canceled += instance.OnClick;
@@ -785,7 +785,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         void OnXAxisMovement(InputAction.CallbackContext context);
         void OnYAxisMovement(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnAbilityOne(InputAction.CallbackContext context);
         void OnAbilityTwo(InputAction.CallbackContext context);
@@ -797,6 +796,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnMove(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);

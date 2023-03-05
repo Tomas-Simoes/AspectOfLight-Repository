@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "f6ef5313-8319-44ac-8924-8f59cb8ff496",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "fdbdd11b-33d5-4f8b-8cf7-835436a88eea",
@@ -265,17 +256,6 @@
                     "action": "AbilityThree",
                     "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "57988b99-6200-4fed-b013-df05965a4c82",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 }
             ]
         },
@@ -305,6 +285,15 @@
                     "name": "Select",
                     "type": "Button",
                     "id": "a192ad57-bf22-4b7e-80a3-198083b33a5b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "4c262ddd-3215-43cc-b538-94e76a56fba7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -501,6 +490,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b2cf3600-0030-4b70-b37b-8721f647490c",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

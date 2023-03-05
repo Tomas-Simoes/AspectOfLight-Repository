@@ -16,7 +16,5 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField]
     protected Player player;
 
-    protected virtual void StartDialogue() { }
-
-    protected virtual void OnTriggerStay2D(Collider2D other) { }
+    public virtual void OnTriggerStay2D(Collider2D other) { }
 }

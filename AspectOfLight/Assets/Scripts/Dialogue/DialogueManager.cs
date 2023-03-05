@@ -6,6 +6,9 @@ public class DialogueManager : MonoBehaviour
 {
     [Header("Manager Information")]
     [SerializeField]
+    private InputHandler inputHandler;
+
+    [SerializeField]
     private UIDialogue UIDialogue;
 
     [SerializeField]
@@ -21,6 +24,11 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private float timeInNode;
 
+    [Header("Stand-by Dialogue Information")]
+    public bool hasDialogueInStandBy = false;
+    private D_Dialogue dialogueInStandBy;
+    private int nodeIndexInStandBy;
+
     void Update()
     {
         if (inDialogueMode)
@@ -33,11 +41,17 @@ public class DialogueManager : MonoBehaviour
             return;
 
         inDialogueMode = true;
+        hasDialogueInStandBy = false;
+        inputHandler.ChangePlayerMapState(false);
 
         currentDialogue = dialogue;
         currentNode = currentDialogue.dialogueNodes[currentNodeIndex];
 
-        UIDialogue.UpdateUI(dialogue.speakerName, currentNode.dialogueText);
+        UIDialogue.UpdateUI(
+            dialogue.speakerName,
+            currentNode.dialogueText,
+            currentNode.dialogueChoises
+        );
     }
 
     public void TryGoToNextNode()
@@ -60,7 +74,11 @@ public class DialogueManager : MonoBehaviour
         currentNodeIndex++;
         currentNode = currentDialogue.dialogueNodes[currentNodeIndex];
 
-        UIDialogue.UpdateUI(currentDialogue.speakerName, currentNode.dialogueText);
+        UIDialogue.UpdateUI(
+            currentDialogue.speakerName,
+            currentNode.dialogueText,
+            currentNode.dialogueChoises
+        );
 
         timeInNode = 0;
     }
@@ -69,6 +87,38 @@ public class DialogueManager : MonoBehaviour
     {
         inDialogueMode = false;
         currentNodeIndex = 0;
+        inputHandler.ChangePlayerMapState(true);
+
         UIDialogue.ExitUIDialogue();
+    }
+
+    public void TryToStandByCurrentDialogue()
+    {
+        if (hasDialogueInStandBy)
+            return;
+
+        if (timeInNode <= minimumTimeInNode)
+            return;
+
+        if (!UIDialogue.isReadyForNewNode)
+        {
+            UIDialogue.FinishDisplayNode();
+            return;
+        }
+
+        hasDialogueInStandBy = true;
+
+        dialogueInStandBy = currentDialogue;
+        nodeIndexInStandBy = currentNodeIndex;
+
+        ExitDialogueMode();
+    }
+
+    public void ResumeStandByDialogue()
+    {
+        currentNodeIndex = nodeIndexInStandBy + 1;
+        timeInNode = 0;
+
+        StartDialogueMode(dialogueInStandBy);
     }
 }

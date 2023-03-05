@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DefaultDialogueTrigger : DialogueTrigger
 {
-    protected override void OnTriggerStay2D(Collider2D other)
+    public override void OnTriggerStay2D(Collider2D other)
     {
         base.OnTriggerStay2D(other);
         if (other.CompareTag("Player") && player.inputHandler.pressedInteract)

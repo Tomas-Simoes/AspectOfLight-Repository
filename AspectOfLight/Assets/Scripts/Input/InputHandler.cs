@@ -58,8 +58,8 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.performed += SetAttack;
         inputActions.Player.Attack.canceled += SetAttack;
 
-        inputActions.Player.Interact.started += SetInteract;
-        inputActions.Player.Interact.canceled += SetInteract;
+        inputActions.UI.Interact.started += SetInteract;
+        inputActions.UI.Interact.canceled += SetInteract;
 
         inputActions.UI.Pause.performed += SetPause;
 
@@ -84,12 +84,23 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;
 
+        inputActions.UI.Interact.started -= SetInteract;
+        inputActions.UI.Interact.canceled -= SetInteract;
+
         inputActions.UI.Pause.performed -= SetPause;
 
         inputActions.UI.Select.started -= SetSelect;
         inputActions.UI.Select.canceled += SetSelect;
 
         inputActions.Disable();
+    }
+
+    public void ChangePlayerMapState(bool state)
+    {
+        if (state)
+            inputActions.Player.Enable();
+        else
+            inputActions.Player.Disable();
     }
 
     private void SetXAxisMovement(InputAction.CallbackContext ctx)
