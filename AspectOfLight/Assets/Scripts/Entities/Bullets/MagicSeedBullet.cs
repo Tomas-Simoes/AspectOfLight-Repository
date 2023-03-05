@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicSeed : Bullet
+public class MagicSeedBullet : Bullet
 {
 
   /*
@@ -27,28 +27,47 @@ public class MagicSeed : Bullet
 
   public Transform _distatination;
 
-  public GameObject _entity;
+  protected Transform _magicBullet;
+  public bool IsGrounded = false;
 
-  private bool IsGrounded = false;
-
-  private bool IsTravelling = false;
-
-  private Player player;
+  public bool IsTravelling = true;
 
   private bool MovePosition;
+
+  private AbilityManager abilityManager;
+
+  public Player player;
 
   public override void Start()
   {
     base.Start();
     rb = GetComponent<Rigidbody2D>();
 
+    Debug.Log(player.abilityManager.GetPlayerAbilitySlot("Magic Seed"));
+
     rb.velocity = (targetPosition - transform.position).normalized * speed;
 
+    IsTravelling = true;
   }
 
   public override void Update()
   {
     base.Update();
+
+    if (player.inputHandler.pressedAbilityOne && IsTravelling)
+    {
+      IsTravelling = true;
+      IsGrounded = false;
+      setVelocity();
+    }
+
+    if (player.inputHandler.pressedAbilityOne && IsGrounded)
+    {
+      IsTravelling = false;
+      IsGrounded = true;
+      teleport();
+      Destroy(this);
+    }
     //if (player.inputHandler.press)
   }
 
@@ -69,9 +88,12 @@ public class MagicSeed : Bullet
   void teleport()
   {
     // if(magicseedIsGrounded)
-    //player.rb.MovePosition(bullet.position);
+    player.rb.MovePosition(_magicBullet.position);
     //transform.position = new Vector2(_distatination.position.x, _distatination.position.y);
   }
 
-
+  void setVelocity()
+  {
+    speed = 0;
+  }
 }

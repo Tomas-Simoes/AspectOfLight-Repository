@@ -7,294 +7,307 @@ using UnityEngine.EventSystems;
 
 public class AbilityManager : Menu
 {
-    public Dictionary<int, Ability> playerAbilities = new Dictionary<int, Ability>();
+  public Dictionary<int, Ability> playerAbilities = new Dictionary<int, Ability>();
 
-    /*
-        * Player Abilities       key            value
-        *                         1      SpecificAbility1
-        *                         2      SpecificAbility2
-        *                         3          ...
-    */
+  /*
+      * Player Abilities       key            value
+      *                         1      SpecificAbility1
+      *                         2      SpecificAbility2
+      *                         3          ...
+  */
 
-    public Dictionary<string, Ability> allAbilities;
+  public Dictionary<string, Ability> allAbilities;
 
-    /*
-        * All Abilities       key            value
-        *                   "Drone"      SpecificAbility1
-        *                   "Dash"       SpecificAbility2
-        *                   "..."        SpecificAbility3
-    */
+  /*
+      * All Abilities       key            value
+      *                   "Drone"      SpecificAbility1
+      *                   "Dash"       SpecificAbility2
+      *                   "..."        SpecificAbility3
+  */
 
-    [Header("UI Elements")]
-    [SerializeField]
-    private Button firstSlot;
+  [Header("UI Elements")]
+  [SerializeField]
+  private Button firstSlot;
 
-    [SerializeField]
-    private Button secondSlot;
+  [SerializeField]
+  private Button secondSlot;
 
-    [SerializeField]
-    private Button thirdSlot;
+  [SerializeField]
+  private Button thirdSlot;
 
-    [SerializeField]
-    private Button closeButton;
+  [SerializeField]
+  private Button closeButton;
 
-    [SerializeField]
-    private Button cancelButton;
+  [SerializeField]
+  private Button cancelButton;
 
-    [SerializeField]
-    private TextMeshProUGUI informationText;
+  [SerializeField]
+  private TextMeshProUGUI informationText;
 
-    [SerializeField]
-    private TextMeshProUGUI abilitiesCountText;
+  [SerializeField]
+  private TextMeshProUGUI abilitiesCountText;
 
-    [SerializeField]
-    private TextMeshProUGUI abilityDescription;
+  [SerializeField]
+  private TextMeshProUGUI abilityDescription;
 
-    [SerializeField]
-    private Button removeSlotOneButton;
+  [SerializeField]
+  private Button removeSlotOneButton;
 
-    [SerializeField]
-    private Button removeSlotTwoButton;
+  [SerializeField]
+  private Button removeSlotTwoButton;
 
-    [SerializeField]
-    private Button removeSlotThreeButton;
+  [SerializeField]
+  private Button removeSlotThreeButton;
 
-    [Header("Ability Information")]
-    [SerializeField]
-    private GameObject abilityPrefab;
+  [Header("Ability Information")]
+  [SerializeField]
+  private GameObject abilityPrefab;
 
-    [SerializeField]
-    private GameObject abilitiesParent;
+  [SerializeField]
+  private GameObject abilitiesParent;
 
-    public Ability magicSeed { get; private set; }
-    public Ability summonPlague { get; private set; }
-    public Ability specific2 { get; private set; }
+  public Ability magicSeed { get; private set; }
+  public Ability summonPlague { get; private set; }
+  public Ability specific2 { get; private set; }
 
-    [Header("Ability Data")]
-    [SerializeField]
-    private D_BaseAbility magicSeedBaseData;
+  [Header("Ability Data")]
+  [SerializeField]
+  private D_BaseAbility magicSeedBaseData;
 
-    [SerializeField]
-    private D_MagicSeedAbility magicSeedData;
+  [SerializeField]
+  private D_MagicSeedAbility magicSeedData;
 
-    [Space(5)]
-    [SerializeField]
-    private D_BaseAbility summonPlagueBaseData;
+  [Space(5)]
+  [SerializeField]
+  private D_BaseAbility summonPlagueBaseData;
 
-    [SerializeField]
-    private D_SummonPlagueAbility summonPlagueData;
+  [SerializeField]
+  private D_SummonPlagueAbility summonPlagueData;
 
-    [Space(5)]
-    [SerializeField]
-    private D_BaseAbility abilityTwoBaseData;
+  [Space(5)]
+  [SerializeField]
+  private D_BaseAbility abilityTwoBaseData;
 
-    [Header("Change Ability Information")]
-    private bool isChangingPlayerAbility;
-    private int slotToChange;
+  [Header("Change Ability Information")]
+  private bool isChangingPlayerAbility;
+  private int slotToChange;
 
-    [Header("Others")]
-    [SerializeField]
-    private Player player;
-    private bool abilityListAlreadyHasData;
+  [Header("Others")]
+  [SerializeField]
+  private Player player;
+  private bool abilityListAlreadyHasData;
 
-    void OnEnabled()
-    {
-        ChangeAbilityDescription(" ");
-    }
+  void OnEnabled()
+  {
+    ChangeAbilityDescription(" ");
+  }
 
-    public void InitAbilities()
-    {
-        magicSeed = new MagicSeedAbility(player, magicSeedBaseData, magicSeedData);
-        specific2 = new AbilitySpecific2(player, abilityTwoBaseData);
-        summonPlague = new SummonPlagueAbility(player, summonPlagueBaseData, summonPlagueData);
+  public void InitAbilities()
+  {
+    magicSeed = new MagicSeedAbility(player, magicSeedBaseData, magicSeedData);
+    specific2 = new AbilitySpecific2(player, abilityTwoBaseData);
+    summonPlague = new SummonPlagueAbility(player, summonPlagueBaseData, summonPlagueData);
 
-        allAbilities = new Dictionary<string, Ability>()
+    allAbilities = new Dictionary<string, Ability>()
         {
             { magicSeedBaseData.abilityName, magicSeed },
             { summonPlagueBaseData.abilityName, summonPlague },
             { abilityTwoBaseData.abilityName, specific2 }
         };
-    }
+  }
 
-    public void RemovePlayerAbility(int slot)
+  public void RemovePlayerAbility(int slot)
+  {
+    playerAbilities.Remove(slot);
+
+    UpdateAbilityObject(GetPlayerSlotButton(slotToChange).gameObject, "Slot " + slot);
+    ChangeRemovePlayerAbility(slot, false);
+    GetPlayerSlotButton(slotToChange).GetComponent<ButtonDescription>().description = " ";
+
+    ResetUI();
+  }
+
+  public void CastAbility(int abilitySlot, float timeSinceAbility)
+  {
+    if (timeSinceAbility >= playerAbilities[abilitySlot].baseAbilityData.abilityCD)
     {
-        playerAbilities.Remove(slot);
+      switch (abilitySlot)
+      {
+        case 1:
+          player.timeSinceAbilityOne = 0;
+          break;
+        case 2:
+          player.timeSinceAbilityTwo = 0;
+          break;
+        case 3:
+          player.timeSinceAbilityThree = 0;
+          break;
+      }
 
-        UpdateAbilityObject(GetPlayerSlotButton(slotToChange).gameObject, "Slot " + slot);
-        ChangeRemovePlayerAbility(slot, false);
-        GetPlayerSlotButton(slotToChange).GetComponent<ButtonDescription>().description = " ";
-
-        ResetUI();
+      playerAbilities[abilitySlot].Cast();
     }
+  }
 
-    public void CastAbility(int abilitySlot, float timeSinceAbility)
+  public void SelectUIAbility(string abilityName)
+  {
+    if (isChangingPlayerAbility)
     {
-        if (timeSinceAbility >= playerAbilities[abilitySlot].baseAbilityData.abilityCD)
-        {
-            switch (abilitySlot)
-            {
-                case 1:
-                    player.timeSinceAbilityOne = 0;
-                    break;
-                case 2:
-                    player.timeSinceAbilityTwo = 0;
-                    break;
-                case 3:
-                    player.timeSinceAbilityThree = 0;
-                    break;
-            }
+      if (playerAbilities.ContainsValue(allAbilities[abilityName]))
+      {
+        informationText.text = "This ability is already in a slot";
+        return;
+      }
 
-            playerAbilities[abilitySlot].Cast();
-        }
+      if (playerAbilities.ContainsKey(slotToChange))
+        playerAbilities[slotToChange] = allAbilities[abilityName];
+      else
+        playerAbilities.Add(slotToChange, allAbilities[abilityName]);
+
+      Button _slotToUpdate = GetPlayerSlotButton(slotToChange);
+      D_BaseAbility _newPlayerAbilityData = playerAbilities[slotToChange].baseAbilityData;
+
+      UpdateAbilityObject(_slotToUpdate.gameObject, _newPlayerAbilityData.abilityName);
+
+      _slotToUpdate.GetComponent<ButtonDescription>().description =
+          _newPlayerAbilityData.description;
+
+      ResetUI();
     }
+    else { }
+  }
 
-    public void SelectUIAbility(string abilityName)
+  public void ResetUI()
+  {
+    ChangeInteractablePlayerAbilitySlots(true);
+
+    closeButton.interactable = true;
+    cancelButton.gameObject.SetActive(false);
+    closeButton.gameObject.SetActive(true);
+
+    GetPlayerSlotButton(slotToChange).Select();
+    ChangeRemovePlayerAbility(slotToChange, false);
+
+    informationText.text = "Abilities";
+
+    isChangingPlayerAbility = false;
+  }
+
+  private Button GetPlayerSlotButton(int slotToChange)
+  {
+    switch (slotToChange)
     {
-        if (isChangingPlayerAbility)
-        {
-            if (playerAbilities.ContainsValue(allAbilities[abilityName]))
-            {
-                informationText.text = "This ability is already in a slot";
-                return;
-            }
-
-            if (playerAbilities.ContainsKey(slotToChange))
-                playerAbilities[slotToChange] = allAbilities[abilityName];
-            else
-                playerAbilities.Add(slotToChange, allAbilities[abilityName]);
-
-            Button _slotToUpdate = GetPlayerSlotButton(slotToChange);
-            D_BaseAbility _newPlayerAbilityData = playerAbilities[slotToChange].baseAbilityData;
-
-            UpdateAbilityObject(_slotToUpdate.gameObject, _newPlayerAbilityData.abilityName);
-
-            _slotToUpdate.GetComponent<ButtonDescription>().description =
-                _newPlayerAbilityData.description;
-
-            ResetUI();
-        }
-        else { }
+      case 1:
+        return firstSlot;
+      case 2:
+        return secondSlot;
+      case 3:
+        return thirdSlot;
+      default:
+        return null;
     }
+  }
 
-    public void ResetUI()
+  public void SelectUIPlayerAbility(int slot)
+  {
+    ChangeInteractablePlayerAbilitySlots(false);
+
+    abilitiesParent.transform.GetChild(0).GetComponent<Button>().Select();
+
+    isChangingPlayerAbility = true;
+    slotToChange = slot;
+
+    if (playerAbilities.ContainsKey(slot))
+      ChangeRemovePlayerAbility(slot, true);
+  }
+
+  public void ListUIAbilities()
+  {
+    if (!abilityListAlreadyHasData)
     {
-        ChangeInteractablePlayerAbilitySlots(true);
+      foreach (Ability ability in allAbilities.Values)
+      {
+        GameObject _newAbilityObj = Instantiate(abilityPrefab);
+        UpdateAbilityObject(_newAbilityObj, ability.baseAbilityData.abilityName);
 
-        closeButton.interactable = true;
-        cancelButton.gameObject.SetActive(false);
-        closeButton.gameObject.SetActive(true);
+        ButtonDescription descriptionComponent =
+            _newAbilityObj.GetComponent<ButtonDescription>();
 
-        GetPlayerSlotButton(slotToChange).Select();
-        ChangeRemovePlayerAbility(slotToChange, false);
+        descriptionComponent.description = ability.baseAbilityData.description;
+        descriptionComponent.abilityManager = this;
 
-        informationText.text = "Abilities";
+        _newAbilityObj.transform.SetParent(abilitiesParent.transform);
+        _newAbilityObj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
 
-        isChangingPlayerAbility = false;
+        _newAbilityObj
+            .GetComponent<Button>()
+            .onClick.AddListener(
+                delegate
+                {
+                  SelectUIAbility(ability.baseAbilityData.abilityName);
+                }
+            );
+      }
+
+      abilityListAlreadyHasData = true;
     }
+  }
 
-    private Button GetPlayerSlotButton(int slotToChange)
+  private void ChangeInteractablePlayerAbilitySlots(bool state)
+  {
+    firstSlot.interactable = state;
+    secondSlot.interactable = state;
+    thirdSlot.interactable = state;
+  }
+
+  private void ChangeRemovePlayerAbility(int slot, bool state)
+  {
+    switch (slot)
     {
-        switch (slotToChange)
-        {
-            case 1:
-                return firstSlot;
-            case 2:
-                return secondSlot;
-            case 3:
-                return thirdSlot;
-            default:
-                return null;
-        }
+      case 1:
+        removeSlotOneButton.gameObject.SetActive(state);
+        break;
+      case 2:
+        removeSlotTwoButton.gameObject.SetActive(state);
+        break;
+      case 3:
+        removeSlotThreeButton.gameObject.SetActive(state);
+        break;
+      default:
+        break;
     }
+  }
 
-    public void SelectUIPlayerAbility(int slot)
+  private void UpdateAbilityObject(GameObject abilityObj, string text)
+  {
+    abilityObj.transform.Find("Label").GetComponent<TextMeshProUGUI>().text = text;
+  }
+
+  public void ChangeAbilityDescription(string description)
+  {
+    abilityDescription.text = description;
+  }
+
+  public int GetPlayerAbilitySlot(string abilityName)
+  {
+    foreach (KeyValuePair<int, Ability> playerAbility in playerAbilities)
     {
-        ChangeInteractablePlayerAbilitySlots(false);
-
-        abilitiesParent.transform.GetChild(0).GetComponent<Button>().Select();
-
-        isChangingPlayerAbility = true;
-        slotToChange = slot;
-
-        if (playerAbilities.ContainsKey(slot))
-            ChangeRemovePlayerAbility(slot, true);
+      if (playerAbility.Value == allAbilities[abilityName])
+      {
+        return playerAbility.Key;
+      }
     }
 
-    public void ListUIAbilities()
-    {
-        if (!abilityListAlreadyHasData)
-        {
-            foreach (Ability ability in allAbilities.Values)
-            {
-                GameObject _newAbilityObj = Instantiate(abilityPrefab);
-                UpdateAbilityObject(_newAbilityObj, ability.baseAbilityData.abilityName);
+    return 0;
+  }
 
-                ButtonDescription descriptionComponent =
-                    _newAbilityObj.GetComponent<ButtonDescription>();
+  //? JUST FOR TESTS
+  public void StopBackground()
+  {
+    Time.timeScale = 0f;
+  }
 
-                descriptionComponent.description = ability.baseAbilityData.description;
-                descriptionComponent.abilityManager = this;
-
-                _newAbilityObj.transform.SetParent(abilitiesParent.transform);
-                _newAbilityObj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
-
-                _newAbilityObj
-                    .GetComponent<Button>()
-                    .onClick.AddListener(
-                        delegate
-                        {
-                            SelectUIAbility(ability.baseAbilityData.abilityName);
-                        }
-                    );
-            }
-
-            abilityListAlreadyHasData = true;
-        }
-    }
-
-    private void ChangeInteractablePlayerAbilitySlots(bool state)
-    {
-        firstSlot.interactable = state;
-        secondSlot.interactable = state;
-        thirdSlot.interactable = state;
-    }
-
-    private void ChangeRemovePlayerAbility(int slot, bool state)
-    {
-        switch (slot)
-        {
-            case 1:
-                removeSlotOneButton.gameObject.SetActive(state);
-                break;
-            case 2:
-                removeSlotTwoButton.gameObject.SetActive(state);
-                break;
-            case 3:
-                removeSlotThreeButton.gameObject.SetActive(state);
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void UpdateAbilityObject(GameObject abilityObj, string text)
-    {
-        abilityObj.transform.Find("Label").GetComponent<TextMeshProUGUI>().text = text;
-    }
-
-    public void ChangeAbilityDescription(string description)
-    {
-        abilityDescription.text = description;
-    }
-
-    //? JUST FOR TESTS
-    public void StopBackground()
-    {
-        Time.timeScale = 0f;
-    }
-
-    public void ResumeBackground()
-    {
-        Time.timeScale = 1f;
-    }
+  public void ResumeBackground()
+  {
+    Time.timeScale = 1f;
+  }
 }

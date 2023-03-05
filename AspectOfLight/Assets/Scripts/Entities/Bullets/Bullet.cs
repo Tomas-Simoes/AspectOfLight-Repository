@@ -19,8 +19,6 @@ public class Bullet : MonoBehaviour
 
   protected Rigidbody2D rb;
 
-
-
   public InputHandler inputHandler { get; private set; }
 
   public DefaultBullet defaultBullet { get; private set; }
