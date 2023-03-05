@@ -26,6 +26,7 @@ public class InputHandler : MonoBehaviour
     [Header("UI Input")]
     [SerializeField]
     public bool pressedSelect;
+    public bool pressedInteract;
 
     void Awake()
     {
@@ -56,6 +57,9 @@ public class InputHandler : MonoBehaviour
 
         inputActions.Player.Attack.performed += SetAttack;
         inputActions.Player.Attack.canceled += SetAttack;
+
+        inputActions.Player.Interact.started += SetInteract;
+        inputActions.Player.Interact.canceled += SetInteract;
 
         inputActions.UI.Pause.performed += SetPause;
 
@@ -121,6 +125,11 @@ public class InputHandler : MonoBehaviour
     private void SetAttack(InputAction.CallbackContext ctx)
     {
         pressingAttack = ctx.performed;
+    }
+
+    private void SetInteract(InputAction.CallbackContext ctx)
+    {
+        pressedInteract = ctx.started;
     }
 
     private void SetPause(InputAction.CallbackContext ctx)

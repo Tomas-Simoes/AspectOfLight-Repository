@@ -4,18 +4,71 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("Manager Information")]
+    [SerializeField]
+    private UIDialogue UIDialogue;
+
+    [SerializeField]
+    private float minimumTimeInNode = 1;
+
+    [Header("Dialogue Information")]
+    private D_Dialogue currentDialogue;
     private D_Dialogue.DialogueNode currentNode;
     private int currentNodeIndex = 0;
 
-    public void StartDialogueMode(D_Dialogue dialogue)
+    public bool inDialogueMode = false;
+
+    [SerializeField]
+    private float timeInNode;
+
+    void Update()
     {
-        currentNode = dialogue.dialogueNodes[currentNodeIndex];
+        if (inDialogueMode)
+            timeInNode += Time.deltaTime;
     }
 
-    public void GoToNextNode() { }
+    public void StartDialogueMode(D_Dialogue dialogue)
+    {
+        if (inDialogueMode)
+            return;
+
+        inDialogueMode = true;
+
+        currentDialogue = dialogue;
+        currentNode = currentDialogue.dialogueNodes[currentNodeIndex];
+
+        UIDialogue.UpdateUI(dialogue.speakerName, currentNode.dialogueText);
+    }
+
+    public void TryGoToNextNode()
+    {
+        if (timeInNode <= minimumTimeInNode)
+            return;
+
+        if (!UIDialogue.isReadyForNewNode)
+        {
+            UIDialogue.FinishDisplayNode();
+            return;
+        }
+
+        if (currentNodeIndex + 1 >= currentDialogue.dialogueNodes.Count)
+        {
+            ExitDialogueMode();
+            return;
+        }
+
+        currentNodeIndex++;
+        currentNode = currentDialogue.dialogueNodes[currentNodeIndex];
+
+        UIDialogue.UpdateUI(currentDialogue.speakerName, currentNode.dialogueText);
+
+        timeInNode = 0;
+    }
 
     public void ExitDialogueMode()
     {
+        inDialogueMode = false;
         currentNodeIndex = 0;
+        UIDialogue.ExitUIDialogue();
     }
 }
