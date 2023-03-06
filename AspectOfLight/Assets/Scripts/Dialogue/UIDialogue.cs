@@ -93,10 +93,14 @@ public class UIDialogue : MonoBehaviour
 
         foreach (D_Dialogue.DialogueChoise choise in choises)
         {
-            TextMeshProUGUI currentChoiseText = choisesContainer.transform
-                .GetChild(_choiseIndex)
+            GameObject _newChoiseObj = Instantiate(choisePrefab);
+
+            _newChoiseObj.transform.SetParent(choisesContainer.transform);
+            _newChoiseObj.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+
+            TextMeshProUGUI currentChoiseText = _newChoiseObj.transform
                 .Find("Text")
-                .GetComponent<TextMeshProUGUI>();
+                .gameObject.GetComponent<TextMeshProUGUI>();
 
             foreach (char character in choise.choiseText)
             {
