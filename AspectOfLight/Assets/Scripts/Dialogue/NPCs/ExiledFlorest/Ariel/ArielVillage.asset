@@ -12,6 +12,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844faeac500ba845939da53eaad3b15, type: 3}
   m_Name: ArielVillage
   m_EditorClassIdentifier: 
-  speakerName: 
-  dialogueNodes: []
+  speakerName: Ariel
+  dialogueNodes:
+  - dialogueText: I'll assume you're not a threat and I won't harm you, b- but you
+      better be careful about what you do be-because I'm keeping an eye on you...!
+    dialogueChoises: []
+  - dialogueText: 'Well... Welcome to the Village!! '
+    dialogueChoises: []
+  - dialogueText: This is, well, the Village!!
+    dialogueChoises: []
+  - dialogueText: Land of the Engineer and land of great story... I was born and
+      raised here, so everything I know is here, which is why I think it's a beautiful
+      village.
+    dialogueChoises: []
+  - dialogueText: So tell me, can I help you with something traveller?
+    dialogueChoises:
+    - choiseText: Land of the Engineer?
+      followOnDialogue: {fileID: 0}
+      choiseWasAlreadyChoosen: 0
+    - choiseText: Have you never left the village?
+      followOnDialogue: {fileID: 0}
+      choiseWasAlreadyChoosen: 0
+    - choiseText: Where should I go?
+      followOnDialogue: {fileID: 0}
+      choiseWasAlreadyChoosen: 0
+    - choiseText: I have to go...
+      followOnDialogue: {fileID: 0}
+      choiseWasAlreadyChoosen: 0
   followOnDialogue: {fileID: 0}
