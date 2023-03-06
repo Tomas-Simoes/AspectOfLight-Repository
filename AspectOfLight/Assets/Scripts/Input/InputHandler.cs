@@ -26,6 +26,7 @@ public class InputHandler : MonoBehaviour
     [Header("UI Input")]
     [SerializeField]
     public bool pressedSelect;
+    public bool pressedInteract;
 
     void Awake()
     {
@@ -57,6 +58,9 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.performed += SetAttack;
         inputActions.Player.Attack.canceled += SetAttack;
 
+        inputActions.UI.Interact.started += SetInteract;
+        inputActions.UI.Interact.canceled += SetInteract;
+
         inputActions.UI.Pause.performed += SetPause;
 
         inputActions.UI.Select.started += SetSelect;
@@ -80,12 +84,23 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;
 
+        inputActions.UI.Interact.started -= SetInteract;
+        inputActions.UI.Interact.canceled -= SetInteract;
+
         inputActions.UI.Pause.performed -= SetPause;
 
         inputActions.UI.Select.started -= SetSelect;
         inputActions.UI.Select.canceled += SetSelect;
 
         inputActions.Disable();
+    }
+
+    public void ChangePlayerMapState(bool state)
+    {
+        if (state)
+            inputActions.Player.Enable();
+        else
+            inputActions.Player.Disable();
     }
 
     private void SetXAxisMovement(InputAction.CallbackContext ctx)
@@ -121,6 +136,11 @@ public class InputHandler : MonoBehaviour
     private void SetAttack(InputAction.CallbackContext ctx)
     {
         pressingAttack = ctx.performed;
+    }
+
+    private void SetInteract(InputAction.CallbackContext ctx)
+    {
+        pressedInteract = ctx.started;
     }
 
     private void SetPause(InputAction.CallbackContext ctx)
