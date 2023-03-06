@@ -2,15 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class UIDialogue : MonoBehaviour
 {
     [Header("UI Elements")]
     public TextMeshProUGUI speakerText;
 
-    public TextMeshProUGUI dialogueText;
+    public Image dialogueWithChoises;
+    public Image dialogueWithoutChoises;
+    public TextMeshProUGUI withChoisesDialogueText;
+    public TextMeshProUGUI withoutChoisesDialogueText;
+
+    public GameObject choisesContainer;
+    public GameObject choisePrefab;
 
     [Header("Dialogue Information")]
+    private bool dialogueHasChoises;
     private string currentNode;
     public bool isReadyForNewNode = true;
 
@@ -48,23 +56,55 @@ public class UIDialogue : MonoBehaviour
         isReadyForNewNode = false;
         timeSinceNodeEnded = 0;
 
-        dialogueText.text = " ";
+        dialogueHasChoises = dialogueChoises.Count != 0;
+
+        GetDialogueText(dialogueHasChoises).text = " ";
 
         gameObject.SetActive(true);
+
+        if (dialogueHasChoises)
+        {
+            dialogueWithChoises.gameObject.SetActive(true);
+            dialogueWithoutChoises.gameObject.SetActive(false);
+        }
+        else
+        {
+            dialogueWithoutChoises.gameObject.SetActive(true);
+            dialogueWithChoises.gameObject.SetActive(false);
+        }
 
         speakerText.text = speaker;
         currentNode = newNode;
 
-        currentCoroutine = DisplayNode(currentNode);
+        currentCoroutine = DisplayNode(currentNode, dialogueChoises);
         StartCoroutine(currentCoroutine);
     }
 
-    private IEnumerator DisplayNode(string text)
+    private IEnumerator DisplayNode(string text, List<D_Dialogue.DialogueChoise> choises)
     {
         foreach (char character in text)
         {
-            dialogueText.text += character;
+            GetDialogueText(dialogueHasChoises).text += character;
+
             yield return new WaitForSeconds(textSpeed);
+        }
+
+        int _choiseIndex = 0;
+
+        foreach (D_Dialogue.DialogueChoise choise in choises)
+        {
+            TextMeshProUGUI currentChoiseText = choisesContainer.transform
+                .GetChild(_choiseIndex)
+                .Find("Text")
+                .GetComponent<TextMeshProUGUI>();
+
+            foreach (char character in choise.choiseText)
+            {
+                currentChoiseText.text += character;
+                yield return new WaitForSeconds(textSpeed);
+            }
+
+            _choiseIndex++;
         }
 
         nodeIsFinish = true;
@@ -74,12 +114,20 @@ public class UIDialogue : MonoBehaviour
     {
         StopCoroutine(currentCoroutine);
 
-        dialogueText.text = currentNode;
+        GetDialogueText(dialogueHasChoises).text = currentNode;
         nodeIsFinish = true;
     }
 
     public void ExitUIDialogue()
     {
         gameObject.SetActive(false);
+    }
+
+    private TextMeshProUGUI GetDialogueText(bool hasChoises)
+    {
+        if (dialogueHasChoises)
+            return withChoisesDialogueText;
+        else
+            return withoutChoisesDialogueText;
     }
 }
