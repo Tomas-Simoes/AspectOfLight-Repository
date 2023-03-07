@@ -84,14 +84,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  speed: 3
+  speed: 7
   damage: 2
   lifeTime: 4
   targatableTag: Enemy
-  _distatination: {fileID: 4477906987564694839}
+  minimumTimeTraveling: 0.3
+  minimumTimeGrounded: 0.3
   player: {fileID: 0}
---- !u!4 &4477906987564694839 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1843742842366480043, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-  m_PrefabInstance: {fileID: 2860615854316598172}
-  m_PrefabAsset: {fileID: 0}

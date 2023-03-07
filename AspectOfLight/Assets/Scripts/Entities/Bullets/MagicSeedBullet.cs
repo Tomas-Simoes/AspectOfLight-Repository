@@ -4,59 +4,106 @@ using UnityEngine;
 
 public class MagicSeedBullet : Bullet
 {
-    /*
-      travelState
-      groundedState
-  
-      setVelocity();
-  
-      abilityManager.playerAbilities.FindSlotMagicSeed  *1, 2, 3*
-  
-    
-      if(player.input.pressedAbilityKey && travelState){
-        travelState = false;
-        groundedState = true;
-      }
-  
-      if(player.input.pressedAbilityKey && grounedState){
-        TeleportPlayer();
-        Destroy(this);
-      }
-    */
+    [Header("Magic Seed Information")]
+    [SerializeField]
+    private float minimumTimeTraveling;
+    private float timeTravelling;
 
+    [SerializeField]
+    private float minimumTimeGrounded;
+    private float timeGrounded;
 
     private bool isGrounded = false;
-
     private bool isTravelling = false;
 
-    private AbilityManager abilityManager;
-
+    private int abilitySlot;
     public Player player;
+
+    private AbilityManager abilityManager;
 
     public override void Start()
     {
         base.Start();
-        rb.velocity = (targetPosition - transform.position).normalized * speed;
+        rb.velocity = (GetMousePosition() - transform.position).normalized * speed;
 
         isTravelling = true;
+        abilitySlot = player.abilityManager.GetPlayerAbilitySlot("Magic Seed");
     }
 
     public override void Update()
     {
         base.Update();
+        UpdateTimeInState();
+
+        if (isTravelling)
+            CheckTravellingState();
+
+        if (isGrounded)
+            CheckGroundedState();
+    }
+
+    private void CheckTravellingState()
+    {
+        if (timeTravelling <= minimumTimeTraveling)
+            return;
+
+        if (PressedAbilityKey() && isTravelling)
+        {
+            rb.velocity = Vector2.zero;
+
+            isTravelling = false;
+            isGrounded = true;
+        }
+    }
+
+    private void CheckGroundedState()
+    {
+        if (timeGrounded <= minimumTimeGrounded)
+            return;
+
+        if (PressedAbilityKey() && isGrounded)
+        {
+            player.rb.MovePosition(this.rb.position);
+            Destroy(this.gameObject);
+        }
+    }
+
+    private void UpdateTimeInState()
+    {
+        if (isTravelling)
+            timeTravelling += Time.deltaTime;
+        if (isGrounded)
+            timeGrounded += Time.deltaTime;
+    }
+
+    private bool PressedAbilityKey()
+    {
+        switch (player.abilityManager.GetPlayerAbilitySlot("Magic Seed"))
+        {
+            case 1:
+                return player.inputHandler.pressedAbilityOne;
+            case 2:
+                return player.inputHandler.pressedAbilityTwo;
+            case 3:
+                return player.inputHandler.pressedAbilityThree;
+        }
+
+        return false;
+    }
+
+    private void StopTravellingState()
+    {
+        rb.velocity = Vector2.zero;
+
+        isTravelling = false;
+        isGrounded = true;
     }
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag(targatableTag))
-        {
-            other.GetComponent<Entity>().TakeDamage(damage);
-            Destroy(this.gameObject);
-        }
-
         if (other.CompareTag("Wall"))
         {
-            Destroy(this.gameObject);
+            StopTravellingState();
         }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Bullet : MonoBehaviour
 {
@@ -29,4 +30,12 @@ public class Bullet : MonoBehaviour
     }
 
     public virtual void Update() { }
+
+    public Vector3 GetMousePosition()
+    {
+        Vector3 mousePosition = Mouse.current.position.ReadValue();
+        mousePosition.z = 10;
+
+        return Camera.main.ScreenToWorldPoint(mousePosition);
+    }
 }
