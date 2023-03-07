@@ -61,13 +61,21 @@ public class DialogueManager : MonoBehaviour
 
         if (!UIDialogue.isReadyForNewNode)
         {
-            UIDialogue.FinishDisplayNode();
+            if (!UIDialogue.nodeIsFinish)
+                UIDialogue.FinishDisplayNode();
             return;
         }
 
         if (currentNodeIndex + 1 >= currentDialogue.dialogueNodes.Count)
         {
-            ExitDialogueMode();
+            if (currentDialogue.followOnDialogue == null)
+                ExitDialogueMode();
+            else
+                ChangeCurrentDialogue(
+                    currentDialogue.followOnDialogue,
+                    currentDialogue.startFollowOnDialogueIndex
+                );
+
             return;
         }
 
@@ -90,6 +98,29 @@ public class DialogueManager : MonoBehaviour
         inputHandler.ChangePlayerMapState(true);
 
         UIDialogue.ExitUIDialogue();
+    }
+
+    public void SelectChoise(int choiseIndex)
+    {
+        D_Dialogue.DialogueChoise _currentChoise = currentNode.dialogueChoises[choiseIndex];
+        _currentChoise.choiseWasAlreadyChoosen = true;
+
+        ChangeCurrentDialogue(_currentChoise.followOnDialogue);
+    }
+
+    public void ChangeCurrentDialogue(D_Dialogue newDialogue, int newDialogueStartIndex = 0)
+    {
+        currentDialogue = newDialogue;
+        currentNodeIndex = newDialogueStartIndex;
+
+        Debug.Log(currentNodeIndex);
+        currentNode = currentDialogue.dialogueNodes[currentNodeIndex];
+
+        UIDialogue.UpdateUI(
+            currentDialogue.speakerName,
+            currentNode.dialogueText,
+            currentNode.dialogueChoises
+        );
     }
 
     public void TryToStandByCurrentDialogue()

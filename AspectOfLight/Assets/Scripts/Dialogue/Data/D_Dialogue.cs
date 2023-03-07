@@ -13,19 +13,26 @@ public class D_Dialogue : ScriptableObject
 
     [Header("Next Dialogue (Optional)")]
     public D_Dialogue followOnDialogue;
+    public int startFollowOnDialogueIndex;
 
     [System.Serializable]
-    public struct DialogueNode
+    public class DialogueNode
     {
         public string dialogueText;
         public List<DialogueChoise> dialogueChoises;
     }
 
     [System.Serializable]
-    public struct DialogueChoise
+    public class DialogueChoise
     {
         public string choiseText;
+        public int choiseIndex;
         public D_Dialogue followOnDialogue;
         public bool choiseWasAlreadyChoosen;
+    }
+
+    public void ChangeChoosenChoiseState(bool state, int nodeIndex, int choiseIndex)
+    {
+        dialogueNodes[nodeIndex].dialogueChoises[choiseIndex].choiseWasAlreadyChoosen = true;
     }
 }

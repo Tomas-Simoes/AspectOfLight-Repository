@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b844faeac500ba845939da53eaad3b15, type: 3}
+  m_Name: ArielVillage_Choise2
+  m_EditorClassIdentifier: 
+  speakerName: Ariel
+  dialogueNodes:
+  - dialogueText: Well, I'm not really sure, do whatever you want to do!!
+    dialogueChoises: []
+  - dialogueText: The people here are quite friendly, so don't be afraid to talk
+      to everyone, I bet they'll welcome you well in the Village.
+    dialogueChoises: []
+  - dialogueText: If you want, you can also go to the village library to learn more
+      about our ancient history and our guardian, the Engineer!
+    dialogueChoises: []
+  - dialogueText: It's located on the north side of the village, you'll easily find
+      it.
+    dialogueChoises: []
+  - dialogueText: Oh, and if you happen to leave the village, be careful...
+    dialogueChoises: []
+  followOnDialogue: {fileID: 11400000, guid: c67efa1fc0ebe344489aeeae7dfcafad, type: 2}
+  startFollowOnDialogueIndex: 0
