@@ -12,6 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b844faeac500ba845939da53eaad3b15, type: 3}
   m_Name: ArielVillage_Choise3
   m_EditorClassIdentifier: 
-  speakerName: 
-  dialogueNodes: []
+  speakerName: Ariel
+  dialogueNodes:
+  - dialogueText: Oops, I forgot that I also have a duty to attend to. I can't leave
+      my post, so I have to go back now.
+    dialogueChoises: []
+  - dialogueText: Have a good stay here in the village, warrior. And don't forget...
+    dialogueChoises: []
+  - dialogueText: I...
+    dialogueChoises: []
+  - dialogueText: am...
+    dialogueChoises: []
+  - dialogueText: keeping...
+    dialogueChoises: []
+  - dialogueText: an...
+    dialogueChoises: []
+  - dialogueText: eye...
+    dialogueChoises: []
+  - dialogueText: on...
+    dialogueChoises: []
+  - dialogueText: you...
+    dialogueChoises: []
+  - dialogueText: BYE!!
+    dialogueChoises: []
   followOnDialogue: {fileID: 0}
+  startFollowOnDialogueIndex: 0
