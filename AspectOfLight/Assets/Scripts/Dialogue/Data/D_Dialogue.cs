@@ -29,6 +29,7 @@ public class D_Dialogue : ScriptableObject
         public int choiseIndex;
         public D_Dialogue followOnDialogue;
         public bool choiseWasAlreadyChoosen;
+        public bool onlyReadbleOnce;
     }
 
     public void ChangeChoosenChoiseState(bool state, int nodeIndex, int choiseIndex)

@@ -69,6 +69,8 @@ public class UIDialogue : MonoBehaviour
 
         if (dialogueHasChoises)
         {
+            DestroyPreviousChoises();
+
             dialogueWithChoises.gameObject.SetActive(true);
             dialogueWithoutChoises.gameObject.SetActive(false);
         }
@@ -99,7 +101,7 @@ public class UIDialogue : MonoBehaviour
         {
             foreach (D_Dialogue.DialogueChoise choise in currentChoises)
             {
-                GameObject _newChoiseObj = InstantiateChoise();
+                GameObject _newChoiseObj = InstantiateChoise(choise);
 
                 TextMeshProUGUI _currentChoiseText = _newChoiseObj.transform
                     .Find("Text")
@@ -110,15 +112,6 @@ public class UIDialogue : MonoBehaviour
                     _currentChoiseText.text += character;
                     yield return new WaitForSeconds(textSpeed);
                 }
-
-                _newChoiseObj
-                    .GetComponent<Button>()
-                    .onClick.AddListener(
-                        delegate
-                        {
-                            dialogueManager.SelectChoise(choise.choiseIndex);
-                        }
-                    );
             }
 
             choisesContainer.transform.GetChild(0).GetComponent<Button>().Select();
@@ -135,24 +128,17 @@ public class UIDialogue : MonoBehaviour
 
         if (dialogueHasChoises)
         {
+            DestroyPreviousChoises();
+
             foreach (D_Dialogue.DialogueChoise choise in currentChoises)
             {
-                GameObject _newChoiseObj = InstantiateChoise();
+                GameObject _newChoiseObj = InstantiateChoise(choise);
 
                 TextMeshProUGUI _currentChoiseText = _newChoiseObj.transform
                     .Find("Text")
                     .gameObject.GetComponent<TextMeshProUGUI>();
 
                 _currentChoiseText.text = choise.choiseText;
-
-                _newChoiseObj
-                    .GetComponent<Button>()
-                    .onClick.AddListener(
-                        delegate
-                        {
-                            dialogueManager.SelectChoise(choise.choiseIndex);
-                        }
-                    );
             }
 
             choisesContainer.transform.GetChild(0).GetComponent<Button>().Select();
@@ -161,12 +147,24 @@ public class UIDialogue : MonoBehaviour
         nodeIsFinish = true;
     }
 
-    public GameObject InstantiateChoise()
+    public GameObject InstantiateChoise(D_Dialogue.DialogueChoise newChoise)
     {
         GameObject _newChoise = Instantiate(choisePrefab);
 
         _newChoise.transform.SetParent(choisesContainer.transform);
         _newChoise.GetComponent<RectTransform>().localScale = new Vector3(1f, 1f, 1f);
+
+        Button _newChoiseButton = _newChoise.GetComponent<Button>();
+
+        _newChoiseButton.onClick.AddListener(
+            delegate
+            {
+                dialogueManager.SelectChoise(newChoise.choiseIndex);
+            }
+        );
+
+        if (newChoise.onlyReadbleOnce && newChoise.choiseWasAlreadyChoosen)
+            _newChoiseButton.GetComponent<Button>().interactable = false;
 
         return _newChoise;
     }
@@ -174,6 +172,14 @@ public class UIDialogue : MonoBehaviour
     public void ExitUIDialogue()
     {
         gameObject.SetActive(false);
+    }
+
+    private void DestroyPreviousChoises()
+    {
+        foreach (Transform childChoises in choisesContainer.transform)
+        {
+            Destroy(childChoises.gameObject);
+        }
     }
 
     private TextMeshProUGUI GetDialogueText(bool hasChoises)
