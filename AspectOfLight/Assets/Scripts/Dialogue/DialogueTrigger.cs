@@ -4,26 +4,17 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-  [Header("Informations")]
-  [SerializeField]
-  protected bool readyToInteract = true;
-  [SerializeField]
-  protected bool onlyInteractOnce;
+    [Header("Informations")]
+    protected bool readyToInteract = true;
 
-  [SerializeField]
-  protected float minimumTimeAfterDialogue;
-  [SerializeField]
+    [SerializeField]
+    protected DialogueManager dialogueManager;
 
-  protected float timeAfterDialogue;
+    [SerializeField]
+    protected D_Dialogue dialogue;
 
-  [SerializeField]
-  protected DialogueManager dialogueManager;
+    [SerializeField]
+    protected Player player;
 
-  [SerializeField]
-  protected D_Dialogue dialogue;
-
-  [SerializeField]
-  protected Player player;
-
-  public virtual void OnTriggerStay2D(Collider2D other) { }
+    public virtual void OnTriggerStay2D(Collider2D other) { }
 }
