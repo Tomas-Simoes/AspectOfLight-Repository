@@ -31,17 +31,21 @@ MonoBehaviour:
       choiseIndex: 0
       followOnDialogue: {fileID: 11400000, guid: e3a1bec32547167499178341d018f726, type: 2}
       choiseWasAlreadyChoosen: 1
+      onlyReadbleOnce: 0
     - choiseText: Have you never left the village?
       choiseIndex: 1
       followOnDialogue: {fileID: 11400000, guid: 707b74a1303c16840a4fe3e9ad542bd6, type: 2}
-      choiseWasAlreadyChoosen: 0
+      choiseWasAlreadyChoosen: 1
+      onlyReadbleOnce: 0
     - choiseText: Where should I go?
       choiseIndex: 2
       followOnDialogue: {fileID: 11400000, guid: 39b08edcee882604e8469064217136b6, type: 2}
-      choiseWasAlreadyChoosen: 0
+      choiseWasAlreadyChoosen: 1
+      onlyReadbleOnce: 0
     - choiseText: I have to go...
       choiseIndex: 3
       followOnDialogue: {fileID: 11400000, guid: 21ca995501d16fb4496c5fe1d92a5c9a, type: 2}
-      choiseWasAlreadyChoosen: 0
+      choiseWasAlreadyChoosen: 1
+      onlyReadbleOnce: 0
   followOnDialogue: {fileID: 0}
   startFollowOnDialogueIndex: 0

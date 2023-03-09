@@ -80,8 +80,6 @@ public class Player_AttackState : State
             {
                 _bulletComponent.damage = 5;
             }
-            // Debug.Log(attackTime);
-            Debug.Log(_bulletComponent.damage);
             stateMachine.ChangeState(player.moveState);
         }
     }
