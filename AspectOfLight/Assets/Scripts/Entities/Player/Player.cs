@@ -56,8 +56,6 @@ public class Player : Entity
   [SerializeField]
   public GameObject attackPosition;
 
-  public GameObject DeathScreen;
-
   public InputHandler inputHandler { get; private set; }
 
   public override void Start()
@@ -170,11 +168,5 @@ public class Player : Entity
   {
     FacingRight = !FacingRight;
     transform.Rotate(0f, 180f, 0f);
-  }
-
-  public override void Die()
-  {
-    base.Die();
-    DeathScreen.SetActive(true);
   }
 }
