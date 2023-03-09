@@ -58,8 +58,6 @@ public class Player : Entity
 
   public GameObject DeathScreen;
 
-  public GameObject DeathScreen;
-
   public InputHandler inputHandler { get; private set; }
 
     public override void Start()
