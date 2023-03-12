@@ -11,5 +11,8 @@ public class Ability
         this.baseAbilityData = baseAbilityData;
     }
 
-    public virtual void Cast() { }
+    public virtual void Cast()
+    {
+        player.ReduceStamina(baseAbilityData.staminaCost);
+    }
 }

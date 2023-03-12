@@ -20,7 +20,7 @@ public class SummonPlagueAbility : Ability
     {
         base.Cast();
 
-        foreach (GameObject spawnpoint in player.dronesSpawnPoints)
+        foreach (GameObject spawnpoint in player.plagueSpawnPoints)
         {
             player.CreatePrefab(
                 abilityData.plaguePrefab,

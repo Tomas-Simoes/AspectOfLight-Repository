@@ -8,5 +8,6 @@ public class D_BaseAbility : ScriptableObject
     public string abilityName = "No name";
     public Sprite icon;
     public float abilityCD;
+    public int staminaCost;
     public string description = "No description yet";
 }
