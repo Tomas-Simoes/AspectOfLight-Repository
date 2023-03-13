@@ -19,9 +19,6 @@ public class Player : Entity
     private D_PlayerDashState dashStateData;
 
     [SerializeField]
-    private D_PlayerNecromancerState necromancerStateData;
-
-    [SerializeField]
     private D_PlayerAttackState attackStateData;
 
     [Header("Cooldowns")]
@@ -38,10 +35,7 @@ public class Player : Entity
     private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
 
     [Header("Abilities Information")]
-    public bool hasStamina;
-
-    [SerializeField]
-    private int currentStamina;
+    public int currentStamina;
 
     [SerializeField]
     public AbilityManager abilityManager;
@@ -63,8 +57,8 @@ public class Player : Entity
     {
         base.Start();
         currentHealth = entityData.MAX_HEALTH;
-        timeSinceDash = coolDownData.dashCD;
         currentStamina = entityData.MAX_STAMINA;
+        timeSinceDash = coolDownData.dashCD;
 
         if (inputHandler == null)
         {
@@ -170,7 +164,6 @@ public class Player : Entity
     public void ReduceStamina(int stamina)
     {
         currentStamina -= stamina;
-
-        hasStamina = currentStamina <= 0 ? false : true;
+        Debug.Log(currentStamina);
     }
 }

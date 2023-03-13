@@ -129,9 +129,12 @@ public class AbilityManager : Menu
 
     public void CastAbility(int abilitySlot, float timeSinceAbility)
     {
+        bool _hasStaminaToCast =
+            player.currentStamina - playerAbilities[abilitySlot].baseAbilityData.staminaCost >= 0;
+
         if (
             timeSinceAbility >= playerAbilities[abilitySlot].baseAbilityData.abilityCD
-            && player.hasStamina
+            && _hasStaminaToCast
         )
         {
             switch (abilitySlot)
@@ -148,7 +151,6 @@ public class AbilityManager : Menu
             }
 
             playerAbilities[abilitySlot].Cast();
-            player.ReduceStamina(playerAbilities[abilitySlot].baseAbilityData.staminaCost);
         }
         else
         {
