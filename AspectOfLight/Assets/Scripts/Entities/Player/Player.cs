@@ -64,6 +64,7 @@ public class Player : Entity
         base.Start();
         currentHealth = entityData.MAX_HEALTH;
         timeSinceDash = coolDownData.dashCD;
+        currentStamina = entityData.MAX_STAMINA;
 
         if (inputHandler == null)
         {

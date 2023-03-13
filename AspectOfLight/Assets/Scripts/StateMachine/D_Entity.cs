@@ -6,6 +6,7 @@ using UnityEngine;
 public class D_Entity : ScriptableObject
 {
     public float MAX_HEALTH = 10;
+    public int MAX_STAMINA = 20;
     public float wallCheckDistance = 0.2f;
     public LayerMask whatIsGround;
     public LayerMask whatIsWall;
