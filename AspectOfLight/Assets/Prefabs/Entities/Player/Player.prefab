@@ -152,7 +152,7 @@ GameObject:
   m_Component:
   - component: {fileID: 752691949}
   m_Layer: 0
-  m_Name: SpawnPoints
+  m_Name: PlagueSpawnpoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 752691948}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -173,7 +173,7 @@ Transform:
   - {fileID: 1990554868}
   - {fileID: 229118593}
   - {fileID: 1956915855}
-  m_Father: {fileID: 480230100939751991}
+  m_Father: {fileID: 5899337003674907248}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918610556
@@ -199,13 +199,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918610556}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.56, y: 0.06, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.5600027, y: 0.060001493, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 480230100939751991}
-  m_RootOrder: 4
+  m_Father: {fileID: 5899337003674907248}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1103641547
 GameObject:
@@ -299,7 +299,7 @@ Transform:
   m_Children:
   - {fileID: 132111085}
   m_Father: {fileID: 480230100939751991}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1990554867
 GameObject:
@@ -366,11 +366,10 @@ Transform:
   m_LocalScale: {x: 0.22633308, y: 0.22633308, z: 0.22633308}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 480230101691718370}
-  - {fileID: 752691949}
+  - {fileID: 5899337003674907248}
   - {fileID: 1976133031}
+  - {fileID: 480230101691718370}
   - {fileID: 1103641548}
-  - {fileID: 918610557}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -504,14 +503,17 @@ MonoBehaviour:
   coolDownData: {fileID: 11400000, guid: 07f65c5ccfc73e64ab563f8dec899eee, type: 2}
   moveStateData: {fileID: 11400000, guid: e70a09bca30f5c243b680560dfe84669, type: 2}
   dashStateData: {fileID: 11400000, guid: b726f2b98028dd54e9b5d4211cfee371, type: 2}
-  necromancerStateData: {fileID: 11400000, guid: 6efe397210b46db43baabae9f78c84e0, type: 2}
   attackStateData: {fileID: 11400000, guid: 2f49c34f63670124194c767185439259, type: 2}
   timeSinceAttack: 0
   timeSinceDash: 0
-  timeSinceNecromancer: 0
+  timeSinceAbilityOne: 0
+  timeSinceAbilityTwo: 0
+  timeSinceAbilityThree: 0
   axisMovement: {x: 0, y: 0}
   FacingRight: 1
-  dronesSpawnPoints:
+  currentStamina: 0
+  abilityManager: {fileID: 0}
+  plagueSpawnPoints:
   - {fileID: 1990554867}
   - {fileID: 229118592}
   - {fileID: 1956915854}
@@ -535,6 +537,11 @@ MonoBehaviour:
   pressingAttack: 0
   pressedDash: 0
   pressedAbilityOne: 0
+  pressedAbilityTwo: 0
+  pressedAbilityThree: 0
+  pauseMenuHandler: {fileID: 0}
+  pressedSelect: 0
+  pressedInteract: 0
 --- !u!1 &480230101691718373
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,6 +570,39 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 480230100939751991}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3262613667749024619
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5899337003674907248}
+  m_Layer: 6
+  m_Name: Abilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5899337003674907248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3262613667749024619}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 918610557}
+  - {fileID: 752691949}
   m_Father: {fileID: 480230100939751991}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

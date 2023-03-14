@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Player_BaseData
   m_EditorClassIdentifier: 
   MAX_HEALTH: 1000
+  MAX_STAMINA: 100
   wallCheckDistance: 0.2
   whatIsGround:
     serializedVersion: 2

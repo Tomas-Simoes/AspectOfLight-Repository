@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd08be37192de834bb76e2f61fd6b540, type: 3}
   m_Name: Player_AttackStateData
   m_EditorClassIdentifier: 
-  maxAttackTime: 4
+  maxAttackTime: 1.5
+  defaultDamage: 2
+  changeDamageTimeJump: 0.5
+  damageIncrement: 2
+  staminaCostTime: 0.1
+  staminaCost: 5

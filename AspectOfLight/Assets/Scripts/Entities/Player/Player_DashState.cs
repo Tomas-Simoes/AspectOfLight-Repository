@@ -27,6 +27,7 @@ public class Player_DashState : State
     public override void Enter()
     {
         base.Enter();
+        player.ReduceStamina(stateData.staminaCost);
 
         float _xAxis = player.inputHandler.xAxis;
         float _yAxis = player.inputHandler.yAxis;

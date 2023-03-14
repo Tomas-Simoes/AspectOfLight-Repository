@@ -6,12 +6,13 @@ public class Player_AttackState : State
     public Player player;
     public D_PlayerAttackState stateData;
 
-    public DefaultBullet _bullet;
+    [Header("Attack Information")]
+    public float attackTime;
+    private float changeDamageTime;
+    private float currentDamage;
 
-    [SerializeField]
-    private float attackTime;
-
-    private float normalDamage;
+    [Header("Stamina Information")]
+    private float currentStaminaCostTime;
 
     public Player_AttackState(
         Entity entity,
@@ -31,7 +32,12 @@ public class Player_AttackState : State
     {
         base.Enter();
         attackTime = 0;
+        currentStaminaCostTime = stateData.staminaCostTime;
+
         player.timeSinceAttack = 0;
+
+        changeDamageTime = stateData.changeDamageTimeJump;
+        currentDamage = stateData.defaultDamage;
 
         entity.rb.velocity = Vector2.zero;
     }
@@ -47,18 +53,30 @@ public class Player_AttackState : State
 
         if (attackTime >= stateData.maxAttackTime)
         {
-            // can't charge more
+            //TODO shake camera or something
+            currentStaminaCostTime += Time.deltaTime;
 
-            Debug.Log("Can't charge more");
+            if (currentStaminaCostTime >= stateData.staminaCostTime)
+            {
+                player.ReduceStamina(stateData.staminaCost);
+                currentStaminaCostTime = 0;
+            }
         }
         else
         {
-            // still charging
             attackTime += Time.deltaTime;
-            //Debug.Log("still charging");
+
+            if (attackTime >= changeDamageTime)
+            {
+                changeDamageTime += stateData.changeDamageTimeJump;
+                currentDamage += stateData.damageIncrement;
+            }
         }
 
-        if (!player.inputHandler.pressingAttack)
+        bool _releaseAttack =
+            !player.inputHandler.pressingAttack || !player.HasStaminaToUse(stateData.staminaCost);
+
+        if (_releaseAttack)
         {
             GameObject _bullet = entity.CreatePrefab(
                 player.bulletPrefab,
@@ -66,22 +84,8 @@ public class Player_AttackState : State
                 player.bulletsParent
             );
 
-            DefaultBullet _bulletComponent = _bullet.GetComponent<DefaultBullet>();
+            _bullet.GetComponent<DefaultBullet>().damage = currentDamage;
 
-            if (attackTime >= 1)
-            {
-                _bulletComponent.damage = 1;
-            }
-            if (attackTime >= 3)
-            {
-                _bulletComponent.damage = 3;
-            }
-            if (attackTime >= 4)
-            {
-                _bulletComponent.damage = 5;
-            }
-            // Debug.Log(attackTime);
-            Debug.Log(_bulletComponent.damage);
             stateMachine.ChangeState(player.moveState);
         }
     }
