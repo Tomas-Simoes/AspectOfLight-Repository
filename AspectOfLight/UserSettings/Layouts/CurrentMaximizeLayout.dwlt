@@ -20,8 +20,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 30
-    width: 1920
-    height: 947
+    width: 1304
+    height: 675
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
@@ -46,14 +46,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
+    x: 62
     y: 73
-<<<<<<< HEAD
-    width: 725
-=======
-    width: 642
->>>>>>> parent of 41217f6 (Death Screen Done)
-    height: 474
+    width: 481
+    height: 273
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -64,11 +60,7 @@ MonoBehaviour:
   m_ShowGizmos: 0
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
-<<<<<<< HEAD
-  m_TargetSize: {x: 725, y: 408}
-=======
-  m_TargetSize: {x: 642, y: 361}
->>>>>>> parent of 41217f6 (Death Screen Done)
+  m_TargetSize: {x: 448, y: 252}
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -83,17 +75,10 @@ MonoBehaviour:
     m_VRangeLocked: 0
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
-<<<<<<< HEAD
-    m_HBaseRangeMin: -362.5
-    m_HBaseRangeMax: 362.5
-    m_VBaseRangeMin: -204
-    m_VBaseRangeMax: 204
-=======
-    m_HBaseRangeMin: -321
-    m_HBaseRangeMax: 321
-    m_VBaseRangeMin: -180.5
-    m_VBaseRangeMax: 180.5
->>>>>>> parent of 41217f6 (Death Screen Done)
+    m_HBaseRangeMin: -224
+    m_HBaseRangeMax: 224
+    m_VBaseRangeMin: -126
+    m_VBaseRangeMax: 126
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -111,40 +96,23 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
-<<<<<<< HEAD
-      width: 725
-      height: 453
+      width: 481
+      height: 252
     m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 362.5, y: 226.5}
-=======
-      width: 642
-      height: 453
-    m_Scale: {x: 1, y: 1}
-    m_Translation: {x: 321, y: 226.5}
->>>>>>> parent of 41217f6 (Death Screen Done)
+    m_Translation: {x: 240.5, y: 126}
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
-<<<<<<< HEAD
-      x: -362.5
-      y: -226.5
-      width: 725
-      height: 453
+      x: -240.5
+      y: -126
+      width: 481
+      height: 252
     m_MinimalGUI: 1
   m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 725, y: 474}
-=======
-      x: -321
-      y: -226.5
-      width: 642
-      height: 453
-    m_MinimalGUI: 1
-  m_defaultScale: 1
-  m_LastWindowPixelSize: {x: 642, y: 474}
->>>>>>> parent of 41217f6 (Death Screen Done)
+  m_LastWindowPixelSize: {x: 481, y: 273}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -169,12 +137,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 726
-=======
-    width: 643
->>>>>>> parent of 41217f6 (Death Screen Done)
-    height: 947
+    width: 482
+    height: 675
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
@@ -196,14 +160,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 726
-=======
-    width: 643
->>>>>>> parent of 41217f6 (Death Screen Done)
-    height: 495
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+    width: 482
+    height: 294
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 2}
   m_Panes:
   - {fileID: 2}
@@ -1020,18 +980,11 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-    y: 495
-<<<<<<< HEAD
-    width: 726
-    height: 452
+    y: 294
+    width: 482
+    height: 381
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 4000, y: 4000}
-=======
-    width: 643
-    height: 452
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
->>>>>>> parent of 41217f6 (Death Screen Done)
   m_ActualView: {fileID: 7}
   m_Panes:
   - {fileID: 7}
@@ -1057,14 +1010,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 0
-    y: 568
-<<<<<<< HEAD
-    width: 725
-=======
-    width: 642
->>>>>>> parent of 41217f6 (Death Screen Done)
-    height: 431
+    x: 62
+    y: 367
+    width: 481
+    height: 360
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1288,15 +1237,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-<<<<<<< HEAD
-    m_Target: {x: 348.88046, y: 302.54514, z: -1.7664641}
+    m_Target: {x: 98.79355, y: 97.72611, z: -1.4398398}
     speed: 2
-    m_Value: {x: 348.88046, y: 302.54514, z: -1.7664641}
-=======
-    m_Target: {x: 28.529129, y: 18.982607, z: 0.117180154}
-    speed: 2
-    m_Value: {x: 28.529129, y: 18.982607, z: 0.117180154}
->>>>>>> parent of 41217f6 (Death Screen Done)
+    m_Value: {x: 98.79355, y: 97.72611, z: -1.4398398}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1347,15 +1290,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-<<<<<<< HEAD
-    m_Target: 253.04988
+    m_Target: 146.58636
     speed: 2
-    m_Value: 253.04988
-=======
-    m_Target: 5.7444224
-    speed: 2
-    m_Value: 5.7444224
->>>>>>> parent of 41217f6 (Death Screen Done)
+    m_Value: 146.58636
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1397,24 +1334,14 @@ MonoBehaviour:
   - {fileID: 11}
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 726
+    x: 482
     y: 0
-    width: 511
-=======
-    x: 643
-    y: 0
-    width: 628
->>>>>>> parent of 41217f6 (Death Screen Done)
-    height: 947
+    width: 336
+    height: 675
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-<<<<<<< HEAD
-  controlID: 34483
-=======
-  controlID: 333
->>>>>>> parent of 41217f6 (Death Screen Done)
+  controlID: 15296
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1432,13 +1359,8 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 511
-    height: 483
-=======
-    width: 628
-    height: 484
->>>>>>> parent of 41217f6 (Death Screen Done)
+    width: 336
+    height: 344
   m_MinSize: {x: 202, y: 221}
   m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 10}
@@ -1466,17 +1388,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 726
+    x: 544
     y: 73
-    width: 509
-    height: 462
-=======
-    x: 643
-    y: 73
-    width: 626
-    height: 463
->>>>>>> parent of 41217f6 (Death Screen Done)
+    width: 334
+    height: 323
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1484,15 +1399,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-<<<<<<< HEAD
-      m_SelectedIDs: 44d60300
-      m_LastClickedID: 251460
-      m_ExpandedIDs: e460fbff9261fbff6872fbffc837fdffc666feff0afbffff4e7200007272000018730000f0740000c47500006676000014780000d2db0300
-=======
-      m_SelectedIDs: 32880000
-      m_LastClickedID: 34866
-      m_ExpandedIDs: 46e4ffff0afbffffb2880000
->>>>>>> parent of 41217f6 (Death Screen Done)
+      m_SelectedIDs: 5e88fcff
+      m_LastClickedID: -227234
+      m_ExpandedIDs: 6088fcff32a1fcff92bdfcff90c0fcffdcd5fcff46d9fcffaa77feffba91feff9ca9ffffaecbffffdccbffff52d8ffff74e9ffff0afbffff7c880000b48c0000ea8f0000549000007a3001005e39010094400100ca490100d8490100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -1508,7 +1417,7 @@ MonoBehaviour:
         m_IsRenaming: 0
         m_OriginalEventType: 11
         m_IsRenamingFilename: 0
-        m_ClientGUIView: {fileID: 9}
+        m_ClientGUIView: {fileID: 6}
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1532,24 +1441,49 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-    y: 483
-    width: 511
-    height: 464
-=======
-    y: 484
-    width: 628
-    height: 463
->>>>>>> parent of 41217f6 (Death Screen Done)
+    y: 344
+    width: 336
+    height: 331
   m_MinSize: {x: 232, y: 271}
   m_MaxSize: {x: 10002, y: 10021}
-  m_ActualView: {fileID: 12}
+  m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 12}
   - {fileID: 13}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &12
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12071, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Animation
+    m_Image: {fileID: -8166618308981325432, guid: 0000000000000000d000000000000000, type: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 1
+    y: 363
+    width: 284
+    height: 310
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+  m_LockTracker:
+    m_IsLocked: 0
+  m_LastSelectedObjectID: -227234
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1569,17 +1503,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 726
-    y: 556
-    width: 509
-    height: 443
-=======
-    x: 643
-    y: 557
-    width: 626
-    height: 442
->>>>>>> parent of 41217f6 (Death Screen Done)
+    x: 544
+    y: 417
+    width: 334
+    height: 310
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1597,37 +1524,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-<<<<<<< HEAD
-    - Assets/Scripts/Dialogue/NPCs/ExiledFlorest/Ariel/ArielVillage
-=======
-    - Assets/Scripts/Dialogue/NPCs/ExiledFlorest
->>>>>>> parent of 41217f6 (Death Screen Done)
+    - Assets/Scripts/Entities/Bullets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-<<<<<<< HEAD
-  - Assets/Scripts/Dialogue/NPCs/ExiledFlorest/Ariel/ArielVillage
-=======
-  - Assets/Scripts/Dialogue/NPCs/ExiledFlorest
->>>>>>> parent of 41217f6 (Death Screen Done)
+  - Assets/Scripts/Entities/Bullets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: E:\Games Projects\AspectOfLight-Repository\AspectOfLight
+  m_LastProjectPath: C:\Users\aeal\Documents\GitHub\AspectOfLight-Repository\AspectOfLight
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-<<<<<<< HEAD
-    scrollPos: {x: 0, y: 133}
-    m_SelectedIDs: 8ea30000
-    m_LastClickedID: 41870
-    m_ExpandedIDs: 00000000fa810000fc810000fe81000000820000028200000482000006820000088200000a8200000c820000408200005a8a00001e8e00002493000000ca9a3b
-=======
-    scrollPos: {x: 0, y: 78}
-    m_SelectedIDs: 4a820000
-    m_LastClickedID: 33354
-    m_ExpandedIDs: 00000000f6810000f8810000fa810000fc810000fe81000000820000028200000482000006820000088200000a8200002a8200004c82000000ca9a3b
->>>>>>> parent of 41217f6 (Death Screen Done)
+    scrollPos: {x: 0, y: 194}
+    m_SelectedIDs: 12b70000
+    m_LastClickedID: 46866
+    m_ExpandedIDs: 00000000288200002a8200003e8200004482000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1655,11 +1567,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< HEAD
-    m_ExpandedIDs: 00000000fa810000fc810000fe81000000820000028200000482000006820000088200000a8200000c82000000ca9a3b
-=======
-    m_ExpandedIDs: 00000000f6810000f8810000fa810000fc810000fe81000000820000028200000482000006820000088200000a82000000ca9a3b
->>>>>>> parent of 41217f6 (Death Screen Done)
+    m_ExpandedIDs: 00000000288200002a82000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1684,14 +1592,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-<<<<<<< HEAD
-    m_SelectedInstanceIDs: 44d60300
-    m_LastClickedInstanceID: 251460
-=======
-    m_SelectedInstanceIDs: 32880000
-    m_LastClickedInstanceID: 34866
->>>>>>> parent of 41217f6 (Death Screen Done)
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 5e88fcff
+    m_LastClickedInstanceID: -227234
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1719,46 +1622,7 @@ MonoBehaviour:
     m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 64
   m_SkipHiddenPackages: 0
-<<<<<<< HEAD
-  m_DirectoriesAreaWidth: 157
-=======
-  m_DirectoriesAreaWidth: 185
->>>>>>> parent of 41217f6 (Death Screen Done)
---- !u!114 &13
-MonoBehaviour:
-  m_ObjectHideFlags: 52
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 12071, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
-  m_TitleContent:
-    m_Text: Animation
-    m_Image: {fileID: -8166618308981325432, guid: 0000000000000000d000000000000000, type: 0}
-    m_Tooltip: 
-  m_Pos:
-    serializedVersion: 2
-    x: 725
-    y: 678
-    width: 604
-    height: 321
-  m_ViewDataDictionary: {fileID: 0}
-  m_OverlayCanvas:
-    m_LastAppliedPresetName: Default
-    m_SaveData: []
-  m_LockTracker:
-    m_IsLocked: 0
-<<<<<<< HEAD
-  m_LastSelectedObjectID: 29730
-=======
-  m_LastSelectedObjectID: -4476
->>>>>>> parent of 41217f6 (Death Screen Done)
+  m_DirectoriesAreaWidth: 50
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1776,24 +1640,14 @@ MonoBehaviour:
   - {fileID: 18}
   m_Position:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1237
+    x: 818
     y: 0
-    width: 683
-=======
-    x: 1271
-    y: 0
-    width: 649
->>>>>>> parent of 41217f6 (Death Screen Done)
-    height: 947
+    width: 486
+    height: 675
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-<<<<<<< HEAD
-  controlID: 34577
-=======
-  controlID: 425
->>>>>>> parent of 41217f6 (Death Screen Done)
+  controlID: 15233
 --- !u!114 &15
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1811,15 +1665,10 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-<<<<<<< HEAD
-    width: 683
-    height: 483
-=======
-    width: 649
-    height: 484
->>>>>>> parent of 41217f6 (Death Screen Done)
-  m_MinSize: {x: 275, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+    width: 486
+    height: 344
+  m_MinSize: {x: 276, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -1846,17 +1695,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1237
+    x: 880
     y: 73
-    width: 682
-    height: 462
-=======
-    x: 1271
-    y: 73
-    width: 648
-    height: 463
->>>>>>> parent of 41217f6 (Death Screen Done)
+    width: 485
+    height: 323
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -1868,11 +1710,7 @@ MonoBehaviour:
     m_ControlHash: 1412526313
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-<<<<<<< HEAD
   m_LastVerticalScrollValue: 0
-=======
-  m_LastVerticalScrollValue: 1188
->>>>>>> parent of 41217f6 (Death Screen Done)
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
@@ -1923,33 +1761,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
     x: 0
-<<<<<<< HEAD
-    y: 483
-    width: 683
-    height: 464
-  m_MinSize: {x: 231, y: 271}
-  m_MaxSize: {x: 10001, y: 10021}
-  m_ActualView: {fileID: 20}
-=======
-    y: 484
-    width: 649
-    height: 463
-  m_MinSize: {x: 101, y: 121}
-  m_MaxSize: {x: 4001, y: 4021}
+    y: 344
+    width: 486
+    height: 331
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
->>>>>>> parent of 41217f6 (Death Screen Done)
   m_Panes:
   - {fileID: 19}
   - {fileID: 20}
   - {fileID: 21}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &19
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1970,17 +1799,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1237
-    y: 556
-    width: 682
-    height: 443
-=======
-    x: 1271
-    y: 557
-    width: 648
-    height: 442
->>>>>>> parent of 41217f6 (Death Screen Done)
+    x: 880
+    y: 417
+    width: 485
+    height: 310
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -2005,17 +1827,10 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-<<<<<<< HEAD
-    x: 1237
-    y: 556
-    width: 682
-    height: 443
-=======
-    x: 1271
-    y: 557
-    width: 648
-    height: 442
->>>>>>> parent of 41217f6 (Death Screen Done)
+    x: 960
+    y: 417
+    width: 405
+    height: 310
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -2031,41 +1846,24 @@ MonoBehaviour:
     m_SceneHandles: 
     m_ShowAllHits: 0
     m_SkipHidden: 0
-    m_SearchArea: 0
+    m_SearchArea: 1
     m_Folders:
-<<<<<<< HEAD
-    - Assets/Sprites/UI/PauseMenu
-=======
-    - Assets
->>>>>>> parent of 41217f6 (Death Screen Done)
+    - Assets/Prefabs
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-<<<<<<< HEAD
-  - Assets/Sprites/UI/PauseMenu
+  - Assets/Prefabs
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: E:\Games Projects\AspectOfLight-Repository\AspectOfLight
+  m_LastProjectPath: C:\Users\aeal\Documents\GitHub\AspectOfLight-Repository\AspectOfLight
   m_LockTracker:
     m_IsLocked: 1
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 233}
-    m_SelectedIDs: 58500100
-    m_LastClickedID: 86104
-    m_ExpandedIDs: 00000000fa810000fc810000fe81000000820000028200000482000006820000088200000a8200000c82000050820000c8a6000000ca9a3b
-=======
-  - Assets
-  m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\12prog\Desktop\AspectOfLight-Repository\AspectOfLight
-  m_LockTracker:
-    m_IsLocked: 1
-  m_FolderTreeState:
-    scrollPos: {x: 0, y: 31}
-    m_SelectedIDs: c2800000
-    m_LastClickedID: 32962
-    m_ExpandedIDs: 00000000f6810000f8810000fa810000fc810000fe81000000820000028200000482000006820000088200000a82000000ca9a3b
->>>>>>> parent of 41217f6 (Death Screen Done)
+    scrollPos: {x: 0, y: 88.99884}
+    m_SelectedIDs: 0c7c0000
+    m_LastClickedID: 31756
+    m_ExpandedIDs: 00000000288200002a82000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2093,11 +1891,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-<<<<<<< HEAD
-    m_ExpandedIDs: 00000000fa810000fc810000fe81000000820000028200000482000006820000088200000a8200000c82000000ca9a3b
-=======
-    m_ExpandedIDs: 00000000f6810000f8810000fa810000fc810000fe81000000820000028200000482000006820000088200000a82000000ca9a3b
->>>>>>> parent of 41217f6 (Death Screen Done)
+    m_ExpandedIDs: 00000000288200002a82000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2122,15 +1916,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-<<<<<<< HEAD
-    m_SelectedInstanceIDs: 44d60300
-    m_LastClickedInstanceID: 251460
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-=======
-    m_SelectedInstanceIDs: bcf70100
-    m_LastClickedInstanceID: 128956
-    m_HadKeyboardFocusLastEvent: 0
->>>>>>> parent of 41217f6 (Death Screen Done)
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -2276,9 +2064,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: ddbc517f23cf37044a6fcfe5fa1abd9a, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: cb35286729696ef4eb0cf51bcef1f331, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 4249067152240463894, guid: ddbc517f23cf37044a6fcfe5fa1abd9a, type: 2}
+  - m_Target: {fileID: 8184281910265471676, guid: cb35286729696ef4eb0cf51bcef1f331, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}

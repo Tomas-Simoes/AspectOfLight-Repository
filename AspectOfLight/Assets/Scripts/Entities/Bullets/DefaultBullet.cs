@@ -4,30 +4,30 @@ using UnityEngine;
 
 public class DefaultBullet : Bullet
 {
-    public override void Start()
-    {
-        base.Start();
-        rb.velocity = (GetMousePosition() - transform.position).normalized * speed;
+  public override void Start()
+  {
+    base.Start();
+    rb.velocity = (GetMousePosition() - transform.position).normalized * speed;
 
-        Destroy(this.gameObject, lifeTime);
+    Destroy(this.gameObject, lifeTime);
+  }
+
+  public override void Update()
+  {
+    base.Update();
+  }
+
+  void OnTriggerEnter2D(Collider2D other)
+  {
+    if (other.CompareTag(targatableTag))
+    {
+      other.GetComponent<Entity>().TakeDamage(damage);
+      Destroy(this.gameObject);
     }
 
-    public override void Update()
+    if (other.CompareTag("Wall"))
     {
-        base.Update();
+      Destroy(this.gameObject);
     }
-
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag(targatableTag))
-        {
-            other.GetComponent<Entity>().TakeDamage(damage);
-            Destroy(this.gameObject);
-        }
-
-        if (other.CompareTag("Wall"))
-        {
-            Destroy(this.gameObject);
-        }
-    }
+  }
 }

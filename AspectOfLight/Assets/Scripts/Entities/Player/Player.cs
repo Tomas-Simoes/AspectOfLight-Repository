@@ -4,173 +4,176 @@ using UnityEngine;
 
 public class Player : Entity
 {
-    public Player_MoveState moveState { get; private set; }
-    public Player_DashState dashState { get; private set; }
-    public Player_AttackState attackState { get; private set; }
+  public Player_MoveState moveState { get; private set; }
+  public Player_DashState dashState { get; private set; }
+  public Player_AttackState attackState { get; private set; }
 
-    [Header("States Data")]
-    [SerializeField]
-    private D_PlayerCoolDown coolDownData;
+  [Header("States Data")]
+  [SerializeField]
+  private D_PlayerCoolDown coolDownData;
 
-    [SerializeField]
-    private D_PlayerMoveState moveStateData;
+  [SerializeField]
+  private D_PlayerMoveState moveStateData;
 
-    [SerializeField]
-    private D_PlayerDashState dashStateData;
+  [SerializeField]
+  private D_PlayerDashState dashStateData;
 
-    [SerializeField]
-    private D_PlayerNecromancerState necromancerStateData;
+  [SerializeField]
+  private D_PlayerNecromancerState necromancerStateData;
 
-    [SerializeField]
-    private D_PlayerAttackState attackStateData;
+  [SerializeField]
+  private D_PlayerAttackState attackStateData;
 
-    [Header("Cooldowns")]
-    public float timeSinceAttack;
-    public float timeSinceDash;
-    public float timeSinceAbilityOne;
-    public float timeSinceAbilityTwo;
-    public float timeSinceAbilityThree;
+  [Header("Cooldowns")]
+  public float timeSinceAttack;
+  public float timeSinceDash;
+  public float timeSinceAbilityOne;
+  public float timeSinceAbilityTwo;
+  public float timeSinceAbilityThree;
 
-    [Header("Information")]
-    public Vector2 axisMovement;
+  [Header("Information")]
+  public Vector2 axisMovement;
 
-    [SerializeField]
-    private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
+  [SerializeField]
+  private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
 
-    [Header("Abilities Information")]
-    public bool hasStamina;
+  [Header("Abilities Information")]
+  public bool hasStamina;
 
-    [SerializeField]
-    private int currentStamina;
+  [SerializeField]
+  private int currentStamina;
 
-    [SerializeField]
-    public AbilityManager abilityManager;
+  [SerializeField]
+  public AbilityManager abilityManager;
 
-    public GameObject[] plagueSpawnPoints;
+  public GameObject[] plagueSpawnPoints;
 
-    [SerializeField]
-    public GameObject bulletPrefab;
+  [SerializeField]
+  public GameObject bulletPrefab;
 
-    [SerializeField]
-    public GameObject bulletsParent;
+  [SerializeField]
+  public GameObject bulletsParent;
 
-    [SerializeField]
-    public GameObject attackPosition;
+  [SerializeField]
+  public GameObject attackPosition;
 
-    public InputHandler inputHandler { get; private set; }
+  public GameObject DeathScreen; //X
 
-    public override void Start()
+  public InputHandler inputHandler { get; private set; }
+
+  public override void Start()
+  {
+    base.Start();
+    currentHealth = entityData.MAX_HEALTH;
+    timeSinceDash = coolDownData.dashCD;
+    currentStamina = entityData.MAX_STAMINA;
+
+    if (inputHandler == null)
     {
-        base.Start();
-        currentHealth = entityData.MAX_HEALTH;
-        timeSinceDash = coolDownData.dashCD;
-        currentStamina = entityData.MAX_STAMINA;
-
-        if (inputHandler == null)
-        {
-            inputHandler = this.GetComponent<InputHandler>();
-        }
-
-        moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
-        dashState = new Player_DashState(
-            this,
-            stateMachine,
-            "dash",
-            dashStateData,
-            this,
-            coolDownData
-        );
-
-        attackState = new Player_AttackState(
-            this,
-            stateMachine,
-            "attack",
-            attackStateData,
-            this,
-            coolDownData
-        );
-
-        abilityManager.InitAbilities();
-        stateMachine.Init(moveState);
+      inputHandler = this.GetComponent<InputHandler>();
     }
 
-    public override void Update()
+    moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
+    dashState = new Player_DashState(
+        this,
+        stateMachine,
+        "dash",
+        dashStateData,
+        this,
+        coolDownData
+    );
+
+    attackState = new Player_AttackState(
+        this,
+        stateMachine,
+        "attack",
+        attackStateData,
+        this,
+        coolDownData
+    );
+
+    abilityManager.InitAbilities();
+    stateMachine.Init(moveState);
+  }
+
+  public override void Update()
+  {
+    base.Update();
+    GetInputs();
+
+    Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+
+    //Check "Direction" (dir), and the flips.
+    if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
     {
-        base.Update();
-        GetInputs();
+      CheckForFlipping();
+    }
+  }
 
-        Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+  public override void UpdateCooldowns()
+  {
+    base.UpdateCooldowns();
 
-        //Check "Direction" (dir), and the flips.
-        if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
-        {
-            CheckForFlipping();
-        }
+    timeSinceDash += Time.deltaTime;
+
+    timeSinceAbilityOne += Time.deltaTime;
+    timeSinceAbilityTwo += Time.deltaTime;
+    timeSinceAbilityThree += Time.deltaTime;
+
+    timeSinceAttack += Time.deltaTime;
+  }
+
+  private void GetInputs()
+  {
+    axisMovement.x = inputHandler.xAxis;
+    axisMovement.y = inputHandler.yAxis;
+
+    if (inputHandler.pressedDash && timeSinceDash >= coolDownData.dashCD)
+    {
+      stateMachine.ChangeState(dashState);
     }
 
-    public override void UpdateCooldowns()
+    if (inputHandler.pressedAbilityOne)
     {
-        base.UpdateCooldowns();
-
-        timeSinceDash += Time.deltaTime;
-
-        timeSinceAbilityOne += Time.deltaTime;
-        timeSinceAbilityTwo += Time.deltaTime;
-        timeSinceAbilityThree += Time.deltaTime;
-
-        timeSinceAttack += Time.deltaTime;
+      abilityManager.CastAbility(1, timeSinceAbilityOne);
     }
 
-    private void GetInputs()
+    if (inputHandler.pressedAbilityTwo)
     {
-        axisMovement.x = inputHandler.xAxis;
-        axisMovement.y = inputHandler.yAxis;
-
-        if (inputHandler.pressedDash && timeSinceDash >= coolDownData.dashCD)
-        {
-            stateMachine.ChangeState(dashState);
-        }
-
-        if (inputHandler.pressedAbilityOne)
-        {
-            abilityManager.CastAbility(1, timeSinceAbilityOne);
-        }
-
-        if (inputHandler.pressedAbilityTwo)
-        {
-            abilityManager.CastAbility(2, timeSinceAbilityTwo);
-        }
-
-        if (inputHandler.pressedAbilityThree)
-        {
-            abilityManager.CastAbility(3, timeSinceAbilityThree);
-        }
-
-        if (
-            inputHandler.pressingAttack
-            && timeSinceAttack >= coolDownData.attackCD
-            && stateMachine.currentState != attackState
-        )
-        {
-            stateMachine.ChangeState(attackState);
-        }
+      abilityManager.CastAbility(2, timeSinceAbilityTwo);
     }
 
-    public override void Die()
+    if (inputHandler.pressedAbilityThree)
     {
-        base.Die();
+      abilityManager.CastAbility(3, timeSinceAbilityThree);
     }
 
-    private void CheckForFlipping()
+    if (
+        inputHandler.pressingAttack
+        && timeSinceAttack >= coolDownData.attackCD
+        && stateMachine.currentState != attackState
+    )
     {
-        FacingRight = !FacingRight;
-        transform.Rotate(0f, 180f, 0f);
+      stateMachine.ChangeState(attackState);
     }
+  }
 
-    public void ReduceStamina(int stamina)
-    {
-        currentStamina -= stamina;
+  public override void Die()
+  {
+    base.Die();
+    DeathScreen.SetActive(true);
+  }
 
-        hasStamina = currentStamina <= 0 ? false : true;
-    }
+  private void CheckForFlipping()
+  {
+    FacingRight = !FacingRight;
+    transform.Rotate(0f, 180f, 0f);
+  }
+
+  public void ReduceStamina(int stamina)
+  {
+    currentStamina -= stamina;
+
+    hasStamina = currentStamina <= 0 ? false : true;
+  }
 }
