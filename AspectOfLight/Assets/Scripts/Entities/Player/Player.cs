@@ -120,7 +120,12 @@ public class Player : Entity
         axisMovement.x = inputHandler.xAxis;
         axisMovement.y = inputHandler.yAxis;
 
-        if (inputHandler.pressedDash && timeSinceDash >= coolDownData.dashCD)
+        bool _canDash =
+            inputHandler.pressedDash
+            && timeSinceDash >= coolDownData.dashCD
+            && HasStaminaToUse(dashStateData.staminaCost);
+
+        if (_canDash)
         {
             stateMachine.ChangeState(dashState);
         }
@@ -140,11 +145,13 @@ public class Player : Entity
             abilityManager.CastAbility(3, timeSinceAbilityThree);
         }
 
-        if (
+        bool _canAttack =
             inputHandler.pressingAttack
             && timeSinceAttack >= coolDownData.attackCD
             && stateMachine.currentState != attackState
-        )
+            && HasStaminaToUse(attackState.stateData.staminaCost);
+
+        if (_canAttack)
         {
             stateMachine.ChangeState(attackState);
         }
@@ -161,9 +168,14 @@ public class Player : Entity
         transform.Rotate(0f, 180f, 0f);
     }
 
-    public void ReduceStamina(int stamina)
+    public void ReduceStamina(float stamina)
     {
-        currentStamina -= stamina;
+        currentStamina -= (int)Mathf.Floor(stamina);
         Debug.Log(currentStamina);
+    }
+
+    public bool HasStaminaToUse(float staminaCost)
+    {
+        return currentStamina - staminaCost >= 0;
     }
 }
