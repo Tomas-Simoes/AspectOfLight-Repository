@@ -7,14 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1843742842366480042, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-      propertyPath: m_Color.g
-      value: 0.89084154
-      objectReference: {fileID: 0}
-    - target: {fileID: 1843742842366480042, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-      propertyPath: m_Color.r
-      value: 0.94509804
-      objectReference: {fileID: 0}
     - target: {fileID: 1843742842366480043, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -63,21 +55,28 @@ PrefabInstance:
       propertyPath: m_Name
       value: DefaultBullet
       objectReference: {fileID: 0}
-    - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-      propertyPath: speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-      propertyPath: damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-      propertyPath: lifeTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
-      propertyPath: targatableTag
-      value: Enemy
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4849115121996861085, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+--- !u!1 &4915393039249167469 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1843742842366480047, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+  m_PrefabInstance: {fileID: 6746587635360438978}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5606782483380442829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4915393039249167469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7da1ca5cc8f84344289f986fbc99fabf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 0, y: 0, z: 0}
+  speed: 3
+  damage: 2
+  lifeTime: 4
+  targatableTag: Enemy
