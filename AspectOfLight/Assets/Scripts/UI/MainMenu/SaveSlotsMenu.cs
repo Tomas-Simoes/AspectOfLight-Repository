@@ -40,7 +40,7 @@ public class SaveSlotsMenu : Menu
             DataPersistenceManager.instance.NewGame();
         }
         DataPersistenceManager.instance.SaveGame();
-        SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync("ExiledFlorest");
     }
 
     public void OnClearClicked(SaveSlot saveSlot)

@@ -1572,7 +1572,8 @@ PrefabInstance:
       propertyPath: useEncryption
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1475129004, guid: 78878186f56bca9449bebe08f5b72064, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 78878186f56bca9449bebe08f5b72064, type: 3}
 --- !u!224 &1391891215 stripped
 RectTransform:
