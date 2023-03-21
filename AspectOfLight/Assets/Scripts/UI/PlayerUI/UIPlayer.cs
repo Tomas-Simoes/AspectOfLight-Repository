@@ -16,11 +16,11 @@ public class UIPlayer : MonoBehaviour
     [Header("Others")]
     [SerializeField]
     private Player player;
-    private GameObject playerUIObject;
+    private GameObject inPlayerUIObject;
 
     void Start()
     {
-        playerUIObject = attackMask.transform.parent.gameObject;
+        inPlayerUIObject = attackMask.transform.parent.gameObject;
     }
 
     void Update()
@@ -30,7 +30,7 @@ public class UIPlayer : MonoBehaviour
         if (player.stateMachine.currentState == player.attackState)
             UpdateAttackBar();
         else
-            playerUIObject.SetActive(false);
+            inPlayerUIObject.SetActive(false);
     }
 
     void UpdateStaminaBar()
@@ -41,7 +41,7 @@ public class UIPlayer : MonoBehaviour
 
     void UpdateAttackBar()
     {
-        playerUIObject.SetActive(true);
+        inPlayerUIObject.SetActive(true);
 
         attackMask.fillAmount =
             (float)player.attackState.attackTime

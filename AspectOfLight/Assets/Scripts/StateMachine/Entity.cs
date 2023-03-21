@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour
     public D_Entity entityData;
 
     [SerializeField]
-    protected float currentHealth;
+    public float currentHealth;
     public int facingDirection;
 
     [Header("Entity Informations")]
