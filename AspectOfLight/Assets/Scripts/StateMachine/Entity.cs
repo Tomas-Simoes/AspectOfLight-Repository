@@ -131,10 +131,12 @@ public class Entity : MonoBehaviour
 
     public virtual void OnDrawGizmos()
     {
+        /*
         Gizmos.DrawLine(
             wallCheck.position,
             wallCheck.position
                 + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance)
         );
+        */
     }
 }
