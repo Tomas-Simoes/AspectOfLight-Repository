@@ -7,6 +7,11 @@ using TMPro;
 
 public class BossFightHandler : MonoBehaviour
 {
+    [Header("Boss Battle Information")]
+    [SerializeField]
+    private Entity boss;
+    private bool isFightStarted;
+
     [Header("Camera")]
     [SerializeField]
     private Animator cameraAnimator;
@@ -21,16 +26,16 @@ public class BossFightHandler : MonoBehaviour
     [SerializeField]
     private float fadeOutSeconds;
 
-    [Header("Barriers")]
+    [Header("Barrier")]
     [SerializeField]
     private GameObject backBarrier;
 
     [Header("UI Elements")]
-    private Image healthMask;
+    [SerializeField]
+    private GameObject bossArenaUI;
 
-    [Header("Others")]
-    private Entity boss;
-    private bool isFightStarted;
+    [SerializeField]
+    private Slider healthSlider;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -45,6 +50,7 @@ public class BossFightHandler : MonoBehaviour
     {
         isFightStarted = true;
 
+        bossArenaUI.SetActive(true);
         InitializeText();
 
         backBarrier.SetActive(true);
@@ -65,7 +71,7 @@ public class BossFightHandler : MonoBehaviour
 
     private void UpdateBossHealthBar()
     {
-        healthMask.fillAmount = (float)boss.currentHealth / (float)boss.entityData.MAX_HEALTH;
+        healthSlider.value = (float)boss.currentHealth / (float)boss.entityData.MAX_HEALTH;
     }
 
     IEnumerator FadeOutAfterSeconds(float time)
