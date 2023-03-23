@@ -23,6 +23,7 @@ public class Thornborne : Enemy
 
     [Header("Cooldowns")]
     public float timeSinceUGAttack;
+    public float timeSinceUGTeleport;
 
     [Header("Abilities Information")]
     public GameObject ugAttackExplosion;

@@ -34,13 +34,17 @@ public class Thornborne_UGAttackState : State
 
         enemy.rb.velocity = Vector2.zero;
 
+        enemy.canTakeDamage = false;
         timeSincePreviousWave = stateData.ugAttackTickRate;
+
         _animationTime = 0;
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        enemy.canTakeDamage = true;
         enemy.timeSinceUGAttack = 0;
     }
 
@@ -76,10 +80,35 @@ public class Thornborne_UGAttackState : State
     public void SpawnNewWave()
     {
         List<Vector2> _availableReferencePoints = new List<Vector2>(referencePoints);
+        for (int i = 0; i < _availableReferencePoints.Count; i++)
+        {
+            bool _isReferencePointToClose =
+                Vector2.Distance(enemy.transform.position, _availableReferencePoints[i]) <= 3;
+
+            if (_isReferencePointToClose)
+                _availableReferencePoints.RemoveAt(i);
+        }
+
+        Vector2 _closestReferencePoint = _availableReferencePoints[0];
+        for (int i = 1; i < _availableReferencePoints.Count; i++)
+        {
+            float _currentReferencePointDistance = Vector2.Distance(
+                enemy.playerReference.transform.position,
+                _availableReferencePoints[i]
+            );
+
+            float _closestReferencePointDistance = Vector2.Distance(
+                enemy.playerReference.transform.position,
+                _closestReferencePoint
+            );
+
+            if (_currentReferencePointDistance < _closestReferencePointDistance)
+                _closestReferencePoint = _availableReferencePoints[i];
+        }
 
         for (int i = 0; i < stateData.explosionCount; i++)
         {
-            int _referencePointIndex = GetRandomPositionIndex(_availableReferencePoints);
+            int _referencePointIndex = Random.Range(0, _availableReferencePoints.Count - 1);
 
             entity.CreatePrefab(
                 enemy.ugAttackExplosion,
@@ -89,10 +118,17 @@ public class Thornborne_UGAttackState : State
 
             _availableReferencePoints.RemoveAt(_referencePointIndex);
         }
-    }
 
-    public int GetRandomPositionIndex(List<Vector2> referencePoints)
-    {
-        return Random.Range(0, referencePoints.Count - 1);
+        entity.CreatePrefab(
+            enemy.ugAttackExplosion,
+            enemy.playerReference.transform.position,
+            enemy.ugAttackExplosionParent
+        );
+
+        entity.CreatePrefab(
+            enemy.ugAttackExplosion,
+            _closestReferencePoint,
+            enemy.ugAttackExplosionParent
+        );
     }
 }

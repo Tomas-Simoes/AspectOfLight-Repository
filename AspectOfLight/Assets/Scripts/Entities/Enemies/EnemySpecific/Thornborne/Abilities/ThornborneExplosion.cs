@@ -8,6 +8,8 @@ public class ThornborneExplosion : MonoBehaviour
 
 
     [Header("Explosion Information")]
+    private bool hasAlreadyHitted = false;
+
     [SerializeField]
     private float explosionDamage;
     private float _animationTime = 0;
@@ -26,9 +28,10 @@ public class ThornborneExplosion : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasAlreadyHitted)
         {
             other.GetComponent<Entity>().TakeDamage(explosionDamage);
+            hasAlreadyHitted = true;
         }
     }
 }
