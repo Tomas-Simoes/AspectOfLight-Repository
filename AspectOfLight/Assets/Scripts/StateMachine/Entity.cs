@@ -105,9 +105,9 @@ public class Entity : MonoBehaviour
         GameObject _newGameObject = Instantiate(
             prefabToSpawn,
             spawnPointPosition,
-            Quaternion.identity
+            Quaternion.identity,
+            parent.transform
         );
-        _newGameObject.transform.parent = parent.transform;
 
         return _newGameObject;
     }

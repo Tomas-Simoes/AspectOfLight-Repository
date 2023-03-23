@@ -11,6 +11,7 @@ public class Thornborne_UGAttackState : State
 
     [Header("State Information")]
     private float timeSincePreviousWave;
+    public List<Vector2> referencePoints;
 
     float _animationTime = 0;
 
@@ -40,6 +41,7 @@ public class Thornborne_UGAttackState : State
     public override void Exit()
     {
         base.Exit();
+        enemy.timeSinceUGAttack = 0;
     }
 
     public override void LogicUpdate()
@@ -48,20 +50,21 @@ public class Thornborne_UGAttackState : State
         //float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
         _animationTime += Time.deltaTime;
 
-        Debug.Log(_animationTime);
-        Debug.Log(_animationTime + Time.deltaTime);
         if (_animationTime >= 1) //TODO put the right value to when it's grounded
         {
             timeSincePreviousWave += Time.deltaTime;
 
-            Debug.Log(timeSincePreviousWave);
             if (timeSincePreviousWave >= stateData.ugAttackTickRate)
             {
-                Debug.Log("Spawning new wave");
                 timeSincePreviousWave = 0;
 
                 SpawnNewWave();
             }
+        }
+
+        if (_animationTime >= 15)
+        {
+            stateMachine.ChangeState(enemy.chaseState);
         }
     }
 
@@ -72,7 +75,7 @@ public class Thornborne_UGAttackState : State
 
     public void SpawnNewWave()
     {
-        List<Vector2> _availableReferencePoints = enemy.ugAttackReferencePoints;
+        List<Vector2> _availableReferencePoints = new List<Vector2>(referencePoints);
 
         for (int i = 0; i < stateData.explosionCount; i++)
         {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Thornborne : Enemy
 {
@@ -23,12 +24,13 @@ public class Thornborne : Enemy
     [Header("Abilities Information")]
     public GameObject ugAttackExplosion;
     public GameObject ugAttackExplosionParent;
-    public List<Vector2> ugAttackReferencePoints;
+
+    [SerializeField]
+    private Transform ugAttackReferencePointsParent;
 
     public override void Start()
     {
         base.Start();
-        InitCooldowns();
 
         chaseState = new Thornborne_ChaseState(this, stateMachine, "move", chaseStateData, this);
         ugAttackState = new Thornborne_UGAttackState(
@@ -40,6 +42,9 @@ public class Thornborne : Enemy
         );
 
         stateMachine.Init(chaseState);
+
+        InitCooldowns();
+        InitReferencePoints();
     }
 
     public override void Update()
@@ -54,6 +59,7 @@ public class Thornborne : Enemy
     {
         bool _canUGAttack =
             timeSinceUGAttack >= cooldownData.ugAttackCD
+            && stateMachine.currentState != ugAttackState
             && Vector2.Distance(transform.position, playerReference.transform.position)
                 <= ugAttackStateData.ugAttackRange;
 
@@ -77,6 +83,17 @@ public class Thornborne : Enemy
     public void InitCooldowns()
     {
         timeSinceUGAttack = cooldownData.ugAttackCD;
+    }
+
+    public void InitReferencePoints()
+    {
+        List<Transform> _ugAttackReferencePointsList = ugAttackReferencePointsParent
+            .Cast<Transform>()
+            .ToList();
+
+        ugAttackState.referencePoints = _ugAttackReferencePointsList.ConvertAll(
+            referencePoint => new Vector2(referencePoint.position.x, referencePoint.position.y)
+        );
     }
 
     public override void OnDrawGizmos()
