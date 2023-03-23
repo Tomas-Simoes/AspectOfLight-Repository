@@ -18,6 +18,9 @@ public class Thornborne : Enemy
     [SerializeField]
     private D_ThornborneCooldown cooldownData;
 
+    [Header("Thornborne Information")]
+    public bool canTakeDamage;
+
     [Header("Cooldowns")]
     public float timeSinceUGAttack;
 
@@ -61,7 +64,7 @@ public class Thornborne : Enemy
             timeSinceUGAttack >= cooldownData.ugAttackCD
             && stateMachine.currentState != ugAttackState
             && Vector2.Distance(transform.position, playerReference.transform.position)
-                <= ugAttackStateData.ugAttackRange;
+                >= ugAttackStateData.ugAttackRange;
 
         if (_canUGAttack)
         {
@@ -78,6 +81,12 @@ public class Thornborne : Enemy
     {
         base.UpdateCooldowns();
         timeSinceUGAttack += Time.deltaTime;
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        if (canTakeDamage)
+            base.TakeDamage(damage);
     }
 
     public void InitCooldowns()

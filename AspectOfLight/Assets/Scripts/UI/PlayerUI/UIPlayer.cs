@@ -7,7 +7,11 @@ public class UIPlayer : MonoBehaviour
 {
     [Header("Stamina Bar")]
     [SerializeField]
-    private Image staminaMask;
+    private Slider staminaSlider;
+
+    [Header("Health Bar")]
+    [SerializeField]
+    private Slider healthSlider;
 
     [Header("Attack Bar")]
     [SerializeField]
@@ -26,6 +30,7 @@ public class UIPlayer : MonoBehaviour
     void Update()
     {
         UpdateStaminaBar();
+        UpdateHealthBar();
 
         if (player.stateMachine.currentState == player.attackState)
             UpdateAttackBar();
@@ -35,8 +40,12 @@ public class UIPlayer : MonoBehaviour
 
     void UpdateStaminaBar()
     {
-        staminaMask.fillAmount =
-            (float)player.currentStamina / (float)player.entityData.MAX_STAMINA;
+        staminaSlider.value = (float)player.currentStamina / (float)player.entityData.MAX_STAMINA;
+    }
+
+    void UpdateHealthBar()
+    {
+        healthSlider.value = (float)player.currentHealth / (float)player.entityData.MAX_HEALTH;
     }
 
     void UpdateAttackBar()

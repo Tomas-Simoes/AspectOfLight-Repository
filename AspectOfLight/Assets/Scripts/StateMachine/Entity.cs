@@ -79,7 +79,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         StartCoroutine(VisualIndicator(Color.red));
         currentHealth -= damage;

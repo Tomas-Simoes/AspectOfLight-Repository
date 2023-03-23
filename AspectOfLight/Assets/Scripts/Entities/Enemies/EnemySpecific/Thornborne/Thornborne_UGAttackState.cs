@@ -62,7 +62,7 @@ public class Thornborne_UGAttackState : State
             }
         }
 
-        if (_animationTime >= 15)
+        if (_animationTime >= 10)
         {
             stateMachine.ChangeState(enemy.chaseState);
         }
@@ -93,6 +93,6 @@ public class Thornborne_UGAttackState : State
 
     public int GetRandomPositionIndex(List<Vector2> referencePoints)
     {
-        return Random.Range(0, referencePoints.Count);
+        return Random.Range(0, referencePoints.Count - 1);
     }
 }

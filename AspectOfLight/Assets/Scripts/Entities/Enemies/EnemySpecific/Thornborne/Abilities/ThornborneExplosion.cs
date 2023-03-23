@@ -8,7 +8,9 @@ public class ThornborneExplosion : MonoBehaviour
 
 
     [Header("Explosion Information")]
-    float _animationTime = 0;
+    [SerializeField]
+    private float explosionDamage;
+    private float _animationTime = 0;
 
     void Start() { }
 
@@ -20,5 +22,13 @@ public class ThornborneExplosion : MonoBehaviour
     void Die()
     {
         Destroy(this.gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            other.GetComponent<Entity>().TakeDamage(explosionDamage);
+        }
     }
 }
