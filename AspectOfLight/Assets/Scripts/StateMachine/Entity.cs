@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour
     public D_Entity entityData;
 
     [SerializeField]
-    protected float currentHealth;
+    public float currentHealth;
     public int facingDirection;
 
     [Header("Entity Informations")]
@@ -79,7 +79,7 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
         StartCoroutine(VisualIndicator(Color.red));
         currentHealth -= damage;
@@ -105,9 +105,9 @@ public class Entity : MonoBehaviour
         GameObject _newGameObject = Instantiate(
             prefabToSpawn,
             spawnPointPosition,
-            Quaternion.identity
+            Quaternion.identity,
+            parent.transform
         );
-        _newGameObject.transform.parent = parent.transform;
 
         return _newGameObject;
     }
@@ -131,10 +131,12 @@ public class Entity : MonoBehaviour
 
     public virtual void OnDrawGizmos()
     {
+        /*
         Gizmos.DrawLine(
             wallCheck.position,
             wallCheck.position
                 + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance)
         );
+        */
     }
 }

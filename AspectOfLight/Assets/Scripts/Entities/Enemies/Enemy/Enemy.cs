@@ -12,6 +12,8 @@ public class Enemy : Entity
 
     [Header("Informations")]
     public GameObject playerReference;
+
+    [Space(5)]
     public bool goTowardsOtherPatrolPoint; //TODO change this to EnemyPatrolState
     public GameObject[] patrolPoints;
 

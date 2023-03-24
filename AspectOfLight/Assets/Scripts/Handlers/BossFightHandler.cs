@@ -2,10 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BossFightHandler : MonoBehaviour
 {
+    [Header("Boss Battle Information")]
+    [SerializeField]
+    private Entity boss;
+    private bool isFightStarted;
+
     [Header("Camera")]
     [SerializeField]
     private Animator cameraAnimator;
@@ -20,12 +26,16 @@ public class BossFightHandler : MonoBehaviour
     [SerializeField]
     private float fadeOutSeconds;
 
-    [Header("Barriers")]
+    [Header("Barrier")]
     [SerializeField]
     private GameObject backBarrier;
 
-    [Header("Others")]
-    private bool isFightStarted;
+    [Header("UI Elements")]
+    [SerializeField]
+    private GameObject bossArenaUI;
+
+    [SerializeField]
+    private Slider healthSlider;
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -40,17 +50,15 @@ public class BossFightHandler : MonoBehaviour
     {
         isFightStarted = true;
 
+        bossArenaUI.SetActive(true);
         InitializeText();
 
         backBarrier.SetActive(true);
     }
 
-    IEnumerator FadeOutAfterSeconds(float time)
+    private void Update()
     {
-        yield return new WaitForSeconds(time);
-
-        bossNameAnim.SetBool("fadeIn", false);
-        bossNameAnim.SetBool("fadeOut", true);
+        UpdateBossHealthBar();
     }
 
     private void InitializeText()
@@ -59,5 +67,18 @@ public class BossFightHandler : MonoBehaviour
         bossNameAnim.SetBool("fadeIn", true);
 
         StartCoroutine(FadeOutAfterSeconds(fadeOutSeconds));
+    }
+
+    private void UpdateBossHealthBar()
+    {
+        healthSlider.value = (float)boss.currentHealth / (float)boss.entityData.MAX_HEALTH;
+    }
+
+    IEnumerator FadeOutAfterSeconds(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        bossNameAnim.SetBool("fadeIn", false);
+        bossNameAnim.SetBool("fadeOut", true);
     }
 }
