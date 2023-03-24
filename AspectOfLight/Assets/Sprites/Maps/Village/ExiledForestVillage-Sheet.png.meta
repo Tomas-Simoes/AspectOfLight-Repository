@@ -1,0 +1,1552 @@
+fileFormatVersion: 2
+guid: aeec754237a03f74485b7bc49dcddf27
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_5
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 590
+        width: 126
+        height: 102
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fdd962ba9c56cb24090cf28ef8036f63
+      internalID: 1060139861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_38
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 591
+        width: 159
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dafe8e14629ee24792eb1dcde7b2d3e
+      internalID: -1824166579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_52
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 463
+        width: 159
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9800b9ad985bcd24186009d93460b525
+      internalID: -1266061782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 559
+        y: 502
+        width: 258
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e86bfc42f15ce6545a849c29481be967
+      internalID: -462656012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_105
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 464
+        width: 125
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbf07b02391bf0b40b3f87c15516ff6a
+      internalID: -617519867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_109
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 336
+        width: 96
+        height: 160
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68b1f7bf75194c442972ddc10dfe6c2b
+      internalID: -1006483525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_112
+      rect:
+        serializedVersion: 2
+        x: 295
+        y: 373
+        width: 114
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a869741d27082249a3608b4d6b664ee
+      internalID: -661460239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_169
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 217
+        width: 91
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 019966c75089c1743bcc88fb9e100091
+      internalID: 1078802579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_172
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 219
+        width: 90
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef21029a17a1dc541996238f59279e1b
+      internalID: 1364233447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_173
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 208
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80f1e3b38bce28d499615a6c30054406
+      internalID: -634257162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_175
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 150
+        width: 111
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b67d23b6247fab488a6e2734d52ad59
+      internalID: 1121522110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_186
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 176
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf0360286d603644b8feae417d703a35
+      internalID: 1390025810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_187
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 176
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20577266dc6bf1648b0feb1cc4f9aa99
+      internalID: 588983675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_188
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 176
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e82456e38b930b41b2b00b45a8b4c4a
+      internalID: -805577628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_197
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 144
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d3a2e9abb111e949b5c3758a48dbba9
+      internalID: 1314468641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_199
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 144
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6c7cb62ff2864a4f85144df89289999
+      internalID: -1293947867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_200
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 144
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83f077131ed6c5a488976e6ca5e30403
+      internalID: -1723805997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_201
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 144
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a7dfb5360da0e8409e901ce5c80db89
+      internalID: 1166548336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_202
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 144
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60e042c5f15e8794b9a0bd434808e876
+      internalID: -1197520182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_206
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 143
+        width: 96
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7fa2aa44f5eb1ac4583bb5bb50f67144
+      internalID: -1987479992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_209
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 112
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 019ce0e9c780f9346b03ecb2fb7d3d2a
+      internalID: -1820337859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_215
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 112
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5548f1d01799e741aa85262c29c54c0
+      internalID: 692628453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_216
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 112
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66517acc867f0864c91af9da2644115c
+      internalID: 1435818120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_217
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 112
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd21cdb38c455a44295388f748f09e83
+      internalID: 1237278241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_219
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 80
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c1e82036eb498f4a8f6a5896a01aa7e
+      internalID: -1754813889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_220
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 80
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 101cb891def2e0f4e90abdce87359dad
+      internalID: -2080169186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_221
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 80
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f873aaf73ab0d2149a71dd690afa7d2b
+      internalID: -317103467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_222
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 80
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 388d3fcae1f7c654cb7c35f85e8c01ae
+      internalID: -245014688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_223
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 80
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1331978d6cc61f94593b09ce17c7200d
+      internalID: -8488813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_224
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 80
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6e06d7ac2cc42d84387cdce89529c4ef
+      internalID: -823516886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_226
+      rect:
+        serializedVersion: 2
+        x: 416
+        y: 48
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d174954dd70d6a94d88aa3484bb9e24b
+      internalID: -2012335919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_227
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 80
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d56db97f8d434842911a6797b36bc2c
+      internalID: 1008320501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_228
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 80
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d87cb06103ec21541b18e10997322549
+      internalID: 618831901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_229
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 80
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b4c371d15b20f347954dc80fc880d8b
+      internalID: 341179786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_230
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 80
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aea776953ed3b44e836a3f583323477
+      internalID: 798162707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_231
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e936211758dce742bb53e54d951d6d3
+      internalID: 1928018753
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_232
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2d349e94cf46d341bb15d80bb9ab1d2
+      internalID: -1324129277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_233
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 315e4796fd56d0f4494608f2a0dea990
+      internalID: -396055706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_234
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 031ff6ee630b83c44bf8d7597cf82875
+      internalID: 2009284149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_235
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1133e26403567349902294ebfd08144
+      internalID: -1101238415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_236
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4428804b8f9b25340ab60cc59761452c
+      internalID: -181676555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_237
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76eafccfef543144092099a6775d3262
+      internalID: -896946006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_238
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24702a4de52ddf04dac1fb3c343faaa2
+      internalID: -759486202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_239
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 48
+        width: 32
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 335eee992b0116a489b14bb149773d9b
+      internalID: -469313487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_241
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 48
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9dc58d80d44c17d4abcfcd414976600f
+      internalID: 2147240958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_242
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af6cf9a7c2ac2a1458bf80d0da79fcf8
+      internalID: -1977484918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_243
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b33cc73261e7534c89f804c298b99a3
+      internalID: 1765816678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_244
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8f71210f5038184287b7943afb65ded
+      internalID: -2045882363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_245
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c583b7ed35cb6f34eb9fda393287e909
+      internalID: 1153182154
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_246
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b628401574114c24ab964e8dac6e2aeb
+      internalID: 1429701184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_247
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef82831a1f43a9d438954dbd0ca4f8f3
+      internalID: -1360642616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_248
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84fc27b9a8236474da2ea9afc5e7b20c
+      internalID: -1452425225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_249
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ee19f5e155d994ca5de3c192ed5404
+      internalID: -351572980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_250
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2331a91f6d28d674da67dcf93951e51d
+      internalID: -273123810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_251
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24d871a13b4610444aa59fd421c3c5ec
+      internalID: 740275119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ExiledForestVillage-Sheet_252
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 16
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a4c2445b0f864b4997da50613f3d8a3
+      internalID: -289338217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      ExiledForestVillage-Sheet_237: -896946006
+      ExiledForestVillage-Sheet_211: -1206505178
+      ExiledForestVillage-Sheet_185: 1200237641
+      ExiledForestVillage-Sheet_136: -1559133240
+      ExiledForestVillage-Sheet_56: -757487956
+      ExiledForestVillage-Sheet_55: -85185515
+      ExiledForestVillage-Sheet_157: -1582703244
+      ExiledForestVillage-Sheet_132: 1253635866
+      ExiledForestVillage-Sheet_45: 1610086857
+      ExiledForestVillage-Sheet_40: 1643072455
+      ExiledForestVillage-Sheet_34: 955902366
+      ExiledForestVillage-Sheet_143: 686341816
+      ExiledForestVillage-Sheet_203: 45120531
+      ExiledForestVillage-Sheet_3: 2077012336
+      ExiledForestVillage-Sheet_243: 1765816678
+      ExiledForestVillage-Sheet_247: -1360642616
+      ExiledForestVillage-Sheet_87: 1566562903
+      ExiledForestVillage-Sheet_110: -1444008784
+      ExiledForestVillage-Sheet_168: -873348739
+      ExiledForestVillage-Sheet_96: 1580394400
+      ExiledForestVillage-Sheet_146: -1923049305
+      ExiledForestVillage-Sheet_92: -1548847655
+      ExiledForestVillage-Sheet_15: 1212598986
+      ExiledForestVillage-Sheet_36: -250223160
+      ExiledForestVillage-Sheet_42: 1025431771
+      ExiledForestVillage-Sheet_26: -1846844175
+      ExiledForestVillage-Sheet_236: -181676555
+      ExiledForestVillage-Sheet_201: 1166548336
+      ExiledForestVillage-Sheet_144: 1835447785
+      ExiledForestVillage-Sheet_190: 1658962169
+      ExiledForestVillage-Sheet_193: 800014274
+      ExiledForestVillage-Sheet_244: -2045882363
+      ExiledForestVillage-Sheet_163: -2005085626
+      ExiledForestVillage-Sheet_11: 1503055816
+      ExiledForestVillage-Sheet_38: -1824166579
+      ExiledForestVillage-Sheet_61: 1514673042
+      ExiledForestVillage-Sheet_135: -1930116339
+      ExiledForestVillage-Sheet_148: 208932866
+      ExiledForestVillage-Sheet_181: -623758241
+      ExiledForestVillage-Sheet_120: 1912647548
+      ExiledForestVillage-Sheet_128: 1164232653
+      ExiledForestVillage-Sheet_104: -847267982
+      ExiledForestVillage-Sheet_217: 1237278241
+      ExiledForestVillage-Sheet_46: 246256414
+      ExiledForestVillage-Sheet_53: -1876257469
+      ExiledForestVillage-Sheet_235: -1101238415
+      ExiledForestVillage-Sheet_75: -1833402346
+      ExiledForestVillage-Sheet_113: 491042878
+      ExiledForestVillage-Sheet_90: -533030603
+      ExiledForestVillage-Sheet_32: 1930647797
+      ExiledForestVillage-Sheet_33: 517624435
+      ExiledForestVillage-Sheet_63: -520789235
+      ExiledForestVillage-Sheet_111: 1733310999
+      ExiledForestVillage-Sheet_105: -617519867
+      ExiledForestVillage-Sheet_216: 1435818120
+      ExiledForestVillage-Sheet_115: 1899851854
+      ExiledForestVillage-Sheet_93: -951695417
+      ExiledForestVillage-Sheet_126: -1515735517
+      ExiledForestVillage-Sheet_205: -708557213
+      ExiledForestVillage-Sheet_68: 1710577101
+      ExiledForestVillage-Sheet_123: 1175881926
+      ExiledForestVillage-Sheet_182: 1092820071
+      ExiledForestVillage-Sheet_117: -1929592997
+      ExiledForestVillage-Sheet_138: 170965361
+      ExiledForestVillage-Sheet_229: 341179786
+      ExiledForestVillage-Sheet_141: -1928467014
+      ExiledForestVillage-Sheet_234: 2009284149
+      ExiledForestVillage-Sheet_226: -2012335919
+      ExiledForestVillage-Sheet_142: 124998927
+      ExiledForestVillage-Sheet_164: -2147268745
+      ExiledForestVillage-Sheet_91: -1319371001
+      ExiledForestVillage-Sheet_213: -1679342481
+      ExiledForestVillage-Sheet_218: 1674728221
+      ExiledForestVillage-Sheet_202: -1197520182
+      ExiledForestVillage-Sheet_204: 1862139263
+      ExiledForestVillage-Sheet_121: -1940074557
+      ExiledForestVillage-Sheet_240: 895761939
+      ExiledForestVillage-Sheet_69: -1989069789
+      ExiledForestVillage-Sheet_151: 151477765
+      ExiledForestVillage-Sheet_195: -812825453
+      ExiledForestVillage-Sheet_12: -303187004
+      ExiledForestVillage-Sheet_85: 1036377173
+      ExiledForestVillage-Sheet_62: -293126279
+      ExiledForestVillage-Sheet_166: -1238450655
+      ExiledForestVillage-Sheet_188: -805577628
+      ExiledForestVillage-Sheet_107: 614195060
+      ExiledForestVillage-Sheet_79: -1513448665
+      ExiledForestVillage-Sheet_178: -1916534987
+      ExiledForestVillage-Sheet_18: -1660514472
+      ExiledForestVillage-Sheet_97: -1663320344
+      ExiledForestVillage-Sheet_150: -507442920
+      ExiledForestVillage-Sheet_200: -1723805997
+      ExiledForestVillage-Sheet_78: -1261482930
+      ExiledForestVillage-Sheet_130: -1135755354
+      ExiledForestVillage-Sheet_153: -384289891
+      ExiledForestVillage-Sheet_9: 1903443994
+      ExiledForestVillage-Sheet_4: 1239731486
+      ExiledForestVillage-Sheet_173: -634257162
+      ExiledForestVillage-Sheet_108: 284691431
+      ExiledForestVillage-Sheet_70: 486889663
+      ExiledForestVillage-Sheet_220: -2080169186
+      ExiledForestVillage-Sheet_57: -385672563
+      ExiledForestVillage-Sheet_24: 1707949837
+      ExiledForestVillage-Sheet_59: -758196466
+      ExiledForestVillage-Sheet_98: 656413214
+      ExiledForestVillage-Sheet_82: 564214546
+      ExiledForestVillage-Sheet_245: 1153182154
+      ExiledForestVillage-Sheet_137: 167846902
+      ExiledForestVillage-Sheet_206: -1987479992
+      ExiledForestVillage-Sheet_84: 1850489574
+      ExiledForestVillage-Sheet_158: 1657462349
+      ExiledForestVillage-Sheet_41: -1103019077
+      ExiledForestVillage-Sheet_95: 768664826
+      ExiledForestVillage-Sheet_239: -469313487
+      ExiledForestVillage-Sheet_131: 1394571614
+      ExiledForestVillage-Sheet_147: 909117202
+      ExiledForestVillage-Sheet_152: -762998440
+      ExiledForestVillage-Sheet_176: -1466055689
+      ExiledForestVillage-Sheet_179: 1532911501
+      ExiledForestVillage-Sheet_60: -852818181
+      ExiledForestVillage-Sheet_54: -2066456428
+      ExiledForestVillage-Sheet_114: -1634476129
+      ExiledForestVillage-Sheet_251: 740275119
+      ExiledForestVillage-Sheet_103: 276962137
+      ExiledForestVillage-Sheet_149: -292856267
+      ExiledForestVillage-Sheet_124: 522906894
+      ExiledForestVillage-Sheet_17: 894982142
+      ExiledForestVillage-Sheet_43: -714661715
+      ExiledForestVillage-Sheet_14: 399342380
+      ExiledForestVillage-Sheet_228: 618831901
+      ExiledForestVillage-Sheet_39: 854739524
+      ExiledForestVillage-Sheet_65: -462656012
+      ExiledForestVillage-Sheet_134: 1999723849
+      ExiledForestVillage-Sheet_170: -122529923
+      ExiledForestVillage-Sheet_119: 1076627695
+      ExiledForestVillage-Sheet_183: -302690339
+      ExiledForestVillage-Sheet_159: 274706533
+      ExiledForestVillage-Sheet_225: -1260289822
+      ExiledForestVillage-Sheet_100: -1818143170
+      ExiledForestVillage-Sheet_29: -1048205509
+      ExiledForestVillage-Sheet_94: 558005159
+      ExiledForestVillage-Sheet_209: -1820337859
+      ExiledForestVillage-Sheet_219: -1754813889
+      ExiledForestVillage-Sheet_230: 798162707
+      ExiledForestVillage-Sheet_180: -1819041799
+      ExiledForestVillage-Sheet_48: -2084849858
+      ExiledForestVillage-Sheet_37: 1493311608
+      ExiledForestVillage-Sheet_10: 1465670280
+      ExiledForestVillage-Sheet_155: -1052532404
+      ExiledForestVillage-Sheet_8: -1616376966
+      ExiledForestVillage-Sheet_118: 425343004
+      ExiledForestVillage-Sheet_192: 237402109
+      ExiledForestVillage-Sheet_156: -1108424574
+      ExiledForestVillage-Sheet_223: -8488813
+      ExiledForestVillage-Sheet_187: 588983675
+      ExiledForestVillage-Sheet_50: 1305006093
+      ExiledForestVillage-Sheet_145: -648184246
+      ExiledForestVillage-Sheet_249: -351572980
+      ExiledForestVillage-Sheet_162: 1690440500
+      ExiledForestVillage-Sheet_72: 190152517
+      ExiledForestVillage-Sheet_167: 1078567817
+      ExiledForestVillage-Sheet_20: 975303302
+      ExiledForestVillage-Sheet_13: 957540324
+      ExiledForestVillage-Sheet_215: 692628453
+      ExiledForestVillage-Sheet_58: -686187326
+      ExiledForestVillage-Sheet_51: 1484477700
+      ExiledForestVillage-Sheet_2: 1151327103
+      ExiledForestVillage-Sheet_227: 1008320501
+      ExiledForestVillage-Sheet_212: 926656552
+      ExiledForestVillage-Sheet_106: 286953496
+      ExiledForestVillage-Sheet_21: -1340989002
+      ExiledForestVillage-Sheet_35: -2039695371
+      ExiledForestVillage-Sheet_0: 1443740163
+      ExiledForestVillage-Sheet_184: 1951350043
+      ExiledForestVillage-Sheet_81: -521696464
+      ExiledForestVillage-Sheet_77: -705392292
+      ExiledForestVillage-Sheet_127: -68551467
+      ExiledForestVillage-Sheet_248: -1452425225
+      ExiledForestVillage-Sheet_44: 1324526653
+      ExiledForestVillage-Sheet_25: -1952569823
+      ExiledForestVillage-Sheet_161: -544691359
+      ExiledForestVillage-Sheet_233: -396055706
+      ExiledForestVillage-Sheet_28: -2011469521
+      ExiledForestVillage-Sheet_88: -1400535320
+      ExiledForestVillage-Sheet_74: -1341035705
+      ExiledForestVillage-Sheet_175: 1121522110
+      ExiledForestVillage-Sheet_214: -846522896
+      ExiledForestVillage-Sheet_16: -1566086410
+      ExiledForestVillage-Sheet_47: 613971037
+      ExiledForestVillage-Sheet_189: -1219638491
+      ExiledForestVillage-Sheet_22: 2018078881
+      ExiledForestVillage-Sheet_125: 401732823
+      ExiledForestVillage-Sheet_73: 18957154
+      ExiledForestVillage-Sheet_172: 1364233447
+      ExiledForestVillage-Sheet_252: -289338217
+      ExiledForestVillage-Sheet_186: 1390025810
+      ExiledForestVillage-Sheet_241: 2147240958
+      ExiledForestVillage-Sheet_198: 526525984
+      ExiledForestVillage-Sheet_222: -245014688
+      ExiledForestVillage-Sheet_83: 1094121959
+      ExiledForestVillage-Sheet_139: 636858412
+      ExiledForestVillage-Sheet_221: -317103467
+      ExiledForestVillage-Sheet_23: 1045055601
+      ExiledForestVillage-Sheet_174: -615297246
+      ExiledForestVillage-Sheet_52: -1266061782
+      ExiledForestVillage-Sheet_86: 542156421
+      ExiledForestVillage-Sheet_194: -637832826
+      ExiledForestVillage-Sheet_165: 860782523
+      ExiledForestVillage-Sheet_71: 402233496
+      ExiledForestVillage-Sheet_109: -1006483525
+      ExiledForestVillage-Sheet_210: 806098319
+      ExiledForestVillage-Sheet_207: 1068001542
+      ExiledForestVillage-Sheet_102: 159500732
+      ExiledForestVillage-Sheet_231: 1928018753
+      ExiledForestVillage-Sheet_7: 1481234158
+      ExiledForestVillage-Sheet_169: 1078802579
+      ExiledForestVillage-Sheet_208: 1476911929
+      ExiledForestVillage-Sheet_140: 2096674757
+      ExiledForestVillage-Sheet_31: 853248205
+      ExiledForestVillage-Sheet_246: 1429701184
+      ExiledForestVillage-Sheet_112: -661460239
+      ExiledForestVillage-Sheet_49: -1550789407
+      ExiledForestVillage-Sheet_27: -2032317288
+      ExiledForestVillage-Sheet_160: -328669690
+      ExiledForestVillage-Sheet_177: 52690649
+      ExiledForestVillage-Sheet_64: -403302016
+      ExiledForestVillage-Sheet_242: -1977484918
+      ExiledForestVillage-Sheet_224: -823516886
+      ExiledForestVillage-Sheet_154: -613538428
+      ExiledForestVillage-Sheet_5: 1060139861
+      ExiledForestVillage-Sheet_80: -737739765
+      ExiledForestVillage-Sheet_129: -994178322
+      ExiledForestVillage-Sheet_1: 1794157298
+      ExiledForestVillage-Sheet_30: -831464188
+      ExiledForestVillage-Sheet_199: -1293947867
+      ExiledForestVillage-Sheet_89: -14642962
+      ExiledForestVillage-Sheet_171: -857198790
+      ExiledForestVillage-Sheet_66: 1315528462
+      ExiledForestVillage-Sheet_116: 1538994020
+      ExiledForestVillage-Sheet_122: -965372669
+      ExiledForestVillage-Sheet_101: 283290045
+      ExiledForestVillage-Sheet_133: -464369471
+      ExiledForestVillage-Sheet_197: 1314468641
+      ExiledForestVillage-Sheet_191: -505247239
+      ExiledForestVillage-Sheet_232: -1324129277
+      ExiledForestVillage-Sheet_99: 690657646
+      ExiledForestVillage-Sheet_250: -273123810
+      ExiledForestVillage-Sheet_196: 1441127089
+      ExiledForestVillage-Sheet_238: -759486202
+      ExiledForestVillage-Sheet_19: 1420164720
+      ExiledForestVillage-Sheet_6: 605212714
+      ExiledForestVillage-Sheet_67: 2134640948
+      ExiledForestVillage-Sheet_76: -2096890257
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
