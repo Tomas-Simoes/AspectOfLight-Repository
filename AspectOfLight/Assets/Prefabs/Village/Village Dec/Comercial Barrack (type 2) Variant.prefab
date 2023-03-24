@@ -9,12 +9,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1235527769527341004, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_Name
-      value: Comercial Barrack (type 2)
+      value: Comercial Barrack (type 2) Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1951832046636912870, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -1293947867, guid: aeec754237a03f74485b7bc49dcddf27, type: 3}
+    - target: {fileID: 1951832046636912870, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
+      propertyPath: m_SortingLayer
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1951832046636912870, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1275185391
+      objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_RootOrder
       value: 0
