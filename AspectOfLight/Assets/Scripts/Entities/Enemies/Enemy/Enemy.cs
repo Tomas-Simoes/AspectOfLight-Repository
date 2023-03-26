@@ -17,6 +17,9 @@ public class Enemy : Entity
     public bool goTowardsOtherPatrolPoint; //TODO change this to EnemyPatrolState
     public GameObject[] patrolPoints;
 
+    [Header("Enemy Boss Information")]
+    public bool isFightStarted = false;
+
     public override void Start()
     {
         base.Start();
@@ -29,6 +32,7 @@ public class Enemy : Entity
     public override void Update()
     {
         base.Update();
+
         UpdateWaypoints();
     }
 

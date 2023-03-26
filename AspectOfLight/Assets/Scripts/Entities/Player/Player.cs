@@ -95,15 +95,9 @@ public class Player : Entity
     public override void Update()
     {
         base.Update();
+
         GetInputs();
-
-        Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-
-        //Check "Direction" (dir), and the flips.
-        if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
-        {
-            CheckForFlipping();
-        }
+        CheckForFlipping();
     }
 
     public override void UpdateCooldowns()
@@ -167,8 +161,15 @@ public class Player : Entity
 
     private void CheckForFlipping()
     {
-        FacingRight = !FacingRight;
-        transform.Rotate(0f, 180f, 0f);
+        Vector2 mouseDirection =
+            Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+
+        bool _hasToFlip =
+            mouseDirection.x > 0 && facingDirection == -1
+            || mouseDirection.x < 0 && facingDirection == 1;
+
+        if (_hasToFlip)
+            Flip();
     }
 
     public void ReduceStamina(float stamina)
