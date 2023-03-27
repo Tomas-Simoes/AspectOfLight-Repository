@@ -40,7 +40,7 @@ public class UIPlayer : MonoBehaviour
 
     void UpdateStaminaBar()
     {
-        staminaSlider.value = (float)player.currentStamina / (float)player.entityData.MAX_STAMINA;
+        staminaSlider.value = (float)player.currentStamina / (float)player.staminaData.MAX_STAMINA;
     }
 
     void UpdateHealthBar()

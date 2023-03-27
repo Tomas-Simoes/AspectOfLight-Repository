@@ -10,16 +10,18 @@ public class Thornborne : Enemy
     public Thornborne_ChaseState chaseState { get; private set; }
     public Thornborne_UGAttackState ugAttackState { get; private set; }
     public Thornborne_UGTeleportState uGTeleportState { get; private set; }
+    public Thornborne_PukeAttackState pukeAttackState { get; private set; }
 
     [Header("State Data")]
     [SerializeField]
     private D_EnemyChaseState chaseStateData;
 
-    [SerializeField]
-    private D_ThornborneUGAttackState ugAttackStateData;
+    public D_ThornborneUGAttackState ugAttackStateData;
 
     [SerializeField]
     private D_ThornborneCooldown cooldownData;
+
+    public D_ThornbornePukeAttackState pukeAttackStateData;
 
     [Header("Thornborne Information")]
     public bool canTakeDamage;
@@ -28,10 +30,13 @@ public class Thornborne : Enemy
     [Header("Cooldowns")]
     public float timeSinceUGAttack;
     public float timeSinceUGTeleport;
+    public float timeSincePukeAttack;
 
     [Header("Abilities Information")]
     public GameObject ugAttackExplosion;
-    public GameObject ugAttackExplosionParent;
+    public GameObject abilitiesParent;
+    public GameObject pukeAttack;
+    public GameObject pukeAttackPosition;
 
     [SerializeField]
     private Transform ugAttackReferencePointsParent;
@@ -41,16 +46,30 @@ public class Thornborne : Enemy
         base.Start();
 
         sleepState = new Thornborne_SleepState(this, stateMachine, "idle", this);
-        awakeState = new Thornborne_AwakeState(this, stateMachine, "awake", this);
-        chaseState = new Thornborne_ChaseState(this, stateMachine, "move", chaseStateData, this);
+        awakeState = new Thornborne_AwakeState(this, stateMachine, "idle", this);
+        chaseState = new Thornborne_ChaseState(
+            this,
+            stateMachine,
+            "move",
+            chaseStateData,
+            cooldownData,
+            this
+        );
         ugAttackState = new Thornborne_UGAttackState(
             this,
             stateMachine,
-            "ugAttack",
+            "idle",
             this,
             ugAttackStateData
         );
-        uGTeleportState = new Thornborne_UGTeleportState(this, stateMachine, "ugTelport", this);
+        uGTeleportState = new Thornborne_UGTeleportState(this, stateMachine, "idle", this);
+        pukeAttackState = new Thornborne_PukeAttackState(
+            this,
+            stateMachine,
+            "idle",
+            this,
+            pukeAttackStateData
+        );
 
         InitCooldowns();
         InitReferencePoints();
@@ -77,19 +96,11 @@ public class Thornborne : Enemy
 
         bool _canUGAttack =
             timeSinceUGAttack >= cooldownData.ugAttackCD
-            && stateMachine.currentState != ugAttackState
-            && _inRangeToUGAbility;
-
-        bool _canUGTeleport =
-            timeSinceUGTeleport >= cooldownData.ugTeleportCD
-            && timeSinceUGAttack <= cooldownData.ugAttackCD
-            && _inRangeToUGAbility;
+            && _inRangeToUGAbility
+            && stateMachine.currentState != ugAttackState;
 
         if (_canUGAttack)
             stateMachine.ChangeState(ugAttackState);
-
-        if (_canUGTeleport)
-            stateMachine.ChangeState(uGTeleportState);
     }
 
     public override void FixedUpdate()
@@ -100,7 +111,10 @@ public class Thornborne : Enemy
     public override void UpdateCooldowns()
     {
         base.UpdateCooldowns();
+
         timeSinceUGAttack += Time.deltaTime;
+        timeSinceUGTeleport += Time.deltaTime;
+        timeSincePukeAttack += Time.deltaTime;
     }
 
     public override void TakeDamage(float damage)
@@ -129,7 +143,9 @@ public class Thornborne : Enemy
     {
         base.OnDrawGizmos();
         Gizmos.color = Color.red;
-
         Gizmos.DrawWireSphere(transform.position, ugAttackStateData.ugAttackRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, pukeAttackStateData.pukeAttackRange);
     }
 }

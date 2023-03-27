@@ -55,7 +55,7 @@ public class Thornborne_UGTeleportState : State
 
         Vector3 _newPosition =
             _playerTransform.position
-            + new Vector3(_playerTransform.localScale.x + 0.5f, 0f, 0f)
+            + new Vector3(_playerTransform.localScale.x + 1f, 0f, 0f)
                 * enemy.playerReference.GetComponent<Entity>().facingDirection;
 
         enemy.rb.MovePosition(_newPosition);

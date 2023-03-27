@@ -113,7 +113,7 @@ public class Thornborne_UGAttackState : State
             entity.CreatePrefab(
                 enemy.ugAttackExplosion,
                 _availableReferencePoints[_referencePointIndex],
-                enemy.ugAttackExplosionParent
+                enemy.abilitiesParent
             );
 
             _availableReferencePoints.RemoveAt(_referencePointIndex);
@@ -122,13 +122,9 @@ public class Thornborne_UGAttackState : State
         entity.CreatePrefab(
             enemy.ugAttackExplosion,
             enemy.playerReference.transform.position,
-            enemy.ugAttackExplosionParent
+            enemy.abilitiesParent
         );
 
-        entity.CreatePrefab(
-            enemy.ugAttackExplosion,
-            _closestReferencePoint,
-            enemy.ugAttackExplosionParent
-        );
+        entity.CreatePrefab(enemy.ugAttackExplosion, _closestReferencePoint, enemy.abilitiesParent);
     }
 }

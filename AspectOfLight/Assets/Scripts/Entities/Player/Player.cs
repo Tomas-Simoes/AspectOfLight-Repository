@@ -21,12 +21,15 @@ public class Player : Entity
     [SerializeField]
     private D_PlayerAttackState attackStateData;
 
+    public D_PlayerStamina staminaData;
+
     [Header("Cooldowns")]
     public float timeSinceAttack;
     public float timeSinceDash;
     public float timeSinceAbilityOne;
     public float timeSinceAbilityTwo;
     public float timeSinceAbilityThree;
+    public float timeSinceStaminaUsage;
 
     [Header("Information")]
     public Vector2 axisMovement;
@@ -62,7 +65,9 @@ public class Player : Entity
         base.Start();
         currentHealth = entityData.MAX_HEALTH;
         timeSinceDash = coolDownData.dashCD;
-        currentStamina = entityData.MAX_STAMINA;
+        currentStamina = staminaData.MAX_STAMINA;
+
+        StartCoroutine(RecoverStamina());
 
         if (inputHandler == null)
         {
@@ -111,6 +116,8 @@ public class Player : Entity
         timeSinceAbilityThree += Time.deltaTime;
 
         timeSinceAttack += Time.deltaTime;
+
+        timeSinceStaminaUsage += Time.deltaTime;
     }
 
     private void GetInputs()
@@ -177,6 +184,20 @@ public class Player : Entity
         currentStamina -= Mathf.FloorToInt(stamina);
 
         hasStamina = currentStamina <= 0 ? false : true;
+        timeSinceStaminaUsage = 0;
+    }
+
+    private IEnumerator RecoverStamina()
+    {
+        while (true)
+        {
+            if (timeSinceStaminaUsage >= 1f)
+            {
+                currentStamina += staminaData.recoverStaminaRate;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     public bool HasStaminaToUse(float staminaCost)
