@@ -12,7 +12,7 @@ public class Thornborne_UGAttackState : State
     [Header("State Information")]
     private float timeSincePreviousWave;
     public List<Vector2> referencePoints;
-
+    private int currentWavesCount;
     float _animationTime = 0;
 
     public Thornborne_UGAttackState(
@@ -38,6 +38,7 @@ public class Thornborne_UGAttackState : State
         timeSincePreviousWave = stateData.ugAttackTickRate;
 
         _animationTime = 0;
+        currentWavesCount = 0;
     }
 
     public override void Exit()
@@ -61,12 +62,11 @@ public class Thornborne_UGAttackState : State
             if (timeSincePreviousWave >= stateData.ugAttackTickRate)
             {
                 timeSincePreviousWave = 0;
-
                 SpawnNewWave();
             }
         }
 
-        if (_animationTime >= 10)
+        if (currentWavesCount >= stateData.wavesCount)
         {
             stateMachine.ChangeState(enemy.chaseState);
         }
@@ -83,41 +83,15 @@ public class Thornborne_UGAttackState : State
         for (int i = 0; i < _availableReferencePoints.Count; i++)
         {
             bool _isReferencePointToClose =
-                Vector2.Distance(enemy.transform.position, _availableReferencePoints[i]) <= 3;
+                Vector2.Distance(enemy.transform.position, _availableReferencePoints[i]) <= 3.5;
 
             if (_isReferencePointToClose)
                 _availableReferencePoints.RemoveAt(i);
         }
 
-        Vector2 _closestReferencePoint = _availableReferencePoints[0];
-        for (int i = 1; i < _availableReferencePoints.Count; i++)
-        {
-            float _currentReferencePointDistance = Vector2.Distance(
-                enemy.playerReference.transform.position,
-                _availableReferencePoints[i]
-            );
-
-            float _closestReferencePointDistance = Vector2.Distance(
-                enemy.playerReference.transform.position,
-                _closestReferencePoint
-            );
-
-            if (_currentReferencePointDistance < _closestReferencePointDistance)
-                _closestReferencePoint = _availableReferencePoints[i];
-        }
-
-        for (int i = 0; i < stateData.explosionCount; i++)
-        {
-            int _referencePointIndex = Random.Range(0, _availableReferencePoints.Count - 1);
-
-            entity.CreatePrefab(
-                enemy.ugAttackExplosion,
-                _availableReferencePoints[_referencePointIndex],
-                enemy.abilitiesParent
-            );
-
-            _availableReferencePoints.RemoveAt(_referencePointIndex);
-        }
+        Vector2 _closestReferencePoint = GetClosestReferencePointToPlayer(
+            _availableReferencePoints
+        );
 
         entity.CreatePrefab(
             enemy.ugAttackExplosion,
@@ -126,5 +100,70 @@ public class Thornborne_UGAttackState : State
         );
 
         entity.CreatePrefab(enemy.ugAttackExplosion, _closestReferencePoint, enemy.abilitiesParent);
+
+        SpawnExplosions(_availableReferencePoints);
+
+        currentWavesCount++;
+    }
+
+    private Vector2 GetClosestReferencePointToPlayer(List<Vector2> referencePoints)
+    {
+        Vector2 _closestReferencePoint = referencePoints[0];
+
+        for (int i = 1; i < referencePoints.Count; i++)
+        {
+            float _currentReferencePointDistance = Vector2.Distance(
+                enemy.playerReference.transform.position,
+                referencePoints[i]
+            );
+
+            float _closestReferencePointDistance = Vector2.Distance(
+                enemy.playerReference.transform.position,
+                _closestReferencePoint
+            );
+
+            if (_currentReferencePointDistance < _closestReferencePointDistance)
+                _closestReferencePoint = referencePoints[i];
+        }
+
+        return _closestReferencePoint;
+    }
+
+    private void SpawnExplosions(List<Vector2> referencePoints)
+    {
+        int _plantsCount = 0;
+
+        for (int i = 0; i < stateData.explosionCount; i++)
+        {
+            int _referencePointIndex = Random.Range(0, referencePoints.Count - 1);
+
+            entity.CreatePrefab(
+                enemy.ugAttackExplosion,
+                referencePoints[_referencePointIndex],
+                enemy.abilitiesParent
+            );
+
+            if (
+                currentWavesCount >= stateData.wavesCount - 1
+                && _plantsCount <= stateData.plantsCount
+            )
+            {
+                GameObject _shootingPlant = entity.CreatePrefab(
+                    enemy.shootingPlant,
+                    referencePoints[_referencePointIndex],
+                    enemy.abilitiesParent
+                );
+
+                ThornborneShootingPlant _shootingPlantComponent =
+                    _shootingPlant.GetComponent<ThornborneShootingPlant>();
+
+                _shootingPlantComponent.bulletParent = enemy.abilitiesParent.transform;
+                _shootingPlantComponent.plantTarget = enemy.target;
+
+                _plantsCount++;
+            }
+
+            referencePoints.RemoveAt(_referencePointIndex);
+        }
     }
 }

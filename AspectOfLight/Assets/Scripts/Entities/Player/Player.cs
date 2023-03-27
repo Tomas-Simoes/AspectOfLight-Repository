@@ -55,8 +55,8 @@ public class Player : Entity
     [SerializeField]
     public GameObject attackPosition;
 
-    [Header("UI Elements")]
-    public GameObject DeathScreen; //X
+    [Header("UI Managers")]
+    public DeathUIManager deathUIManager;
 
     public InputHandler inputHandler { get; private set; }
 
@@ -163,7 +163,8 @@ public class Player : Entity
     public override void Die()
     {
         base.Die();
-        DeathScreen.SetActive(true);
+
+        deathUIManager.UpdateDeathUI();
     }
 
     private void CheckForFlipping()

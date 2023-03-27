@@ -33,8 +33,9 @@ public class Thornborne : Enemy
     public float timeSincePukeAttack;
 
     [Header("Abilities Information")]
-    public GameObject ugAttackExplosion;
     public GameObject abilitiesParent;
+    public GameObject ugAttackExplosion;
+    public GameObject shootingPlant;
     public GameObject pukeAttack;
     public GameObject pukeAttackPosition;
 
