@@ -26,7 +26,7 @@ public class DataPersistenceManager : MonoBehaviour
     [SerializeField]
     private bool useEncryption;
 
-    private GameData gameData;
+    public GameData gameData;
     private FileDataHandler dataHandler;
 
     private string selectedProfileId = "";

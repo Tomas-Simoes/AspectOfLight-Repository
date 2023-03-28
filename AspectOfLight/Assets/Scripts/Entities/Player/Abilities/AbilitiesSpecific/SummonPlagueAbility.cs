@@ -25,7 +25,7 @@ public class SummonPlagueAbility : Ability
             player.CreatePrefab(
                 abilityData.plaguePrefab,
                 spawnpoint.transform.position,
-                GameObject.Find("AbilityInstances")
+                GameObject.Find("AbilityInstances") //TODO have a reference to ability instances somewhere
             );
         }
     }

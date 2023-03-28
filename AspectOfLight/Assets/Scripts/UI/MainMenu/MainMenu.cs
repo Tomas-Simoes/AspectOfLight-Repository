@@ -50,7 +50,7 @@ public class MainMenu : Menu
     {
         DisableMenuButtons();
         DataPersistenceManager.instance.SaveGame();
-        SceneManager.LoadSceneAsync("SampleScene");
+        SceneManager.LoadSceneAsync(DataPersistenceManager.instance.gameData.areaInMap);
     }
 
     private void DisableMenuButtons()

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity
+public class Player : Entity, IDataPersistence
 {
     public Player_MoveState moveState { get; private set; }
     public Player_DashState dashState { get; private set; }
@@ -21,12 +21,15 @@ public class Player : Entity
     [SerializeField]
     private D_PlayerAttackState attackStateData;
 
+    public D_PlayerStamina staminaData;
+
     [Header("Cooldowns")]
     public float timeSinceAttack;
     public float timeSinceDash;
     public float timeSinceAbilityOne;
     public float timeSinceAbilityTwo;
     public float timeSinceAbilityThree;
+    public float timeSinceStaminaUsage;
 
     [Header("Information")]
     public Vector2 axisMovement;
@@ -52,8 +55,8 @@ public class Player : Entity
     [SerializeField]
     public GameObject attackPosition;
 
-    [Header("UI Elements")]
-    public GameObject DeathScreen; //X
+    [Header("UI Managers")]
+    public DeathUIManager deathUIManager;
 
     public InputHandler inputHandler { get; private set; }
 
@@ -62,7 +65,9 @@ public class Player : Entity
         base.Start();
         currentHealth = entityData.MAX_HEALTH;
         timeSinceDash = coolDownData.dashCD;
-        currentStamina = entityData.MAX_STAMINA;
+        currentStamina = staminaData.MAX_STAMINA;
+
+        StartCoroutine(RecoverStamina());
 
         if (inputHandler == null)
         {
@@ -95,15 +100,9 @@ public class Player : Entity
     public override void Update()
     {
         base.Update();
+
         GetInputs();
-
-        Vector2 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
-
-        //Check "Direction" (dir), and the flips.
-        if (dir.x > 0 && !FacingRight || dir.x < 0 && FacingRight)
-        {
-            CheckForFlipping();
-        }
+        CheckForFlipping();
     }
 
     public override void UpdateCooldowns()
@@ -117,6 +116,8 @@ public class Player : Entity
         timeSinceAbilityThree += Time.deltaTime;
 
         timeSinceAttack += Time.deltaTime;
+
+        timeSinceStaminaUsage += Time.deltaTime;
     }
 
     private void GetInputs()
@@ -162,13 +163,21 @@ public class Player : Entity
     public override void Die()
     {
         base.Die();
-        DeathScreen.SetActive(true);
+
+        deathUIManager.UpdateDeathUI();
     }
 
     private void CheckForFlipping()
     {
-        FacingRight = !FacingRight;
-        transform.Rotate(0f, 180f, 0f);
+        Vector2 mouseDirection =
+            Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+
+        bool _hasToFlip =
+            mouseDirection.x > 0 && facingDirection == -1
+            || mouseDirection.x < 0 && facingDirection == 1;
+
+        if (_hasToFlip)
+            Flip();
     }
 
     public void ReduceStamina(float stamina)
@@ -176,10 +185,35 @@ public class Player : Entity
         currentStamina -= Mathf.FloorToInt(stamina);
 
         hasStamina = currentStamina <= 0 ? false : true;
+        timeSinceStaminaUsage = 0;
+    }
+
+    private IEnumerator RecoverStamina()
+    {
+        while (true)
+        {
+            if (timeSinceStaminaUsage >= 1f)
+            {
+                currentStamina += staminaData.recoverStaminaRate;
+            }
+
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     public bool HasStaminaToUse(float staminaCost)
     {
         return currentStamina - staminaCost >= 0;
+    }
+
+    public void LoadData(GameData data)
+    {
+        Debug.Log(data.playerPosition);
+        transform.position = data.playerPosition;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerPosition = transform.position;
     }
 }

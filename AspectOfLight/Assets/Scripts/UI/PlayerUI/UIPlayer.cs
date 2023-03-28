@@ -7,7 +7,11 @@ public class UIPlayer : MonoBehaviour
 {
     [Header("Stamina Bar")]
     [SerializeField]
-    private Image staminaMask;
+    private Slider staminaSlider;
+
+    [Header("Health Bar")]
+    [SerializeField]
+    private Slider healthSlider;
 
     [Header("Attack Bar")]
     [SerializeField]
@@ -16,32 +20,37 @@ public class UIPlayer : MonoBehaviour
     [Header("Others")]
     [SerializeField]
     private Player player;
-    private GameObject playerUIObject;
+    private GameObject inPlayerUIObject;
 
     void Start()
     {
-        playerUIObject = attackMask.transform.parent.gameObject;
+        inPlayerUIObject = attackMask.transform.parent.gameObject;
     }
 
     void Update()
     {
         UpdateStaminaBar();
+        UpdateHealthBar();
 
         if (player.stateMachine.currentState == player.attackState)
             UpdateAttackBar();
         else
-            playerUIObject.SetActive(false);
+            inPlayerUIObject.SetActive(false);
     }
 
     void UpdateStaminaBar()
     {
-        staminaMask.fillAmount =
-            (float)player.currentStamina / (float)player.entityData.MAX_STAMINA;
+        staminaSlider.value = (float)player.currentStamina / (float)player.staminaData.MAX_STAMINA;
+    }
+
+    void UpdateHealthBar()
+    {
+        healthSlider.value = (float)player.currentHealth / (float)player.entityData.MAX_HEALTH;
     }
 
     void UpdateAttackBar()
     {
-        playerUIObject.SetActive(true);
+        inPlayerUIObject.SetActive(true);
 
         attackMask.fillAmount =
             (float)player.attackState.attackTime

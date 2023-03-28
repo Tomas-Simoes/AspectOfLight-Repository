@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
 using TMPro;
 
 public class BossFightHandler : MonoBehaviour
 {
+    [Header("Boss Battle Information")]
+    [SerializeField]
+    private Enemy boss;
+
     [Header("Camera")]
     [SerializeField]
     private Animator cameraAnimator;
@@ -18,39 +23,34 @@ public class BossFightHandler : MonoBehaviour
     private Animator bossNameAnim;
 
     [SerializeField]
-    private float fadeOutSeconds;
+    private float awakeSeconds;
 
-    [Header("Barriers")]
+    [Header("Barrier")]
     [SerializeField]
     private GameObject backBarrier;
 
-    [Header("Others")]
-    private bool isFightStarted;
+    [Header("UI Elements")]
+    [SerializeField]
+    private GameObject bossArenaUI;
 
-    void OnTriggerEnter2D(Collider2D other)
+    [SerializeField]
+    private GameObject bossInformationUI;
+
+    [SerializeField]
+    private Slider healthSlider;
+
+    private void Update()
     {
-        if (other.CompareTag("Player") && !isFightStarted)
-        {
-            cameraAnimator.SetBool("bossCamera", true);
-            StartBossBattle();
-        }
+        UpdateBossHealthBar();
     }
 
-    void StartBossBattle()
+    private void StartBossBattle()
     {
-        isFightStarted = true;
+        bossArenaUI.SetActive(true);
 
         InitializeText();
 
         backBarrier.SetActive(true);
-    }
-
-    IEnumerator FadeOutAfterSeconds(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        bossNameAnim.SetBool("fadeIn", false);
-        bossNameAnim.SetBool("fadeOut", true);
     }
 
     private void InitializeText()
@@ -58,6 +58,31 @@ public class BossFightHandler : MonoBehaviour
         bossNameAnim.SetBool("fadeOut", false);
         bossNameAnim.SetBool("fadeIn", true);
 
-        StartCoroutine(FadeOutAfterSeconds(fadeOutSeconds));
+        StartCoroutine(AwakeBoss(awakeSeconds));
+    }
+
+    private void UpdateBossHealthBar()
+    {
+        healthSlider.value = (float)boss.currentHealth / (float)boss.entityData.MAX_HEALTH;
+    }
+
+    IEnumerator AwakeBoss(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        bossNameAnim.SetBool("fadeIn", false);
+        bossNameAnim.SetBool("fadeOut", true);
+
+        boss.isFightStarted = true;
+        bossInformationUI.SetActive(true);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player") && !boss.isFightStarted)
+        {
+            cameraAnimator.SetBool("bossCamera", true);
+            StartBossBattle();
+        }
     }
 }

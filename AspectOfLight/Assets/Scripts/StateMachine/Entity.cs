@@ -13,7 +13,7 @@ public class Entity : MonoBehaviour
     public D_Entity entityData;
 
     [SerializeField]
-    protected float currentHealth;
+    public float currentHealth;
     public int facingDirection;
 
     [Header("Entity Informations")]
@@ -26,6 +26,9 @@ public class Entity : MonoBehaviour
     public GameObject pivot;
 
     private Vector2 velocityWorkspace;
+
+    [Header("Others")]
+    private Color defaultDamageColor = Color.red;
 
     public virtual void Start()
     {
@@ -79,9 +82,14 @@ public class Entity : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public virtual void TakeDamage(float damage)
     {
-        StartCoroutine(VisualIndicator(Color.red));
+        TakeDamage(damage, Color.red);
+    }
+
+    public virtual void TakeDamage(float damage, Color damageColor)
+    {
+        StartCoroutine(VisualIndicator(damageColor));
         currentHealth -= damage;
 
         if (currentHealth <= 0)
@@ -89,6 +97,21 @@ public class Entity : MonoBehaviour
             //play death animation and then Die();
             Die();
         }
+    }
+
+    public virtual void Heal(float healAmount)
+    {
+        StartCoroutine(VisualIndicator(Color.green));
+        currentHealth += healAmount;
+
+        if (currentHealth > entityData.MAX_HEALTH)
+            currentHealth = entityData.MAX_HEALTH;
+    }
+
+    public void TakePoisonDamage(float damage, float poisonTime, float tickRate)
+    {
+        Coroutine poisonCoroutine = StartCoroutine(Poisoned(damage, tickRate));
+        StartCoroutine(StopCourotineAfterTime(poisonCoroutine, poisonTime));
     }
 
     public virtual void Die()
@@ -105,9 +128,9 @@ public class Entity : MonoBehaviour
         GameObject _newGameObject = Instantiate(
             prefabToSpawn,
             spawnPointPosition,
-            Quaternion.identity
+            Quaternion.identity,
+            parent.transform
         );
-        _newGameObject.transform.parent = parent.transform;
 
         return _newGameObject;
     }
@@ -129,12 +152,31 @@ public class Entity : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
+    private IEnumerator Poisoned(float damage, float tickRate)
+    {
+        while (true)
+        {
+            TakeDamage(damage, Color.magenta);
+
+            yield return new WaitForSeconds(tickRate);
+        }
+    }
+
+    private IEnumerator StopCourotineAfterTime(Coroutine courotine, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        StopCoroutine(courotine);
+    }
+
     public virtual void OnDrawGizmos()
     {
+        /*
         Gizmos.DrawLine(
             wallCheck.position,
             wallCheck.position
                 + (Vector3)(Vector2.right * facingDirection * entityData.wallCheckDistance)
         );
+        */
     }
 }
