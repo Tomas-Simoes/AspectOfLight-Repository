@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity
+public class Player : Entity, IDataPersistence
 {
     public Player_MoveState moveState { get; private set; }
     public Player_DashState dashState { get; private set; }
@@ -204,5 +204,16 @@ public class Player : Entity
     public bool HasStaminaToUse(float staminaCost)
     {
         return currentStamina - staminaCost >= 0;
+    }
+
+    public void LoadData(GameData data)
+    {
+        Debug.Log(data.playerPosition);
+        transform.position = data.playerPosition;
+    }
+
+    public void SaveData(GameData data)
+    {
+        data.playerPosition = transform.position;
     }
 }

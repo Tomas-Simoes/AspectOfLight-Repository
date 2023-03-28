@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class DeathUIManager : MonoBehaviour
 {
@@ -18,7 +19,15 @@ public class DeathUIManager : MonoBehaviour
 
     public void UpdateDeathUI()
     {
+        Time.timeScale = 0f;
+
         deathScreen.SetActive(true);
         deathText.text = deathMessages[Random.Range(0, deathMessages.Length)];
+    }
+
+    public void OnContinueClicked()
+    {
+        DataPersistenceManager.instance.LoadGame();
+        SceneManager.LoadSceneAsync(DataPersistenceManager.instance.gameData.areaInMap);
     }
 }
