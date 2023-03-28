@@ -27,6 +27,9 @@ public class Entity : MonoBehaviour
 
     private Vector2 velocityWorkspace;
 
+    [Header("Others")]
+    private Color defaultDamageColor = Color.red;
+
     public virtual void Start()
     {
         facingDirection = 1;
@@ -81,7 +84,12 @@ public class Entity : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
-        StartCoroutine(VisualIndicator(Color.red));
+        TakeDamage(damage, Color.red);
+    }
+
+    public virtual void TakeDamage(float damage, Color damageColor)
+    {
+        StartCoroutine(VisualIndicator(damageColor));
         currentHealth -= damage;
 
         if (currentHealth <= 0)
@@ -89,6 +97,21 @@ public class Entity : MonoBehaviour
             //play death animation and then Die();
             Die();
         }
+    }
+
+    public virtual void Heal(float healAmount)
+    {
+        StartCoroutine(VisualIndicator(Color.green));
+        currentHealth += healAmount;
+
+        if (currentHealth > entityData.MAX_HEALTH)
+            currentHealth = entityData.MAX_HEALTH;
+    }
+
+    public void TakePoisonDamage(float damage, float poisonTime, float tickRate)
+    {
+        Coroutine poisonCoroutine = StartCoroutine(Poisoned(damage, tickRate));
+        StartCoroutine(StopCourotineAfterTime(poisonCoroutine, poisonTime));
     }
 
     public virtual void Die()
@@ -127,6 +150,23 @@ public class Entity : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.15f);
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    private IEnumerator Poisoned(float damage, float tickRate)
+    {
+        while (true)
+        {
+            TakeDamage(damage, Color.magenta);
+
+            yield return new WaitForSeconds(tickRate);
+        }
+    }
+
+    private IEnumerator StopCourotineAfterTime(Coroutine courotine, float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        StopCoroutine(courotine);
     }
 
     public virtual void OnDrawGizmos()

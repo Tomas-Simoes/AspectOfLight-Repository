@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9cba4e3e6e6f18b438ad679e24567996, type: 3}
   m_Name: Thornborne_UGAttackStateData
   m_EditorClassIdentifier: 
-  ugAttackRange: 4.5
+  ugAttackRange: 5.5
   ugAttackTickRate: 2.5
   explosionCount: 10
+  wavesCount: 4
+  plantsCount: 3

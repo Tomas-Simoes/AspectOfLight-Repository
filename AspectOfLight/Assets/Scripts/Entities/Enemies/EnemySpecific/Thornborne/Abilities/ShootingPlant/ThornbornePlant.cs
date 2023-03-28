@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThornborneShootingPlant : MonoBehaviour
+public class ThornbornePlant : Entity
 {
+    public ThornbornePlant_ShootingState shootingState { get; private set; }
+
     [Header("Shooting Plant Information")]
-    [SerializeField]
-    private float shootingRate;
+    public float shootingRate;
 
     [SerializeField]
     private GameObject bullet;
@@ -15,9 +16,18 @@ public class ThornborneShootingPlant : MonoBehaviour
     private Transform shootingPosition;
 
     public GameObject plantTarget;
-    public Transform bulletParent;
+    public GameObject bulletParent;
 
-    private void Start()
+    public override void Start()
+    {
+        base.Start();
+
+        shootingState = new ThornbornePlant_ShootingState(this, stateMachine, "shooting", this);
+
+        stateMachine.Init(shootingState);
+    }
+
+    public void StartShooting()
     {
         StartCoroutine(Shoot());
     }
@@ -26,12 +36,7 @@ public class ThornborneShootingPlant : MonoBehaviour
     {
         while (true)
         {
-            GameObject _bullet = Instantiate(
-                bullet,
-                shootingPosition.position,
-                Quaternion.identity,
-                bulletParent
-            );
+            GameObject _bullet = CreatePrefab(bullet, shootingPosition.position, bulletParent);
 
             _bullet.GetComponent<Bullet>().targetPosition = plantTarget.transform.position;
 

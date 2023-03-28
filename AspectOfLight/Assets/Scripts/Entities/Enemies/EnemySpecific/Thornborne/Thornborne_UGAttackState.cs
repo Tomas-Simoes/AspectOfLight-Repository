@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Thornborne_UGAttackState : State
@@ -13,6 +14,8 @@ public class Thornborne_UGAttackState : State
     private float timeSincePreviousWave;
     public List<Vector2> referencePoints;
     private int currentWavesCount;
+    private Dictionary<Vector2, GameObject> currentShootingPlants =
+        new Dictionary<Vector2, GameObject>();
     float _animationTime = 0;
 
     public Thornborne_UGAttackState(
@@ -31,6 +34,8 @@ public class Thornborne_UGAttackState : State
     public override void Enter()
     {
         base.Enter();
+
+        UpdateCurrentShootingPlants();
 
         enemy.rb.velocity = Vector2.zero;
 
@@ -77,6 +82,18 @@ public class Thornborne_UGAttackState : State
         base.PhysicsUpdate();
     }
 
+    public void UpdateCurrentShootingPlants()
+    {
+        for (int i = currentShootingPlants.Count - 1; i >= 0; i--)
+        {
+            KeyValuePair<Vector2, GameObject> _currentShootingPlant =
+                currentShootingPlants.ElementAt(i);
+
+            if (_currentShootingPlant.Value == null)
+                currentShootingPlants.Remove(_currentShootingPlant.Key);
+        }
+    }
+
     public void SpawnNewWave()
     {
         List<Vector2> _availableReferencePoints = new List<Vector2>(referencePoints);
@@ -93,13 +110,15 @@ public class Thornborne_UGAttackState : State
             _availableReferencePoints
         );
 
+        entity.CreatePrefab(enemy.ugAttackExplosion, _closestReferencePoint, enemy.abilitiesParent);
         entity.CreatePrefab(
             enemy.ugAttackExplosion,
             enemy.playerReference.transform.position,
             enemy.abilitiesParent
         );
 
-        entity.CreatePrefab(enemy.ugAttackExplosion, _closestReferencePoint, enemy.abilitiesParent);
+        if (currentWavesCount >= stateData.wavesCount - 1)
+            UpgradePreviousPlants();
 
         SpawnExplosions(_availableReferencePoints);
 
@@ -131,7 +150,7 @@ public class Thornborne_UGAttackState : State
 
     private void SpawnExplosions(List<Vector2> referencePoints)
     {
-        int _plantsCount = 0;
+        int _plantsCount = currentShootingPlants.Count;
 
         for (int i = 0; i < stateData.explosionCount; i++)
         {
@@ -148,22 +167,41 @@ public class Thornborne_UGAttackState : State
                 && _plantsCount <= stateData.plantsCount
             )
             {
-                GameObject _shootingPlant = entity.CreatePrefab(
-                    enemy.shootingPlant,
-                    referencePoints[_referencePointIndex],
-                    enemy.abilitiesParent
-                );
+                if (!currentShootingPlants.ContainsKey(referencePoints[_referencePointIndex]))
+                {
+                    GameObject _shootingPlant = entity.CreatePrefab(
+                        enemy.shootingPlant,
+                        referencePoints[_referencePointIndex],
+                        enemy.abilitiesParent
+                    );
 
-                ThornborneShootingPlant _shootingPlantComponent =
-                    _shootingPlant.GetComponent<ThornborneShootingPlant>();
+                    currentShootingPlants.Add(
+                        referencePoints[_referencePointIndex],
+                        _shootingPlant
+                    );
 
-                _shootingPlantComponent.bulletParent = enemy.abilitiesParent.transform;
-                _shootingPlantComponent.plantTarget = enemy.target;
+                    ThornbornePlant _shootingPlantComponent =
+                        _shootingPlant.GetComponent<ThornbornePlant>();
 
-                _plantsCount++;
+                    _shootingPlantComponent.bulletParent = enemy.abilitiesParent;
+                    _shootingPlantComponent.plantTarget = enemy.target;
+
+                    _plantsCount++;
+                }
             }
 
             referencePoints.RemoveAt(_referencePointIndex);
+        }
+    }
+
+    private void UpgradePreviousPlants()
+    {
+        foreach (GameObject shootingPlant in currentShootingPlants.Values)
+        {
+            if (shootingPlant == null)
+                break;
+
+            shootingPlant.GetComponent<ThornbornePlant>().shootingRate /= 2;
         }
     }
 }

@@ -136,3 +136,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosionDamage: 15
+  poisonDamage: 2
+  poisonTime: 6
+  tickRate: 2

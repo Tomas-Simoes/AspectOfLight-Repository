@@ -11,6 +11,7 @@ public class Thornborne : Enemy
     public Thornborne_UGAttackState ugAttackState { get; private set; }
     public Thornborne_UGTeleportState uGTeleportState { get; private set; }
     public Thornborne_PukeAttackState pukeAttackState { get; private set; }
+    public Thornborne_HealingState healingState { get; private set; }
 
     [Header("State Data")]
     [SerializeField]
@@ -23,6 +24,11 @@ public class Thornborne : Enemy
 
     public D_ThornbornePukeAttackState pukeAttackStateData;
 
+    public D_ThornborneUGTeleportState ugTeleportStateData;
+
+    [SerializeField]
+    private D_ThornborneHealingState healingStateData;
+
     [Header("Thornborne Information")]
     public bool canTakeDamage;
     public bool fightAlreadyInitiated;
@@ -34,13 +40,23 @@ public class Thornborne : Enemy
 
     [Header("Abilities Information")]
     public GameObject abilitiesParent;
+
+    [Space(2)]
     public GameObject ugAttackExplosion;
-    public GameObject shootingPlant;
-    public GameObject pukeAttack;
-    public GameObject pukeAttackPosition;
 
     [SerializeField]
     private Transform ugAttackReferencePointsParent;
+
+    [Space(2)]
+    public GameObject shootingPlant;
+
+    [Space(2)]
+    public GameObject pukeAttack;
+    public GameObject pukeAttackPosition;
+
+    [Space(2)]
+    [SerializeField]
+    public GameObject[] safePoints;
 
     public override void Start()
     {
@@ -63,13 +79,26 @@ public class Thornborne : Enemy
             this,
             ugAttackStateData
         );
-        uGTeleportState = new Thornborne_UGTeleportState(this, stateMachine, "idle", this);
-        pukeAttackState = new Thornborne_PukeAttackState(
+        uGTeleportState = new Thornborne_UGTeleportState(
             this,
             stateMachine,
             "idle",
             this,
+            ugTeleportStateData
+        );
+        pukeAttackState = new Thornborne_PukeAttackState(
+            this,
+            stateMachine,
+            "puke",
+            this,
             pukeAttackStateData
+        );
+        healingState = new Thornborne_HealingState(
+            this,
+            stateMachine,
+            "healing",
+            this,
+            healingStateData
         );
 
         InitCooldowns();
@@ -83,25 +112,6 @@ public class Thornborne : Enemy
         base.Update();
 
         UpdateCooldowns();
-        UpdateStates();
-    }
-
-    public void UpdateStates()
-    {
-        if (!isFightStarted)
-            return;
-
-        bool _inRangeToUGAbility =
-            Vector2.Distance(transform.position, playerReference.transform.position)
-            >= ugAttackStateData.ugAttackRange;
-
-        bool _canUGAttack =
-            timeSinceUGAttack >= cooldownData.ugAttackCD
-            && _inRangeToUGAbility
-            && stateMachine.currentState != ugAttackState;
-
-        if (_canUGAttack)
-            stateMachine.ChangeState(ugAttackState);
     }
 
     public override void FixedUpdate()
@@ -120,8 +130,13 @@ public class Thornborne : Enemy
 
     public override void TakeDamage(float damage)
     {
+        if (stateMachine.currentState == healingState)
+            stateMachine.ChangeState(chaseState);
+
         if (canTakeDamage)
             base.TakeDamage(damage);
+        else
+            Heal(damage);
     }
 
     public void InitCooldowns()
@@ -138,6 +153,11 @@ public class Thornborne : Enemy
         ugAttackState.referencePoints = _ugAttackReferencePointsList.ConvertAll(
             referencePoint => new Vector2(referencePoint.position.x, referencePoint.position.y)
         );
+    }
+
+    public void SpawnPuke()
+    {
+        CreatePrefab(pukeAttack, pukeAttackPosition.transform.position, abilitiesParent);
     }
 
     public override void OnDrawGizmos()

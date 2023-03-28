@@ -28,8 +28,6 @@ public class Thornborne_PukeAttackState : State
     {
         base.Enter();
 
-        _animationTime = 0;
-
         enemy.rb.velocity = Vector2.zero;
         enemy.timeSincePukeAttack = 0;
     }
@@ -42,12 +40,10 @@ public class Thornborne_PukeAttackState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        _animationTime += Time.deltaTime;
+        float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
         if (_animationTime >= 1f)
         {
-            SpawnPuke();
-
             stateMachine.ChangeState(enemy.chaseState);
         }
     }
@@ -55,14 +51,5 @@ public class Thornborne_PukeAttackState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-    }
-
-    public void SpawnPuke()
-    {
-        entity.CreatePrefab(
-            enemy.pukeAttack,
-            enemy.pukeAttackPosition.transform.position,
-            enemy.abilitiesParent
-        );
     }
 }

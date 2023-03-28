@@ -12,6 +12,16 @@ public class ThornborneExplosion : MonoBehaviour
 
     [SerializeField]
     private float explosionDamage;
+
+    [SerializeField]
+    private float poisonDamage;
+
+    [SerializeField]
+    private float poisonTime;
+
+    [SerializeField]
+    private float tickRate;
+
     private float _animationTime = 0;
 
     void Start() { }
@@ -30,7 +40,13 @@ public class ThornborneExplosion : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hasAlreadyHitted)
         {
-            other.GetComponent<Entity>().TakeDamage(explosionDamage);
+            Debug.Log("Hitted Player");
+
+            Entity player = other.GetComponent<Entity>();
+
+            player.TakeDamage(explosionDamage);
+            player.TakePoisonDamage(poisonDamage, poisonTime, tickRate);
+
             hasAlreadyHitted = true;
         }
     }
