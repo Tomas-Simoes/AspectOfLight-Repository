@@ -4,10 +4,8 @@ using UnityEngine;
 
 public class Thornborne_UGTeleportState : State
 {
-    //TODO change this to animation time
     private D_ThornborneUGTeleportState stateData;
     private Thornborne enemy;
-    private float animationTime;
 
     public bool teleportToPlayer;
     public bool teleportToSafePoint;
@@ -41,15 +39,28 @@ public class Thornborne_UGTeleportState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-        animationTime += Time.deltaTime;
-
-        if (animationTime >= 1)
+        if (_animationTime >= 0.5f)
         {
             if (teleportToPlayer)
                 TeleportToPlayer();
             else if (teleportToSafePoint)
                 TeleportToSafePoint();
+        }
+
+        if (_animationTime >= 1f)
+        {
+            if (teleportToPlayer)
+                stateMachine.ChangeState(enemy.chaseState);
+
+            if (teleportToSafePoint)
+            {
+                if (enemy.currentHealth <= stateData.minimumLifeToHeal)
+                    stateMachine.ChangeState(enemy.healingState);
+                else
+                    stateMachine.ChangeState(enemy.ugAttackState);
+            }
         }
     }
 
@@ -68,19 +79,12 @@ public class Thornborne_UGTeleportState : State
                 * enemy.playerReference.GetComponent<Entity>().facingDirection;
 
         enemy.rb.MovePosition(_newPosition);
-
-        stateMachine.ChangeState(enemy.chaseState); //TODO change this to melee attack state
     }
 
     private void TeleportToSafePoint()
     {
         Vector2 currentSafePoint = FindNewSafePoint();
         enemy.rb.MovePosition(currentSafePoint);
-
-        if (enemy.currentHealth <= stateData.minimumLifeToHeal)
-            stateMachine.ChangeState(enemy.healingState);
-        else
-            stateMachine.ChangeState(enemy.ugAttackState);
     }
 
     private Vector2 FindNewSafePoint()

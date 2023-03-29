@@ -11,12 +11,13 @@ public class Thornborne_UGAttackState : State
     private D_ThornborneUGAttackState stateData;
 
     [Header("State Information")]
+    public bool canSpawnWaves;
     private float timeSincePreviousWave;
     public List<Vector2> referencePoints;
+    private int wavesCount;
     private int currentWavesCount;
     private Dictionary<Vector2, GameObject> currentShootingPlants =
         new Dictionary<Vector2, GameObject>();
-    float _animationTime = 0;
 
     public Thornborne_UGAttackState(
         Entity entity,
@@ -37,12 +38,16 @@ public class Thornborne_UGAttackState : State
 
         UpdateCurrentShootingPlants();
 
+        enemy.anim.SetBool("ugAttackUp", false);
+
         enemy.rb.velocity = Vector2.zero;
 
+        canSpawnWaves = false;
         enemy.canTakeDamage = false;
         timeSincePreviousWave = stateData.ugAttackTickRate;
 
-        _animationTime = 0;
+        wavesCount = Random.Range(stateData.minWavesCount, stateData.maxWavesCount);
+
         currentWavesCount = 0;
     }
 
@@ -57,10 +62,8 @@ public class Thornborne_UGAttackState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        //float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        _animationTime += Time.deltaTime;
 
-        if (_animationTime >= 1) //TODO put the right value to when it's grounded
+        if (canSpawnWaves && currentWavesCount < wavesCount)
         {
             timeSincePreviousWave += Time.deltaTime;
 
@@ -71,9 +74,22 @@ public class Thornborne_UGAttackState : State
             }
         }
 
-        if (currentWavesCount >= stateData.wavesCount)
+        if (currentWavesCount >= wavesCount)
         {
-            stateMachine.ChangeState(enemy.chaseState);
+            Debug.Log("Waves completed");
+
+            enemy.anim.SetBool("ugAttackUp", true);
+
+            float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+            if (entity.anim.GetCurrentAnimatorStateInfo(0).IsName("UGAttack_Up"))
+
+                Debug.Log(" / " + _animationTime);
+            if (_animationTime >= 1)
+            {
+                Debug.Log("Left");
+                stateMachine.ChangeState(enemy.chaseState);
+            }
         }
     }
 
@@ -117,7 +133,7 @@ public class Thornborne_UGAttackState : State
             enemy.abilitiesParent
         );
 
-        if (currentWavesCount >= stateData.wavesCount - 1)
+        if (currentWavesCount >= wavesCount - 1)
             UpgradePreviousPlants();
 
         SpawnExplosions(_availableReferencePoints);
@@ -162,10 +178,7 @@ public class Thornborne_UGAttackState : State
                 enemy.abilitiesParent
             );
 
-            if (
-                currentWavesCount >= stateData.wavesCount - 1
-                && _plantsCount <= stateData.plantsCount
-            )
+            if (currentWavesCount >= wavesCount - 1 && _plantsCount <= stateData.plantsCount)
             {
                 if (!currentShootingPlants.ContainsKey(referencePoints[_referencePointIndex]))
                 {

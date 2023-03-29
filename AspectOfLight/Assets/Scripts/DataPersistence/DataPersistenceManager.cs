@@ -156,18 +156,18 @@ public class DataPersistenceManager : MonoBehaviour
 
         foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
+            Debug.Log("Loading data ");
             dataPersistenceObj.LoadData(gameData);
         }
-
-        Debug.Log("Loaded profile: " + selectedProfileId);
     }
 
-    //? Only for testing purpouses
+    /*
+    ? Only for testing purpouses
     private void OnApplicationQuit()
     {
-        SaveGame();
+        //SaveGame();
     }
-
+    */
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
         IEnumerable<IDataPersistence> dataPersistencesObjects = FindObjectsOfType<MonoBehaviour>(

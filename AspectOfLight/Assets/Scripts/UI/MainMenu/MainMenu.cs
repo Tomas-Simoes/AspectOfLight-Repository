@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenu : Menu
 {
@@ -31,6 +32,9 @@ public class MainMenu : Menu
         {
             continueGameButton.interactable = false;
             loadGameButton.interactable = false;
+
+            continueGameButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
+            loadGameButton.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
         }
     }
 

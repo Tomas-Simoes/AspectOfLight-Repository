@@ -75,14 +75,14 @@ public class Thornborne : Enemy
         ugAttackState = new Thornborne_UGAttackState(
             this,
             stateMachine,
-            "idle",
+            "ugAttack",
             this,
             ugAttackStateData
         );
         uGTeleportState = new Thornborne_UGTeleportState(
             this,
             stateMachine,
-            "idle",
+            "ugTeleport",
             this,
             ugTeleportStateData
         );
@@ -168,5 +168,10 @@ public class Thornborne : Enemy
 
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, pukeAttackStateData.pukeAttackRange);
+    }
+
+    public void StartSpawningSpikes()
+    {
+        ugAttackState.canSpawnWaves = true;
     }
 }

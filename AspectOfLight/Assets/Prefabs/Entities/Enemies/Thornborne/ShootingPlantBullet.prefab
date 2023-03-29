@@ -138,8 +138,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
   speed: 3
-  damage: 4
+  damage: 8
   lifeTime: 4
   targatableTag: Player
   tickRate: 2
-  poisonTime: 8
+  poisonTime: 6

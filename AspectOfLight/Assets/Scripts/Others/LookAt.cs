@@ -14,6 +14,9 @@ public class LookAt : MonoBehaviour
 
     void LateUpdate()
     {
+        if (parent == null)
+            return;
+
         transform.position = Vector3.MoveTowards(
             transform.position,
             parent.transform.position,

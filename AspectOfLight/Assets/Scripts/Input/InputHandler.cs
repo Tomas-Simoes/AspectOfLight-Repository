@@ -21,7 +21,7 @@ public class InputHandler : MonoBehaviour
 
     [Header("Pause Input")]
     [SerializeField]
-    PauseMenu pauseMenuHandler;
+    PauseUIManager pauseMenuHandler;
 
     [Header("UI Input")]
     [SerializeField]

@@ -27,7 +27,7 @@ public class DeathUIManager : MonoBehaviour
 
     public void OnContinueClicked()
     {
-        DataPersistenceManager.instance.LoadGame();
-        SceneManager.LoadSceneAsync(DataPersistenceManager.instance.gameData.areaInMap);
+        SceneManager.LoadScene(DataPersistenceManager.instance.gameData.areaInMap);
+        Time.timeScale = 1f;
     }
 }

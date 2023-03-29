@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class SaveSlotsMenu : Menu
 {
@@ -66,7 +67,11 @@ public class SaveSlotsMenu : Menu
             saveSlot.SetData(profileData);
 
             bool _isNotInteractable = profileData == null && isLoadingGame;
+
             saveSlot.SetInteractable(!_isNotInteractable);
+
+            if (_isNotInteractable)
+                saveSlot.gameObject.GetComponentInChildren<TextMeshProUGUI>().color = Color.gray;
 
             if (!_isNotInteractable && firstSelected.Equals(backButton.gameObject))
             {

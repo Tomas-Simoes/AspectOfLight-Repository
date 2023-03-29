@@ -208,7 +208,6 @@ public class Player : Entity, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        Debug.Log(data.playerPosition);
         transform.position = data.playerPosition;
     }
 
