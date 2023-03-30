@@ -61,6 +61,7 @@ public class Thornborne_UGAttackState : State
 
     public override void LogicUpdate()
     {
+
         base.LogicUpdate();
 
         if (canSpawnWaves && currentWavesCount < wavesCount)
@@ -70,24 +71,23 @@ public class Thornborne_UGAttackState : State
             if (timeSincePreviousWave >= stateData.ugAttackTickRate)
             {
                 timeSincePreviousWave = 0;
+        
                 SpawnNewWave();
             }
         }
 
         if (currentWavesCount >= wavesCount)
         {
-            Debug.Log("Waves completed");
 
             enemy.anim.SetBool("ugAttackUp", true);
 
             float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-            if (entity.anim.GetCurrentAnimatorStateInfo(0).IsName("UGAttack_Up"))
+            if (!entity.anim.GetCurrentAnimatorStateInfo(0).IsName("UGAttack_Up"))
+                return;
 
-                Debug.Log(" / " + _animationTime);
             if (_animationTime >= 1)
             {
-                Debug.Log("Left");
                 stateMachine.ChangeState(enemy.chaseState);
             }
         }
@@ -130,9 +130,8 @@ public class Thornborne_UGAttackState : State
         entity.CreatePrefab(
             enemy.ugAttackExplosion,
             enemy.playerReference.transform.position,
-            enemy.abilitiesParent
-        );
-
+            enemy.abilitiesParent);
+            
         if (currentWavesCount >= wavesCount - 1)
             UpgradePreviousPlants();
 

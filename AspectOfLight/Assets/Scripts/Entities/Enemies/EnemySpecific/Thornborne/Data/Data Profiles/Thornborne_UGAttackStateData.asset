@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ugAttackRange: 5.5
   ugAttackTickRate: 1.5
-  explosionCount: 8
-  wavesCount: 4
-  plantsCount: 5
+  explosionCount: 7
+  minWavesCount: 1
+  maxWavesCount: 5
+  plantsCount: 4
