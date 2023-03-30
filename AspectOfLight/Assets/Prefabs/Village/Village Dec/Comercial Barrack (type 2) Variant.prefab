@@ -11,10 +11,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Comercial Barrack (type 2) Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 1951832046636912870, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: -1293947867, guid: aeec754237a03f74485b7bc49dcddf27, type: 3}
+    - target: {fileID: 1713868083501961688, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
+      propertyPath: m_Size.x
+      value: 1.1498368
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713868083501961688, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
+      propertyPath: m_Size.y
+      value: 0.676342
+      objectReference: {fileID: 0}
+    - target: {fileID: 1713868083501961688, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.0057052374
+      objectReference: {fileID: 0}
     - target: {fileID: 1951832046636912870, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_SortingLayer
       value: 4
@@ -29,15 +37,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.1278658
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -33.677994
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 3.6426234
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -45,15 +53,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2306366873375499243, guid: f116fbf488b80b442ae46ba12630c5a3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
