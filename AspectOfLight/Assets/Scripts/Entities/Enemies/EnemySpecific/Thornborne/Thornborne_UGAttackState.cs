@@ -27,7 +27,7 @@ public class Thornborne_UGAttackState : State
         D_ThornborneUGAttackState stateData
     )
         : base(entity, stateMachine, animBoolName)
-    {
+    {       
         this.enemy = enemy;
         this.stateData = stateData;
     }
@@ -131,7 +131,7 @@ public class Thornborne_UGAttackState : State
             enemy.ugAttackExplosion,
             enemy.playerReference.transform.position,
             enemy.abilitiesParent);
-            
+
         if (currentWavesCount >= wavesCount - 1)
             UpgradePreviousPlants();
 

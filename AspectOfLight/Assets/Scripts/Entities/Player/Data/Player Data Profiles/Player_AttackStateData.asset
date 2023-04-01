@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Player_AttackStateData
   m_EditorClassIdentifier: 
   maxAttackTime: 1.5
-  defaultDamage: 2
+  defaultDamage: 4
   changeDamageTimeJump: 0.5
   damageIncrement: 2
   staminaCostTime: 0.1
