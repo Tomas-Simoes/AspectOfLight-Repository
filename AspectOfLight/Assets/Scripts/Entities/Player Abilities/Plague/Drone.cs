@@ -10,7 +10,6 @@ public class Drone : Entity
     [Header("States Data")]
     [SerializeField]
     private D_DroneAttackState attackStateData;
-
     [SerializeField]
     private D_DroneChaseState chaseStateData;
 
