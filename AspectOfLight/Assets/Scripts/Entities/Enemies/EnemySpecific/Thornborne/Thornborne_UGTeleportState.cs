@@ -73,10 +73,27 @@ public class Thornborne_UGTeleportState : State
     {
         Transform _playerTransform = enemy.playerReference.transform;
 
+        int _playerFacingDirection = enemy.playerReference.GetComponent<Entity>().facingDirection;
+
         Vector3 _newPosition =
             _playerTransform.position
-            + new Vector3(_playerTransform.localScale.x + 1f, 0f, 0f)
-                * enemy.playerReference.GetComponent<Entity>().facingDirection;
+            + new Vector3(
+                (_playerTransform.localScale.x + 1f) * (_playerFacingDirection * -1),
+                0f,
+                0f
+            );
+
+        Collider2D[] _collidersInNewPosition = Physics2D.OverlapCircleAll(
+            _newPosition,
+            0.5f,
+            LayerMask.GetMask("Wall", "Water", "TopGround")
+        );
+
+        if (_collidersInNewPosition.Length != 0)
+        {
+            _newPosition.x = _newPosition.x * -1;
+            Debug.Log("ya");
+        }
 
         enemy.rb.MovePosition(_newPosition);
     }

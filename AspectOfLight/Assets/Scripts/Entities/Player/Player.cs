@@ -94,6 +94,7 @@ public class Player : Entity, IDataPersistence
         );
 
         abilityManager.InitAbilities();
+        
         stateMachine.Init(moveState);
     }
 

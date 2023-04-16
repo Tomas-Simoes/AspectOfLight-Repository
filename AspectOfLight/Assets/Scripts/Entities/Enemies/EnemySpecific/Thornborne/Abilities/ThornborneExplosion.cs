@@ -40,8 +40,6 @@ public class ThornborneExplosion : MonoBehaviour
     {
         if (other.CompareTag("Player") && !hasAlreadyHitted)
         {
-            Debug.Log("Hitted Player");
-
             Entity player = other.GetComponent<Entity>();
 
             player.TakeDamage(explosionDamage);

@@ -12,7 +12,6 @@ public class Menu : MonoBehaviour
     protected virtual void OnEnable()
     {
         SetFirstSelected(firstSelected);
-        Debug.Log("Set first selected: " + firstSelected.gameObject.name);
     }
 
     public void SetFirstSelected(Button firstSelectedButton)
