@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -55,14 +56,14 @@ public class Player : Entity, IDataPersistence
     [SerializeField]
     public GameObject attackPosition;
 
-    [Header("UI Managers")]
-    public DeathUIManager deathUIManager;
-
     public InputHandler inputHandler { get; private set; }
+
+    public static Action OnPlayerDeath;
 
     public override void Start()
     {
         base.Start();
+
         currentHealth = entityData.MAX_HEALTH;
         timeSinceDash = coolDownData.dashCD;
         currentStamina = staminaData.MAX_STAMINA;
@@ -94,7 +95,7 @@ public class Player : Entity, IDataPersistence
         );
 
         abilityManager.InitAbilities();
-        
+
         stateMachine.Init(moveState);
     }
 
@@ -163,9 +164,8 @@ public class Player : Entity, IDataPersistence
 
     public override void Die()
     {
-        base.Die();
-
-        deathUIManager.UpdateDeathUI();
+        UIManager.Instance.OpenDeathScreen();
+        OnPlayerDeath?.Invoke();
     }
 
     private void CheckForFlipping()

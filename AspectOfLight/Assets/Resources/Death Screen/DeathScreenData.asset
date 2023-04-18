@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48d2fb45e56c424c9a54b211f99de41, type: 3}
+  m_Name: DeathScreenData
+  m_EditorClassIdentifier: 
+  deathScreen: {fileID: 5146140973794564418, guid: f987d7273be6c4845961c65f6940e680, type: 3}
+  deathMessages:
+  - Do not be afraid, my light. Keep fighting.
+  - You are not alone.
+  - Your soul is eternal. Find your way home.
+  - It's not time to end yet.
+  - Keep going Light.
+  - Keep your spirit strong.
+  - Have determination.
