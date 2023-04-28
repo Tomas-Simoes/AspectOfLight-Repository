@@ -8,9 +8,6 @@ public class Singleton<T> : MonoBehaviour
     private static object m_Lock = new object();
     private static T instance;
 
-    /// <summary>
-    /// Access singleton instance through this propriety.
-    /// </summary>
     public static T Instance
     {
         get
@@ -39,6 +36,7 @@ public class Singleton<T> : MonoBehaviour
                         DontDestroyOnLoad(singletonObject);
                     }
                 }
+
                 return instance;
             }
         }
@@ -53,4 +51,6 @@ public class Singleton<T> : MonoBehaviour
     {
         shuttingDown = true;
     }
+
+    public virtual void Init() { }
 }

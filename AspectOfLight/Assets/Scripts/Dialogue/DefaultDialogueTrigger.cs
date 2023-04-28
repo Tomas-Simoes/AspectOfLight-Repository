@@ -4,23 +4,19 @@ using UnityEngine;
 
 public class DefaultDialogueTrigger : DialogueTrigger
 {
-  public override void OnTriggerStay2D(Collider2D other)
-  {
-    base.OnTriggerStay2D(other);
-    if (other.CompareTag("Player") && player.inputHandler.pressedInteract)
+    // TODO Decouple the player from here
+    public override void OnTriggerStay2D(Collider2D other)
     {
-      if (!dialogueManager.inDialogueMode)
-      {
-        if (!readyToInteract)
-          return;
+        base.OnTriggerStay2D(other);
 
-        dialogueManager.StartDialogueMode(dialogue);
-        readyToInteract = false;
-      }
-      else
-      {
-        dialogueManager.TryGoToNextNode();
-      }
+        if (other.CompareTag("Player") && player.inputHandler.pressedInteract)
+        {
+            if (!DialogueManager.Instance.inDialogueMode)
+            {
+                StartDialogue();
+            }
+            else
+                EventManager.TriggerEvent("onGoToNextNode", false, null);
+        }
     }
-  }
 }

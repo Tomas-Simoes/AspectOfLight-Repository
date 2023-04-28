@@ -1,10 +1,11 @@
+/*
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class UIDialogue : MonoBehaviour
+public class DialogueMenu : Singleton<DialogueMenu>
 {
     [Header("Others")]
     [SerializeField]
@@ -189,4 +190,4 @@ public class UIDialogue : MonoBehaviour
         else
             return withoutChoisesDialogueText;
     }
-}
+} */

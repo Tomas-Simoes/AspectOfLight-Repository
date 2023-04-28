@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagistrateSigilManager : MonoBehaviour
+public class MagistrateSigilMenu : Singleton<MagistrateSigilMenu>
 {
     public void OnRestPressed() { }
 

@@ -124,6 +124,7 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.SaveData(gameData);
         }
+
         gameData.lastUpdated = System.DateTime.Now.ToBinary();
         dataHandler.Save(gameData, selectedProfileId);
 

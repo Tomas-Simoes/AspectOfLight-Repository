@@ -20,8 +20,7 @@ public class InputHandler : MonoBehaviour
     public bool pressedAbilityThree;
 
     [Header("Pause Input")]
-    [SerializeField]
-    PauseUIManager pauseMenuHandler;
+    private bool isPaused = false;
 
     [Header("UI Input")]
     [SerializeField]
@@ -145,14 +144,15 @@ public class InputHandler : MonoBehaviour
 
     private void SetPause(InputAction.CallbackContext ctx)
     {
-        if (!pauseMenuHandler.isPaused)
-        {
-            pauseMenuHandler.PauseGame();
-        }
-        else
-        {
-            pauseMenuHandler.ResumeGame();
-        }
+        UIManager.Instance.Init();
+
+        EventManager.TriggerEvent(
+            "onPause",
+            true,
+            new Dictionary<string, object> { { "pauseGame", !isPaused } }
+        );
+
+        isPaused = !isPaused;
     }
 
     private void SetSelect(InputAction.CallbackContext ctx)

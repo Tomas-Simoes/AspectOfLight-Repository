@@ -17,35 +17,33 @@ public class ArielDialogueTrigger : DialogueTrigger
 
         if (other.CompareTag("Player"))
         {
-            if (!dialogueManager.inDialogueMode && !dialogueManager.hasDialogueInStandBy)
+            if (
+                !DialogueManager.Instance.inDialogueMode
+                && !DialogueManager.Instance.hasDialogueInStandBy
+            )
             {
-                dialogueManager.StartDialogueMode(dialogue);
+                StartDialogue();
                 return;
             }
 
             if (player.inputHandler.pressedInteract)
             {
-                dialogueManager.TryToStandByCurrentDialogue();
+                DialogueManager.Instance.TryToStandByCurrentDialogue();
             }
         }
     }
 
     void Update()
     {
-        if (dialogueManager.hasDialogueInStandBy)
+        if (DialogueManager.Instance.hasDialogueInStandBy)
         {
-            Debug.Log(
-                Mathf.Round(
-                    Mathf.Abs(player.transform.position.x - gameObject.transform.position.x)
-                )
-            );
             if (
                 Mathf.Round(
                     Mathf.Abs(player.transform.position.x - gameObject.transform.position.x)
                 ) <= newNodeMinimumDistance
             )
             {
-                dialogueManager.ResumeStandByDialogue();
+                DialogueManager.Instance.ResumeStandByDialogue();
 
                 if (newNodeMinimumDistance == 2)
                     newNodeStep++;

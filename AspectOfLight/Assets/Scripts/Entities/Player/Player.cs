@@ -58,8 +58,6 @@ public class Player : Entity, IDataPersistence
 
     public InputHandler inputHandler { get; private set; }
 
-    public static Action OnPlayerDeath;
-
     public override void Start()
     {
         base.Start();
@@ -164,8 +162,7 @@ public class Player : Entity, IDataPersistence
 
     public override void Die()
     {
-        UIManager.Instance.OpenDeathScreen();
-        OnPlayerDeath?.Invoke();
+        EventManager.TriggerEvent("onPlayerDeath", true, null);
     }
 
     private void CheckForFlipping()

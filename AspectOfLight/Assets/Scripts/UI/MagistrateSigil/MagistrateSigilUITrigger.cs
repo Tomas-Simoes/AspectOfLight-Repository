@@ -4,15 +4,11 @@ using UnityEngine;
 
 public class MagistrateSigilUITrigger : MonoBehaviour
 {
-    [Header("Magistrate Sigil Information")]
-    [SerializeField]
-    private GameObject magistrateSigilMenu;
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            magistrateSigilMenu.SetActive(true);
+            UIManager.Instance.ChangeUIMagistrateSigilState(true);
         }
     }
 
@@ -20,7 +16,7 @@ public class MagistrateSigilUITrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            magistrateSigilMenu.SetActive(false);
+            UIManager.Instance.ChangeUIMagistrateSigilState(false);
         }
     }
 }
