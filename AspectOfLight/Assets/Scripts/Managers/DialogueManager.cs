@@ -255,7 +255,11 @@ public class DialogueManager : Singleton<DialogueManager>
         currentNodeIndex = 0;
         //inputHandler.ChangePlayerMapState(true); TODO change this
 
-        EventManager.TriggerEvent("onExitDialogue", true, null);
+        EventManager.TriggerEvent(
+            "onExitDialogue",
+            true,
+            new Dictionary<string, object> { { "inputMap", "Player" }, { "inputMapState", true } }
+        );
     }
 
     public void TryToStandByCurrentDialogue()
@@ -282,9 +286,19 @@ public class DialogueManager : Singleton<DialogueManager>
 
     public void ResumeStandByDialogue()
     {
-        currentNodeIndex = nodeIndexInStandBy + 1;
         timeInNode = 0;
+        currentNodeIndex = nodeIndexInStandBy + 1;
 
-        StartDialogueMode(dialogueInStandBy);
+        EventManager.TriggerEvent(
+            "onDialogue",
+            true,
+            new Dictionary<string, object>
+            {
+                { "dialogue", dialogueInStandBy },
+                { "inputMap", "Player" },
+                { "inputMapState", false },
+                { "startNode", nodeIndexInStandBy + 1 }
+            }
+        );
     }
 }

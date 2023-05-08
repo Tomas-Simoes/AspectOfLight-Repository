@@ -27,7 +27,7 @@ public class MagicSeedBullet : Bullet
         rb.velocity = (GetMousePosition() - transform.position).normalized * speed;
 
         isTravelling = true;
-        abilitySlot = player.abilityManager.GetPlayerAbilitySlot("Magic Seed");
+        //TODO abilitySlot = player.abilityManager.GetPlayerAbilitySlot("Magic Seed");
     }
 
     public override void Update()
@@ -78,6 +78,8 @@ public class MagicSeedBullet : Bullet
 
     private bool PressedAbilityKey()
     {
+        /*
+        TODO
         switch (player.abilityManager.GetPlayerAbilitySlot("Magic Seed"))
         {
             case 1:
@@ -88,6 +90,7 @@ public class MagicSeedBullet : Bullet
                 return player.inputHandler.pressedAbilityThree;
         }
 
+        */
         return false;
     }
 

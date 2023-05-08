@@ -7,6 +7,8 @@ public class DialogueTrigger : MonoBehaviour
     [Header("Informations")]
     [SerializeField]
     protected float minimumTimeToInteractAgain = 0.5f;
+
+    [SerializeField]
     protected float timeSinceInteract;
     protected bool hasFinishedInteraction;
 
@@ -26,12 +28,12 @@ public class DialogueTrigger : MonoBehaviour
         EventManager.StopListening("onExitDialogue", FinishInteraction);
     }
 
-    private void Start()
+    public virtual void Start()
     {
         timeSinceInteract = minimumTimeToInteractAgain;
     }
 
-    private void Update()
+    public virtual void Update()
     {
         if (hasFinishedInteraction)
         {
@@ -45,17 +47,27 @@ public class DialogueTrigger : MonoBehaviour
         hasFinishedInteraction = true;
     }
 
-    public virtual void StartDialogue()
+    public virtual void StartDialogue(int startNode)
     {
+        Debug.Log("bb");
+        Debug.Log(timeSinceInteract);
+        Debug.Log(minimumTimeToInteractAgain);
         if (timeSinceInteract < minimumTimeToInteractAgain)
             return;
 
         hasFinishedInteraction = false;
 
+        Debug.Log("triggered");
         EventManager.TriggerEvent(
             "onDialogue",
             true,
-            new Dictionary<string, object> { { "dialogue", dialogue } }
+            new Dictionary<string, object>
+            {
+                { "dialogue", dialogue },
+                { "inputMap", "Player" },
+                { "startNode", startNode },
+                { "inputMapState", false }
+            }
         );
     }
 

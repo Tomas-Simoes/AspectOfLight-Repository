@@ -4,17 +4,8 @@ using UnityEngine;
 
 public class SummonPlagueAbility : Ability
 {
+    [SerializeField]
     D_SummonPlagueAbility abilityData;
-
-    public SummonPlagueAbility(
-        Player player,
-        D_BaseAbility baseAbilityData,
-        D_SummonPlagueAbility abilityData
-    )
-        : base(player, baseAbilityData)
-    {
-        this.abilityData = abilityData;
-    }
 
     public override void Cast()
     {
