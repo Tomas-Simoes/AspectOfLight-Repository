@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4907bed1d13bdf74098a78e8a55acc54, type: 3}
+  m_Name: AbilitiesData
+  m_EditorClassIdentifier: 
+  abilities:
+  - rid: 6103573841027530759
+  - rid: 6103573841027530760
+  abilityPrefab: {fileID: 1815980126670210084, guid: d88cc555dc60ed94ab2fb3206c71e2ce, type: 3}
+  references:
+    version: 2
+    RefIds:
+    - rid: 6103573841027530759
+      type: {class: MagicSeedAbility, ns: , asm: Assembly-CSharp}
+      data:
+        abilityName: Magic Seed
+        abilityPath: Path of the Luminary
+        abilityCD: 0
+        staminaCost: 0
+        unlockCost: 0
+        isAvailable: 1
+        iconAvailable: {fileID: 21300000, guid: 34c1a4920ab55e342b55f8f8e0d28cda, type: 3}
+        iconUnavailable: {fileID: 21300000, guid: 52d564b5cddc6ff4fa99a9dd77474298, type: 3}
+        description: "Cast this ability to spawn a magic seed. It will travel  for
+          3 seconds or until you recast the ability. \nWhen the Magic Seed is on
+          the ground, recast this ability to teleport instantly to the place where
+          it's planted, restoring x HP."
+        abilityData: {fileID: 0}
+    - rid: 6103573841027530760
+      type: {class: SummonPlagueAbility, ns: , asm: Assembly-CSharp}
+      data:
+        abilityName: Plague
+        abilityPath: Path of the Unnatural
+        abilityCD: 0
+        staminaCost: 0
+        unlockCost: 0
+        isAvailable: 0
+        iconAvailable: {fileID: 21300000, guid: 06a774f02886bde4db7d7b53549b1ff7, type: 3}
+        iconUnavailable: {fileID: 21300000, guid: c4f4ce43bca61a84e87812bbe2bc67ba, type: 3}
+        description: No description yet
+        abilityData: {fileID: 0}

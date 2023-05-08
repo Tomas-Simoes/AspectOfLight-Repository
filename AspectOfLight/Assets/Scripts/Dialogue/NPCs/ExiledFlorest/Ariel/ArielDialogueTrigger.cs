@@ -22,7 +22,7 @@ public class ArielDialogueTrigger : DialogueTrigger
                 && !DialogueManager.Instance.hasDialogueInStandBy
             )
             {
-                StartDialogue();
+                StartDialogue(0);
                 return;
             }
 
@@ -33,8 +33,10 @@ public class ArielDialogueTrigger : DialogueTrigger
         }
     }
 
-    void Update()
+    public override void Update()
     {
+        base.Update();
+
         if (DialogueManager.Instance.hasDialogueInStandBy)
         {
             if (

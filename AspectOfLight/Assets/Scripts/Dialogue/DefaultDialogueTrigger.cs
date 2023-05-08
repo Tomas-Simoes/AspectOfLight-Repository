@@ -13,7 +13,7 @@ public class DefaultDialogueTrigger : DialogueTrigger
         {
             if (!DialogueManager.Instance.inDialogueMode)
             {
-                StartDialogue();
+                StartDialogue(0);
             }
             else
                 EventManager.TriggerEvent("onGoToNextNode", false, null);

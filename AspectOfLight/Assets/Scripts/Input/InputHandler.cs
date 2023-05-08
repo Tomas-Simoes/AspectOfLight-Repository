@@ -34,6 +34,22 @@ public class InputHandler : MonoBehaviour
 
     private void OnEnable()
     {
+        SubscribeInputs();
+
+        EventManager.StartListening("onDialogue", ChangeInputMapState);
+        EventManager.StartListening("onExitDialogue", ChangeInputMapState);
+    }
+
+    private void OnDisable()
+    {
+        UnsubscribeInputs();
+
+        EventManager.StopListening("onDialogue", ChangeInputMapState);
+        EventManager.StopListening("onExitDialogue", ChangeInputMapState);
+    }
+
+    private void SubscribeInputs()
+    {
         inputActions.Enable();
 
         inputActions.Player.XAxisMovement.performed += SetXAxisMovement;
@@ -66,7 +82,7 @@ public class InputHandler : MonoBehaviour
         inputActions.UI.Select.canceled += SetSelect;
     }
 
-    private void OnDisable()
+    private void UnsubscribeInputs()
     {
         inputActions.Player.XAxisMovement.performed -= SetXAxisMovement;
         inputActions.Player.XAxisMovement.canceled -= SetXAxisMovement;
@@ -94,12 +110,25 @@ public class InputHandler : MonoBehaviour
         inputActions.Disable();
     }
 
-    public void ChangePlayerMapState(bool state)
+    public void ChangeInputMapState(Dictionary<string, object> message)
     {
-        if (state)
-            inputActions.Player.Enable();
-        else
-            inputActions.Player.Disable();
+        bool _newState = (bool)message["inputMapState"];
+
+        switch (message["inputMap"])
+        {
+            case "Player":
+                if (_newState)
+                    inputActions.Player.Enable();
+                else
+                    inputActions.Player.Disable();
+                break;
+            case "UI":
+                if (_newState)
+                    inputActions.UI.Enable();
+                else
+                    inputActions.UI.Disable();
+                break;
+        }
     }
 
     private void SetXAxisMovement(InputAction.CallbackContext ctx)

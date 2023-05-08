@@ -1,18 +1,24 @@
 using UnityEngine;
 
-public class Ability
+[System.Serializable]
+public abstract class Ability
 {
-    public D_BaseAbility baseAbilityData;
-    protected Player player;
+    public string abilityName = "No name";
+    public string abilityPath;
+    public float abilityCD = 0;
+    public int staminaCost = 0;
+    public int unlockCost = 0;
+    public bool isAvailable = false;
+    public Sprite iconAvailable;
+    public Sprite iconUnavailable;
 
-    public Ability(Player player, D_BaseAbility baseAbilityData)
-    {
-        this.player = player;
-        this.baseAbilityData = baseAbilityData;
-    }
+    [TextArea(3, 10)]
+    public string description = "No description yet";
+
+    protected Player player;
 
     public virtual void Cast()
     {
-        player.ReduceStamina(baseAbilityData.staminaCost);
+        player = GameObject.Find("Player").GetComponent<Player>();
     }
 }

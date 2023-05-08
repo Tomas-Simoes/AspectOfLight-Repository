@@ -1,19 +1,11 @@
 using UnityEngine;
 
+[System.Serializable]
 public class MagicSeedAbility : Ability
 {
+    [SerializeField]
     private D_MagicSeedAbility abilityData;
     private MagicSeedBullet magicSeedComponent;
-
-    public MagicSeedAbility(
-        Player player,
-        D_BaseAbility baseAbilityData,
-        D_MagicSeedAbility abilityData
-    )
-        : base(player, baseAbilityData)
-    {
-        this.abilityData = abilityData;
-    }
 
     public override void Cast()
     {

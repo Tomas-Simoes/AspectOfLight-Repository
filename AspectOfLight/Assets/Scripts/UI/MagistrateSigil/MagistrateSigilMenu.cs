@@ -6,7 +6,10 @@ public class MagistrateSigilMenu : Singleton<MagistrateSigilMenu>
 {
     public void OnRestPressed() { }
 
-    public void OnSkillTreePressed() { }
+    public void OnSkillTreePressed()
+    {
+        UIManager.Instance.ChangeUIAbilityTreeState(true);
+    }
 
     public void OnSaveGamePressed()
     {
