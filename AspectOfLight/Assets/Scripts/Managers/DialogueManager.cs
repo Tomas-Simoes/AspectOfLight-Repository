@@ -253,12 +253,11 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         inDialogueMode = false;
         currentNodeIndex = 0;
-        //inputHandler.ChangePlayerMapState(true); TODO change this
 
         EventManager.TriggerEvent(
-            "onExitDialogue",
+            "onDialogue",
             true,
-            new Dictionary<string, object> { { "inputMap", "Player" }, { "inputMapState", true } }
+            new Dictionary<string, object> { { "activeState", false } }
         );
     }
 
@@ -294,10 +293,8 @@ public class DialogueManager : Singleton<DialogueManager>
             true,
             new Dictionary<string, object>
             {
+                { "activeState", true },
                 { "dialogue", dialogueInStandBy },
-                { "inputMap", "Player" },
-                { "inputMapState", false },
-                { "startNode", nodeIndexInStandBy + 1 }
             }
         );
     }

@@ -8,7 +8,11 @@ public class MagistrateSigilMenu : Singleton<MagistrateSigilMenu>
 
     public void OnSkillTreePressed()
     {
-        UIManager.Instance.ChangeUIAbilityTreeState(true);
+        EventManager.TriggerEvent(
+            "onAbilityTree",
+            true,
+            new Dictionary<string, object> { { "activeState", true } }
+        );
     }
 
     public void OnSaveGamePressed()

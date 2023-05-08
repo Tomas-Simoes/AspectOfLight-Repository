@@ -7,9 +7,9 @@ public class SummonPlagueAbility : Ability
     [SerializeField]
     D_SummonPlagueAbility abilityData;
 
-    public override void Cast()
+    public override void Cast(Player player)
     {
-        base.Cast();
+        base.Cast(player);
 
         foreach (GameObject spawnpoint in player.plagueSpawnPoints)
         {

@@ -7,9 +7,9 @@ public class MagicSeedAbility : Ability
     private D_MagicSeedAbility abilityData;
     private MagicSeedBullet magicSeedComponent;
 
-    public override void Cast()
+    public override void Cast(Player player)
     {
-        base.Cast();
+        base.Cast(player);
 
         GameObject _bullet = player.CreatePrefab(
             abilityData.bulletPrefab,

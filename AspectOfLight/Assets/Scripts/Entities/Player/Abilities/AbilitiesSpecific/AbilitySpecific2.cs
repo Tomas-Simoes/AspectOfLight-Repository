@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class AbilitySpecific2 : Ability
 {
-    public override void Cast()
+    public override void Cast(Player player)
     {
-        base.Cast();
+        base.Cast(player);
         Debug.Log("Cast specific ability two");
     }
 }

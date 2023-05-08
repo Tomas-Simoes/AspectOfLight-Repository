@@ -36,16 +36,18 @@ public class InputHandler : MonoBehaviour
     {
         SubscribeInputs();
 
-        EventManager.StartListening("onDialogue", ChangeInputMapState);
-        EventManager.StartListening("onExitDialogue", ChangeInputMapState);
+        EventManager.StartListening("onDialogue", ChangeMapStatesBasedOnUI);
+        EventManager.StartListening("onPause", ChangeMapStatesBasedOnUI);
+        EventManager.StartListening("onAbilityTree", ChangeMapStatesBasedOnUI);
     }
 
     private void OnDisable()
     {
         UnsubscribeInputs();
 
-        EventManager.StopListening("onDialogue", ChangeInputMapState);
-        EventManager.StopListening("onExitDialogue", ChangeInputMapState);
+        EventManager.StopListening("onDialogue", ChangeMapStatesBasedOnUI);
+        EventManager.StopListening("onPause", ChangeMapStatesBasedOnUI);
+        EventManager.StopListening("onAbilityTree", ChangeMapStatesBasedOnUI);
     }
 
     private void SubscribeInputs()
@@ -110,25 +112,20 @@ public class InputHandler : MonoBehaviour
         inputActions.Disable();
     }
 
-    public void ChangeInputMapState(Dictionary<string, object> message)
+    public void ChangeMapStatesBasedOnUI(Dictionary<string, object> message)
     {
-        bool _newState = (bool)message["inputMapState"];
+        bool _UIActiveState = (bool)message["activeState"];
 
-        switch (message["inputMap"])
-        {
-            case "Player":
-                if (_newState)
-                    inputActions.Player.Enable();
-                else
-                    inputActions.Player.Disable();
-                break;
-            case "UI":
-                if (_newState)
-                    inputActions.UI.Enable();
-                else
-                    inputActions.UI.Disable();
-                break;
-        }
+        ChangeInputMapState(inputActions.Player, !_UIActiveState);
+        ChangeInputMapState(inputActions.UI, _UIActiveState);
+    }
+
+    public void ChangeInputMapState(InputActionMap map, bool state)
+    {
+        if (state)
+            map.Enable();
+        else
+            map.Disable();
     }
 
     private void SetXAxisMovement(InputAction.CallbackContext ctx)

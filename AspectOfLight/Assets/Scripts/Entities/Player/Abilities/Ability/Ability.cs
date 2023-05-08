@@ -17,8 +17,5 @@ public abstract class Ability
 
     protected Player player;
 
-    public virtual void Cast()
-    {
-        player = GameObject.Find("Player").GetComponent<Player>();
-    }
+    public virtual void Cast(Player player) { }
 }

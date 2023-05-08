@@ -20,12 +20,12 @@ public class DialogueTrigger : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.StartListening("onExitDialogue", FinishInteraction);
+        EventManager.StartListening("onDialogue", FinishInteraction);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening("onExitDialogue", FinishInteraction);
+        EventManager.StopListening("onDialogue", FinishInteraction);
     }
 
     public virtual void Start()
@@ -43,8 +43,11 @@ public class DialogueTrigger : MonoBehaviour
 
     private void FinishInteraction(Dictionary<string, object> message)
     {
-        timeSinceInteract = 0;
-        hasFinishedInteraction = true;
+        if (!(bool)message["activeState"])
+        {
+            timeSinceInteract = 0;
+            hasFinishedInteraction = true;
+        }
     }
 
     public virtual void StartDialogue(int startNode)
@@ -57,17 +60,10 @@ public class DialogueTrigger : MonoBehaviour
 
         hasFinishedInteraction = false;
 
-        Debug.Log("triggered");
         EventManager.TriggerEvent(
             "onDialogue",
             true,
-            new Dictionary<string, object>
-            {
-                { "dialogue", dialogue },
-                { "inputMap", "Player" },
-                { "startNode", startNode },
-                { "inputMapState", false }
-            }
+            new Dictionary<string, object> { { "dialogue", dialogue }, { "startNode", startNode }, }
         );
     }
 

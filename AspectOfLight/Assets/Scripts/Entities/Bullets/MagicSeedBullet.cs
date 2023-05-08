@@ -78,9 +78,7 @@ public class MagicSeedBullet : Bullet
 
     private bool PressedAbilityKey()
     {
-        /*
-        TODO
-        switch (player.abilityManager.GetPlayerAbilitySlot("Magic Seed"))
+        switch (AbilityManager.Instance.GetPlayerAbilitySlot("Magic Seed"))
         {
             case 1:
                 return player.inputHandler.pressedAbilityOne;
@@ -90,7 +88,6 @@ public class MagicSeedBullet : Bullet
                 return player.inputHandler.pressedAbilityThree;
         }
 
-        */
         return false;
     }
 
