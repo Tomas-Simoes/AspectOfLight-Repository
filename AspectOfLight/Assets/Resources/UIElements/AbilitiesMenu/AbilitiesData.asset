@@ -26,14 +26,14 @@ MonoBehaviour:
         abilityPath: Path of the Luminary
         abilityCD: 4
         staminaCost: 10
-        unlockCost: 0
+        unlockCost: 3
         isAvailable: 1
         iconAvailable: {fileID: 21300000, guid: 5c0cb37944d68964b9549d5603182197, type: 3}
         iconUnavailable: {fileID: 21300000, guid: 52d564b5cddc6ff4fa99a9dd77474298, type: 3}
-        description: "Cast this ability to spawn a magic seed. It will travel  for
-          3 seconds or until you recast the ability. \nWhen the Magic Seed is on
-          the ground, recast this ability to teleport instantly to the place where
-          it's planted, restoring x HP."
+        description: "Spawn a magic seed that will travel for 3 seconds or until
+          you recast the ability. \nWhen the Magic Seed is on the ground, recast
+          this ability to teleport instantly to the place where it's planted, restoring
+          x HP."
         abilityData: {fileID: 11400000, guid: 22f222acf306ffc4cb1f307a48fade5a, type: 2}
     - rid: 6103573841027530760
       type: {class: SummonPlagueAbility, ns: , asm: Assembly-CSharp}
@@ -42,9 +42,15 @@ MonoBehaviour:
         abilityPath: Path of the Unnatural
         abilityCD: 0
         staminaCost: 0
-        unlockCost: 0
-        isAvailable: 0
+        unlockCost: 2
+        isAvailable: 1
         iconAvailable: {fileID: 21300000, guid: 06a774f02886bde4db7d7b53549b1ff7, type: 3}
         iconUnavailable: {fileID: 21300000, guid: c4f4ce43bca61a84e87812bbe2bc67ba, type: 3}
-        description: No description yet
+        description: 'Spawns 3 Rotwings that follow the closest enemy. When they
+          reach their target they explode in a small area, damaging all enemies around
+          him.
+
+
+          If no target it''s found, It will follow the player until
+          it founds one.'
         abilityData: {fileID: 0}

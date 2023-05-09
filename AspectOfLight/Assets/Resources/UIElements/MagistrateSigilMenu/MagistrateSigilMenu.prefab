@@ -417,7 +417,7 @@ GameObject:
   - component: {fileID: 3303745817781425816}
   - component: {fileID: 3303745817781425817}
   m_Layer: 5
-  m_Name: SkillTreeButton
+  m_Name: SacredPathsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -873,7 +873,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Skill Tree
+  m_text: Sacred Paths
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 46dd3116f84d43b4abb408877ce28ca1, type: 2}
   m_sharedMaterial: {fileID: 2853334642897727688, guid: 46dd3116f84d43b4abb408877ce28ca1, type: 2}

@@ -101,8 +101,8 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.25490198, g: 0.5803922, b: 0.74509805, a: 1}
-    m_SelectedColor: {r: 0.25663045, g: 0.5787376, b: 0.745283, a: 1}
+    m_PressedColor: {r: 0.59607846, g: 0.1882353, b: 0.25882354, a: 1}
+    m_SelectedColor: {r: 0.7254902, g: 0.2509804, b: 0.33333334, a: 1}
     m_DisabledColor: {r: 0.7075472, g: 0.7075472, b: 0.7075472, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -134,3 +134,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810233f1d01ea404895d1a185c39cff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isSelected: 0

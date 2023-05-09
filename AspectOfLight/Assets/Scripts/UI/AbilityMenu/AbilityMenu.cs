@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class AbilityMenu : Menu
 {
@@ -49,9 +50,18 @@ public class AbilityMenu : Menu
     private bool isChangingPlayerAbility;
     private int slotToChange;
 
+    [Header("Miracles")]
+    [SerializeField]
+    private TextMeshProUGUI miraclesText;
+
+    [Header("Others")]
+    [SerializeField]
+    private Sprite emptySlotSprite;
+
     void Start()
     {
         InitAbilities();
+        miraclesText.text = AbilityManager.Instance.playerMiracles.ToString();
     }
 
     protected override void OnEnable()
@@ -60,12 +70,14 @@ public class AbilityMenu : Menu
 
         EventManager.StartListening("onSelectAbility", OnSelectAbility);
         EventManager.StartListening("onDeselectAbility", OnDeselectAbility);
+        EventManager.StartListening("onCancel", OnCancel);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening("onSelectAbility", OnSelectAbility);
         EventManager.StopListening("onDeselectAbility", OnDeselectAbility);
+        EventManager.StopListening("onCancel", OnCancel);
     }
 
     private void InitAbilities()
@@ -101,14 +113,12 @@ public class AbilityMenu : Menu
                 ? ability.iconAvailable
                 : ability.iconUnavailable;
 
-            _newAbility.GetComponent<Button>().interactable = ability.isAvailable;
-
             _newAbility
                 .GetComponent<Button>()
                 .onClick.AddListener(
                     delegate
                     {
-                        PressedAvailableAbility(ability);
+                        PressedAvailableAbility(_newAbility.GetComponent<Image>(), ability);
                     }
                 );
 
@@ -116,13 +126,20 @@ public class AbilityMenu : Menu
         }
     }
 
-    public void PressedAvailableAbility(Ability ability)
+    public void PressedAvailableAbility(Image image, Ability ability)
     {
         if (isChangingPlayerAbility)
         {
+            //TODO make this warning logs for player
             if (AbilityManager.playerAbilities.ContainsValue(ability))
             {
                 Debug.LogWarning("Ability already equiped");
+                return;
+            }
+
+            if (!ability.isAvailable)
+            {
+                Debug.LogWarning("Ability is locked");
                 return;
             }
 
@@ -141,6 +158,13 @@ public class AbilityMenu : Menu
             ].iconAvailable;
 
             ResetUI();
+            return;
+        }
+
+        if (AbilityManager.Instance.UnlockAbility(ability))
+        {
+            image.sprite = ability.iconAvailable;
+            miraclesText.text = AbilityManager.Instance.playerMiracles.ToString();
         }
     }
 
@@ -151,6 +175,8 @@ public class AbilityMenu : Menu
             true,
             new Dictionary<string, object> { { "activeState", false } }
         );
+
+        ResetUI();
     }
 
     public void OnPlayerAbilityPressed(int slot)
@@ -197,20 +223,40 @@ public class AbilityMenu : Menu
         */
     }
 
+    private void OnCancel(Dictionary<string, object> message)
+    {
+        if (isChangingPlayerAbility)
+        {
+            ResetUI();
+            return;
+        }
+
+        for (int i = 0; i <= 4; i++)
+        {
+            ButtonSelected _abilitySlotButton = abilitySlots[i].GetComponent<ButtonSelected>();
+
+            if (_abilitySlotButton.isSelected)
+            {
+                _abilitySlotButton.ability = null;
+                abilitySlots[i].GetComponent<Image>().sprite = emptySlotSprite;
+
+                AbilityManager.Instance.RemovePlayerAbility(i);
+                ResetUI();
+
+                return;
+            }
+        }
+    }
+
     public void ResetUI()
     {
         ChangeInteractablePlayerAbilitySlots(true, 0);
         abilitySlots[slotToChange].Select();
-
-        ChangeRemovePlayerAbility(slotToChange, false);
-
         isChangingPlayerAbility = false;
     }
 
     public void OnSelectAbility(Dictionary<string, object> message)
     {
-        Debug.Log("on select");
-
         descriptionAbilitySelected.SetActive(true);
         descriptionAbilityNotSelected.SetActive(false);
 
@@ -221,7 +267,6 @@ public class AbilityMenu : Menu
 
     public void OnDeselectAbility(Dictionary<string, object> message)
     {
-        Debug.Log("on deselect");
         descriptionAbilitySelected.SetActive(false);
         descriptionAbilityNotSelected.SetActive(true);
     }

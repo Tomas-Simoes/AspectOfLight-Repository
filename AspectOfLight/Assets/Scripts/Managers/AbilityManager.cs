@@ -20,6 +20,9 @@ public class AbilityManager : Singleton<AbilityManager>
     private float timeSinceAbilityTwo;
     private float timeSinceAbilityThree;
 
+    [Header("Miracles")]
+    public int playerMiracles = 3;
+
     private void Update()
     {
         UpdateCooldowns();
@@ -72,6 +75,31 @@ public class AbilityManager : Singleton<AbilityManager>
         else
         {
             //TODO play some visual indicator that user has no stamina;
+        }
+    }
+
+    public void RemovePlayerAbility(int slot)
+    {
+        playerAbilities.Remove(slot);
+
+        //UpdateAbilityObject(GetPlayerSlotButton(slotToChange).gameObject, "Slot " + slot);
+        //ChangeRemovePlayerAbility(slot, false);
+        //GetPlayerSlotButton(slotToChange).GetComponent<ButtonDescription>().description = " ";
+    }
+
+    public bool UnlockAbility(Ability ability)
+    {
+        if (ability.unlockCost <= playerMiracles)
+        {
+            ability.isAvailable = true;
+            playerMiracles -= ability.unlockCost;
+
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("You don't have enough miracles");
+            return false;
         }
     }
 
@@ -221,7 +249,7 @@ public class AbilityManager : Singleton<AbilityManager>
         ResetUI();
     }
   
-    
+  
   
     public void SelectUIAbility(string abilityName)
     {

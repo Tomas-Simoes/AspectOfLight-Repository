@@ -6,183 +6,180 @@ using UnityEngine.InputSystem.Interactions;
 
 public class InputHandler : MonoBehaviour
 {
-    InputActions inputActions;
+  InputActions inputActions;
 
-    [Header("Walking Input")]
-    public float xAxis;
-    public float yAxis;
+  [Header("Walking Input")]
+  public float xAxis;
+  public float yAxis;
 
-    [Header("Abilities Input")]
-    public bool pressingAttack;
-    public bool pressedDash;
-    public bool pressedAbilityOne; //? now it's the necromancer ability
-    public bool pressedAbilityTwo;
-    public bool pressedAbilityThree;
+  [Header("Abilities Input")]
+  public bool pressingAttack;
+  public bool pressedDash;
+  public bool pressedAbilityOne; //? now it's the necromancer ability
+  public bool pressedAbilityTwo;
+  public bool pressedAbilityThree;
 
-    [Header("Pause Input")]
-    private bool isPaused = false;
+  [Header("Pause Input")]
+  private bool isPaused = false;
 
-    [Header("UI Input")]
-    [SerializeField]
-    public bool pressedSelect;
-    public bool pressedInteract;
+  [Header("UI Input")]
+  [SerializeField]
+  public bool pressedSelect;
+  public bool pressedInteract;
 
-    void Awake()
-    {
-        inputActions = new InputActions();
-    }
+  void Awake()
+  {
+    inputActions = new InputActions();
+  }
 
-    private void OnEnable()
-    {
-        SubscribeInputs();
+  private void OnEnable()
+  {
+    SubscribeInputs();
 
-        EventManager.StartListening("onDialogue", ChangeMapStatesBasedOnUI);
-        EventManager.StartListening("onPause", ChangeMapStatesBasedOnUI);
-        EventManager.StartListening("onAbilityTree", ChangeMapStatesBasedOnUI);
-    }
+    EventManager.StartListening("onDialogue", ChangeMapStatesBasedOnUI);
+    EventManager.StartListening("onPause", ChangeMapStatesBasedOnUI);
+    EventManager.StartListening("onAbilityTree", ChangeMapStatesBasedOnUI);
+  }
 
-    private void OnDisable()
-    {
-        UnsubscribeInputs();
+  private void OnDisable()
+  {
+    UnsubscribeInputs();
 
-        EventManager.StopListening("onDialogue", ChangeMapStatesBasedOnUI);
-        EventManager.StopListening("onPause", ChangeMapStatesBasedOnUI);
-        EventManager.StopListening("onAbilityTree", ChangeMapStatesBasedOnUI);
-    }
+    EventManager.StopListening("onDialogue", ChangeMapStatesBasedOnUI);
+    EventManager.StopListening("onPause", ChangeMapStatesBasedOnUI);
+    EventManager.StopListening("onAbilityTree", ChangeMapStatesBasedOnUI);
+  }
 
-    private void SubscribeInputs()
-    {
-        inputActions.Enable();
+  private void SubscribeInputs()
+  {
+    inputActions.Enable();
 
-        inputActions.Player.XAxisMovement.performed += SetXAxisMovement;
-        inputActions.Player.XAxisMovement.canceled += SetXAxisMovement;
+    inputActions.Player.XAxisMovement.performed += SetXAxisMovement;
+    inputActions.Player.XAxisMovement.canceled += SetXAxisMovement;
 
-        inputActions.Player.YAxisMovement.performed += SetYAxisMovement;
-        inputActions.Player.YAxisMovement.canceled += SetYAxisMovement;
+    inputActions.Player.YAxisMovement.performed += SetYAxisMovement;
+    inputActions.Player.YAxisMovement.canceled += SetYAxisMovement;
 
-        inputActions.Player.Dash.started += SetDashing;
-        inputActions.Player.Dash.canceled += SetDashing;
+    inputActions.Player.Dash.started += SetDashing;
+    inputActions.Player.Dash.canceled += SetDashing;
 
-        inputActions.Player.AbilityOne.started += SetAbilityOne;
-        inputActions.Player.AbilityOne.canceled += SetAbilityOne;
+    inputActions.Player.AbilityOne.started += SetAbilityOne;
+    inputActions.Player.AbilityOne.canceled += SetAbilityOne;
 
-        inputActions.Player.AbilityTwo.started += SetAbilityTwo;
-        inputActions.Player.AbilityTwo.canceled += SetAbilityTwo;
+    inputActions.Player.AbilityTwo.started += SetAbilityTwo;
+    inputActions.Player.AbilityTwo.canceled += SetAbilityTwo;
 
-        inputActions.Player.AbilityThree.started += SetAbilityThree;
-        inputActions.Player.AbilityThree.canceled += SetAbilityThree;
+    inputActions.Player.AbilityThree.started += SetAbilityThree;
+    inputActions.Player.AbilityThree.canceled += SetAbilityThree;
 
-        inputActions.Player.Attack.performed += SetAttack;
-        inputActions.Player.Attack.canceled += SetAttack;
+    inputActions.Player.Attack.performed += SetAttack;
+    inputActions.Player.Attack.canceled += SetAttack;
 
-        inputActions.UI.Interact.started += SetInteract;
-        inputActions.UI.Interact.canceled += SetInteract;
+    inputActions.UI.Interact.performed += SetInteract;
+    inputActions.UI.Pause.performed += SetPause;
+    inputActions.UI.Select.performed += SetSelect;
+    inputActions.UI.Cancel.performed += SetCancel;
+  }
 
-        inputActions.UI.Pause.performed += SetPause;
+  private void UnsubscribeInputs()
+  {
+    inputActions.Player.XAxisMovement.performed -= SetXAxisMovement;
+    inputActions.Player.XAxisMovement.canceled -= SetXAxisMovement;
 
-        inputActions.UI.Select.started += SetSelect;
-        inputActions.UI.Select.canceled += SetSelect;
-    }
+    inputActions.Player.XAxisMovement.performed -= SetYAxisMovement;
+    inputActions.Player.XAxisMovement.canceled -= SetYAxisMovement;
 
-    private void UnsubscribeInputs()
-    {
-        inputActions.Player.XAxisMovement.performed -= SetXAxisMovement;
-        inputActions.Player.XAxisMovement.canceled -= SetXAxisMovement;
+    inputActions.Player.Dash.started -= SetDashing;
+    inputActions.Player.Dash.canceled -= SetDashing;
 
-        inputActions.Player.XAxisMovement.performed -= SetYAxisMovement;
-        inputActions.Player.XAxisMovement.canceled -= SetYAxisMovement;
+    inputActions.Player.AbilityOne.started -= SetAbilityOne;
+    inputActions.Player.AbilityOne.canceled += SetAbilityOne;
 
-        inputActions.Player.Dash.started -= SetDashing;
-        inputActions.Player.Dash.canceled -= SetDashing;
+    inputActions.Player.Attack.performed -= SetAttack;
+    inputActions.Player.Attack.canceled -= SetAttack;
 
-        inputActions.Player.AbilityOne.started -= SetAbilityOne;
-        inputActions.Player.AbilityOne.canceled += SetAbilityOne;
+    inputActions.UI.Interact.performed -= SetInteract;
+    inputActions.UI.Pause.performed -= SetPause;
+    inputActions.UI.Select.performed -= SetSelect;
+    inputActions.UI.Cancel.performed -= SetCancel;
 
-        inputActions.Player.Attack.performed -= SetAttack;
-        inputActions.Player.Attack.canceled -= SetAttack;
+    inputActions.Disable();
+  }
 
-        inputActions.UI.Interact.started -= SetInteract;
-        inputActions.UI.Interact.canceled -= SetInteract;
+  public void ChangeMapStatesBasedOnUI(Dictionary<string, object> message)
+  {
+    bool _UIActiveState = (bool)message["activeState"];
 
-        inputActions.UI.Pause.performed -= SetPause;
+    ChangeInputMapState(inputActions.Player, !_UIActiveState);
+    ChangeInputMapState(inputActions.UI, _UIActiveState);
+  }
 
-        inputActions.UI.Select.started -= SetSelect;
-        inputActions.UI.Select.canceled += SetSelect;
+  public void ChangeInputMapState(InputActionMap map, bool state)
+  {
+    if (state)
+      map.Enable();
+    else
+      map.Disable();
+  }
 
-        inputActions.Disable();
-    }
+  private void SetXAxisMovement(InputAction.CallbackContext ctx)
+  {
+    xAxis = ctx.ReadValue<Vector2>().x;
+  }
 
-    public void ChangeMapStatesBasedOnUI(Dictionary<string, object> message)
-    {
-        bool _UIActiveState = (bool)message["activeState"];
+  private void SetYAxisMovement(InputAction.CallbackContext ctx)
+  {
+    yAxis = ctx.ReadValue<Vector2>().y;
+  }
 
-        ChangeInputMapState(inputActions.Player, !_UIActiveState);
-        ChangeInputMapState(inputActions.UI, _UIActiveState);
-    }
+  private void SetDashing(InputAction.CallbackContext ctx)
+  {
+    pressedDash = ctx.started;
+  }
 
-    public void ChangeInputMapState(InputActionMap map, bool state)
-    {
-        if (state)
-            map.Enable();
-        else
-            map.Disable();
-    }
+  private void SetAbilityOne(InputAction.CallbackContext ctx)
+  {
+    pressedAbilityOne = ctx.started;
+  }
 
-    private void SetXAxisMovement(InputAction.CallbackContext ctx)
-    {
-        xAxis = ctx.ReadValue<Vector2>().x;
-    }
+  private void SetAbilityTwo(InputAction.CallbackContext ctx)
+  {
+    pressedAbilityTwo = ctx.started;
+  }
 
-    private void SetYAxisMovement(InputAction.CallbackContext ctx)
-    {
-        yAxis = ctx.ReadValue<Vector2>().y;
-    }
+  private void SetAbilityThree(InputAction.CallbackContext ctx)
+  {
+    pressedAbilityThree = ctx.started;
+  }
 
-    private void SetDashing(InputAction.CallbackContext ctx)
-    {
-        pressedDash = ctx.started;
-    }
+  private void SetAttack(InputAction.CallbackContext ctx)
+  {
+    pressingAttack = ctx.performed;
+  }
 
-    private void SetAbilityOne(InputAction.CallbackContext ctx)
-    {
-        pressedAbilityOne = ctx.started;
-    }
+  private void SetInteract(InputAction.CallbackContext ctx)
+  {
+    pressedInteract = ctx.started;
+  }
 
-    private void SetAbilityTwo(InputAction.CallbackContext ctx)
-    {
-        pressedAbilityTwo = ctx.started;
-    }
+  private void SetPause(InputAction.CallbackContext ctx)
+  {
+    EventManager.TriggerEvent(
+        "onPause",
+        true,
+        new Dictionary<string, object> { { "pauseGame", !isPaused } }
+    );
 
-    private void SetAbilityThree(InputAction.CallbackContext ctx)
-    {
-        pressedAbilityThree = ctx.started;
-    }
+    isPaused = !isPaused;
+  }
 
-    private void SetAttack(InputAction.CallbackContext ctx)
-    {
-        pressingAttack = ctx.performed;
-    }
+  private void SetSelect(InputAction.CallbackContext ctx)
+  {
+    pressedSelect = ctx.started;
+  }
 
-    private void SetInteract(InputAction.CallbackContext ctx)
-    {
-        pressedInteract = ctx.started;
-    }
-
-    private void SetPause(InputAction.CallbackContext ctx)
-    {
-        UIManager.Instance.Init();
-
-        EventManager.TriggerEvent(
-            "onPause",
-            true,
-            new Dictionary<string, object> { { "pauseGame", !isPaused } }
-        );
-
-        isPaused = !isPaused;
-    }
-
-    private void SetSelect(InputAction.CallbackContext ctx)
-    {
-        pressedSelect = ctx.started;
-    }
+  private void SetCancel(InputAction.CallbackContext ctx)
+  {
+    EventManager.TriggerEvent("onCancel", true, null);
+  }
 }

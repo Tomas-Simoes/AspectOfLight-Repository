@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager>
 {
+    [Header("UI information")]
+    private string currentUI;
+
     [Header("Death UI")]
     private GameObject deathScreen;
     private TextMeshProUGUI deathText;
@@ -98,7 +101,7 @@ public class UIManager : Singleton<UIManager>
                 .onClick.AddListener(MagistrateSigilMenu.Instance.OnRestPressed);
 
             magistrateSigilMenu.transform
-                .Find("Buttons/SkillTreeButton")
+                .Find("Buttons/SacredPathsButton")
                 .GetComponent<Button>()
                 .onClick.AddListener(MagistrateSigilMenu.Instance.OnSkillTreePressed);
 
