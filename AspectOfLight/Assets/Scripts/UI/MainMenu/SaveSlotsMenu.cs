@@ -34,19 +34,21 @@ public class SaveSlotsMenu : Menu
     {
         DisableMenuButtoms();
 
-        DataPersistenceManager.instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
+        DataPersistenceManager.Instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
 
+        Debug.Log("Is Loading Game: " + isLoadingGame);
         if (!isLoadingGame)
         {
-            DataPersistenceManager.instance.NewGame();
+            DataPersistenceManager.Instance.NewGame();
         }
-        DataPersistenceManager.instance.SaveGame();
+
+        //DataPersistenceManager.Instance.SaveGame();
         SceneManager.LoadSceneAsync("ExiledFlorest");
     }
 
     public void OnClearClicked(SaveSlot saveSlot)
     {
-        DataPersistenceManager.instance.DeleteProfileData(saveSlot.GetProfileId());
+        DataPersistenceManager.Instance.DeleteProfileData(saveSlot.GetProfileId());
         ActivateMenu(isLoadingGame);
     }
 
@@ -56,7 +58,7 @@ public class SaveSlotsMenu : Menu
         this.isLoadingGame = isLoadingGame;
 
         Dictionary<string, GameData> profilesGameData =
-            DataPersistenceManager.instance.GetAllProfilesGameData();
+            DataPersistenceManager.Instance.GetAllProfilesGameData();
 
         GameObject firstSelected = backButton.gameObject;
         foreach (SaveSlot saveSlot in saveSlots)

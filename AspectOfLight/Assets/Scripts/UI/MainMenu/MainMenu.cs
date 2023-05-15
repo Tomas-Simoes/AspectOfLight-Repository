@@ -24,11 +24,13 @@ public class MainMenu : Menu
     void Start()
     {
         DisableButtonsDepedingOnData();
+
+        GameManager.Instance.gameStarted = false;
     }
 
     private void DisableButtonsDepedingOnData()
     {
-        if (!DataPersistenceManager.instance.HasGameData())
+        if (!DataPersistenceManager.Instance.HasGameData())
         {
             continueGameButton.interactable = false;
             loadGameButton.interactable = false;
@@ -53,8 +55,8 @@ public class MainMenu : Menu
     public void OnContinueClicked()
     {
         DisableMenuButtons();
-        DataPersistenceManager.instance.SaveGame();
-        SceneManager.LoadSceneAsync(DataPersistenceManager.instance.gameData.areaInMap);
+        DataPersistenceManager.Instance.LoadGame();
+        SceneManager.LoadSceneAsync(DataPersistenceManager.Instance.gameData.areaInMap);
     }
 
     private void DisableMenuButtons()

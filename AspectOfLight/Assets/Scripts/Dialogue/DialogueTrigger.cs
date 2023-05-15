@@ -52,9 +52,6 @@ public class DialogueTrigger : MonoBehaviour
 
     public virtual void StartDialogue(int startNode)
     {
-        Debug.Log("bb");
-        Debug.Log(timeSinceInteract);
-        Debug.Log(minimumTimeToInteractAgain);
         if (timeSinceInteract < minimumTimeToInteractAgain)
             return;
 

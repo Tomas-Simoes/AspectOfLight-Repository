@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.SceneManagement;
 
-public class DataPersistenceManager : MonoBehaviour
+public class DataPersistenceManager : Singleton<DataPersistenceManager>
 {
     [Header("Debugging")]
     [SerializeField]
@@ -21,32 +20,31 @@ public class DataPersistenceManager : MonoBehaviour
 
     [Header("File Storage Config")]
     [SerializeField]
-    private string fileName;
+    private string fileName = "data.game";
 
     [SerializeField]
     private bool useEncryption;
 
+    [SerializeField]
     public GameData gameData;
     private FileDataHandler dataHandler;
 
+    [SerializeField]
     private string selectedProfileId = "";
 
-    private List<IDataPersistence> dataPersistanceObjects;
-    public static DataPersistenceManager instance { get; private set; }
+    private List<IDataPersistence> dataPersistanceObjects = new List<IDataPersistence>();
+
+    //! THIS IS FOR DEVELOPMENT ONLY
+    //! REMOVE THIS WHEN BUILDING THE GAME
+    public override void Init()
+    {
+        base.Init();
+
+        LoadGame();
+    }
 
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.Log(
-                "Found more than one Data Persistence Manager in the scene. Destroying the newest one."
-            );
-            Destroy(this.gameObject);
-            return;
-        }
-
-        instance = this;
-
         if (disableDataPersitence)
         {
             Debug.LogWarning("Data Persitence is currently disabled.");
@@ -59,22 +57,6 @@ public class DataPersistenceManager : MonoBehaviour
         );
 
         InitializeSelectedProfileId();
-    }
-
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        this.dataPersistanceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
     }
 
     public void ChangeSelectedProfileId(string newProfileId)
@@ -93,6 +75,7 @@ public class DataPersistenceManager : MonoBehaviour
     private void InitializeSelectedProfileId()
     {
         this.selectedProfileId = dataHandler.GetMostRecentlyUpdatedProfileId();
+
         if (overrideSelectedProfileId)
         {
             this.selectedProfileId = testSelectedProfileId;
@@ -103,6 +86,8 @@ public class DataPersistenceManager : MonoBehaviour
     public void NewGame()
     {
         this.gameData = new GameData();
+        SaveGame();
+        GameManager.Instance.gameStarted = true;
     }
 
     public void SaveGame()
@@ -120,15 +105,18 @@ public class DataPersistenceManager : MonoBehaviour
             return;
         }
 
+        dataPersistanceObjects = FindAllDataPersistenceObjects();
+
         foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
             dataPersistenceObj.SaveData(gameData);
         }
 
         gameData.lastUpdated = System.DateTime.Now.ToBinary();
+
         dataHandler.Save(gameData, selectedProfileId);
 
-        Debug.Log("Saved profile: " + selectedProfileId);
+        EventManager.TriggerEvent("onGameSaved", true, null);
     }
 
     public void LoadGame()
@@ -140,12 +128,6 @@ public class DataPersistenceManager : MonoBehaviour
 
         this.gameData = dataHandler.Load(selectedProfileId);
 
-        //? This is only for debugging reasons
-        if (this.gameData == null && initializeDataIfNull)
-        {
-            NewGame();
-        }
-
         if (this.gameData == null)
         {
             Debug.LogWarning(
@@ -154,20 +136,15 @@ public class DataPersistenceManager : MonoBehaviour
             return;
         }
 
+        dataPersistanceObjects = FindAllDataPersistenceObjects();
         foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
-            Debug.Log("Loading data ");
             dataPersistenceObj.LoadData(gameData);
         }
+
+        Debug.Log(gameData.currentHealth);
     }
 
-    /*
-    ? Only for testing purpouses
-    private void OnApplicationQuit()
-    {
-        //SaveGame();
-    }
-    */
     private List<IDataPersistence> FindAllDataPersistenceObjects()
     {
         IEnumerable<IDataPersistence> dataPersistencesObjects = FindObjectsOfType<MonoBehaviour>(
@@ -180,6 +157,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     public bool HasGameData()
     {
+        LoadGame();
         return gameData != null;
     }
 

@@ -30,14 +30,17 @@ public class Entity : MonoBehaviour
     [Header("Others")]
     private Color defaultDamageColor = Color.red;
 
+    public virtual void Awake()
+    {
+        stateMachine = new StateMachine();
+    }
+
     public virtual void Start()
     {
         facingDirection = 1;
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
-        stateMachine = new StateMachine();
     }
 
     public virtual void Update()

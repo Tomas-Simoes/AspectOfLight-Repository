@@ -38,7 +38,12 @@ public class Player_MoveState : State
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+        entity.rb.velocity = player.axisMovement.normalized * player.currentMovementSpeed;
+    }
 
-        entity.rb.velocity = player.axisMovement.normalized * stateData.movementSpeed;
+    public void ChangePlayerMovementSpeed(Dictionary<string, object> message)
+    {
+        player.currentMovementSpeed = stateData.movementSpeed;
+        EventManager.StopListening("onRest", ChangePlayerMovementSpeed);
     }
 }

@@ -31,6 +31,7 @@ public class Singleton<T> : MonoBehaviour
                         // Need to create a new GameObject to attach the singleton to.
                         var singletonObject = new GameObject();
                         instance = singletonObject.AddComponent<T>();
+
                         singletonObject.name = typeof(T).ToString() + " (Singleton)";
                         // Make instance persistent.
                         DontDestroyOnLoad(singletonObject);
@@ -43,11 +44,6 @@ public class Singleton<T> : MonoBehaviour
     }
 
     private void OnApplicationQuit()
-    {
-        shuttingDown = true;
-    }
-
-    private void OnDestroy()
     {
         shuttingDown = true;
     }

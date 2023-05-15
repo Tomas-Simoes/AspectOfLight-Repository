@@ -198,15 +198,6 @@
             "id": "2adec513-3fcb-48d4-80a6-427003771115",
             "actions": [
                 {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "2e54ed42-88f4-4fb0-a511-91e6a4526e57",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Move",
                     "type": "Value",
                     "id": "9dfc900e-6487-4534-bf43-98decb0f2d9e",
@@ -225,27 +216,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Interact",
-                    "type": "Button",
-                    "id": "4c262ddd-3215-43cc-b538-94e76a56fba7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Click",
                     "type": "Button",
                     "id": "62f99d57-8e6d-4915-aacc-3e722ef081c4",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Cancel",
-                    "type": "Button",
-                    "id": "24c477fa-e894-4672-b0e1-8cfb3ecf01aa",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -265,6 +238,15 @@
                     "type": "PassThrough",
                     "id": "578b4552-2bb4-4419-8ad8-1651a2e36219",
                     "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Cancel",
+                    "type": "Button",
+                    "id": "54cce947-3b59-4904-8a6a-1f1ea44356ef",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -372,7 +354,44 @@
                 },
                 {
                     "name": "",
-                    "id": "9acffae0-663a-4c3e-9add-4500ad6d4ac4",
+                    "id": "a955a99a-f556-460c-a5f9-74c64dbd88ac",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Cancel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "InGameActions",
+            "id": "55e105db-01c9-4600-af01-7bb9a9bdb2b7",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "f7304ad7-7246-415a-a34a-a1fdf6866ed0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "89015267-62aa-4aa4-a260-fc93b9ce6186",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "d30774b9-60f1-4702-aec9-3bd0021d7bcc",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
@@ -383,23 +402,12 @@
                 },
                 {
                     "name": "",
-                    "id": "b2cf3600-0030-4b70-b37b-8721f647490c",
+                    "id": "bed449f2-dbce-4811-901f-c5c7d4a5ea4b",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b4021b57-e975-434c-b587-c17c78c47923",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Cancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

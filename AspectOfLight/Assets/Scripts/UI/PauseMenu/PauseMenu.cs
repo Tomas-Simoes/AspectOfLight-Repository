@@ -2,32 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PauseMenu : Singleton<PauseMenu>
+public class PauseMenu : Menu
 {
-    private void OnEnable()
+    protected override void OnEnable()
     {
-        EventManager.StartListening("onPause", OnPauseGame);
+        base.OnEnable();
+
+        PauseGame(true);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening("onPause", OnPauseGame);
+        PauseGame(false);
     }
 
-    public void OnPauseGame(Dictionary<string, object> message)
+    public void PauseGame(bool pauseState)
     {
-        if ((bool)message["pauseGame"])
+        if (pauseState)
             Time.timeScale = 0f;
         else
             Time.timeScale = 1f;
     }
 
-    public void OnContinueClicked()
+    public void OnContinuePressed()
     {
         EventManager.TriggerEvent(
             "onPause",
-            false,
-            new Dictionary<string, object> { { "pauseGame", false } }
+            true,
+            new Dictionary<string, object> { { "activeState", false } }
         );
+    }
+
+    public void OnOptionsPressed() { }
+
+    public void OnQuitToMenuPressed()
+    {
+        ScenesManager.Instance.LoadScene("MainMenu");
     }
 }

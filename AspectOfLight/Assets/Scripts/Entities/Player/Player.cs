@@ -27,11 +27,11 @@ public class Player : Entity, IDataPersistence
     [Header("Cooldowns")]
     public float timeSinceAttack;
     public float timeSinceDash;
-
     public float timeSinceStaminaUsage;
 
     [Header("Information")]
     public Vector2 axisMovement;
+    public float currentMovementSpeed;
 
     [SerializeField]
     private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
@@ -56,20 +56,9 @@ public class Player : Entity, IDataPersistence
 
     public InputHandler inputHandler { get; private set; }
 
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
-
-        currentHealth = entityData.MAX_HEALTH;
-        timeSinceDash = coolDownData.dashCD;
-        currentStamina = staminaData.MAX_STAMINA;
-
-        StartCoroutine(RecoverStamina());
-
-        if (inputHandler == null)
-        {
-            inputHandler = this.GetComponent<InputHandler>();
-        }
+        base.Awake();
 
         moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
         dashState = new Player_DashState(
@@ -89,6 +78,29 @@ public class Player : Entity, IDataPersistence
             this,
             coolDownData
         );
+    }
+
+    private void OnEnable()
+    {
+        EventManager.StartListening("onRest", moveState.ChangePlayerMovementSpeed);
+        EventManager.StartListening("onRest", Rest);
+    }
+
+    public override void Start()
+    {
+        base.Start();
+        timeSinceDash = coolDownData.dashCD;
+
+        StartCoroutine(RecoverStamina());
+
+        if (inputHandler == null)
+        {
+            inputHandler = this.GetComponent<InputHandler>();
+        }
+
+        //! THIS IS FOR DEVELOPMENT ONLY
+        //! REMOVE THIS WHEN BUILDING THE GAME
+        DataPersistenceManager.Instance.Init();
 
         stateMachine.Init(moveState);
     }
@@ -98,7 +110,7 @@ public class Player : Entity, IDataPersistence
         base.Update();
 
         GetInputs();
-        CheckForFlipping();
+        RotatePlayerBasedOnMousePosition();
     }
 
     public override void UpdateCooldowns()
@@ -174,10 +186,20 @@ public class Player : Entity, IDataPersistence
 
     public override void Die()
     {
-        EventManager.TriggerEvent("onPlayerDeath", true, null);
+        EventManager.TriggerEvent(
+            "onPlayerDeath",
+            true,
+            new Dictionary<string, object> { { "activeState", true } }
+        );
     }
 
-    private void CheckForFlipping()
+    public void Rest(Dictionary<string, object> message)
+    {
+        currentHealth = entityData.MAX_HEALTH;
+        currentStamina = staminaData.MAX_STAMINA;
+    }
+
+    private void RotatePlayerBasedOnMousePosition()
     {
         Vector2 mouseDirection =
             Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
@@ -202,7 +224,7 @@ public class Player : Entity, IDataPersistence
     {
         while (true)
         {
-            if (timeSinceStaminaUsage >= 1f)
+            if (timeSinceStaminaUsage >= 1f || currentStamina <= staminaData.MAX_STAMINA)
             {
                 currentStamina += staminaData.recoverStaminaRate;
             }
@@ -218,11 +240,17 @@ public class Player : Entity, IDataPersistence
 
     public void LoadData(GameData data)
     {
+        currentHealth = data.currentHealth;
+        currentStamina = data.currentStamina;
         transform.position = data.playerPosition;
+        currentMovementSpeed = data.movementSpeed;
     }
 
     public void SaveData(GameData data)
     {
+        data.currentHealth = currentHealth;
+        data.currentStamina = currentStamina;
+        data.movementSpeed = currentMovementSpeed;
         data.playerPosition = transform.position;
     }
 }

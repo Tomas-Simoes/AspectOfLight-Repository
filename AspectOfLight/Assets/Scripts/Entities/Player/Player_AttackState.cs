@@ -87,6 +87,7 @@ public class Player_AttackState : State
 
             _bullet.GetComponent<DefaultBullet>().damage = currentDamage;
 
+            Debug.Log(stateMachine);
             stateMachine.ChangeState(player.moveState);
         }
     }

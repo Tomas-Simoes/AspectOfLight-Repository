@@ -1,13 +1,11 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Collections;
 using System.Collections.Generic;
 
 public class UIManager : Singleton<UIManager>
 {
-    [Header("UI information")]
-    private string currentUI;
-
     [Header("Death UI")]
     private GameObject deathScreen;
     private TextMeshProUGUI deathText;
@@ -26,50 +24,37 @@ public class UIManager : Singleton<UIManager>
     [Header("Ability Tree UI")]
     private GameObject abilityTree;
 
+    [Header("Progress Saved UI")]
+    private GameObject progressSavedText;
+
     private void OnEnable()
     {
-        EventManager.StartListening("onPlayerDeath", Instance.OpenDeathScreen);
-        EventManager.StartListening("onPause", Instance.ChangeUIPauseState);
-        EventManager.StartListening("onDialogue", Instance.ChangeUIDialogueState);
-        EventManager.StartListening("onAbilityTree", Instance.ChangeUIAbilityTreeState);
+        EventManager.StartListening("onPlayerDeath", OpenDeathScreen);
+        EventManager.StartListening("onPause", ChangeUIPauseState);
+        EventManager.StartListening("onMagistrateSigil", ChangeUIMagistrateSigilState);
+        EventManager.StartListening("onDialogue", ChangeUIDialogueState);
+        EventManager.StartListening("onAbilityTree", ChangeUIAbilityTreeState);
+        EventManager.StartListening("onGameSaved", ShowProgressSavedText);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening("onPlayerDeath", Instance.OpenDeathScreen);
-        EventManager.StopListening("onPause", Instance.ChangeUIPauseState);
-        EventManager.StopListening("onDialogue", Instance.ChangeUIDialogueState);
-        EventManager.StopListening("onAbilityTree", Instance.ChangeUIAbilityTreeState);
+        EventManager.StopListening("onPlayerDeath", OpenDeathScreen);
+        EventManager.StopListening("onPause", ChangeUIPauseState);
+        EventManager.StopListening("onMagistrateSigil", ChangeUIMagistrateSigilState);
+        EventManager.StopListening("onDialogue", ChangeUIDialogueState);
+        EventManager.StopListening("onAbilityTree", ChangeUIAbilityTreeState);
+        EventManager.StopListening("onGameSaved", ShowProgressSavedText);
     }
 
     public void OpenDeathScreen(Dictionary<string, object> message)
     {
         if (deathScreen == null)
         {
-            D_DeathScreen deathScreenData = Resources.Load<D_DeathScreen>(
-                "UIElements/DeathScreen/DeathScreenData"
-            );
-
-            deathScreen = Instantiate(deathScreenData.deathScreen);
-            deathMessages = deathScreenData.deathMessages;
-
-            deathScreen.transform.SetParent(
-                GameObject.FindGameObjectWithTag("Canvas").transform,
-                false
-            );
-
-            deathScreen.transform
-                .Find("Buttons/ContinueButton")
-                .GetComponent<Button>()
-                .onClick.AddListener(DeathMenu.Instance.OnContinueClicked);
-
-            deathText = deathScreen.transform.Find("Text").GetComponent<TextMeshProUGUI>();
+            deathScreen = LoadUIObject("UIElements/DeathScreen/DeathScreen");
         }
 
-        Time.timeScale = 0f;
-
-        deathScreen.SetActive(true);
-        deathText.text = deathMessages[UnityEngine.Random.Range(0, deathMessages.Length)];
+        deathScreen.SetActive((bool)message["activeState"]);
     }
 
     public void ChangeUIPauseState(Dictionary<string, object> message)
@@ -77,53 +62,26 @@ public class UIManager : Singleton<UIManager>
         if (pauseMenu == null)
         {
             pauseMenu = LoadUIObject("UIElements/PauseMenu/PauseMenu");
-
-            GetChildObject(pauseMenu, "Buttons/ContinueButton")
-                .GetComponent<Button>()
-                .onClick.AddListener(PauseMenu.Instance.OnContinueClicked);
         }
 
-        pauseMenu.SetActive((bool)message["pauseGame"]);
+        pauseMenu.SetActive((bool)message["activeState"]);
     }
 
-    //TODO Change this to the event system
-    public void ChangeUIMagistrateSigilState(bool activeState)
+    public void ChangeUIMagistrateSigilState(Dictionary<string, object> message)
     {
         if (magistrateSigilMenu == null)
         {
             magistrateSigilMenu = LoadUIObject(
                 "UIElements/MagistrateSigilMenu/MagistrateSigilMenu"
             );
-
-            magistrateSigilMenu.transform
-                .Find("Buttons/RestButton")
-                .GetComponent<Button>()
-                .onClick.AddListener(MagistrateSigilMenu.Instance.OnRestPressed);
-
-            magistrateSigilMenu.transform
-                .Find("Buttons/SacredPathsButton")
-                .GetComponent<Button>()
-                .onClick.AddListener(MagistrateSigilMenu.Instance.OnSkillTreePressed);
-
-            magistrateSigilMenu.transform
-                .Find("Buttons/SaveButton")
-                .GetComponent<Button>()
-                .onClick.AddListener(MagistrateSigilMenu.Instance.OnSaveGamePressed);
-
-            magistrateSigilMenu.transform
-                .Find("Buttons/LoadButton")
-                .GetComponent<Button>()
-                .onClick.AddListener(MagistrateSigilMenu.Instance.OnLoadGamePressed);
         }
 
-        magistrateSigilMenu.SetActive(activeState);
+        magistrateSigilMenu.SetActive((bool)message["activeState"]);
     }
 
     public void ChangeUIAbilityTreeState(Dictionary<string, object> message)
     {
-        bool _activeState = (bool)message["activeState"];
-
-        ChangeUIMagistrateSigilState(!_activeState);
+        ChangeUIMagistrateSigilState(new Dictionary<string, object> { { "activeState", false } });
 
         if (abilityTree == null)
         {
@@ -133,7 +91,7 @@ public class UIManager : Singleton<UIManager>
             );
         }
 
-        abilityTree.SetActive(_activeState);
+        abilityTree.SetActive((bool)message["activeState"]);
     }
 
     public void ChangeUIDialogueState(Dictionary<string, object> message)
@@ -154,6 +112,23 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
+    public void ShowProgressSavedText(Dictionary<string, object> message)
+    {
+        if (!GameManager.Instance.gameStarted)
+            return;
+
+        if (progressSavedText == null)
+        {
+            progressSavedText = LoadUIObject("UIElements/Informations/OnSaveText");
+        }
+
+        progressSavedText.SetActive(true);
+
+        StartCoroutine(HideProgressSavedText());
+    }
+
+    //TODO Change this to work without having to load the UI
+    //? (it's needed to separate DialogueManager to DialogueMenu, so good luck future Tomás)
     public void LoadDialogueUIBasedOnChoises(bool hasChoises)
     {
         GameObject newDialogueUI = dialogueUI;
@@ -205,6 +180,14 @@ public class UIManager : Singleton<UIManager>
 
         DialogueManager.Instance.speakerText = GetChildObject(newDialogueUI, "SpeakerName")
             .GetComponent<TextMeshProUGUI>();
+    }
+
+    private IEnumerator HideProgressSavedText()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if (GameManager.Instance.gameStarted)
+            progressSavedText.SetActive(false);
     }
 
     private GameObject LoadUIObject(string path)

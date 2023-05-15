@@ -85,9 +85,6 @@ public class DialogueManager : Singleton<DialogueManager>
         nodeHasChoises = newNodeChoises.Count != 0;
         dialogueText.text = " ";
 
-        if (nodeHasChoises) { }
-        // DestroyPreviousChoises(); TODO this
-
         speakerText.text = speaker;
         currentChoises = newNodeChoises;
 

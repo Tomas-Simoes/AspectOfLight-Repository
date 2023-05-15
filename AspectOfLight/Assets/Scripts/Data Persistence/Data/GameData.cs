@@ -5,17 +5,23 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    [Header("Player Information")]
+    public float currentHealth;
+    public int currentStamina;
+
     public long lastUpdated;
-    public int currentHealth;
+    public float movementSpeed;
     public int deathCount;
     public string areaInMap;
     public Vector3 playerPosition;
 
     public GameData()
     {
-        this.currentHealth = 10;
+        this.currentStamina = 35;
+        this.currentHealth = 45;
         this.playerPosition = new Vector3(0f, 0f, 0f);
         this.areaInMap = "ExiledFlorest";
         this.deathCount = 0;
+        this.movementSpeed = 2;
     }
 }
