@@ -81,7 +81,9 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIAbilityTreeState(Dictionary<string, object> message)
     {
-        ChangeUIMagistrateSigilState(new Dictionary<string, object> { { "activeState", false } });
+        ChangeUIMagistrateSigilState(
+            new Dictionary<string, object> { { "activeState", !(bool)message["activeState"] } }
+        );
 
         if (abilityTree == null)
         {
