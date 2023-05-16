@@ -40,7 +40,7 @@ MonoBehaviour:
         abilityCD: 3
         staminaCost: 3
         unlockCost: 1
-        isAvailable: 0
+        isAvailable: 1
         iconAvailable: {fileID: 21300000, guid: 06a774f02886bde4db7d7b53549b1ff7, type: 3}
         iconUnavailable: {fileID: 21300000, guid: c4f4ce43bca61a84e87812bbe2bc67ba, type: 3}
         description: No description yet

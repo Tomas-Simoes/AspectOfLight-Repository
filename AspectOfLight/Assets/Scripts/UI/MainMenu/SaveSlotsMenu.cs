@@ -36,7 +36,6 @@ public class SaveSlotsMenu : Menu
 
         DataPersistenceManager.Instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
 
-        Debug.Log("Is Loading Game: " + isLoadingGame);
         if (!isLoadingGame)
         {
             DataPersistenceManager.Instance.NewGame();

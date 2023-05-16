@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using Newtonsoft.Json;
 
 public class FileDataHandler
 {
@@ -48,7 +49,7 @@ public class FileDataHandler
                     dataToLoad = EncryptDecrypt(dataToLoad);
                 }
 
-                loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
+                loadedData = JsonConvert.DeserializeObject<GameData>(dataToLoad);
             }
             catch (Exception e)
             {
@@ -73,8 +74,14 @@ public class FileDataHandler
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
-
-            string dataToStore = JsonUtility.SerializeObject(data, true);
+            //string dataToStore = JsonUtility.SerializeObject(data, true);
+            string dataToStore = JsonConvert.SerializeObject(
+                data,
+                new JsonSerializerSettings()
+                {
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                }
+            );
 
             if (useEncryption)
             {

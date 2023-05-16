@@ -86,8 +86,11 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     public void NewGame()
     {
         this.gameData = new GameData();
+
+        GameManager.Instance.Init();
+        EventManager.TriggerEvent("onNewGameStarted", false, null);
+
         SaveGame();
-        GameManager.Instance.gameStarted = true;
     }
 
     public void SaveGame()
@@ -110,31 +113,8 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
             dataPersistenceObj.SaveData(gameData);
-
-            foreach (KeyValuePair<string, bool> abilityLockState in gameData.abilityLockState)
-            {
-                Debug.Log(
-                    "Key: "
-                        + abilityLockState.Key
-                        + "  /  "
-                        + "Value: "
-                        + abilityLockState.Value
-                        + "  (DataPersistenceManager / on save)"
-                );
-            }
         }
 
-        foreach (KeyValuePair<string, bool> abilityLockState in gameData.abilityLockState)
-        {
-            Debug.Log(
-                "Key: "
-                    + abilityLockState.Key
-                    + "  /  "
-                    + "Value: "
-                    + abilityLockState.Value
-                    + "  (DataPersistenceManager / after save)"
-            );
-        }
         gameData.lastUpdated = System.DateTime.Now.ToBinary();
 
         dataHandler.Save(gameData, selectedProfileId);

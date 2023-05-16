@@ -86,9 +86,6 @@ public class UIManager : Singleton<UIManager>
         if (abilityTree == null)
         {
             abilityTree = LoadUIObject("UIElements/AbilitiesMenu/AbilitiesMenu");
-            AbilityManager.Instance.abilitiesData = Resources.Load<D_Abilities>(
-                "UIElements/AbilitiesMenu/AbilitiesData"
-            );
         }
 
         abilityTree.SetActive((bool)message["activeState"]);

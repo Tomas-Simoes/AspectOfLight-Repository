@@ -16,15 +16,13 @@ public class GameData
     public float movementSpeed;
     public int deathCount;
     public string areaInMap;
-    public Vector3 playerPosition;
+    public Vector2 playerPosition;
 
     public GameData()
     {
-        Debug.Log("pov");
-
         this.currentStamina = 35;
         this.currentHealth = 45;
-        this.playerPosition = new Vector3(0f, 0f, 0f);
+        this.playerPosition = new Vector2(0f, 0f);
         this.areaInMap = "ExiledFlorest";
         this.deathCount = 0;
         this.movementSpeed = 2;
