@@ -9,6 +9,11 @@ public class GameData
     public float currentHealth;
     public int currentStamina;
 
+    [Header("Abilities Information")]
+    public List<Ability> abilities = Resources
+        .Load<D_Abilities>("UIElements/AbilitiesMenu/AbilitiesData")
+        .abilities;
+
     public long lastUpdated;
     public float movementSpeed;
     public int deathCount;
@@ -23,5 +28,8 @@ public class GameData
         this.areaInMap = "ExiledFlorest";
         this.deathCount = 0;
         this.movementSpeed = 2;
+
+        foreach (Ability ability in abilities)
+            ability.isAvailable = false;
     }
 }

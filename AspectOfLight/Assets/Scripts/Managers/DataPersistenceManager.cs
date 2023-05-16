@@ -142,7 +142,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
             dataPersistenceObj.LoadData(gameData);
         }
 
-        Debug.Log(gameData.currentHealth);
+        Debug.Log(gameData.abilities[0].isAvailable);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

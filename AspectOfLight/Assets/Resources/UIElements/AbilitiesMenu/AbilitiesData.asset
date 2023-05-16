@@ -13,44 +13,35 @@ MonoBehaviour:
   m_Name: AbilitiesData
   m_EditorClassIdentifier: 
   abilities:
-  - rid: 6103573841027530759
-  - rid: 6103573841027530760
+  - rid: 8748871568214196224
+  - rid: 8748871568214196225
   abilityPrefab: {fileID: 1815980126670210084, guid: d88cc555dc60ed94ab2fb3206c71e2ce, type: 3}
   references:
     version: 2
     RefIds:
-    - rid: 6103573841027530759
+    - rid: 8748871568214196224
       type: {class: MagicSeedAbility, ns: , asm: Assembly-CSharp}
       data:
-        abilityName: Magic Seed
-        abilityPath: Path of the Luminary
-        abilityCD: 4
-        staminaCost: 10
-        unlockCost: 3
-        isAvailable: 1
+        abilityName: Magic Crystal
+        abilityPath: Path of the Researcher
+        abilityCD: 2
+        staminaCost: 2
+        unlockCost: 2
+        isAvailable: 0
         iconAvailable: {fileID: 21300000, guid: 5c0cb37944d68964b9549d5603182197, type: 3}
         iconUnavailable: {fileID: 21300000, guid: 52d564b5cddc6ff4fa99a9dd77474298, type: 3}
-        description: "Spawn a magic seed that will travel for 3 seconds or until
-          you recast the ability. \nWhen the Magic Seed is on the ground, recast
-          this ability to teleport instantly to the place where it's planted, restoring
-          x HP."
+        description: No description yet
         abilityData: {fileID: 11400000, guid: 22f222acf306ffc4cb1f307a48fade5a, type: 2}
-    - rid: 6103573841027530760
+    - rid: 8748871568214196225
       type: {class: SummonPlagueAbility, ns: , asm: Assembly-CSharp}
       data:
         abilityName: Plague
         abilityPath: Path of the Unnatural
-        abilityCD: 0
-        staminaCost: 0
-        unlockCost: 2
-        isAvailable: 1
+        abilityCD: 3
+        staminaCost: 3
+        unlockCost: 1
+        isAvailable: 0
         iconAvailable: {fileID: 21300000, guid: 06a774f02886bde4db7d7b53549b1ff7, type: 3}
         iconUnavailable: {fileID: 21300000, guid: c4f4ce43bca61a84e87812bbe2bc67ba, type: 3}
-        description: 'Spawns 3 Rotwings that follow the closest enemy. When they
-          reach their target they explode in a small area, damaging all enemies around
-          him.
-
-
-          If no target it''s found, It will follow the player until
-          it founds one.'
-        abilityData: {fileID: 0}
+        description: No description yet
+        abilityData: {fileID: 11400000, guid: 182a913073d8b4c4990b3ccbde6fef03, type: 2}
