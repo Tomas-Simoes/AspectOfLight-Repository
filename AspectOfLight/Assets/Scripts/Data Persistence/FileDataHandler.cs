@@ -74,7 +74,7 @@ public class FileDataHandler
         {
             Directory.CreateDirectory(Path.GetDirectoryName(fullPath));
 
-            string dataToStore = JsonUtility.ToJson(data, true);
+            string dataToStore = JsonUtility.SerializeObject(data, true);
 
             if (useEncryption)
             {

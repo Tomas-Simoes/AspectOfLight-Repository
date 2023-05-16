@@ -126,14 +126,35 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        Debug.Log(data.abilities[0].isAvailable);
-        abilitiesData.abilities = data.abilities;
+        if (data.abilityLockState.Count != 0)
+        {
+            foreach (KeyValuePair<string, bool> abilityLockState in data.abilityLockState)
+                foreach (Ability ability in abilitiesData.abilities)
+                    if (ability.abilityName == abilityLockState.Key)
+                        ability.isAvailable = abilityLockState.Value;
+        }
     }
 
     public void SaveData(GameData data)
     {
-        data.abilities = abilitiesData.abilities;
+        foreach (Ability ability in abilitiesData.abilities)
+        {
+            if (data.abilityLockState.ContainsKey(ability.abilityName))
+                data.abilityLockState[ability.abilityName] = ability.isAvailable;
+            else
+                data.abilityLockState.Add(ability.abilityName, ability.isAvailable);
+        }
 
-        Debug.Log(data.abilities[0].isAvailable);
+        foreach (KeyValuePair<string, bool> abilityLockState in data.abilityLockState)
+        {
+            Debug.Log(
+                "Key: "
+                    + abilityLockState.Key
+                    + "  /  "
+                    + "Value: "
+                    + abilityLockState.Value
+                    + "  (AbilityManager)"
+            );
+        }
     }
 }
