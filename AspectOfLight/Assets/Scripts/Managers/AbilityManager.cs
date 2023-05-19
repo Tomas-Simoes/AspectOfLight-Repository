@@ -35,6 +35,8 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
 
     private void OnEnable()
     {
+        abilitiesData = Resources.Load<D_Abilities>("UIElements/AbilitiesMenu/AbilitiesData");
+
         EventManager.StartListening("onAbilityCast", CastAbility);
     }
 
@@ -126,14 +128,27 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
 
     public void LoadData(GameData data)
     {
-        Debug.Log(data.abilities[0].isAvailable);
-        abilitiesData.abilities = data.abilities;
+        if (data.abilityLockState.Count != 0)
+        {
+            foreach (KeyValuePair<string, bool> abilityLockState in data.abilityLockState)
+                foreach (Ability ability in abilitiesData.abilities)
+                    if (ability.abilityName == abilityLockState.Key)
+                        ability.isAvailable = abilityLockState.Value;
+        }
     }
 
     public void SaveData(GameData data)
     {
-        data.abilities = abilitiesData.abilities;
+        if (data.abilityLockState.Count == 0)
+            foreach (Ability ability in abilitiesData.abilities)
+                ability.isAvailable = false;
 
-        Debug.Log(data.abilities[0].isAvailable);
+        foreach (Ability ability in abilitiesData.abilities)
+        {
+            if (data.abilityLockState.ContainsKey(ability.abilityName))
+                data.abilityLockState[ability.abilityName] = ability.isAvailable;
+            else
+                data.abilityLockState.Add(ability.abilityName, ability.isAvailable);
+        }
     }
 }

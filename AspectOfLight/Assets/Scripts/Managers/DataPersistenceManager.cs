@@ -86,8 +86,11 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     public void NewGame()
     {
         this.gameData = new GameData();
+
+        GameManager.Instance.Init();
+        EventManager.TriggerEvent("onNewGameStarted", false, null);
+
         SaveGame();
-        GameManager.Instance.gameStarted = true;
     }
 
     public void SaveGame()
@@ -141,8 +144,6 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         {
             dataPersistenceObj.LoadData(gameData);
         }
-
-        Debug.Log(gameData.abilities[0].isAvailable);
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

@@ -36,7 +36,6 @@ public class SaveSlotsMenu : Menu
 
         DataPersistenceManager.Instance.ChangeSelectedProfileId(saveSlot.GetProfileId());
 
-        Debug.Log("Is Loading Game: " + isLoadingGame);
         if (!isLoadingGame)
         {
             DataPersistenceManager.Instance.NewGame();
@@ -82,7 +81,8 @@ public class SaveSlotsMenu : Menu
         }
 
         Button firstSelectedButton = firstSelected.GetComponent<Button>();
-        this.SetFirstSelected(firstSelectedButton);
+        firstSelectedButton.Select();
+        //SetFirstSelected(firstSelectedButton);
     }
 
     public void DeactiveMenu()
