@@ -117,6 +117,12 @@ public class Entity : MonoBehaviour
         StartCoroutine(StopCourotineAfterTime(poisonCoroutine, poisonTime));
     }
 
+    public void TakeLaserDamage(float damage, float laserTime, float tickRate)
+    {
+        Coroutine laserCoroutine = StartCoroutine(Laser(damage, tickRate));
+        StartCoroutine(StopCourotineAfterTime(laserCoroutine, laserTime));
+    }
+
     public virtual void Die()
     {
         Destroy(gameObject);
@@ -146,6 +152,16 @@ public class Entity : MonoBehaviour
     public IEnumerator Wait(float timeToWait)
     {
         yield return new WaitForSeconds(timeToWait);
+    }
+
+    private IEnumerator Laser(float damage, float tickRate)
+    {
+        while (true)
+        {
+            TakeDamage(damage, Color.red);
+
+            yield return new WaitForSeconds(tickRate);
+        }
     }
 
     private IEnumerator VisualIndicator(Color color)
