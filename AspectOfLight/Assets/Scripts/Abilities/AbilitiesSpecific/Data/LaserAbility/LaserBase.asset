@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31407da32106a4a47af1fafde6815b73, type: 3}
   m_Name: LaserBase
   m_EditorClassIdentifier: 
-  abilityName: No name
+  abilityName: Laser
   icon: {fileID: 0}
-  abilityCD: 0
-  staminaCost: 0
-  description: No description yet
+  abilityCD: 5
+  staminaCost: 5
+  description: A laser bean?!
   specificData: {fileID: 0}
