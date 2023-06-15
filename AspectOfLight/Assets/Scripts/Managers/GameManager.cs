@@ -16,8 +16,5 @@ public class GameManager : Singleton<GameManager>
         EventManager.StopListening("onNewGameStarted", OnNewGameStarted);
     }
 
-    private void OnNewGameStarted(Dictionary<string, object> message)
-    {
-        AbilityManager.Instance.Init();
-    }
+    private void OnNewGameStarted(Dictionary<string, object> message) { }
 }

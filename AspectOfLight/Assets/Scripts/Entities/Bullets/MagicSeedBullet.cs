@@ -87,6 +87,7 @@ public class MagicSeedBullet : Bullet
             case 3:
                 return player.inputHandler.pressedAbilityThree;
         }
+        Debug.Log("a");
 
         return false;
     }

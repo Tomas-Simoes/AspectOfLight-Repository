@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class SaveSlot : MonoBehaviour
 {
@@ -51,7 +50,12 @@ public class SaveSlot : MonoBehaviour
             hasDataContent.SetActive(true);
             clearButton.gameObject.SetActive(true);
 
-            areaInMap.text = data.areaInMap;
+            areaInMap.text = " ";
+            foreach (char c in data.areaInMap)
+            {
+                areaInMap.text += Char.IsUpper(c) ? " " + c : c;
+            }
+
             deathCount.text = data.deathCount + " DEATHS";
         }
     }

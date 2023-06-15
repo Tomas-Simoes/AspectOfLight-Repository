@@ -33,23 +33,16 @@ public class Player : Entity, IDataPersistence
     public Vector2 axisMovement;
     public float currentMovementSpeed;
 
-    [SerializeField]
-    private bool FacingRight = true; //TODO change the code that uses this to use the entity.facingRight instead
-
     [Header("Abilities Information")]
     public bool hasStamina;
     public int currentStamina;
-
-    [SerializeField]
-    public AbilityManager abilityManager;
-
     public GameObject[] plagueSpawnPoints;
 
     [SerializeField]
     public GameObject bulletPrefab;
 
     [SerializeField]
-    public GameObject bulletsParent;
+    public GameObject bulletsParent; //TODO change this to AbilitiesManager
 
     [SerializeField]
     public GameObject attackPosition;
@@ -78,6 +71,8 @@ public class Player : Entity, IDataPersistence
             this,
             coolDownData
         );
+
+        AbilityManager.Instance.Init();
     }
 
     private void OnEnable()
