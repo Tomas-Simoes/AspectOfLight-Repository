@@ -26,14 +26,20 @@ public class CameraManager : Singleton<CameraManager>
         defaultCamera.Follow = GameManager.Instance.playerReference.transform;
     }
 
+    private void Start()
+    {
+        OnCameraShake(null);
+    }
+
     private void OnCameraShake(Dictionary<string, object> message)
     {
         StartCoroutine(
             ShakeCamera(
-                (
-                    FindObjectOfType<CinemachineStateDrivenCamera>().LiveChild
-                    as CinemachineVirtualCameraBase
-                ).GetComponent<CinemachineBasicMultiChannelPerlin>()
+                CinemachineCore.Instance
+                    .GetActiveBrain(0)
+                    .ActiveVirtualCamera.VirtualCameraGameObject.GetComponent<CinemachineStateDrivenCamera>()
+                    .LiveChild.VirtualCameraGameObject.gameObject.GetComponent<CinemachineVirtualCamera>()
+                    .GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>()
             )
         );
     }
@@ -43,7 +49,7 @@ public class CameraManager : Singleton<CameraManager>
         cameraPerlinNoise.m_AmplitudeGain = 1;
         cameraPerlinNoise.m_FrequencyGain = 1;
 
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
 
         cameraPerlinNoise.m_AmplitudeGain = 0;
         cameraPerlinNoise.m_FrequencyGain = 0;

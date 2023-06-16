@@ -137,7 +137,6 @@ public class Player : Entity, IDataPersistence
             stateMachine.ChangeState(dashState);
         }
 
-        //TODO Abilities Cast
         if (inputHandler.pressedAbilityOne)
             EventManager.TriggerEvent(
                 "onAbilityCast",
