@@ -26,5 +26,26 @@ public class CameraManager : Singleton<CameraManager>
         defaultCamera.Follow = GameManager.Instance.playerReference.transform;
     }
 
-    private void OnCameraShake(Dictionary<string, object> message) { }
+    private void OnCameraShake(Dictionary<string, object> message)
+    {
+        StartCoroutine(
+            ShakeCamera(
+                (
+                    FindObjectOfType<CinemachineStateDrivenCamera>().LiveChild
+                    as CinemachineVirtualCameraBase
+                ).GetComponent<CinemachineBasicMultiChannelPerlin>()
+            )
+        );
+    }
+
+    private IEnumerator ShakeCamera(CinemachineBasicMultiChannelPerlin cameraPerlinNoise)
+    {
+        cameraPerlinNoise.m_AmplitudeGain = 1;
+        cameraPerlinNoise.m_FrequencyGain = 1;
+
+        yield return new WaitForSeconds(0.3f);
+
+        cameraPerlinNoise.m_AmplitudeGain = 0;
+        cameraPerlinNoise.m_FrequencyGain = 0;
+    }
 }

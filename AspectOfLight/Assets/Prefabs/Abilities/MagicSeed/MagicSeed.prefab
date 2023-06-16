@@ -65,6 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9202488676109990028, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+    - {fileID: 4849115121996861085, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
 --- !u!1 &4477906987564694835 stripped
 GameObject:
@@ -89,5 +90,7 @@ MonoBehaviour:
   lifeTime: 4
   targatableTag: Enemy
   minimumTimeTraveling: 0.3
+  maxTimeTraveling: 1.75
   minimumTimeGrounded: 0.3
+  maxTimeGrounded: 3
   player: {fileID: 0}

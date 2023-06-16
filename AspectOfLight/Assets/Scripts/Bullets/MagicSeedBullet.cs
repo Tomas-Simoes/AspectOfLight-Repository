@@ -7,10 +7,18 @@ public class MagicSeedBullet : Bullet
     [Header("Magic Seed Information")]
     [SerializeField]
     private float minimumTimeTraveling;
+
+    [SerializeField]
+    private float maxTimeTraveling;
+
     private float timeTravelling;
 
     [SerializeField]
     private float minimumTimeGrounded;
+
+    [SerializeField]
+    private float maxTimeGrounded;
+
     private float timeGrounded;
 
     private bool isGrounded = false;
@@ -47,7 +55,7 @@ public class MagicSeedBullet : Bullet
         if (timeTravelling <= minimumTimeTraveling)
             return;
 
-        if (PressedAbilityKey() && isTravelling)
+        if (PressedAbilityKey() && isTravelling || timeTravelling >= maxTimeTraveling)
         {
             rb.velocity = Vector2.zero;
 
@@ -60,6 +68,9 @@ public class MagicSeedBullet : Bullet
     {
         if (timeGrounded <= minimumTimeGrounded)
             return;
+
+        if (timeGrounded >= maxTimeGrounded)
+            Destroy(this.gameObject);
 
         if (PressedAbilityKey() && isGrounded)
         {
@@ -78,7 +89,7 @@ public class MagicSeedBullet : Bullet
 
     private bool PressedAbilityKey()
     {
-        switch (AbilityManager.Instance.GetPlayerAbilitySlot("Magic Seed"))
+        switch (AbilityManager.Instance.GetPlayerAbilitySlot("Magic Crystal"))
         {
             case 1:
                 return player.inputHandler.pressedAbilityOne;
@@ -87,7 +98,6 @@ public class MagicSeedBullet : Bullet
             case 3:
                 return player.inputHandler.pressedAbilityThree;
         }
-        Debug.Log("a");
 
         return false;
     }

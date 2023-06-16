@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Drone : Entity
+public class Plague : Entity
 {
-    public DroneChaseState chaseState { get; private set; }
-    public DroneAttackState attackState { get; private set; }
+    public PlagueChaseState chaseState { get; private set; }
+    public PlagueAttackState attackState { get; private set; }
 
     [Header("States Data")]
     [SerializeField]
-    private D_DroneAttackState attackStateData;
+    private D_PlagueAttackState attackStateData;
     [SerializeField]
-    private D_DroneChaseState chaseStateData;
+    private D_PlagueChaseState chaseStateData;
 
     [Header("Information")]
     [SerializeField]
@@ -23,7 +23,7 @@ public class Drone : Entity
         base.Start();
         facingDirection = -1; // just because the sprite was made facing left
 
-        chaseState = new DroneChaseState(
+        chaseState = new PlagueChaseState(
             this,
             stateMachine,
             "chase",
@@ -31,7 +31,7 @@ public class Drone : Entity
             this,
             attackStateData
         );
-        attackState = new DroneAttackState(this, stateMachine, "die", attackStateData, this);
+        attackState = new PlagueAttackState(this, stateMachine, "die", attackStateData, this);
 
         stateMachine.Init(chaseState);
     }

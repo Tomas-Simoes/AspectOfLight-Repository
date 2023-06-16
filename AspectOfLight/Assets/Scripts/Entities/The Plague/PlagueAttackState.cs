@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DroneAttackState : State
+public class PlagueAttackState : State
 {
-    private Drone drone;
-    protected D_DroneAttackState stateData;
+    private Plague plague;
+    protected D_PlagueAttackState stateData;
 
-    public DroneAttackState(
+    public PlagueAttackState(
         Entity entity,
         StateMachine stateMachine,
         string animBoolName,
-        D_DroneAttackState stateData,
-        Drone drone
+        D_PlagueAttackState stateData,
+        Plague plague
     ) : base(entity, stateMachine, animBoolName)
     {
-        this.drone = drone;
+        this.plague = plague;
         this.stateData = stateData;
     }
 

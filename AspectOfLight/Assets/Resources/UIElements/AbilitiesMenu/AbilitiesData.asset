@@ -24,10 +24,10 @@ MonoBehaviour:
       data:
         abilityName: Magic Crystal
         abilityPath: Path of the Researcher
-        abilityCD: 2
+        abilityCD: 6
         staminaCost: 2
         unlockCost: 2
-        isAvailable: 0
+        isAvailable: 1
         iconAvailable: {fileID: 21300000, guid: 5c0cb37944d68964b9549d5603182197, type: 3}
         iconUnavailable: {fileID: 21300000, guid: 52d564b5cddc6ff4fa99a9dd77474298, type: 3}
         description: No description yet
