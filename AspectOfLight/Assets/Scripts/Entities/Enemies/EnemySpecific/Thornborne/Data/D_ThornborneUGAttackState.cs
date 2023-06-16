@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(
     fileName = "D_ThornborneUGAttack",
-    menuName = "Data/Specific Enemy/Thornborne/UGAttack"
+    menuName = "Data/State Data/Specific Enemy/Thornborne/UGAttack State"
 )]
 public class D_ThornborneUGAttackState : ScriptableObject
 {

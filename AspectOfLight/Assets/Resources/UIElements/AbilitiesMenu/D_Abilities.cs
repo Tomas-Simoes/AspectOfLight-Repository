@@ -4,7 +4,7 @@ using System;
 
 [CreateAssetMenu(
     fileName = "New All Abilities",
-    menuName = "Ability/Create All Abilities Object",
+    menuName = "Data/Ability/All Abilities Object",
     order = 0
 )]
 public class D_Abilities : ScriptableObject

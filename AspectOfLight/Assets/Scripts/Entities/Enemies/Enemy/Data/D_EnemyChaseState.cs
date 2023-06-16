@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "newChaseData", menuName = "Data/State Data/Enemy/Chase State")]
+[CreateAssetMenu(fileName = "newChaseData", menuName = "Data/State Data/General Enemy/Chase State")]
 public class D_EnemyChaseState : ScriptableObject
 {
     public float chaseSpeed = 4f;

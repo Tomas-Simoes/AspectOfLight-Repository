@@ -5,7 +5,7 @@ using Cinemachine;
 using UnityEngine.UI;
 using TMPro;
 
-public class BossFightHandler : MonoBehaviour
+public class BossFightManager : MonoBehaviour
 {
     [Header("Boss Battle Information")]
     [SerializeField]

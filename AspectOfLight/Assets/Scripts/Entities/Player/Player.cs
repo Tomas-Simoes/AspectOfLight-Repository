@@ -81,6 +81,12 @@ public class Player : Entity, IDataPersistence
         EventManager.StartListening("onRest", Rest);
     }
 
+    private void OnDisable()
+    {
+        EventManager.StopListening("onRest", moveState.ChangePlayerMovementSpeed);
+        EventManager.StopListening("onRest", Rest);
+    }
+
     public override void Start()
     {
         base.Start();
@@ -88,14 +94,12 @@ public class Player : Entity, IDataPersistence
 
         StartCoroutine(RecoverStamina());
 
-        if (inputHandler == null)
-        {
-            inputHandler = this.GetComponent<InputHandler>();
-        }
+        inputHandler = this.GetComponent<InputHandler>();
 
         //! THIS IS FOR DEVELOPMENT ONLY
         //! REMOVE THIS WHEN BUILDING THE GAME
         DataPersistenceManager.Instance.Init();
+        GameManager.Instance.SavePlayerReference(this);
 
         stateMachine.Init(moveState);
     }

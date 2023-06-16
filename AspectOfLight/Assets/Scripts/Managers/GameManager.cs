@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     public bool gameStarted = false;
+    public Player playerReference;
 
     private void OnEnable()
     {
@@ -16,5 +17,13 @@ public class GameManager : Singleton<GameManager>
         EventManager.StopListening("onNewGameStarted", OnNewGameStarted);
     }
 
-    private void OnNewGameStarted(Dictionary<string, object> message) { }
+    private void OnNewGameStarted(Dictionary<string, object> message)
+    {
+        CameraManager.Instance.Init();
+    }
+
+    public void SavePlayerReference(Player player)
+    {
+        playerReference = player;
+    }
 }

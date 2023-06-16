@@ -291,7 +291,8 @@ public class DialogueManager : Singleton<DialogueManager>
             new Dictionary<string, object>
             {
                 { "activeState", true },
-                { "dialogue", dialogueInStandBy },
+                { "startNode", currentNodeIndex },
+                { "dialogue", dialogueInStandBy }
             }
         );
     }
