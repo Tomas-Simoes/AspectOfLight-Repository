@@ -73,6 +73,7 @@ public class Player : Entity, IDataPersistence
         );
 
         AbilityManager.Instance.Init();
+        CameraManager.Instance.Init();
     }
 
     private void OnEnable()
@@ -99,6 +100,7 @@ public class Player : Entity, IDataPersistence
         //! THIS IS FOR DEVELOPMENT ONLY
         //! REMOVE THIS WHEN BUILDING THE GAME
         DataPersistenceManager.Instance.Init();
+
         GameManager.Instance.SavePlayerReference(this);
 
         stateMachine.Init(moveState);
@@ -135,7 +137,6 @@ public class Player : Entity, IDataPersistence
             stateMachine.ChangeState(dashState);
         }
 
-        //TODO Abilities Cast
         if (inputHandler.pressedAbilityOne)
             EventManager.TriggerEvent(
                 "onAbilityCast",
@@ -181,6 +182,13 @@ public class Player : Entity, IDataPersistence
         {
             stateMachine.ChangeState(attackState);
         }
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        EventManager.TriggerEvent("onCameraShake", false, null);
     }
 
     public override void Die()

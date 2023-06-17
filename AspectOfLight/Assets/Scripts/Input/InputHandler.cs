@@ -15,7 +15,7 @@ public class InputHandler : MonoBehaviour
     [Header("Abilities Input")]
     public bool pressingAttack;
     public bool pressedDash;
-    public bool pressedAbilityOne; //? now it's the necromancer ability
+    public bool pressedAbilityOne; 
     public bool pressedAbilityTwo;
     public bool pressedAbilityThree;
 
@@ -98,7 +98,13 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Dash.canceled -= SetDashing;
 
         inputActions.Player.AbilityOne.started -= SetAbilityOne;
-        inputActions.Player.AbilityOne.canceled += SetAbilityOne;
+        inputActions.Player.AbilityOne.canceled -= SetAbilityOne;
+
+        inputActions.Player.AbilityTwo.started -= SetAbilityTwo;
+        inputActions.Player.AbilityTwo.canceled -= SetAbilityTwo;
+
+        inputActions.Player.AbilityThree.started -= SetAbilityThree;
+        inputActions.Player.AbilityThree.canceled -= SetAbilityThree;
 
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;

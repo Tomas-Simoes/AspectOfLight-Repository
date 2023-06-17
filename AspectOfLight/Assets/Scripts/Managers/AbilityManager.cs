@@ -49,6 +49,9 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
     {
         int _currentSlot = (int)message["slot"];
 
+        if (!playerAbilities.ContainsKey(_currentSlot))
+            return;
+
         bool _hasStaminaToCast =
             (int)message["currentStamina"] - playerAbilities[_currentSlot].staminaCost >= 0;
 
