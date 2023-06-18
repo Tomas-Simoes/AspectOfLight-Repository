@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,69 @@ using UnityEngine.SceneManagement;
 
 public class ScenesManager : Singleton<ScenesManager>
 {
-    public void LoadScene(string sceneName)
+    private D_ScenesData scenesData;
+
+    private void Start()
     {
-        SceneManager.LoadSceneAsync(sceneName);
+        scenesData = Resources.Load<D_ScenesData>("Data/Scene Data/ScenesData");
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode) { }
+
+    public void LoadScene(string sceneName, int outConnectionID = 0, bool isInGameScene = true)
+    {
+        StartCoroutine(LoadSceneAsync(sceneName, outConnectionID, isInGameScene));
+    }
+
+    public IEnumerator LoadSceneAsync(string sceneName, int outConnectionID, bool isInGameScene)
+    {
+        var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName);
+
+        while (!asyncLoadScene.isDone)
+        {
+            yield return null;
+        }
+
+        if (isInGameScene)
+        {
+            Debug.Log('a');
+            SetPlayerPositionOnSceneLoaded(sceneName, outConnectionID);
+            CameraManager.Instance.SetUpDefaultCamera();
+        }
+    }
+
+    public void SetPlayerPositionOnSceneLoaded(string sceneName, int outConnectionID)
+    {
+        D_ScenesData.GameScene newScene = null;
+
+        foreach (D_ScenesData.GameScene gameScene in scenesData.gameScenes)
+        {
+            if (gameScene.name == sceneName)
+            {
+                newScene = gameScene;
+            }
+        }
+
+        if (newScene == null)
+        {
+            Debug.LogWarning("There is no scene with the name " + sceneName);
+            return;
+        }
+
+        foreach (D_ScenesData.SceneConnection sceneConnection in newScene.sceneConnections)
+        {
+            if (sceneConnection.connectionID == outConnectionID)
+                GameManager.Instance.playerReference.transform.position = sceneConnection.position;
+        }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(
     fileName = "D_ThornborneCooldown",
-    menuName = "Data/Cooldowns/Specific Enemy/Thornborne Cooldown",
+    menuName = "Data/Cooldowns/Enemy/Thornborne Cooldown",
     order = 0
 )]
 public class D_ThornborneCooldown : ScriptableObject

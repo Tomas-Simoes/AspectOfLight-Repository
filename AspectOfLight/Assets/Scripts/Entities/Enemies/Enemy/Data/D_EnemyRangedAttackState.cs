@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(
     fileName = "newRangedAttackData",
-    menuName = "Data/State Data/Enemy/Ranged Attack State"
+    menuName = "Data/State Data/General Enemy/Ranged Attack State"
 )]
 public class D_EnemyRangedAttackState : ScriptableObject
 {

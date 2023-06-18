@@ -15,7 +15,7 @@ public class InputHandler : MonoBehaviour
     [Header("Abilities Input")]
     public bool pressingAttack;
     public bool pressedDash;
-    public bool pressedAbilityOne; //? now it's the necromancer ability
+    public bool pressedAbilityOne; 
     public bool pressedAbilityTwo;
     public bool pressedAbilityThree;
 
@@ -77,8 +77,10 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.performed += SetAttack;
         inputActions.Player.Attack.canceled += SetAttack;
 
-        inputActions.InGameActions.Pause.performed += SetPause;
+        inputActions.InGameActions.Pause.started += SetPause;
+
         inputActions.InGameActions.Interact.performed += SetInteract;
+        inputActions.InGameActions.Interact.canceled += SetInteract;
 
         inputActions.UI.Select.performed += SetSelect;
         inputActions.UI.Cancel.performed += SetCancel;
@@ -96,7 +98,13 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Dash.canceled -= SetDashing;
 
         inputActions.Player.AbilityOne.started -= SetAbilityOne;
-        inputActions.Player.AbilityOne.canceled += SetAbilityOne;
+        inputActions.Player.AbilityOne.canceled -= SetAbilityOne;
+
+        inputActions.Player.AbilityTwo.started -= SetAbilityTwo;
+        inputActions.Player.AbilityTwo.canceled -= SetAbilityTwo;
+
+        inputActions.Player.AbilityThree.started -= SetAbilityThree;
+        inputActions.Player.AbilityThree.canceled -= SetAbilityThree;
 
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;
@@ -114,13 +122,13 @@ public class InputHandler : MonoBehaviour
     {
         if (message["activeState"] == null)
         {
-            Debug.LogWarning("The current UI event doesn't have \"activeState\" property");
+            Debug.LogWarning("The current UI event doesn't have \"UIInputMapState\" property");
         }
 
-        bool _UIActiveState = (bool)message["activeState"];
+        bool _UIInputMapState = (bool)message["activeState"];
 
-        ChangeInputMapState(inputActions.Player, !_UIActiveState);
-        ChangeInputMapState(inputActions.UI, _UIActiveState);
+        ChangeInputMapState(inputActions.Player, !_UIInputMapState);
+        ChangeInputMapState(inputActions.UI, _UIInputMapState);
     }
 
     public void ChangeInputMapState(InputActionMap map, bool state)
@@ -168,7 +176,7 @@ public class InputHandler : MonoBehaviour
 
     private void SetInteract(InputAction.CallbackContext ctx)
     {
-        pressedInteract = ctx.started;
+        pressedInteract = ctx.performed;
     }
 
     private void SetPause(InputAction.CallbackContext ctx)

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Dialogue", menuName = "Dialogue/New Dialogue")]
+[CreateAssetMenu(fileName = "New Dialogue", menuName = "Data/Dialogue/New Dialogue")]
 public class D_Dialogue : ScriptableObject
 {
     [Header("Speaker Information")]

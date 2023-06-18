@@ -2,7 +2,7 @@ using UnityEngine;
 
 [CreateAssetMenu(
     fileName = "newRecoveryAttackData",
-    menuName = "Data/State Data/Enemy/Recovery Attack State"
+    menuName = "Data/State Data/General Enemy/Recovery Attack State"
 )]
 public class D_EnemyRecoveryAttackState : ScriptableObject
 {

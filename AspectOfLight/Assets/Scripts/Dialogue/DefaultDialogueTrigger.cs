@@ -12,9 +12,7 @@ public class DefaultDialogueTrigger : DialogueTrigger
         if (other.CompareTag("Player") && player.inputHandler.pressedInteract)
         {
             if (!DialogueManager.Instance.inDialogueMode)
-            {
                 StartDialogue(0);
-            }
             else
                 EventManager.TriggerEvent("onGoToNextNode", false, null);
         }

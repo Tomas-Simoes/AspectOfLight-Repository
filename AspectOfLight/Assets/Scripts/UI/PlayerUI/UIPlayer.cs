@@ -25,6 +25,8 @@ public class UIPlayer : MonoBehaviour
     void Start()
     {
         inPlayerUIObject = attackMask.transform.parent.gameObject;
+
+        DontDestroyOnLoad(this);
     }
 
     void Update()

@@ -60,7 +60,7 @@ public class DialogueTrigger : MonoBehaviour
         EventManager.TriggerEvent(
             "onDialogue",
             true,
-            new Dictionary<string, object> { { "dialogue", dialogue }, { "startNode", startNode }, }
+            new Dictionary<string, object> { { "dialogue", dialogue }, { "startNode", startNode }, {"activeState", true}}
         );
     }
 

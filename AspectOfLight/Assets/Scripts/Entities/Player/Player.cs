@@ -73,12 +73,19 @@ public class Player : Entity, IDataPersistence
         );
 
         AbilityManager.Instance.Init();
+        CameraManager.Instance.Init();
     }
 
     private void OnEnable()
     {
         EventManager.StartListening("onRest", moveState.ChangePlayerMovementSpeed);
         EventManager.StartListening("onRest", Rest);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StopListening("onRest", moveState.ChangePlayerMovementSpeed);
+        EventManager.StopListening("onRest", Rest);
     }
 
     public override void Start()
@@ -88,14 +95,13 @@ public class Player : Entity, IDataPersistence
 
         StartCoroutine(RecoverStamina());
 
-        if (inputHandler == null)
-        {
-            inputHandler = this.GetComponent<InputHandler>();
-        }
+        inputHandler = this.GetComponent<InputHandler>();
 
         //! THIS IS FOR DEVELOPMENT ONLY
         //! REMOVE THIS WHEN BUILDING THE GAME
         DataPersistenceManager.Instance.Init();
+
+        GameManager.Instance.SavePlayerReference(this);
 
         stateMachine.Init(moveState);
     }
@@ -131,7 +137,6 @@ public class Player : Entity, IDataPersistence
             stateMachine.ChangeState(dashState);
         }
 
-        //TODO Abilities Cast
         if (inputHandler.pressedAbilityOne)
             EventManager.TriggerEvent(
                 "onAbilityCast",
@@ -177,6 +182,13 @@ public class Player : Entity, IDataPersistence
         {
             stateMachine.ChangeState(attackState);
         }
+    }
+
+    public override void TakeDamage(float damage)
+    {
+        base.TakeDamage(damage);
+
+        EventManager.TriggerEvent("onCameraShake", false, null);
     }
 
     public override void Die()

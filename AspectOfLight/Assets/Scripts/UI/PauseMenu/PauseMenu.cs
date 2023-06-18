@@ -37,6 +37,6 @@ public class PauseMenu : Menu
 
     public void OnQuitToMenuPressed()
     {
-        ScenesManager.Instance.LoadScene("MainMenu");
+        ScenesManager.Instance.LoadScene(sceneName: "MainMenu", isInGameScene: false);
     }
 }

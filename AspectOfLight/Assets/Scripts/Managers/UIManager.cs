@@ -158,7 +158,6 @@ public class UIManager : Singleton<UIManager>
 
         if (newDialogueUI != dialogueUI)
         {
-            Debug.Log("Destroy dialogue UI");
             Destroy(dialogueUI);
 
             newDialogueUI.SetActive(true);
