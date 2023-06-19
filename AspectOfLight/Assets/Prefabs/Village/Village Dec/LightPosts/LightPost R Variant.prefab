@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LightPost R Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1690952159650442868, guid: a527c600fd34e534599c2bff426ee957, type: 3}
+      propertyPath: m_Size.x
+      value: 0.18978119
+      objectReference: {fileID: 0}
     - target: {fileID: 3897221352419552978, guid: a527c600fd34e534599c2bff426ee957, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.35
