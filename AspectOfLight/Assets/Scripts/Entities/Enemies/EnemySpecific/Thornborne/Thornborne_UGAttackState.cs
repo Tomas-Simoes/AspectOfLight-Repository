@@ -27,7 +27,7 @@ public class Thornborne_UGAttackState : State
         D_ThornborneUGAttackState stateData
     )
         : base(entity, stateMachine, animBoolName)
-    {       
+    {
         this.enemy = enemy;
         this.stateData = stateData;
     }
@@ -35,8 +35,6 @@ public class Thornborne_UGAttackState : State
     public override void Enter()
     {
         base.Enter();
-
-        UpdateCurrentShootingPlants();
 
         enemy.anim.SetBool("ugAttackUp", false);
 
@@ -61,7 +59,6 @@ public class Thornborne_UGAttackState : State
 
     public override void LogicUpdate()
     {
-
         base.LogicUpdate();
 
         if (canSpawnWaves && currentWavesCount < wavesCount)
@@ -71,14 +68,13 @@ public class Thornborne_UGAttackState : State
             if (timeSincePreviousWave >= stateData.ugAttackTickRate)
             {
                 timeSincePreviousWave = 0;
-        
+
                 SpawnNewWave();
             }
         }
 
         if (currentWavesCount >= wavesCount)
         {
-
             enemy.anim.SetBool("ugAttackUp", true);
 
             float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
@@ -130,13 +126,15 @@ public class Thornborne_UGAttackState : State
         entity.CreatePrefab(
             enemy.ugAttackExplosion,
             enemy.playerReference.transform.position,
-            enemy.abilitiesParent);
+            enemy.abilitiesParent
+        );
 
+        
         if (currentWavesCount >= wavesCount - 1)
             UpgradePreviousPlants();
 
         SpawnExplosions(_availableReferencePoints);
-
+        
         currentWavesCount++;
     }
 
@@ -165,6 +163,7 @@ public class Thornborne_UGAttackState : State
 
     private void SpawnExplosions(List<Vector2> referencePoints)
     {
+        UpdateCurrentShootingPlants();
         int _plantsCount = currentShootingPlants.Count;
 
         for (int i = 0; i < stateData.explosionCount; i++)
@@ -213,7 +212,7 @@ public class Thornborne_UGAttackState : State
             if (shootingPlant == null)
                 break;
 
-            shootingPlant.GetComponent<ThornbornePlant>().shootingRate /= 2;
+            shootingPlant.GetComponent<ThornbornePlant>().shootingCD /= 2;
         }
     }
 }

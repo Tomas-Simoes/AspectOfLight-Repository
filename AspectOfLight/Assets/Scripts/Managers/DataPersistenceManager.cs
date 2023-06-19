@@ -7,9 +7,6 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 {
     [Header("Debugging")]
     [SerializeField]
-    private bool initializeDataIfNull = false;
-
-    [SerializeField]
     private bool disableDataPersitence = false;
 
     [SerializeField]
@@ -41,6 +38,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         base.Init();
 
         LoadGame();
+        GameManager.Instance.gameStarted = true;
     }
 
     private void Awake()
@@ -62,7 +60,6 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     public void ChangeSelectedProfileId(string newProfileId)
     {
         this.selectedProfileId = newProfileId;
-        LoadGame();
     }
 
     public void DeleteProfileData(string profileId)
@@ -90,10 +87,10 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         GameManager.Instance.Init();
         EventManager.TriggerEvent("onNewGameStarted", false, null);
 
-        SaveGame();
+        SaveGame(true);
     }
 
-    public void SaveGame()
+    public void SaveGame(bool isNewGame = false)
     {
         if (disableDataPersitence)
         {
@@ -108,11 +105,14 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
             return;
         }
 
-        dataPersistanceObjects = FindAllDataPersistenceObjects();
-
-        foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
+        if (!isNewGame)
         {
-            dataPersistenceObj.SaveData(gameData);
+            dataPersistanceObjects = FindAllDataPersistenceObjects();
+
+            foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
+            {
+                dataPersistenceObj.SaveData(gameData);
+            }
         }
 
         gameData.lastUpdated = System.DateTime.Now.ToBinary();

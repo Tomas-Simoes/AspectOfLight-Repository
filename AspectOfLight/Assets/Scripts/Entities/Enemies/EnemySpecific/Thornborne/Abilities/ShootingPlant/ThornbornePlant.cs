@@ -5,42 +5,47 @@ using UnityEngine;
 public class ThornbornePlant : Entity
 {
     public ThornbornePlant_ShootingState shootingState { get; private set; }
+    public ThornbornePlant_GrowingState growingState { get; private set; }
+    public ThornbornePlant_IdleState idleState { get; private set; }
 
     [Header("Shooting Plant Information")]
-    public float shootingRate;
-
-    [SerializeField]
-    private GameObject bullet;
-
-    [SerializeField]
-    private Transform shootingPosition;
+    public float shootingCD;
+    public GameObject bullet;
+    public Transform shootingPosition;
 
     public GameObject plantTarget;
     public GameObject bulletParent;
+
+    private void OnEnable()
+    {
+        EventManager.StartListening("onThornborneDie", Die);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.StartListening("onThornborneDie", Die);
+    }
 
     public override void Start()
     {
         base.Start();
 
-        shootingState = new ThornbornePlant_ShootingState(this, stateMachine, "shooting", this);
+        growingState = new ThornbornePlant_GrowingState(this, stateMachine, "growing", this);
+        shootingState = new ThornbornePlant_ShootingState(this, stateMachine, "shoot", this);
+        idleState = new ThornbornePlant_IdleState(this, stateMachine, "idle", this);
 
-        stateMachine.Init(shootingState);
+        stateMachine.Init(growingState);
     }
 
-    public void StartShooting()
+    public override void Update()
     {
-        StartCoroutine(Shoot());
+        base.Update();
+
+        CheckIfFlip(facingDirection, plantTarget.transform.position, rb.position);
     }
 
-    private IEnumerator Shoot()
+    public void Die(Dictionary<string, object> message)
     {
-        while (true)
-        {
-            GameObject _bullet = CreatePrefab(bullet, shootingPosition.position, bulletParent);
-
-            _bullet.GetComponent<Bullet>().targetPosition = plantTarget.transform.position;
-
-            yield return new WaitForSeconds(shootingRate);
-        }
+        base.Die();
     }
 }

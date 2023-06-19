@@ -10,4 +10,5 @@ public class D_ThornborneCooldown : ScriptableObject
     public float ugAttackCD;
     public float ugTeleportCD;
     public float pukeAttackCD;
+    public float healingCD;
 }

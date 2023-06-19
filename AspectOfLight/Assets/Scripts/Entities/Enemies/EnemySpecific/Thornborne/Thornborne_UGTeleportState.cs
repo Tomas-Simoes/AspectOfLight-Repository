@@ -7,6 +7,7 @@ public class Thornborne_UGTeleportState : State
     private D_ThornborneUGTeleportState stateData;
     private Thornborne enemy;
 
+    public bool alreadyTeleported = false;
     public bool teleportToPlayer;
     public bool teleportToSafePoint;
 
@@ -34,6 +35,8 @@ public class Thornborne_UGTeleportState : State
     public override void Exit()
     {
         base.Exit();
+
+        alreadyTeleported = false;
     }
 
     public override void LogicUpdate()
@@ -43,10 +46,15 @@ public class Thornborne_UGTeleportState : State
 
         if (_animationTime >= 0.5f)
         {
-            if (teleportToPlayer)
-                TeleportToPlayer();
-            else if (teleportToSafePoint)
-                TeleportToSafePoint();
+            if (!alreadyTeleported)
+            {
+                if (teleportToPlayer)
+                    TeleportToPlayer();
+                else if (teleportToSafePoint)
+                    TeleportToSafePoint();
+
+                alreadyTeleported = true;
+            }
         }
 
         if (_animationTime >= 1f)
@@ -56,7 +64,10 @@ public class Thornborne_UGTeleportState : State
 
             if (teleportToSafePoint)
             {
-                if (enemy.currentHealth <= stateData.minimumLifeToHeal)
+                if (
+                    enemy.currentHealth <= stateData.minimumLifeToHeal
+                    && enemy.timeSinceHealing >= enemy.cooldownData.healingCD
+                )
                     stateMachine.ChangeState(enemy.healingState);
                 else
                     stateMachine.ChangeState(enemy.ugAttackState);
@@ -71,6 +82,8 @@ public class Thornborne_UGTeleportState : State
 
     private void TeleportToPlayer()
     {
+        alreadyTeleported = true;
+
         Transform _playerTransform = enemy.playerReference.transform;
 
         int _playerFacingDirection = enemy.playerReference.GetComponent<Entity>().facingDirection;
@@ -78,7 +91,7 @@ public class Thornborne_UGTeleportState : State
         Vector3 _newPosition =
             _playerTransform.position
             + new Vector3(
-                (_playerTransform.localScale.x + 1f) * (_playerFacingDirection * -1),
+                (_playerTransform.localScale.x + 1.5f) * (_playerFacingDirection * -1),
                 0f,
                 0f
             );
@@ -92,7 +105,6 @@ public class Thornborne_UGTeleportState : State
         if (_collidersInNewPosition.Length != 0)
         {
             _newPosition.x = _newPosition.x * -1;
-            Debug.Log("ya");
         }
 
         enemy.rb.MovePosition(_newPosition);

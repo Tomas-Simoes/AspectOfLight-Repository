@@ -71,6 +71,9 @@ public class Entity : MonoBehaviour
 
     public void CheckIfFlip(int facingDirection, Vector2 currentPosition, Vector2 futurePosition)
     {
+        if (futurePosition == currentPosition || futurePosition.x == currentPosition.x)
+            return;
+
         bool _newPositionIsOnLeft = currentPosition.x > futurePosition.x;
 
         if (facingDirection == 1)
@@ -97,9 +100,15 @@ public class Entity : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            //play death animation and then Die();
+            //TODO play death animation and then Die();
             Die();
         }
+    }
+
+    public virtual void TakePoisonDamage(float damage, float poisonTime, float tickRate)
+    {
+        Coroutine poisonCoroutine = StartCoroutine(Poisoned(damage, tickRate));
+        StartCoroutine(StopCourotineAfterTime(poisonCoroutine, poisonTime));
     }
 
     public virtual void Heal(float healAmount)
@@ -109,18 +118,6 @@ public class Entity : MonoBehaviour
 
         if (currentHealth > entityData.MAX_HEALTH)
             currentHealth = entityData.MAX_HEALTH;
-    }
-
-    public void TakePoisonDamage(float damage, float poisonTime, float tickRate)
-    {
-        Coroutine poisonCoroutine = StartCoroutine(Poisoned(damage, tickRate));
-        StartCoroutine(StopCourotineAfterTime(poisonCoroutine, poisonTime));
-    }
-
-    public void TakeLaserDamage(float damage, float laserTime, float tickRate)
-    {
-        Coroutine laserCoroutine = StartCoroutine(Laser(damage, tickRate));
-        StartCoroutine(StopCourotineAfterTime(laserCoroutine, laserTime));
     }
 
     public virtual void Die()
@@ -154,16 +151,6 @@ public class Entity : MonoBehaviour
         yield return new WaitForSeconds(timeToWait);
     }
 
-    private IEnumerator Laser(float damage, float tickRate)
-    {
-        while (true)
-        {
-            TakeDamage(damage, Color.red);
-
-            yield return new WaitForSeconds(tickRate);
-        }
-    }
-
     private IEnumerator VisualIndicator(Color color)
     {
         GetComponent<SpriteRenderer>().color = color;
@@ -176,7 +163,6 @@ public class Entity : MonoBehaviour
         while (true)
         {
             TakeDamage(damage, Color.magenta);
-
             yield return new WaitForSeconds(tickRate);
         }
     }

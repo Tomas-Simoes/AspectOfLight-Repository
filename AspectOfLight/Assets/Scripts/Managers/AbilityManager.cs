@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using System.Linq;
 
 public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
 {
@@ -13,10 +14,13 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
     [Header("Player Abilities Information")]
     public static Dictionary<int, Ability> playerAbilities = new Dictionary<int, Ability>();
 
-    [Header("Ability Information")]
+    [Header("Player Ability Information")]
+    private Ability currentCastAbility;
     private float timeSinceAbilityOne;
     private float timeSinceAbilityTwo;
     private float timeSinceAbilityThree;
+    private float timeSinceAbilityGotCasted;
+    private float minTimeSinceAbilityGotCasted = 0.75f;
 
     [Header("Miracles")]
     public int playerMiracles = 3;
@@ -24,6 +28,19 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
     private void Update()
     {
         UpdateCooldowns();
+
+        if (currentCastAbility != null)
+        {
+            currentCastAbility.LogicUpdate();
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (currentCastAbility != null)
+        {
+            currentCastAbility.PhysicsUpdate();
+        }
     }
 
     private void UpdateCooldowns()
@@ -31,6 +48,7 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
         timeSinceAbilityOne += Time.deltaTime;
         timeSinceAbilityTwo += Time.deltaTime;
         timeSinceAbilityThree += Time.deltaTime;
+        timeSinceAbilityGotCasted += Time.deltaTime;
     }
 
     private void OnEnable()
@@ -38,11 +56,15 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
         abilitiesData = Resources.Load<D_Abilities>("UIElements/AbilitiesMenu/AbilitiesData");
 
         EventManager.StartListening("onAbilityCast", CastAbility);
+        EventManager.StartListening("onStopAbilityCast", StopCastAbility);
+        EventManager.StartListening("onAbilityResetCooldown", ResetAbilityCooldown);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening("onAbilityCast", CastAbility);
+        EventManager.StopListening("onStopAbilityCast", StopCastAbility);
+        EventManager.StopListening("onAbilityResetCooldown", ResetAbilityCooldown);
     }
 
     public void CastAbility(Dictionary<string, object> message)
@@ -55,29 +77,66 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
         bool _hasStaminaToCast =
             (int)message["currentStamina"] - playerAbilities[_currentSlot].staminaCost >= 0;
 
-        if (
-            GetTimeSinceCast(_currentSlot) >= playerAbilities[_currentSlot].abilityCD
-            && _hasStaminaToCast
-        )
-        {
-            playerAbilities[_currentSlot].Cast((Player)message["player"]);
+        bool _canCastAbility =
+            (
+                GetTimeSinceCast(_currentSlot) >= playerAbilities[_currentSlot].abilityCD
+                && timeSinceAbilityGotCasted >= minTimeSinceAbilityGotCasted
+            ) && _hasStaminaToCast;
 
-            switch (_currentSlot)
-            {
-                case 1:
-                    timeSinceAbilityOne = 0;
-                    break;
-                case 2:
-                    timeSinceAbilityTwo = 0;
-                    break;
-                case 3:
-                    timeSinceAbilityThree = 0;
-                    break;
-            }
-        }
-        else
+        if (!_canCastAbility)
         {
             //TODO play some visual indicator that user has no stamina;
+            return;
+        }
+
+        timeSinceAbilityGotCasted = 0;
+
+        currentCastAbility = playerAbilities[_currentSlot];
+        Ability abilityGettingCastedInDedicatedState = message["abilityGettingCasted"] as Ability;
+
+        if (abilityGettingCastedInDedicatedState == null)
+        {
+            currentCastAbility.Cast((Player)message["player"]);
+            return;
+        }
+
+        foreach (KeyValuePair<int, Ability> playerAbility in playerAbilities)
+        {
+            if (
+                playerAbility.Value == abilityGettingCastedInDedicatedState
+                && playerAbility.Value.canBeRecasted
+            )
+            {
+                currentCastAbility.Cast((Player)message["player"]);
+                return;
+            }
+        }
+    }
+
+    public void StopCastAbility(Dictionary<string, object> message)
+    {
+        currentCastAbility = null;
+    }
+
+    public void ResetAbilityCooldown(Dictionary<string, object> message)
+    {
+        foreach (KeyValuePair<int, Ability> playerAbility in playerAbilities)
+        {
+            if (playerAbility.Value.abilityName == (string)message["abilityName"])
+            {
+                switch (playerAbility.Key)
+                {
+                    case 1:
+                        timeSinceAbilityOne = 0;
+                        break;
+                    case 2:
+                        timeSinceAbilityTwo = 0;
+                        break;
+                    case 3:
+                        timeSinceAbilityThree = 0;
+                        break;
+                }
+            }
         }
     }
 
@@ -138,6 +197,15 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                     if (ability.abilityName == abilityLockState.Key)
                         ability.isAvailable = abilityLockState.Value;
         }
+
+        playerAbilities = new Dictionary<int, Ability>();
+
+        foreach (KeyValuePair<int, string> savedPlayerAbility in data.playerAbilities)
+        {
+            foreach (Ability ability in abilitiesData.abilities)
+                if (ability.abilityName == savedPlayerAbility.Value)
+                    playerAbilities.Add(savedPlayerAbility.Key, ability);
+        }
     }
 
     public void SaveData(GameData data)
@@ -152,6 +220,14 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                 data.abilityLockState[ability.abilityName] = ability.isAvailable;
             else
                 data.abilityLockState.Add(ability.abilityName, ability.isAvailable);
+        }
+
+        data.playerAbilities = new Dictionary<int, string>();
+
+        foreach (KeyValuePair<int, Ability> playerAbility in playerAbilities)
+        {
+            Debug.Log("Saving ability: " + playerAbility);
+            data.playerAbilities.Add(playerAbility.Key, playerAbility.Value.abilityName);
         }
     }
 }

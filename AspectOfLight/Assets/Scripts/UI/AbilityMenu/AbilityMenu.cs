@@ -61,12 +61,14 @@ public class AbilityMenu : Menu
     void Start()
     {
         InitAbilities();
+
         miraclesText.text = AbilityManager.Instance.playerMiracles.ToString();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        UpdateAbilitySlots();
 
         EventManager.StartListening("onSelectAbility", OnSelectAbility);
         EventManager.StartListening("onDeselectAbility", OnDeselectAbility);
@@ -153,9 +155,7 @@ public class AbilityMenu : Menu
             _slotToUpdate.GetComponent<ButtonSelected>().ability = AbilityManager.playerAbilities[
                 slotToChange
             ];
-            _slotToUpdate.GetComponent<Image>().sprite = AbilityManager.playerAbilities[
-                slotToChange
-            ].iconAvailable;
+            _slotToUpdate.sprite = AbilityManager.playerAbilities[slotToChange].iconAvailable;
 
             ResetUI();
             return;
@@ -269,5 +269,16 @@ public class AbilityMenu : Menu
     {
         descriptionAbilitySelected.SetActive(false);
         descriptionAbilityNotSelected.SetActive(true);
+    }
+
+    public void UpdateAbilitySlots()
+    {
+        foreach (KeyValuePair<int, Ability> playerAbility in AbilityManager.playerAbilities)
+        {
+            GameObject currentSlot = abilitySlots[playerAbility.Key].gameObject;
+
+            currentSlot.GetComponent<Image>().sprite = playerAbility.Value.iconAvailable;
+            currentSlot.GetComponent<ButtonSelected>().ability = playerAbility.Value;
+        }
     }
 }

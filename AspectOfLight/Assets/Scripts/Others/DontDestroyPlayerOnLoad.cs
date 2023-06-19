@@ -11,7 +11,6 @@ public class DontDestroyPlayerOnLoad : MonoBehaviour
         if (instance != null)
             Destroy(instance);
 
-        Debug.Log('a');
         instance = gameObject;
         GameManager.Instance.playerReference = instance.GetComponentInChildren<Player>();
 

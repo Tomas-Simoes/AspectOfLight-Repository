@@ -177,7 +177,7 @@ Animator:
   m_GameObject: {fileID: 289530480361911834}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 64cdcacab142a1d49883eb69c5f40a7b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -205,7 +205,7 @@ MonoBehaviour:
   wallCheck: {fileID: 0}
   target: {fileID: 0}
   pivot: {fileID: 0}
-  shootingRate: 4
+  shootingCD: 3
   bullet: {fileID: 620923869530501149, guid: 48c61b5834032664a996a1afb98e8cca, type: 3}
   shootingPosition: {fileID: 289530480142718248}
   plantTarget: {fileID: 0}

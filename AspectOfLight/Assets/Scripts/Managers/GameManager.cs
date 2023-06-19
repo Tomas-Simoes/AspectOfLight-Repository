@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("In Game Information")]
     public bool gameStarted = false;
+    public bool onGodMode = false;
+
+    [Header("Class Information")]
     public Player playerReference;
 
     private void OnEnable()
     {
         EventManager.StartListening("onNewGameStarted", OnNewGameStarted);
+        EventManager.StartListening("onGodMode", OnGodMode);
     }
 
     private void OnDisable()
@@ -25,5 +30,18 @@ public class GameManager : Singleton<GameManager>
     public void SavePlayerReference(Player player)
     {
         playerReference = player;
+    }
+
+    public void CreateForceCameraRatiosObject()
+    {
+        GameObject forceCameraRatio = Resources.Load<GameObject>("Camera/Force Camera Ratios");
+        GameObject forceCameraRatioObj = Instantiate(forceCameraRatio);
+
+        forceCameraRatioObj.name = "--- Force Camera Ratio";
+    }
+
+    public void OnGodMode(Dictionary<string, object> message)
+    {
+        onGodMode = !onGodMode;
     }
 }

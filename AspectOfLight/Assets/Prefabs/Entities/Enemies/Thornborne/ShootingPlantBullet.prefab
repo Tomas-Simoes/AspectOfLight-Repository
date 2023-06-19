@@ -137,9 +137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  speed: 3
+  speed: 6
   damage: 8
-  lifeTime: 4
+  lifeTime: 1.5
   targatableTag: Player
   tickRate: 2
   poisonTime: 6

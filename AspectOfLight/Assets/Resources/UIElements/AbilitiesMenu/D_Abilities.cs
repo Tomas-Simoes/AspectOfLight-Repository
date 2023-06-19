@@ -10,11 +10,8 @@ using System;
 public class D_Abilities : ScriptableObject
 {
     [SerializeReference]
-    public List<Ability> abilities = new List<Ability>
-    {
-        new MagicSeedAbility(),
-        new SummonPlagueAbility()
-    };
+    public List<Ability> abilities = new List<Ability>();
+    public int selectedClassIndex;
 
     public GameObject abilityPrefab;
 }

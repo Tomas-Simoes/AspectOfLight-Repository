@@ -13,24 +13,29 @@ public class ScenesManager : Singleton<ScenesManager>
         scenesData = Resources.Load<D_ScenesData>("Data/Scene Data/ScenesData");
     }
 
-    private void OnEnable()
+    public void LoadScene(
+        string sceneName,
+        int outConnectionID = 0,
+        bool isInGameTransition = true,
+        bool loadDataAfterLoadingScene = false
+    )
     {
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        StartCoroutine(
+            LoadSceneAsync(
+                sceneName,
+                outConnectionID,
+                isInGameTransition,
+                loadDataAfterLoadingScene
+            )
+        );
     }
 
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode) { }
-
-    public void LoadScene(string sceneName, int outConnectionID = 0, bool isInGameScene = true)
-    {
-        StartCoroutine(LoadSceneAsync(sceneName, outConnectionID, isInGameScene));
-    }
-
-    public IEnumerator LoadSceneAsync(string sceneName, int outConnectionID, bool isInGameScene)
+    public IEnumerator LoadSceneAsync(
+        string sceneName,
+        int outConnectionID,
+        bool isInGameTransition,
+        bool loadDataAfterLoadingScene
+    )
     {
         var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName);
 
@@ -39,15 +44,19 @@ public class ScenesManager : Singleton<ScenesManager>
             yield return null;
         }
 
-        if (isInGameScene)
+        GameManager.Instance.gameStarted = sceneName == "MainMenu" ? false : true;
+
+        if (loadDataAfterLoadingScene)
+            DataPersistenceManager.Instance.LoadGame();
+
+        if (isInGameTransition)
         {
-            Debug.Log('a');
-            SetPlayerPositionOnSceneLoaded(sceneName, outConnectionID);
+            SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
             CameraManager.Instance.SetUpDefaultCamera();
         }
     }
 
-    public void SetPlayerPositionOnSceneLoaded(string sceneName, int outConnectionID)
+    public void SetPlayerPositionOnLoadedScene(string sceneName, int outConnectionID)
     {
         D_ScenesData.GameScene newScene = null;
 

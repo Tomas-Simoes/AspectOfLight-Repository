@@ -54,7 +54,6 @@ public class Player_AttackState : State
 
         if (attackTime >= stateData.maxAttackTime)
         {
-            //TODO shake camera or something
             currentStaminaCostTime += Time.deltaTime;
 
             if (currentStaminaCostTime >= stateData.staminaCostTime)
@@ -82,12 +81,21 @@ public class Player_AttackState : State
             GameObject _bullet = entity.CreatePrefab(
                 player.bulletPrefab,
                 player.attackPosition.transform.position,
-                player.bulletsParent
+                player.abilityInstances
             );
 
-            _bullet.GetComponent<DefaultBullet>().damage = currentDamage;
+            if (GameManager.Instance.onGodMode)
+            {
+                _bullet.GetComponent<DefaultBullet>().damage = 200;
+            }
+            else
+            {
+                _bullet.GetComponent<DefaultBullet>().damage = currentDamage;
+            }
 
-            stateMachine.ChangeState(player.moveState);
+            stateMachine.ChangeState(
+                player.axisMovement == Vector2.zero ? player.idleState : player.moveState
+            );
         }
     }
 

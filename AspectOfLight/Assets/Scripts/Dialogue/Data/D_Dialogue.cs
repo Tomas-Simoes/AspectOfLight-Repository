@@ -18,6 +18,7 @@ public class D_Dialogue : ScriptableObject
     [System.Serializable]
     public class DialogueNode
     {
+        [TextArea(3, 10)]
         public string dialogueText;
         public List<DialogueChoise> dialogueChoises;
     }

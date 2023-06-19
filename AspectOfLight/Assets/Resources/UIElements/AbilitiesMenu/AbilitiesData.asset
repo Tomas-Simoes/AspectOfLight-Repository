@@ -14,11 +14,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilities:
   - rid: 8748871568214196224
-  - rid: 8748871568214196225
+  - rid: 8647921077256454144
+  - rid: 8647921078163734528
+  - rid: 8647921078163734529
+  selectedClassIndex: 3
   abilityPrefab: {fileID: 1815980126670210084, guid: d88cc555dc60ed94ab2fb3206c71e2ce, type: 3}
   references:
     version: 2
     RefIds:
+    - rid: 8647921077256454144
+      type: {class: DashAbility, ns: , asm: Assembly-CSharp}
+      data:
+        abilityName: Dash
+        abilityPath: Path of the Researcher
+        abilityCD: 5
+        staminaCost: 10
+        unlockCost: 1
+        isAvailable: 1
+        iconAvailable: {fileID: 21300000, guid: e6d017c32b0479742a69d379d7a6e917, type: 3}
+        iconUnavailable: {fileID: 21300000, guid: c6d26649daef8204995f810d4271d994, type: 3}
+        canBeRecasted: 0
+        description: 'By absorbing the energy stored within a crystal, the user experiences
+          a surge of power, granting them the ability to quickly move in any desired
+          direction.
+
+
+          During the casting of Dash, you are unable to move
+          or use any other abilities.'
+        abilityData: {fileID: 11400000, guid: b726f2b98028dd54e9b5d4211cfee371, type: 2}
+    - rid: 8647921078163734528
+      type: {class: ThePlagueAbility, ns: , asm: Assembly-CSharp}
+      data:
+        abilityName: The Plague
+        abilityPath: Path of the Unnatural
+        abilityCD: 10
+        staminaCost: 10
+        unlockCost: 1
+        isAvailable: 1
+        iconAvailable: {fileID: 21300000, guid: 06a774f02886bde4db7d7b53549b1ff7, type: 3}
+        iconUnavailable: {fileID: 21300000, guid: c4f4ce43bca61a84e87812bbe2bc67ba, type: 3}
+        canBeRecasted: 0
+        description: "Spawns The Plague, unleashing 3 \"Rotwings\" that pursue the
+          closest enemy within range. \n\nUpon reaching their target, the Rotwings
+          explode, dying and inflicting damage upon all enemies in the area."
+        abilityData: {fileID: 11400000, guid: 182a913073d8b4c4990b3ccbde6fef03, type: 2}
+    - rid: 8647921078163734529
+      type: {class: RadiantCrystalAbility, ns: , asm: Assembly-CSharp}
+      data:
+        abilityName: Radiant Crystal
+        abilityPath: Path of the Researcher
+        abilityCD: 7
+        staminaCost: 10
+        unlockCost: 1
+        isAvailable: 1
+        iconAvailable: {fileID: 21300000, guid: 06a774f02886bde4db7d7b53549b1ff7, type: 3}
+        iconUnavailable: {fileID: 21300000, guid: c4f4ce43bca61a84e87812bbe2bc67ba, type: 3}
+        canBeRecasted: 1
+        description: "\rEmpowers a crystal with energy and releases it, causing damage
+          to all enemies within the area.\r\nYou can recast this ability to cancel
+          it.\n\r\nDuring the casting of Radiant Crystal, you are unable to move
+          or use any other abilities."
+        abilityData: {fileID: 11400000, guid: 333c2bbe9e9f7f04f9a2786482841cbb, type: 2}
     - rid: 8748871568214196224
       type: {class: MagicSeedAbility, ns: , asm: Assembly-CSharp}
       data:
@@ -27,21 +83,15 @@ MonoBehaviour:
         abilityCD: 6
         staminaCost: 2
         unlockCost: 2
-        isAvailable: 1
+        isAvailable: 0
         iconAvailable: {fileID: 21300000, guid: 5c0cb37944d68964b9549d5603182197, type: 3}
         iconUnavailable: {fileID: 21300000, guid: 52d564b5cddc6ff4fa99a9dd77474298, type: 3}
-        description: No description yet
+        canBeRecasted: 0
+        description: 'Releases a crystal, which moves for 1.75 seconds or until recast.
+          Upon recasting, the crystal settles on the ground.
+
+
+
+          Once the
+          crystal is on the ground, recast the ability to instantly teleport to it.'
         abilityData: {fileID: 11400000, guid: 22f222acf306ffc4cb1f307a48fade5a, type: 2}
-    - rid: 8748871568214196225
-      type: {class: SummonPlagueAbility, ns: , asm: Assembly-CSharp}
-      data:
-        abilityName: Plague
-        abilityPath: Path of the Unnatural
-        abilityCD: 3
-        staminaCost: 3
-        unlockCost: 1
-        isAvailable: 1
-        iconAvailable: {fileID: 21300000, guid: 06a774f02886bde4db7d7b53549b1ff7, type: 3}
-        iconUnavailable: {fileID: 21300000, guid: c4f4ce43bca61a84e87812bbe2bc67ba, type: 3}
-        description: No description yet
-        abilityData: {fileID: 11400000, guid: 182a913073d8b4c4990b3ccbde6fef03, type: 2}

@@ -26,7 +26,7 @@ public class ButtonSelected : MonoBehaviour, ISelectHandler, IDeselectHandler
                         !ability.isAvailable
                             ? "This ability needs "
                                 + ability.unlockCost
-                                + " to unlock. \n\n"
+                                + " miracles to unlock. \n\n"
                                 + ability.description
                             : ability.description
                     }

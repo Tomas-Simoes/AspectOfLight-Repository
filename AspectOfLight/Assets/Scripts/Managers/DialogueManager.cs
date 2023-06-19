@@ -94,6 +94,8 @@ public class DialogueManager : Singleton<DialogueManager>
 
     private IEnumerator DisplayNode(string text)
     {
+        dialogueText.text = "";
+
         foreach (char character in text)
         {
             dialogueText.text += character;
@@ -149,6 +151,12 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         D_Dialogue.DialogueChoise _currentChoise = currentNode.dialogueChoises[choiseIndex];
         _currentChoise.choiseWasAlreadyChoosen = true;
+
+        if (_currentChoise.followOnDialogue == null)
+        {
+            ExitDialogueMode();
+            return;
+        }
 
         ChangeCurrentDialogue(_currentChoise.followOnDialogue);
     }

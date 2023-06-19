@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Thornborne_AwakeState : State
 {
-    //TODO Change this to work with animations
-
     private Thornborne enemy;
-
     private float animationTime;
 
     public Thornborne_AwakeState(
@@ -34,9 +31,9 @@ public class Thornborne_AwakeState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        animationTime += Time.deltaTime;
+        animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
-        if (animationTime >= 2)
+        if (animationTime >= 1)
             stateMachine.ChangeState(enemy.chaseState);
     }
 }

@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  speed: 7
+  speed: 11
   damage: 2
-  lifeTime: 1.5
+  lifeTime: 0.75
   targatableTag: Enemy

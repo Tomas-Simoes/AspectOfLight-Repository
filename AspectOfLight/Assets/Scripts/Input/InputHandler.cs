@@ -15,7 +15,7 @@ public class InputHandler : MonoBehaviour
     [Header("Abilities Input")]
     public bool pressingAttack;
     public bool pressedDash;
-    public bool pressedAbilityOne; 
+    public bool pressedAbilityOne;
     public bool pressedAbilityTwo;
     public bool pressedAbilityThree;
 
@@ -78,6 +78,7 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.canceled += SetAttack;
 
         inputActions.InGameActions.Pause.started += SetPause;
+        inputActions.InGameActions.GodMode.started += SetGodMode;
 
         inputActions.InGameActions.Interact.performed += SetInteract;
         inputActions.InGameActions.Interact.canceled += SetInteract;
@@ -110,7 +111,10 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.Attack.canceled -= SetAttack;
 
         inputActions.InGameActions.Interact.performed -= SetInteract;
+        inputActions.InGameActions.Interact.canceled -= SetInteract;
+
         inputActions.InGameActions.Pause.performed -= SetPause;
+        inputActions.InGameActions.GodMode.started -= SetGodMode;
 
         inputActions.UI.Select.performed -= SetSelect;
         inputActions.UI.Cancel.performed -= SetCancel;
@@ -188,6 +192,15 @@ public class InputHandler : MonoBehaviour
         );
 
         isPaused = !isPaused; //TODO change this information to another class
+    }
+
+    private void SetGodMode(InputAction.CallbackContext ctx)
+    {
+        EventManager.TriggerEvent(
+            "onGodMode",
+            true,
+            new Dictionary<string, object> { { "activeState", !GameManager.Instance.onGodMode } }
+        );
     }
 
     private void SetSelect(InputAction.CallbackContext ctx)

@@ -6,8 +6,9 @@ using UnityEngine;
 public class Player : Entity, IDataPersistence
 {
     public Player_MoveState moveState { get; private set; }
-    public Player_DashState dashState { get; private set; }
     public Player_AttackState attackState { get; private set; }
+    public Player_IdleState idleState { get; private set; }
+    public Player_CastingAbilityState castingAbilityState { get; private set; }
 
     [Header("States Data")]
     [SerializeField]
@@ -15,9 +16,6 @@ public class Player : Entity, IDataPersistence
 
     [SerializeField]
     private D_PlayerMoveState moveStateData;
-
-    [SerializeField]
-    private D_PlayerDashState dashStateData;
 
     [SerializeField]
     private D_PlayerAttackState attackStateData;
@@ -29,20 +27,23 @@ public class Player : Entity, IDataPersistence
     public float timeSinceDash;
     public float timeSinceStaminaUsage;
 
-    [Header("Information")]
+    [Header("Player Information")]
     public Vector2 axisMovement;
     public float currentMovementSpeed;
 
-    [Header("Abilities Information")]
+    [Header("Stamina Information")]
     public bool hasStamina;
     public int currentStamina;
+
+    [Header("The Plague Information")]
     public GameObject[] plagueSpawnPoints;
 
+    [Header("Basic attack Information")]
     [SerializeField]
     public GameObject bulletPrefab;
 
     [SerializeField]
-    public GameObject bulletsParent; //TODO change this to AbilitiesManager
+    public GameObject abilityInstances; //TODO change this to AbilitiesManager
 
     [SerializeField]
     public GameObject attackPosition;
@@ -53,15 +54,9 @@ public class Player : Entity, IDataPersistence
     {
         base.Awake();
 
+        idleState = new Player_IdleState(this, stateMachine, "idle", this);
         moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
-        dashState = new Player_DashState(
-            this,
-            stateMachine,
-            "dash",
-            dashStateData,
-            this,
-            coolDownData
-        );
+        castingAbilityState = new Player_CastingAbilityState(this, stateMachine, "none", null);
 
         attackState = new Player_AttackState(
             this,
@@ -79,31 +74,34 @@ public class Player : Entity, IDataPersistence
     private void OnEnable()
     {
         EventManager.StartListening("onRest", moveState.ChangePlayerMovementSpeed);
+        EventManager.StartListening("onPlayerCastingState", ChangeToCastAbilityState);
         EventManager.StartListening("onRest", Rest);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening("onRest", moveState.ChangePlayerMovementSpeed);
+        EventManager.StopListening("onPlayerCastingState", ChangeToCastAbilityState);
         EventManager.StopListening("onRest", Rest);
     }
 
     public override void Start()
     {
         base.Start();
-        timeSinceDash = coolDownData.dashCD;
+        GameManager.Instance.SavePlayerReference(this);
 
         StartCoroutine(RecoverStamina());
 
         inputHandler = this.GetComponent<InputHandler>();
+        GetInputs();
+
+        timeSinceDash = coolDownData.dashCD; //TODO remove this after transforming dash into an ability
 
         //! THIS IS FOR DEVELOPMENT ONLY
         //! REMOVE THIS WHEN BUILDING THE GAME
         DataPersistenceManager.Instance.Init();
 
-        GameManager.Instance.SavePlayerReference(this);
-
-        stateMachine.Init(moveState);
+        stateMachine.Init(idleState);
     }
 
     public override void Update()
@@ -111,7 +109,8 @@ public class Player : Entity, IDataPersistence
         base.Update();
 
         GetInputs();
-        RotatePlayerBasedOnMousePosition();
+        //RotatePlayerBasedOnMousePosition();
+        CheckIfFlip(facingDirection, rb.position, rb.position + axisMovement);
     }
 
     public override void UpdateCooldowns()
@@ -128,14 +127,17 @@ public class Player : Entity, IDataPersistence
         axisMovement.x = inputHandler.xAxis;
         axisMovement.y = inputHandler.yAxis;
 
-        if (
-            inputHandler.pressedDash
-            && timeSinceDash >= coolDownData.dashCD
-            && HasStaminaToUse(dashStateData.staminaCost)
-        )
-        {
-            stateMachine.ChangeState(dashState);
-        }
+        bool _isCastingAnotherAbility = castingAbilityState.currentAbility != null;
+
+        bool _canAttack =
+            inputHandler.pressingAttack
+            && timeSinceAttack >= coolDownData.attackCD
+            && stateMachine.currentState != attackState
+            && HasStaminaToUse(attackStateData.staminaCost)
+            && !_isCastingAnotherAbility;
+
+        if (_canAttack)
+            stateMachine.ChangeState(attackState);
 
         if (inputHandler.pressedAbilityOne)
             EventManager.TriggerEvent(
@@ -145,7 +147,8 @@ public class Player : Entity, IDataPersistence
                 {
                     { "slot", 1 },
                     { "currentStamina", currentStamina },
-                    { "player", this }
+                    { "player", this },
+                    { "abilityGettingCasted", castingAbilityState.currentAbility }
                 }
             );
 
@@ -157,7 +160,8 @@ public class Player : Entity, IDataPersistence
                 {
                     { "slot", 2 },
                     { "currentStamina", currentStamina },
-                    { "player", this }
+                    { "player", this },
+                    { "abilityGettingCasted", castingAbilityState.currentAbility }
                 }
             );
 
@@ -169,24 +173,18 @@ public class Player : Entity, IDataPersistence
                 {
                     { "slot", 3 },
                     { "currentStamina", currentStamina },
-                    { "player", this }
+                    { "player", this },
+                    { "abilityGettingCasted", castingAbilityState.currentAbility }
                 }
             );
-
-        if (
-            inputHandler.pressingAttack
-            && timeSinceAttack >= coolDownData.attackCD
-            && stateMachine.currentState != attackState
-            && HasStaminaToUse(attackStateData.staminaCost)
-        )
-        {
-            stateMachine.ChangeState(attackState);
-        }
     }
 
-    public override void TakeDamage(float damage)
+    public override void TakeDamage(float damage, Color damageColor)
     {
-        base.TakeDamage(damage);
+        if (GameManager.Instance.onGodMode)
+            return;
+
+        base.TakeDamage(damage, damageColor);
 
         EventManager.TriggerEvent("onCameraShake", false, null);
     }
@@ -206,17 +204,23 @@ public class Player : Entity, IDataPersistence
         currentStamina = staminaData.MAX_STAMINA;
     }
 
-    private void RotatePlayerBasedOnMousePosition()
+    public void ChangeToCastAbilityState(Dictionary<string, object> message)
     {
-        Vector2 mouseDirection =
-            Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+        if ((bool)message["activeState"])
+        {
+            castingAbilityState = new Player_CastingAbilityState(
+                this,
+                stateMachine,
+                (string)message["animName"],
+                message["ability"] as Ability
+            );
 
-        bool _hasToFlip =
-            mouseDirection.x > 0 && facingDirection == -1
-            || mouseDirection.x < 0 && facingDirection == 1;
-
-        if (_hasToFlip)
-            Flip();
+            stateMachine.ChangeState(castingAbilityState);
+        }
+        else
+        {
+            stateMachine.ChangeState(idleState);
+        }
     }
 
     public void ReduceStamina(float stamina)
@@ -231,7 +235,7 @@ public class Player : Entity, IDataPersistence
     {
         while (true)
         {
-            if (timeSinceStaminaUsage >= 1f || currentStamina <= staminaData.MAX_STAMINA)
+            if (timeSinceStaminaUsage >= 2f && currentStamina <= staminaData.MAX_STAMINA)
             {
                 currentStamina += staminaData.recoverStaminaRate;
             }
@@ -242,6 +246,9 @@ public class Player : Entity, IDataPersistence
 
     public bool HasStaminaToUse(float staminaCost)
     {
+        if (GameManager.Instance.onGodMode)
+            return true;
+
         return currentStamina - staminaCost >= 0;
     }
 
@@ -260,4 +267,20 @@ public class Player : Entity, IDataPersistence
         data.movementSpeed = currentMovementSpeed;
         data.playerPosition = transform.position;
     }
+
+    /*
+    ! NOT IN USE
+    ? Rotate Player based on mouse position instead of keyboard input.
+    private void RotatePlayerBasedOnMousePosition()
+    {
+        Vector2 mouseDirection =
+            Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
+
+        bool _hasToFlip =
+            mouseDirection.x > 0 && facingDirection == -1
+            || mouseDirection.x < 0 && facingDirection == 1;
+
+        if (_hasToFlip)
+            Flip();
+    }*/
 }

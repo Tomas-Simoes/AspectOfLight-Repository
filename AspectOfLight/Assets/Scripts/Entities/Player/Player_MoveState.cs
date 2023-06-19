@@ -33,11 +33,15 @@ public class Player_MoveState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (player.axisMovement == Vector2.zero)
+            stateMachine.ChangeState(player.idleState);
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
+
         entity.rb.velocity = player.axisMovement.normalized * player.currentMovementSpeed;
     }
 

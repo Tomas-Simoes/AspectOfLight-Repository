@@ -11,6 +11,13 @@ public class GameData
 
     [Header("Abilities Information")]
     public Dictionary<string, bool> abilityLockState;
+    public Dictionary<int, string> playerAbilities;
+
+    [Header("Tutorials Information")]
+    public Dictionary<string, bool> tutorials;
+
+    [Header("Bosses Information")]
+    public Dictionary<string, bool> bosses;
 
     public long lastUpdated;
     public float movementSpeed;
@@ -20,12 +27,22 @@ public class GameData
 
     public GameData()
     {
-        this.currentStamina = 35;
+        this.currentStamina = 75;
         this.currentHealth = 45;
         this.playerPosition = new Vector2(0f, 0f);
         this.areaInMap = "ExiledFlorest";
         this.deathCount = 0;
         this.movementSpeed = 2;
         this.abilityLockState = new Dictionary<string, bool>();
+        this.playerAbilities = new Dictionary<int, string>();
+
+        this.tutorials = new Dictionary<string, bool>()
+        {
+            { "move", false },
+            { "hurt", false },
+            { "sigil", false }
+        };
+
+        this.bosses = new Dictionary<string, bool>() { { "thornborne", false } };
     }
 }

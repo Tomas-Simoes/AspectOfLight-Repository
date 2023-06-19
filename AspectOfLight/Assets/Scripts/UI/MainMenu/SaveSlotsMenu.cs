@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -39,10 +38,23 @@ public class SaveSlotsMenu : Menu
         if (!isLoadingGame)
         {
             DataPersistenceManager.Instance.NewGame();
+
+            ScenesManager.Instance.LoadScene(
+                "ExiledFlorest",
+                isInGameTransition: false,
+                loadDataAfterLoadingScene: true
+            );
+
+            return;
         }
 
+        ScenesManager.Instance.LoadScene(
+            DataPersistenceManager.Instance.gameData.areaInMap,
+            isInGameTransition: false,
+            loadDataAfterLoadingScene: true
+        );
+
         //DataPersistenceManager.Instance.SaveGame();
-        SceneManager.LoadSceneAsync("ExiledFlorest");
     }
 
     public void OnClearClicked(SaveSlot saveSlot)

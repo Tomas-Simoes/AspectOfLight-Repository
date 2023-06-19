@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b844faeac500ba845939da53eaad3b15, type: 3}
+  m_Name: MagistrateSigilDialogue
+  m_EditorClassIdentifier: 
+  speakerName: ???
+  dialogueNodes:
+  - dialogueText: There it lies. You'll find several of these as you walk along your
+      path. If you decide to enter, know that I will be there to heal your injured
+      wounds and bless you with powerful abilities.
+    dialogueChoises: []
+  - dialogueText: These will help you in your objective. They were once owned  by
+      powerful humans and now I'm willing to give them to you in return for Miracles.
+    dialogueChoises: []
+  - dialogueText: Miracles help me strengthen our bond and make you stronger. Find
+      them by staying on the right path. I believe in your ability to succeed.
+    dialogueChoises:
+    - choiseText: Who are you?
+      choiseIndex: 0
+      followOnDialogue: {fileID: 0}
+      choiseWasAlreadyChoosen: 1
+      onlyReadbleOnce: 0
+  followOnDialogue: {fileID: 0}
+  startFollowOnDialogueIndex: 0

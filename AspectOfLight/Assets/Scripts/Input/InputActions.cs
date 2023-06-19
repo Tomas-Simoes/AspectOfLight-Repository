@@ -408,6 +408,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""GodMode"",
+                    ""type"": ""Button"",
+                    ""id"": ""684b5105-e0d6-4622-9881-a2f83f967976"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -430,6 +439,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""53c9509a-124f-41cb-9f2c-021f810527e9"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GodMode"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -465,6 +485,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_InGameActions = asset.FindActionMap("InGameActions", throwIfNotFound: true);
         m_InGameActions_Pause = m_InGameActions.FindAction("Pause", throwIfNotFound: true);
         m_InGameActions_Interact = m_InGameActions.FindAction("Interact", throwIfNotFound: true);
+        m_InGameActions_GodMode = m_InGameActions.FindAction("GodMode", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -680,12 +701,14 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private IInGameActionsActions m_InGameActionsActionsCallbackInterface;
     private readonly InputAction m_InGameActions_Pause;
     private readonly InputAction m_InGameActions_Interact;
+    private readonly InputAction m_InGameActions_GodMode;
     public struct InGameActionsActions
     {
         private @InputActions m_Wrapper;
         public InGameActionsActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_InGameActions_Pause;
         public InputAction @Interact => m_Wrapper.m_InGameActions_Interact;
+        public InputAction @GodMode => m_Wrapper.m_InGameActions_GodMode;
         public InputActionMap Get() { return m_Wrapper.m_InGameActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -701,6 +724,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
+                @GodMode.started -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnGodMode;
+                @GodMode.performed -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnGodMode;
+                @GodMode.canceled -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnGodMode;
             }
             m_Wrapper.m_InGameActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -711,6 +737,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @GodMode.started += instance.OnGodMode;
+                @GodMode.performed += instance.OnGodMode;
+                @GodMode.canceled += instance.OnGodMode;
             }
         }
     }
@@ -747,5 +776,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnGodMode(InputAction.CallbackContext context);
     }
 }

@@ -27,6 +27,9 @@ public class UIManager : Singleton<UIManager>
     [Header("Progress Saved UI")]
     private GameObject progressSavedText;
 
+    [Header("God Mode UI")]
+    private GameObject godModeText;
+
     private void OnEnable()
     {
         EventManager.StartListening("onPlayerDeath", OpenDeathScreen);
@@ -35,6 +38,7 @@ public class UIManager : Singleton<UIManager>
         EventManager.StartListening("onDialogue", ChangeUIDialogueState);
         EventManager.StartListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StartListening("onGameSaved", ShowProgressSavedText);
+        EventManager.StartListening("onGodMode", ChangeUIGodModeState);
     }
 
     private void OnDisable()
@@ -45,6 +49,7 @@ public class UIManager : Singleton<UIManager>
         EventManager.StopListening("onDialogue", ChangeUIDialogueState);
         EventManager.StopListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StopListening("onGameSaved", ShowProgressSavedText);
+        EventManager.StopListening("onGodMode", ChangeUIGodModeState);
     }
 
     public void OpenDeathScreen(Dictionary<string, object> message)
@@ -122,8 +127,17 @@ public class UIManager : Singleton<UIManager>
         }
 
         progressSavedText.SetActive(true);
-
         StartCoroutine(HideProgressSavedText());
+    }
+
+    public void ChangeUIGodModeState(Dictionary<string, object> message)
+    {
+        if (godModeText == null)
+        {
+            godModeText = LoadUIObject("UIElements/Informations/OnGodModeText");
+        }
+
+        godModeText.SetActive((bool)message["activeState"]);
     }
 
     //TODO Change this to work without having to load the UI

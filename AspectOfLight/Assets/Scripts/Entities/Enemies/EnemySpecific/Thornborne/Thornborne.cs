@@ -19,8 +19,7 @@ public class Thornborne : Enemy
 
     public D_ThornborneUGAttackState ugAttackStateData;
 
-    [SerializeField]
-    private D_ThornborneCooldown cooldownData;
+    public D_ThornborneCooldown cooldownData;
 
     public D_ThornbornePukeAttackState pukeAttackStateData;
 
@@ -37,6 +36,7 @@ public class Thornborne : Enemy
     public float timeSinceUGAttack;
     public float timeSinceUGTeleport;
     public float timeSincePukeAttack;
+    public float timeSinceHealing;
 
     [Header("Abilities Information")]
     public GameObject abilitiesParent;
@@ -62,8 +62,8 @@ public class Thornborne : Enemy
     {
         base.Start();
 
-        sleepState = new Thornborne_SleepState(this, stateMachine, "idle", this);
-        awakeState = new Thornborne_AwakeState(this, stateMachine, "idle", this);
+        sleepState = new Thornborne_SleepState(this, stateMachine, "sleep", this);
+        awakeState = new Thornborne_AwakeState(this, stateMachine, "awake", this);
         chaseState = new Thornborne_ChaseState(
             this,
             stateMachine,
@@ -101,7 +101,7 @@ public class Thornborne : Enemy
             healingStateData
         );
 
-        InitCooldowns();
+        timeSinceUGAttack = cooldownData.ugAttackCD;
         InitReferencePoints();
 
         stateMachine.Init(sleepState);
@@ -126,6 +126,7 @@ public class Thornborne : Enemy
         timeSinceUGAttack += Time.deltaTime;
         timeSinceUGTeleport += Time.deltaTime;
         timeSincePukeAttack += Time.deltaTime;
+        timeSinceHealing += Time.deltaTime;
     }
 
     public override void TakeDamage(float damage)
@@ -139,9 +140,11 @@ public class Thornborne : Enemy
             Heal(damage);
     }
 
-    public void InitCooldowns()
+    public override void Die()
     {
-        timeSinceUGAttack = cooldownData.ugAttackCD;
+        EventManager.TriggerEvent("onThornborneDie", false, null);
+
+        base.Die();
     }
 
     public void InitReferencePoints()
