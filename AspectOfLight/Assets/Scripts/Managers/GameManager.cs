@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    [Header("Off Game Information")]
+    public string environment = "development";
+
     [Header("In Game Information")]
+    public int deathCount = 0;
+    public float timePlayed = 0;
+
     public bool gameStarted = false;
     public bool onGodMode = false;
 
@@ -20,6 +26,7 @@ public class GameManager : Singleton<GameManager>
     private void OnDisable()
     {
         EventManager.StopListening("onNewGameStarted", OnNewGameStarted);
+        EventManager.StopListening("onGodMode", OnGodMode);
     }
 
     private void OnNewGameStarted(Dictionary<string, object> message)

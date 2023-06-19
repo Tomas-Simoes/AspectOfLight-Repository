@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName: ???
   dialogueNodes:
-  - dialogueText: There it lies. You'll find several of these as you walk along your
+  - dialogueText: There it is. You'll find several of these as you walk along your
       path. If you decide to enter, know that I will be there to heal your injured
       wounds and bless you with powerful abilities.
     dialogueChoises: []
-  - dialogueText: These will help you in your objective. They were once owned  by
+  - dialogueText: These will help you in your objective. They were once owned by
       powerful humans and now I'm willing to give them to you in return for Miracles.
     dialogueChoises: []
   - dialogueText: Miracles help me strengthen our bond and make you stronger. Find
@@ -26,7 +26,7 @@ MonoBehaviour:
     dialogueChoises:
     - choiseText: Who are you?
       choiseIndex: 0
-      followOnDialogue: {fileID: 0}
+      followOnDialogue: {fileID: 11400000, guid: bdba9094c91a6384ca72ae4602c80c8c, type: 2}
       choiseWasAlreadyChoosen: 1
       onlyReadbleOnce: 0
   followOnDialogue: {fileID: 0}

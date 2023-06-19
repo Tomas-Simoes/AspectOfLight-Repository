@@ -14,11 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName: ???
   dialogueNodes:
-  - dialogueText: Dear child, arise and  travel through these enchanting lands. A
+  - dialogueText: Dear child, arise and travel through these enchanting lands. A
       radiant future awaits you, filled with boundless possibilities. Use Q to interact
       with the world around you.
     dialogueChoises: []
-  - dialogueText: Take heart and begin your adventure. Use WASD keys to move.
+  - dialogueText: Have determination and begin your adventure. Use WASD keys to move.
+    dialogueChoises: []
+  - dialogueText: '[not in the actual game] Welcome to the version 0.2 of Aspect
+      of Light. There is a lot of new things here. Take your time and have fun. '
+    dialogueChoises: []
+  - dialogueText: '[not in the actual game] By the way, I know the player speed is
+      not right considering the movement animation. In the future we will have a
+      crippled player animation, so that''s why.'
+    dialogueChoises: []
+  - dialogueText: "[not in the actual game] Anyways, good luck! \n- sim\xF5es"
     dialogueChoises: []
   followOnDialogue: {fileID: 0}
   startFollowOnDialogueIndex: 0

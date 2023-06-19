@@ -30,6 +30,9 @@ public class UIManager : Singleton<UIManager>
     [Header("God Mode UI")]
     private GameObject godModeText;
 
+    [Header("Player UI")]
+    private GameObject playerUI;
+
     private void OnEnable()
     {
         EventManager.StartListening("onPlayerDeath", OpenDeathScreen);
@@ -39,6 +42,7 @@ public class UIManager : Singleton<UIManager>
         EventManager.StartListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StartListening("onGameSaved", ShowProgressSavedText);
         EventManager.StartListening("onGodMode", ChangeUIGodModeState);
+        EventManager.StartListening("onPlayerUI", OpenPlayerUI);
     }
 
     private void OnDisable()
@@ -50,6 +54,7 @@ public class UIManager : Singleton<UIManager>
         EventManager.StopListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StopListening("onGameSaved", ShowProgressSavedText);
         EventManager.StopListening("onGodMode", ChangeUIGodModeState);
+        EventManager.StopListening("onPlayerUI", OpenPlayerUI);
     }
 
     public void OpenDeathScreen(Dictionary<string, object> message)
@@ -60,6 +65,16 @@ public class UIManager : Singleton<UIManager>
         }
 
         deathScreen.SetActive((bool)message["activeState"]);
+    }
+
+    public void OpenPlayerUI(Dictionary<string, object> message)
+    {
+        if (playerUI == null)
+        {
+            playerUI = LoadUIObject("UIElements/PlayerUI/PlayerUI");
+        }
+
+        playerUI.SetActive(true);
     }
 
     public void ChangeUIPauseState(Dictionary<string, object> message)

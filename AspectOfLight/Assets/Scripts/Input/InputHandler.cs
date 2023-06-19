@@ -18,6 +18,7 @@ public class InputHandler : MonoBehaviour
     public bool pressedAbilityOne;
     public bool pressedAbilityTwo;
     public bool pressedAbilityThree;
+    public bool pressedAbilityFour;
 
     [Header("Pause Input")]
     private bool isPaused = false;
@@ -74,6 +75,9 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.AbilityThree.started += SetAbilityThree;
         inputActions.Player.AbilityThree.canceled += SetAbilityThree;
 
+        inputActions.Player.AbilityFour.started += SetAbilityFour;
+        inputActions.Player.AbilityFour.canceled += SetAbilityFour;
+
         inputActions.Player.Attack.performed += SetAttack;
         inputActions.Player.Attack.canceled += SetAttack;
 
@@ -106,6 +110,9 @@ public class InputHandler : MonoBehaviour
 
         inputActions.Player.AbilityThree.started -= SetAbilityThree;
         inputActions.Player.AbilityThree.canceled -= SetAbilityThree;
+
+        inputActions.Player.AbilityFour.started -= SetAbilityFour;
+        inputActions.Player.AbilityFour.canceled -= SetAbilityFour;
 
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;
@@ -171,6 +178,11 @@ public class InputHandler : MonoBehaviour
     private void SetAbilityThree(InputAction.CallbackContext ctx)
     {
         pressedAbilityThree = ctx.started;
+    }
+
+    private void SetAbilityFour(InputAction.CallbackContext ctx)
+    {
+        pressedAbilityFour = ctx.started;
     }
 
     private void SetAttack(InputAction.CallbackContext ctx)
