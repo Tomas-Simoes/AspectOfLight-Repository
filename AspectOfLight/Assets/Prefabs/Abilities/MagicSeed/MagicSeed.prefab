@@ -81,16 +81,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4477906987564694835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e82a5831f593184494317d546435195, type: 3}
+  m_Script: {fileID: 11500000, guid: 0cc83546b6148df4db5c629d6bf850ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {x: 0, y: 0, z: 0}
-  speed: 7
-  damage: 2
-  lifeTime: 4
+  speed: 10
+  damage: 0
+  lifeTime: 2
   targatableTag: Enemy
-  minimumTimeTraveling: 0.3
-  maxTimeTraveling: 1.75
-  minimumTimeGrounded: 0.3
-  maxTimeGrounded: 3
+  minimumTimeTraveling: 0.2
+  maxTimeTraveling: 1
+  minimumTimeGrounded: 0.2
+  maxTimeGrounded: 2
   player: {fileID: 0}
