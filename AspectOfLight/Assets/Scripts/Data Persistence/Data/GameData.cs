@@ -8,7 +8,6 @@ public class GameData
     [Header("Player Information")]
     public float currentHealth;
     public int currentStamina;
-    public int currentMiracles;
 
     [Header("Abilities Information")]
     public Dictionary<string, bool> abilityLockState;
@@ -30,12 +29,10 @@ public class GameData
     {
         this.currentStamina = 75;
         this.currentHealth = 45;
-        this.currentMiracles = 1;
         this.playerPosition = new Vector2(0f, 0f);
         this.areaInMap = "ExiledFlorest";
         this.deathCount = 0;
         this.movementSpeed = 2;
-
         this.abilityLockState = new Dictionary<string, bool>();
         this.playerAbilities = new Dictionary<int, string>();
 

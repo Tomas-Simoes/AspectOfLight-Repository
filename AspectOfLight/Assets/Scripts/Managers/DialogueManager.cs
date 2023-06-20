@@ -28,7 +28,7 @@ public class DialogueManager : Singleton<DialogueManager>
     private IEnumerator currentDialogueCoroutine;
 
     [Header("Node Information")]
-    private float nodeSpeed = 0.04f;
+    private float nodeSpeed = 0.05f;
 
     private float timeInNode;
 

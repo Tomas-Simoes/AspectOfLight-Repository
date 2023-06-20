@@ -60,15 +60,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AbilityFour",
-                    "type": "Button",
-                    "id": "6bb8e40f-0fe4-4fe0-973b-2a78c1f2a018",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "aabb25b3-cb5e-4433-88c3-4d60f9b1635a",
@@ -197,17 +188,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "AbilityThree",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "841df827-f41a-4fdc-974c-1f3de736b175",
-                    "path": "<Keyboard>/4",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AbilityFour",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
