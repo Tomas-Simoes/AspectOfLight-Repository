@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speakerName: ???
   dialogueNodes:
-  - dialogueText: 'It appears that you''re feeling hurt. Don''t need to be afraid. '
+  - dialogueText: 'It appears that you''re feeling hurt. No need to be afraid. '
     dialogueChoises: []
-  - dialogueText: Seek out my sigil in the ground and allow me to heal your wounds.
+  - dialogueText: Seek out my sigil in the ground and allow me to heal your wounds
+      and infuse you with new abilities.
     dialogueChoises: []
   followOnDialogue: {fileID: 0}
   startFollowOnDialogueIndex: 0

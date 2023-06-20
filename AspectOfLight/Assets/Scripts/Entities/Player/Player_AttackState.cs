@@ -86,7 +86,7 @@ public class Player_AttackState : State
 
             if (GameManager.Instance.onGodMode)
             {
-                _bullet.GetComponent<DefaultBullet>().damage = 100;
+                _bullet.GetComponent<DefaultBullet>().damage = 200;
             }
             else
             {
