@@ -343,8 +343,8 @@ TextureImporter:
         y: 192
         width: 32
         height: 19
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 9
+      pivot: {x: 0.5, y: 1.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -365,7 +365,7 @@ TextureImporter:
         width: 36
         height: 19
       alignment: 9
-      pivot: {x: 0.50095916, y: 1.0002642}
+      pivot: {x: 0.5, y: 1.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -427,8 +427,8 @@ TextureImporter:
         y: 157
         width: 42
         height: 24
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 9
+      pivot: {x: 0.5, y: 1.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -448,8 +448,8 @@ TextureImporter:
         y: 156
         width: 57
         height: 25
-      alignment: 2
-      pivot: {x: 0.5, y: 1}
+      alignment: 9
+      pivot: {x: 0.5, y: 1.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -619,8 +619,8 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ExiledFlorest_Props_15: -2096862157
       ExiledFlorest_Props_25: 904529594
+      ExiledFlorest_Props_36: -448563142
       ExiledFlorest_Props_10: 699606504
       ExiledFlorest_Props_4: -1445532095
       ExiledFlorest_Props_18: -647412850
@@ -657,9 +657,9 @@ TextureImporter:
       ExiledFlorest_Props_28: -483588046
       ExiledFlorest_Props_35: 526970044
       ExiledFlorest_Props_32: -1090327079
-      ExiledFlorest_Props_16: -1664273006
-      ExiledFlorest_Props_36: -448563142
       ExiledFlorest_Props_5: -1798429013
+      ExiledFlorest_Props_16: -1664273006
+      ExiledFlorest_Props_15: -2096862157
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

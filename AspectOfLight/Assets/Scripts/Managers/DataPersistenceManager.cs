@@ -32,13 +32,16 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     private List<IDataPersistence> dataPersistanceObjects = new List<IDataPersistence>();
 
     //! THIS IS FOR DEVELOPMENT ONLY
-    //! REMOVE THIS WHEN BUILDING THE GAME
     public override void Init()
     {
         base.Init();
 
-        LoadGame();
-        GameManager.Instance.gameStarted = true;
+        if (GameManager.Instance.environment == "development")
+        {
+            LoadGame();
+            EventManager.TriggerEvent("onPlayerUI", true, null);
+            GameManager.Instance.gameStarted = true;
+        }
     }
 
     private void Awake()

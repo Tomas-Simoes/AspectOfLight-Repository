@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b844faeac500ba845939da53eaad3b15, type: 3}
+  m_Name: MagistrateSigilDialogueResponse
+  m_EditorClassIdentifier: 
+  speakerName: 
+  dialogueNodes:
+  - dialogueText: ...
+    dialogueChoises: []
+  - dialogueText: '[not in the actual game] The UI navigation to the "Sacred Paths"
+      it''s still in development and it''s very floppy at the moment.'
+    dialogueChoises: []
+  - dialogueText: '[not in the actual game] But to buy the abilities, you have to
+      click on them. Once you have the ability unlocked, you can press on a slot
+      and choose an ability to equip there.'
+    dialogueChoises: []
+  - dialogueText: "[not in the actual game] You can then use 1, 2, 3 or 4 to use
+      the abilities. Also, don't forget to save the game after choosing the abilities.\n-
+      sim\xF5es"
+    dialogueChoises: []
+  followOnDialogue: {fileID: 0}
+  startFollowOnDialogueIndex: 0

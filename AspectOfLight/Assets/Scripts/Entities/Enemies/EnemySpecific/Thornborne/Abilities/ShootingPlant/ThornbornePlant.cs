@@ -23,7 +23,7 @@ public class ThornbornePlant : Entity
 
     private void OnDisable()
     {
-        EventManager.StartListening("onThornborneDie", Die);
+        EventManager.StopListening("onThornborneDie", Die);
     }
 
     public override void Start()
