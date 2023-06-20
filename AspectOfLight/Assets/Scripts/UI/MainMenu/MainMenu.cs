@@ -55,10 +55,8 @@ public class MainMenu : Menu
     public void OnContinueClicked()
     {
         DisableMenuButtons();
-        ScenesManager.Instance.LoadScene(
-            DataPersistenceManager.Instance.gameData.areaInMap,
-            loadDataAfterLoadingScene: true
-        );
+        DataPersistenceManager.Instance.LoadGame();
+        SceneManager.LoadSceneAsync(DataPersistenceManager.Instance.gameData.areaInMap);
     }
 
     private void DisableMenuButtons()

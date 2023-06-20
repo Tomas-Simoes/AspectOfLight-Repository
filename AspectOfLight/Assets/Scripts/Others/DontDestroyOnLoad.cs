@@ -12,6 +12,6 @@ public class DontDestroyOnLoad : MonoBehaviour
             Destroy(instance);
 
         instance = gameObject;
-        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(this);
     }
 }
