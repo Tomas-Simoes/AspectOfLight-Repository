@@ -73,15 +73,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""AbilityFour"",
-                    ""type"": ""Button"",
-                    ""id"": ""6bb8e40f-0fe4-4fe0-973b-2a78c1f2a018"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""aabb25b3-cb5e-4433-88c3-4d60f9b1635a"",
@@ -199,17 +190,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""AbilityThree"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""841df827-f41a-4fdc-974c-1f3de736b175"",
-                    ""path"": ""<Keyboard>/4"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""AbilityFour"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -471,7 +451,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_AbilityOne = m_Player.FindAction("AbilityOne", throwIfNotFound: true);
         m_Player_AbilityTwo = m_Player.FindAction("AbilityTwo", throwIfNotFound: true);
         m_Player_AbilityThree = m_Player.FindAction("AbilityThree", throwIfNotFound: true);
-        m_Player_AbilityFour = m_Player.FindAction("AbilityFour", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -550,7 +529,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AbilityOne;
     private readonly InputAction m_Player_AbilityTwo;
     private readonly InputAction m_Player_AbilityThree;
-    private readonly InputAction m_Player_AbilityFour;
     private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
@@ -561,7 +539,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @AbilityOne => m_Wrapper.m_Player_AbilityOne;
         public InputAction @AbilityTwo => m_Wrapper.m_Player_AbilityTwo;
         public InputAction @AbilityThree => m_Wrapper.m_Player_AbilityThree;
-        public InputAction @AbilityFour => m_Wrapper.m_Player_AbilityFour;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -587,9 +564,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @AbilityThree.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityThree;
                 @AbilityThree.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityThree;
                 @AbilityThree.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityThree;
-                @AbilityFour.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityFour;
-                @AbilityFour.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityFour;
-                @AbilityFour.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityFour;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -612,9 +586,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @AbilityThree.started += instance.OnAbilityThree;
                 @AbilityThree.performed += instance.OnAbilityThree;
                 @AbilityThree.canceled += instance.OnAbilityThree;
-                @AbilityFour.started += instance.OnAbilityFour;
-                @AbilityFour.performed += instance.OnAbilityFour;
-                @AbilityFour.canceled += instance.OnAbilityFour;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -760,7 +731,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnAbilityOne(InputAction.CallbackContext context);
         void OnAbilityTwo(InputAction.CallbackContext context);
         void OnAbilityThree(InputAction.CallbackContext context);
-        void OnAbilityFour(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }
     public interface IUIActions

@@ -62,7 +62,7 @@ public class AbilityMenu : Menu
     {
         InitAbilities();
 
-        miraclesText.text = AbilityManager.Instance.currentMiracles.ToString();
+        miraclesText.text = AbilityManager.Instance.playerMiracles.ToString();
     }
 
     protected override void OnEnable()
@@ -164,7 +164,7 @@ public class AbilityMenu : Menu
         if (AbilityManager.Instance.UnlockAbility(ability))
         {
             image.sprite = ability.iconAvailable;
-            miraclesText.text = AbilityManager.Instance.currentMiracles.ToString();
+            miraclesText.text = AbilityManager.Instance.playerMiracles.ToString();
         }
     }
 
