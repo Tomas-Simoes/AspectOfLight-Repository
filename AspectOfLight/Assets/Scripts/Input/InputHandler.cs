@@ -14,7 +14,6 @@ public class InputHandler : MonoBehaviour
 
     [Header("Abilities Input")]
     public bool pressingAttack;
-    public bool pressedDash;
     public bool pressedAbilityOne;
     public bool pressedAbilityTwo;
     public bool pressedAbilityThree;
@@ -63,9 +62,6 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.YAxisMovement.performed += SetYAxisMovement;
         inputActions.Player.YAxisMovement.canceled += SetYAxisMovement;
 
-        inputActions.Player.Dash.started += SetDashing;
-        inputActions.Player.Dash.canceled += SetDashing;
-
         inputActions.Player.AbilityOne.started += SetAbilityOne;
         inputActions.Player.AbilityOne.canceled += SetAbilityOne;
 
@@ -98,9 +94,6 @@ public class InputHandler : MonoBehaviour
 
         inputActions.Player.XAxisMovement.performed -= SetYAxisMovement;
         inputActions.Player.XAxisMovement.canceled -= SetYAxisMovement;
-
-        inputActions.Player.Dash.started -= SetDashing;
-        inputActions.Player.Dash.canceled -= SetDashing;
 
         inputActions.Player.AbilityOne.started -= SetAbilityOne;
         inputActions.Player.AbilityOne.canceled -= SetAbilityOne;
@@ -158,11 +151,6 @@ public class InputHandler : MonoBehaviour
     private void SetYAxisMovement(InputAction.CallbackContext ctx)
     {
         yAxis = ctx.ReadValue<Vector2>().y;
-    }
-
-    private void SetDashing(InputAction.CallbackContext ctx)
-    {
-        pressedDash = ctx.started;
     }
 
     private void SetAbilityOne(InputAction.CallbackContext ctx)

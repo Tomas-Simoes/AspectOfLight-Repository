@@ -225,6 +225,8 @@ public class AbilityMenu : Menu
 
     private void OnCancel(Dictionary<string, object> message)
     {
+        Debug.Log("ya");
+
         if (isChangingPlayerAbility)
         {
             ResetUI();

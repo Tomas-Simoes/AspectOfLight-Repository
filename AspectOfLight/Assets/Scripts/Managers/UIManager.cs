@@ -8,21 +8,26 @@ public class UIManager : Singleton<UIManager>
 {
     [Header("Death UI")]
     private GameObject deathScreen;
+    private bool inDeathScreen = false;
     private TextMeshProUGUI deathText;
     private string[] deathMessages;
 
     [Header("MagistrateSigil UI")]
     private GameObject magistrateSigilMenu;
+    private bool inMagistrateSigil;
 
     [Header("Pause UI")]
     private GameObject pauseMenu;
+    private bool inPauseMenu = false;
 
     [Header("Dialogue UI")]
     private GameObject dialogueUI;
+    private bool inDialogue = false;
     public bool loadedDialogueUIHasChoises;
 
     [Header("Ability Tree UI")]
     private GameObject abilityTree;
+    private bool inAbilityTree = false;
 
     [Header("Progress Saved UI")]
     private GameObject progressSavedText;
@@ -59,6 +64,22 @@ public class UIManager : Singleton<UIManager>
 
     public void OpenDeathScreen(Dictionary<string, object> message)
     {
+        inDeathScreen = (bool)message["activeState"];
+
+        if (inDeathScreen && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", false } }
+            );
+        }
+
+        if (!inDeathScreen && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", true } }
+            );
+        }
+
         if (deathScreen == null)
         {
             deathScreen = LoadUIObject("UIElements/DeathScreen/DeathScreen");
@@ -79,6 +100,27 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIPauseState(Dictionary<string, object> message)
     {
+        inPauseMenu = (bool)message["activeState"];
+
+        if (inAbilityTree)
+        {
+            return;
+        }
+
+        if (inPauseMenu && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", false } }
+            );
+        }
+
+        if (!inPauseMenu && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", true } }
+            );
+        }
+
         if (pauseMenu == null)
         {
             pauseMenu = LoadUIObject("UIElements/PauseMenu/PauseMenu");
@@ -89,6 +131,12 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIMagistrateSigilState(Dictionary<string, object> message)
     {
+        if (!inPauseMenu && !inAbilityTree && !inDeathScreen)
+        {
+            Debug.Log("Magistrate Sigil state: " + (bool)message["activeState"]);
+            inMagistrateSigil = (bool)message["activeState"];
+        }
+
         if (magistrateSigilMenu == null)
         {
             magistrateSigilMenu = LoadUIObject(
@@ -101,9 +149,7 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIAbilityTreeState(Dictionary<string, object> message)
     {
-        ChangeUIMagistrateSigilState(
-            new Dictionary<string, object> { { "activeState", !(bool)message["activeState"] } }
-        );
+        inAbilityTree = (bool)message["activeState"];
 
         if (abilityTree == null)
         {
@@ -115,6 +161,8 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIDialogueState(Dictionary<string, object> message)
     {
+        inDialogue = (bool)message["activeState"];
+
         if ((bool)message["activeState"])
         {
             D_Dialogue _thisDialogue = (D_Dialogue)message["dialogue"];

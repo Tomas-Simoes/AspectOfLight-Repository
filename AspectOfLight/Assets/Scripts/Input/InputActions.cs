@@ -46,15 +46,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""fdbdd11b-33d5-4f8b-8cf7-835436a88eea"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""AbilityOne"",
                     ""type"": ""Button"",
                     ""id"": ""5a2feab5-8687-40ec-8ab9-7de7af88cee7"",
@@ -101,17 +92,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""01117d46-102e-4e20-8d71-379dcb60e489"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": ""Keys"",
                     ""id"": ""db7ef4c0-f9a4-48af-bc2b-5857240adac8"",
@@ -397,7 +377,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a955a99a-f556-460c-a5f9-74c64dbd88ac"",
-                    ""path"": ""<Keyboard>/b"",
+                    ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -488,7 +468,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_XAxisMovement = m_Player.FindAction("XAxisMovement", throwIfNotFound: true);
         m_Player_YAxisMovement = m_Player.FindAction("YAxisMovement", throwIfNotFound: true);
-        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_AbilityOne = m_Player.FindAction("AbilityOne", throwIfNotFound: true);
         m_Player_AbilityTwo = m_Player.FindAction("AbilityTwo", throwIfNotFound: true);
         m_Player_AbilityThree = m_Player.FindAction("AbilityThree", throwIfNotFound: true);
@@ -568,7 +547,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_XAxisMovement;
     private readonly InputAction m_Player_YAxisMovement;
-    private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_AbilityOne;
     private readonly InputAction m_Player_AbilityTwo;
     private readonly InputAction m_Player_AbilityThree;
@@ -580,7 +558,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @XAxisMovement => m_Wrapper.m_Player_XAxisMovement;
         public InputAction @YAxisMovement => m_Wrapper.m_Player_YAxisMovement;
-        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @AbilityOne => m_Wrapper.m_Player_AbilityOne;
         public InputAction @AbilityTwo => m_Wrapper.m_Player_AbilityTwo;
         public InputAction @AbilityThree => m_Wrapper.m_Player_AbilityThree;
@@ -601,9 +578,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @YAxisMovement.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYAxisMovement;
                 @YAxisMovement.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYAxisMovement;
                 @YAxisMovement.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnYAxisMovement;
-                @Dash.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
-                @Dash.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDash;
                 @AbilityOne.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityOne;
                 @AbilityOne.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityOne;
                 @AbilityOne.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityOne;
@@ -629,9 +603,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @YAxisMovement.started += instance.OnYAxisMovement;
                 @YAxisMovement.performed += instance.OnYAxisMovement;
                 @YAxisMovement.canceled += instance.OnYAxisMovement;
-                @Dash.started += instance.OnDash;
-                @Dash.performed += instance.OnDash;
-                @Dash.canceled += instance.OnDash;
                 @AbilityOne.started += instance.OnAbilityOne;
                 @AbilityOne.performed += instance.OnAbilityOne;
                 @AbilityOne.canceled += instance.OnAbilityOne;
@@ -786,7 +757,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     {
         void OnXAxisMovement(InputAction.CallbackContext context);
         void OnYAxisMovement(InputAction.CallbackContext context);
-        void OnDash(InputAction.CallbackContext context);
         void OnAbilityOne(InputAction.CallbackContext context);
         void OnAbilityTwo(InputAction.CallbackContext context);
         void OnAbilityThree(InputAction.CallbackContext context);

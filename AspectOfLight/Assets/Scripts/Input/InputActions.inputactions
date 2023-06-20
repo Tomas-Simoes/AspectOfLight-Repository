@@ -24,15 +24,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "fdbdd11b-33d5-4f8b-8cf7-835436a88eea",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "AbilityOne",
                     "type": "Button",
                     "id": "5a2feab5-8687-40ec-8ab9-7de7af88cee7",
@@ -79,17 +70,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "01117d46-102e-4e20-8d71-379dcb60e489",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "Keys",
                     "id": "db7ef4c0-f9a4-48af-bc2b-5857240adac8",
@@ -375,7 +355,7 @@
                 {
                     "name": "",
                     "id": "a955a99a-f556-460c-a5f9-74c64dbd88ac",
-                    "path": "<Keyboard>/b",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
