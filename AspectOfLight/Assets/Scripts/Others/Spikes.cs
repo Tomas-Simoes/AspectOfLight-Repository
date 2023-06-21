@@ -11,26 +11,33 @@ public class Spikes : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    public IEnumerator GoUp()
-    {
-        anim.SetBool("spikesUp", true);
+    
 
-        while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
+    public IEnumerator Go(string upOrDown)
+    {
+        Debug.Log(anim);
+        Debug.Log("Starting animation down.");
+        
+        anim.SetBool("spikes" + upOrDown, true);
+        yield return new WaitForSeconds(0.1f);
+        anim.SetBool("spikes" + upOrDown, false);
+
+        while (true)
         {
-            yield return null;
+            float _animationTime = anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+            if(_animationTime >= 1) {
+                if(upOrDown == "Down"){
+                    Destroy(this.gameObject);
+                }
+                
+                goto AnimationOver;
+            }
+
+            yield return new WaitForSeconds(0.001f);
         }
 
-        anim.SetBool("spikesUp", false);
-    }
-
-    public IEnumerator GoDown()
-    {
-        anim.SetBool("spikesDown", true);
-        while (anim.GetCurrentAnimatorStateInfo(0).normalizedTime < 1f)
-        {
-            yield return null;
-        }
-        anim.SetBool("spikesDown", false);
-        gameObject.SetActive(false);
+        AnimationOver: 
+            Debug.Log("animation is over");
     }
 }

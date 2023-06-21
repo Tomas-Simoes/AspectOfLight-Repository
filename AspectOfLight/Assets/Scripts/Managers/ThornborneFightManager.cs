@@ -130,7 +130,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
         yield return new WaitForSeconds(1.5f);
 
-        StartCoroutine(engineerVillageSpikes.GoDown());
+        StartCoroutine(engineerVillageSpikes.Go("Down"));
 
         yield return new WaitForSeconds(1f);
 
@@ -150,13 +150,15 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
             backSpikes1.gameObject.SetActive(true);
             backSpikes2.gameObject.SetActive(true);
 
-            StartCoroutine(backSpikes1.GoUp());
-            StartCoroutine(backSpikes2.GoUp());
+            Debug.Log("Starting up coroutine");
+            StartCoroutine(backSpikes1.Go("Up"));
+            StartCoroutine(backSpikes2.Go("Up"));
             return;
         }
-
-        StartCoroutine(backSpikes1.GoDown());
-        StartCoroutine(backSpikes2.GoDown());
+        
+        Debug.Log("Starting down coroutine");
+        StartCoroutine(backSpikes1.Go("Down"));
+        StartCoroutine(backSpikes2.Go("Down"));
     }
 
     private void FadeInText(Animator text)
