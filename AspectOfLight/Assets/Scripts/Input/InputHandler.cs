@@ -17,6 +17,7 @@ public class InputHandler : MonoBehaviour
     public bool pressedAbilityOne;
     public bool pressedAbilityTwo;
     public bool pressedAbilityThree;
+    public bool pressedAbilityFour;
 
     [Header("Pause Input")]
     private bool isPaused = false;
@@ -70,17 +71,20 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.AbilityThree.started += SetAbilityThree;
         inputActions.Player.AbilityThree.canceled += SetAbilityThree;
 
+        inputActions.Player.AbilityFour.started += SetAbilityFour;
+        inputActions.Player.AbilityFour.canceled += SetAbilityFour;
+
         inputActions.Player.Attack.performed += SetAttack;
         inputActions.Player.Attack.canceled += SetAttack;
 
-        inputActions.InGameActions.Pause.started += SetPause;
+        //inputActions.InGameActions.Exit.started += SetExit;
         inputActions.InGameActions.GodMode.started += SetGodMode;
 
         inputActions.InGameActions.Interact.performed += SetInteract;
         inputActions.InGameActions.Interact.canceled += SetInteract;
 
         inputActions.UI.Select.performed += SetSelect;
-        inputActions.UI.Cancel.performed += SetCancel;
+        inputActions.UI.Exit.performed += SetExit;
     }
 
     private void UnsubscribeInputs()
@@ -100,17 +104,20 @@ public class InputHandler : MonoBehaviour
         inputActions.Player.AbilityThree.started -= SetAbilityThree;
         inputActions.Player.AbilityThree.canceled -= SetAbilityThree;
 
+        inputActions.Player.AbilityFour.started -= SetAbilityFour;
+        inputActions.Player.AbilityFour.canceled -= SetAbilityFour;
+
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;
 
         inputActions.InGameActions.Interact.performed -= SetInteract;
         inputActions.InGameActions.Interact.canceled -= SetInteract;
 
-        inputActions.InGameActions.Pause.performed -= SetPause;
+        //inputActions.InGameActions.Exit.performed -= SetExit;
         inputActions.InGameActions.GodMode.started -= SetGodMode;
 
         inputActions.UI.Select.performed -= SetSelect;
-        inputActions.UI.Cancel.performed -= SetCancel;
+        inputActions.UI.Exit.performed -= SetExit;
 
         inputActions.Disable();
     }
@@ -161,6 +168,11 @@ public class InputHandler : MonoBehaviour
         pressedAbilityThree = ctx.started;
     }
 
+    private void SetAbilityFour(InputAction.CallbackContext ctx)
+    {
+        pressedAbilityFour = ctx.started;
+    }
+
     private void SetAttack(InputAction.CallbackContext ctx)
     {
         pressingAttack = ctx.performed;
@@ -171,15 +183,18 @@ public class InputHandler : MonoBehaviour
         pressedInteract = ctx.performed;
     }
 
-    private void SetPause(InputAction.CallbackContext ctx)
+    private void SetExit(InputAction.CallbackContext ctx)
     {
+        Debug.Log('s');
+
         EventManager.TriggerEvent(
-            "onPause",
+            "onExit",
             true,
-            new Dictionary<string, object> { { "activeState", !isPaused } }
+            null
+        //new Dictionary<string, object> { { "activeState", !isPaused } }
         );
 
-        isPaused = !isPaused; //TODO change this information to another class
+        //isPaused = !isPaused; //TODO change this information to another class
     }
 
     private void SetGodMode(InputAction.CallbackContext ctx)

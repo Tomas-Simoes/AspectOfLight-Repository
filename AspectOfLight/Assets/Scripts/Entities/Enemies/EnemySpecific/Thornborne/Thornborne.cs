@@ -132,7 +132,10 @@ public class Thornborne : Enemy
     public override void TakeDamage(float damage)
     {
         if (stateMachine.currentState == healingState)
+        {
             stateMachine.ChangeState(chaseState);
+            return;
+        }
 
         if (canTakeDamage)
             base.TakeDamage(damage);

@@ -30,7 +30,7 @@ public class ScenesManager : Singleton<ScenesManager>
         );
     }
 
-    public IEnumerator LoadSceneAsync(
+    private IEnumerator LoadSceneAsync(
         string sceneName,
         int outConnectionID,
         bool isInGameTransition,
@@ -45,6 +45,9 @@ public class ScenesManager : Singleton<ScenesManager>
         }
 
         GameManager.Instance.gameStarted = sceneName == "MainMenu" ? false : true;
+
+        if (sceneName != "MainMenu")
+            EventManager.TriggerEvent("onPlayerUI", true, null);
 
         if (loadDataAfterLoadingScene)
             DataPersistenceManager.Instance.LoadGame();

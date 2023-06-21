@@ -8,7 +8,7 @@ public class Thornborne_HealingState : State
     D_ThornborneHealingState stateData;
 
     [Header("State Information")]
-    private float timeSinceHealing;
+    private float timeSinceLastHealingTick;
 
     public Thornborne_HealingState(
         Entity entity,
@@ -28,23 +28,25 @@ public class Thornborne_HealingState : State
         base.Enter();
 
         enemy.rb.velocity = Vector2.zero;
-        timeSinceHealing = 0;
+        timeSinceLastHealingTick = stateData.timeToHeal;
     }
 
     public override void Exit()
     {
         base.Exit();
+
+        enemy.timeSinceHealing = 0;
     }
 
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        timeSinceHealing += Time.deltaTime;
+        timeSinceLastHealingTick += Time.deltaTime;
 
-        if (timeSinceHealing >= stateData.timeToHeal)
+        if (timeSinceLastHealingTick >= stateData.timeToHeal)
         {
             enemy.Heal(stateData.heal);
-            timeSinceHealing = 0;
+            timeSinceLastHealingTick = 0;
         }
     }
 

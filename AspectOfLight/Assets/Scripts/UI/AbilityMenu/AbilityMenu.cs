@@ -25,7 +25,9 @@ public class AbilityMenu : Menu
 
     [Header("UI Slots")]
     [SerializeField]
-    private List<Button> abilitySlots;
+    private List<Button> playerAbilitySlots;
+
+    private List<Button> availableAbilitySlots = new List<Button>();
 
     //? index 0 > passive
     //? index 1 / 2 / 3 > ability slots 1 / 2 / 3
@@ -54,6 +56,10 @@ public class AbilityMenu : Menu
     [SerializeField]
     private TextMeshProUGUI miraclesText;
 
+    [Header("On Prompt Callbacks")]
+    UIManager.OnPromptYes OnYesUnlockingNewAbility;
+    UIManager.OnPromptNo OnNoUnlockingNewAbility;
+
     [Header("Others")]
     [SerializeField]
     private Sprite emptySlotSprite;
@@ -62,7 +68,37 @@ public class AbilityMenu : Menu
     {
         InitAbilities();
 
-        miraclesText.text = AbilityManager.Instance.playerMiracles.ToString();
+        OnYesUnlockingNewAbility = (message) =>
+        {
+            UnlockPlayerAbility((Image)message["image"], (Ability)message["ability"]);
+            isChangingPlayerAbility = (bool)message["isChangingAbility"];
+
+            if (!isChangingPlayerAbility)
+            {
+                ((Image)message["image"]).gameObject.GetComponent<Button>().Select();
+            }
+            else
+            {
+                OnAvailableAbilityPressed(
+                    (Image)message["image"],
+                    (Ability)message["ability"],
+                    false
+                );
+            }
+
+            Destroy((GameObject)message["prompt"]);
+            ChangeInteractableAvailableAbilities(true);
+        };
+
+        OnNoUnlockingNewAbility = (message) =>
+        {
+            Destroy((GameObject)message["prompt"]);
+
+            ResetUIAfterChangingPlayerAbility();
+            ChangeInteractableAvailableAbilities(true);
+        };
+
+        miraclesText.text = AbilityManager.Instance.currentMiracles.ToString();
     }
 
     protected override void OnEnable()
@@ -72,14 +108,14 @@ public class AbilityMenu : Menu
 
         EventManager.StartListening("onSelectAbility", OnSelectAbility);
         EventManager.StartListening("onDeselectAbility", OnDeselectAbility);
-        EventManager.StartListening("onCancel", OnCancel);
+        EventManager.StartListening("onExitInAbilityTree", OnExitInAbilityTree);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening("onSelectAbility", OnSelectAbility);
         EventManager.StopListening("onDeselectAbility", OnDeselectAbility);
-        EventManager.StopListening("onCancel", OnCancel);
+        EventManager.StopListening("onExitInAbilityTree", OnExitInAbilityTree);
     }
 
     private void InitAbilities()
@@ -120,28 +156,47 @@ public class AbilityMenu : Menu
                 .onClick.AddListener(
                     delegate
                     {
-                        PressedAvailableAbility(_newAbility.GetComponent<Image>(), ability);
+                        OnAvailableAbilityPressed(_newAbility.GetComponent<Image>(), ability);
                     }
                 );
 
             _newAbility.GetComponent<ButtonSelected>().ability = ability;
+
+            availableAbilitySlots.Add(_newAbility.GetComponent<Button>());
         }
     }
 
-    public void PressedAvailableAbility(Image image, Ability ability)
+    public void OnAvailableAbilityPressed(Image image, Ability ability, bool promptPlayer = true)
     {
+        //TODO show some history context
+        if (ability.isAvailable && !isChangingPlayerAbility)
+        {
+            return;
+        }
+
+        //TODO make this warning logs for player
+        if (!ability.isAvailable && !AbilityManager.Instance.CanUnlockAbility(ability))
+        {
+            Debug.LogWarning("No miracles");
+            return;
+        }
+
         if (isChangingPlayerAbility)
         {
             //TODO make this warning logs for player
             if (AbilityManager.playerAbilities.ContainsValue(ability))
             {
                 Debug.LogWarning("Ability already equiped");
+
+                ResetUIAfterChangingPlayerAbility();
                 return;
             }
 
             if (!ability.isAvailable)
             {
-                Debug.LogWarning("Ability is locked");
+                ChangeInteractableAvailableAbilities(false);
+                OpenUnlockingAbilityPrompt(image, ability, true);
+
                 return;
             }
 
@@ -150,38 +205,34 @@ public class AbilityMenu : Menu
             else
                 AbilityManager.playerAbilities.Add(slotToChange, ability);
 
-            Image _slotToUpdate = abilitySlots[slotToChange].GetComponent<Image>();
+            Image _slotToUpdate = playerAbilitySlots[slotToChange].GetComponent<Image>();
 
             _slotToUpdate.GetComponent<ButtonSelected>().ability = AbilityManager.playerAbilities[
                 slotToChange
             ];
             _slotToUpdate.sprite = AbilityManager.playerAbilities[slotToChange].iconAvailable;
 
-            ResetUI();
+            ResetUIAfterChangingPlayerAbility();
             return;
         }
 
-        if (AbilityManager.Instance.UnlockAbility(ability))
+        if (promptPlayer)
         {
-            image.sprite = ability.iconAvailable;
-            miraclesText.text = AbilityManager.Instance.playerMiracles.ToString();
+            OpenUnlockingAbilityPrompt(image, ability, false);
+            return;
         }
-    }
-
-    public void OnExitPressed()
-    {
-        EventManager.TriggerEvent(
-            "onAbilityTree",
-            true,
-            new Dictionary<string, object> { { "activeState", false } }
-        );
-
-        ResetUI();
     }
 
     public void OnPlayerAbilityPressed(int slot)
     {
-        ChangeInteractablePlayerAbilitySlots(false, slot);
+        //TODO make this warning logs for player
+        if (AbilityManager.playerAbilities.ContainsKey(slot))
+        {
+            Debug.LogWarning("Tried to change already occupied slot");
+            return;
+        }
+
+        ChangeInteractablePlayerAbility(false, slot);
 
         isChangingPlayerAbility = true;
         slotToChange = slot;
@@ -190,15 +241,46 @@ public class AbilityMenu : Menu
             ChangeRemovePlayerAbility(slot, true);
     }
 
-    private void ChangeInteractablePlayerAbilitySlots(bool state, int playerAbilitySlotPressed)
+    public void UnlockPlayerAbility(Image image, Ability ability)
     {
-        foreach (Button slot in abilitySlots)
+        if (AbilityManager.Instance.UnlockAbility(ability))
+        {
+            image.sprite = ability.iconAvailable;
+            miraclesText.text = AbilityManager.Instance.currentMiracles.ToString();
+        }
+    }
+
+    public void OnExitPressed()
+    {
+        ResetUIAfterChangingPlayerAbility();
+
+        EventManager.TriggerEvent(
+            "onAbilityTree",
+            true,
+            new Dictionary<string, object> { { "activeState", false } }
+        );
+    }
+
+    private void ChangeInteractablePlayerAbility(bool state, int playerAbilitySlotPressed)
+    {
+        foreach (Button slot in playerAbilitySlots)
+        {
+            Debug.Log("Slot " + slot.name + " set to " + state);
             slot.interactable = state;
+        }
 
         if (!state)
         {
-            abilitySlots[playerAbilitySlotPressed].Select();
-            abilitySlots[playerAbilitySlotPressed].interactable = true;
+            playerAbilitySlots[playerAbilitySlotPressed].Select();
+            playerAbilitySlots[playerAbilitySlotPressed].interactable = true;
+        }
+    }
+
+    private void ChangeInteractableAvailableAbilities(bool state)
+    {
+        foreach (Button slot in availableAbilitySlots)
+        {
+            slot.interactable = state;
         }
     }
 
@@ -206,6 +288,24 @@ public class AbilityMenu : Menu
     private void ChangeRemovePlayerAbility(int slot, bool state)
     {
         /*
+         for (int i = 0; i <= 4; i++)
+        {
+            ButtonSelected _playerAbilitySlotButton = playerAbilitySlots[
+                i
+            ].GetComponent<ButtonSelected>();
+
+            if (_playerAbilitySlotButton.isSelected)
+            {
+                _playerAbilitySlotButton.ability = null;
+                playerAbilitySlots[i].GetComponent<Image>().sprite = emptySlotSprite;
+
+                AbilityManager.Instance.RemovePlayerAbility(i);
+                ResetUIAfterChangingPlayerAbility();
+
+                return;
+            }
+        }
+        
         switch (slot)
         {
           case 1:
@@ -223,37 +323,25 @@ public class AbilityMenu : Menu
         */
     }
 
-    private void OnCancel(Dictionary<string, object> message)
+    private void OnExitInAbilityTree(Dictionary<string, object> message)
     {
-        Debug.Log("ya");
-
         if (isChangingPlayerAbility)
         {
-            ResetUI();
+            ResetUIAfterChangingPlayerAbility();
             return;
         }
 
-        for (int i = 0; i <= 4; i++)
-        {
-            ButtonSelected _abilitySlotButton = abilitySlots[i].GetComponent<ButtonSelected>();
-
-            if (_abilitySlotButton.isSelected)
-            {
-                _abilitySlotButton.ability = null;
-                abilitySlots[i].GetComponent<Image>().sprite = emptySlotSprite;
-
-                AbilityManager.Instance.RemovePlayerAbility(i);
-                ResetUI();
-
-                return;
-            }
-        }
+        EventManager.TriggerEvent(
+            "onAbilityTree",
+            true,
+            new Dictionary<string, object> { { "activeState", false } }
+        );
     }
 
-    public void ResetUI()
+    public void ResetUIAfterChangingPlayerAbility()
     {
-        ChangeInteractablePlayerAbilitySlots(true, 0);
-        abilitySlots[slotToChange].Select();
+        ChangeInteractablePlayerAbility(true, 0);
+        playerAbilitySlots[slotToChange].Select();
         isChangingPlayerAbility = false;
     }
 
@@ -273,11 +361,43 @@ public class AbilityMenu : Menu
         descriptionAbilityNotSelected.SetActive(true);
     }
 
+    public void OpenUnlockingAbilityPrompt(Image image, Ability ability, bool isChangingAbility)
+    {
+        EventManager.TriggerEvent(
+            "onPrompt",
+            true,
+            new Dictionary<string, object>
+            {
+                {
+                    "promptText",
+                    "Are you sure that you want this abiity? \n It will cost you "
+                        + ability.unlockCost
+                        + " miracles."
+                },
+                { "yesCallback", OnYesUnlockingNewAbility },
+                { "noCallback", OnNoUnlockingNewAbility },
+                {
+                    "callbackMessage",
+                    new Dictionary<string, object>
+                    {
+                        { "image", image },
+                        { "ability", ability },
+                        { "isChangingAbility", isChangingAbility },
+                        {
+                            "prompt",
+                            UIManager.Instance.LoadUIObject("UIElements/PromptUI/PromptUI")
+                        }
+                    }
+                }
+            }
+        );
+    }
+
     public void UpdateAbilitySlots()
     {
         foreach (KeyValuePair<int, Ability> playerAbility in AbilityManager.playerAbilities)
         {
-            GameObject currentSlot = abilitySlots[playerAbility.Key].gameObject;
+            GameObject currentSlot = playerAbilitySlots[playerAbility.Key].gameObject;
 
             currentSlot.GetComponent<Image>().sprite = playerAbility.Value.iconAvailable;
             currentSlot.GetComponent<ButtonSelected>().ability = playerAbility.Value;

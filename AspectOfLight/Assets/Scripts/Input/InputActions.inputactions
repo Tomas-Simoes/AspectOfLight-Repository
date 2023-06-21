@@ -51,6 +51,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "AbilityFour",
+                    "type": "Button",
+                    "id": "46088829-b600-4a87-9fea-6dff735bc2c2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Attack",
                     "type": "Button",
                     "id": "aabb25b3-cb5e-4433-88c3-4d60f9b1635a",
@@ -170,6 +179,17 @@
                     "action": "AbilityThree",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1e14d9fd-1478-4610-816d-5b1a2d6d016e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AbilityFour",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -223,7 +243,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Cancel",
+                    "name": "Exit",
                     "type": "Button",
                     "id": "54cce947-3b59-4904-8a6a-1f1ea44356ef",
                     "expectedControlType": "Button",
@@ -339,7 +359,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Cancel",
+                    "action": "Exit",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -349,15 +369,6 @@
             "name": "InGameActions",
             "id": "55e105db-01c9-4600-af01-7bb9a9bdb2b7",
             "actions": [
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "f7304ad7-7246-415a-a34a-a1fdf6866ed0",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
                 {
                     "name": "Interact",
                     "type": "Button",
@@ -378,17 +389,6 @@
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "d30774b9-60f1-4702-aec9-3bd0021d7bcc",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "",
                     "id": "bed449f2-dbce-4811-901f-c5c7d4a5ea4b",

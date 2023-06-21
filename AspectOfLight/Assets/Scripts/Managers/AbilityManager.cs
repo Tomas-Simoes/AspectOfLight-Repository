@@ -23,7 +23,7 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
     private float minTimeSinceAbilityGotCasted = 0.75f;
 
     [Header("Miracles")]
-    public int playerMiracles = 3;
+    public int currentMiracles = 4;
 
     private void Update()
     {
@@ -151,15 +151,20 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
 
     public bool UnlockAbility(Ability ability)
     {
-        if (ability.unlockCost <= playerMiracles)
+        if (CanUnlockAbility(ability))
         {
             ability.isAvailable = true;
-            playerMiracles -= ability.unlockCost;
+            currentMiracles -= ability.unlockCost;
 
             return true;
         }
 
         return false;
+    }
+
+    public bool CanUnlockAbility(Ability ability)
+    {
+        return ability.unlockCost <= currentMiracles || GameManager.Instance.onGodMode;
     }
 
     private float GetTimeSinceCast(int slot)
@@ -206,6 +211,8 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                 if (ability.abilityName == savedPlayerAbility.Value)
                     playerAbilities.Add(savedPlayerAbility.Key, ability);
         }
+
+        currentMiracles = data.currentMiracles;
     }
 
     public void SaveData(GameData data)
@@ -226,8 +233,9 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
 
         foreach (KeyValuePair<int, Ability> playerAbility in playerAbilities)
         {
-            Debug.Log("Saving ability: " + playerAbility);
             data.playerAbilities.Add(playerAbility.Key, playerAbility.Value.abilityName);
         }
+
+        data.currentMiracles = currentMiracles;
     }
 }

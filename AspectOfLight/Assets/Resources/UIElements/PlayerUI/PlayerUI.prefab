@@ -291,14 +291,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 607282452110120066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ef0c9f3c7f284542aee067fc9a48fa4, type: 3}
+  m_Script: {fileID: 11500000, guid: 97d7f6ece1877bc4595cb25042552b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   staminaSlider: {fileID: 607282451306001497}
   healthSlider: {fileID: 607282452601372821}
   attackMask: {fileID: 0}
   stackBar: {fileID: 3119995059857795284}
-  stackPrefabTypePoison: {fileID: 2255383715786351221, guid: 55351ce025347c840a8dad1fd9a51705, type: 3}
+  stackPrefabTypePoison: {fileID: 7025513524258819592, guid: c0a298efaa12be94586551a089b2c0cb, type: 3}
   player: {fileID: 0}
 --- !u!1 &607282452389465603
 GameObject:

@@ -6,6 +6,12 @@ public class MagistrateSigilMenu : Menu
 {
     bool firstTimeRest = true;
 
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        Debug.Log("a");
+    }
+
     public void OnRestPressed()
     {
         EventManager.TriggerEvent(

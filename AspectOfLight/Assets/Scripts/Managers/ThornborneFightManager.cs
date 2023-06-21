@@ -33,10 +33,13 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
     [Header("Barriers")]
     [SerializeField]
-    private GameObject backBarrier;
+    private Spikes backSpikes1;
 
     [SerializeField]
-    private GameObject engineerVillageBarrier;
+    private Spikes backSpikes2;
+
+    [SerializeField]
+    private Spikes engineerVillageSpikes;
 
     [Header("UI Elements")]
     [SerializeField]
@@ -65,13 +68,14 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-        Debug.Log(bossAlreadyDefeated);
-
         if (bossAlreadyDefeated)
         {
             Destroy(boss.gameObject);
-            Destroy(backBarrier.gameObject);
-            Destroy(engineerVillageBarrier.gameObject);
+
+            Destroy(backSpikes1.gameObject);
+            Destroy(backSpikes2.gameObject);
+
+            Destroy(engineerVillageSpikes.gameObject);
 
             this.GetComponent<BoxCollider2D>().enabled = false;
         }
@@ -79,7 +83,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
     private void StartBossBattle()
     {
-        backBarrier.SetActive(true);
+        ChangeBarriersState(true);
         bossArenaUI.SetActive(true);
 
         boss.isFightStarted = true;
@@ -118,7 +122,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
         FadeOutText(bossDefeatedText);
 
         bossInformationUI.SetActive(false);
-        backBarrier.SetActive(false); //TODO change this to use animation
+        ChangeBarriersState(false);
 
         yield return new WaitForSeconds(0.5f);
 
@@ -126,7 +130,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
         yield return new WaitForSeconds(1.5f);
 
-        engineerVillageBarrier.SetActive(false);
+        StartCoroutine(engineerVillageSpikes.GoDown());
 
         yield return new WaitForSeconds(1f);
 
@@ -137,6 +141,22 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
         bossAlreadyDefeated = true;
         DataPersistenceManager.Instance.SaveGame();
+    }
+
+    private void ChangeBarriersState(bool isFightStarting)
+    {
+        if (isFightStarting)
+        {
+            backSpikes1.gameObject.SetActive(true);
+            backSpikes2.gameObject.SetActive(true);
+
+            StartCoroutine(backSpikes1.GoUp());
+            StartCoroutine(backSpikes2.GoUp());
+            return;
+        }
+
+        StartCoroutine(backSpikes1.GoDown());
+        StartCoroutine(backSpikes2.GoDown());
     }
 
     private void FadeInText(Animator text)
@@ -168,8 +188,8 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
         if (bossAlreadyDefeated)
         {
             Destroy(boss.gameObject);
-            Destroy(backBarrier.gameObject);
-            Destroy(engineerVillageBarrier.gameObject);
+            Destroy(backSpikes1.gameObject);
+            Destroy(engineerVillageSpikes.gameObject);
 
             this.GetComponent<BoxCollider2D>().enabled = false;
         }

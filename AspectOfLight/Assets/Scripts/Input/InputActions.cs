@@ -73,6 +73,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""AbilityFour"",
+                    ""type"": ""Button"",
+                    ""id"": ""46088829-b600-4a87-9fea-6dff735bc2c2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Attack"",
                     ""type"": ""Button"",
                     ""id"": ""aabb25b3-cb5e-4433-88c3-4d60f9b1635a"",
@@ -192,6 +201,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""action"": ""AbilityThree"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e14d9fd-1478-4610-816d-5b1a2d6d016e"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AbilityFour"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -245,7 +265,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Cancel"",
+                    ""name"": ""Exit"",
                     ""type"": ""Button"",
                     ""id"": ""54cce947-3b59-4904-8a6a-1f1ea44356ef"",
                     ""expectedControlType"": ""Button"",
@@ -361,7 +381,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Cancel"",
+                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -371,15 +391,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             ""name"": ""InGameActions"",
             ""id"": ""55e105db-01c9-4600-af01-7bb9a9bdb2b7"",
             ""actions"": [
-                {
-                    ""name"": ""Pause"",
-                    ""type"": ""Button"",
-                    ""id"": ""f7304ad7-7246-415a-a34a-a1fdf6866ed0"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
                 {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
@@ -400,17 +411,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 }
             ],
             ""bindings"": [
-                {
-                    ""name"": """",
-                    ""id"": ""d30774b9-60f1-4702-aec9-3bd0021d7bcc"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Pause"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
                 {
                     ""name"": """",
                     ""id"": ""bed449f2-dbce-4811-901f-c5c7d4a5ea4b"",
@@ -451,6 +451,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_Player_AbilityOne = m_Player.FindAction("AbilityOne", throwIfNotFound: true);
         m_Player_AbilityTwo = m_Player.FindAction("AbilityTwo", throwIfNotFound: true);
         m_Player_AbilityThree = m_Player.FindAction("AbilityThree", throwIfNotFound: true);
+        m_Player_AbilityFour = m_Player.FindAction("AbilityFour", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
@@ -459,10 +460,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
-        m_UI_Cancel = m_UI.FindAction("Cancel", throwIfNotFound: true);
+        m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
         // InGameActions
         m_InGameActions = asset.FindActionMap("InGameActions", throwIfNotFound: true);
-        m_InGameActions_Pause = m_InGameActions.FindAction("Pause", throwIfNotFound: true);
         m_InGameActions_Interact = m_InGameActions.FindAction("Interact", throwIfNotFound: true);
         m_InGameActions_GodMode = m_InGameActions.FindAction("GodMode", throwIfNotFound: true);
     }
@@ -529,6 +529,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AbilityOne;
     private readonly InputAction m_Player_AbilityTwo;
     private readonly InputAction m_Player_AbilityThree;
+    private readonly InputAction m_Player_AbilityFour;
     private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
@@ -539,6 +540,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @AbilityOne => m_Wrapper.m_Player_AbilityOne;
         public InputAction @AbilityTwo => m_Wrapper.m_Player_AbilityTwo;
         public InputAction @AbilityThree => m_Wrapper.m_Player_AbilityThree;
+        public InputAction @AbilityFour => m_Wrapper.m_Player_AbilityFour;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -564,6 +566,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @AbilityThree.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityThree;
                 @AbilityThree.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityThree;
                 @AbilityThree.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityThree;
+                @AbilityFour.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityFour;
+                @AbilityFour.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityFour;
+                @AbilityFour.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAbilityFour;
                 @Attack.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnAttack;
@@ -586,6 +591,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @AbilityThree.started += instance.OnAbilityThree;
                 @AbilityThree.performed += instance.OnAbilityThree;
                 @AbilityThree.canceled += instance.OnAbilityThree;
+                @AbilityFour.started += instance.OnAbilityFour;
+                @AbilityFour.performed += instance.OnAbilityFour;
+                @AbilityFour.canceled += instance.OnAbilityFour;
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
@@ -602,7 +610,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_ScrollWheel;
-    private readonly InputAction m_UI_Cancel;
+    private readonly InputAction m_UI_Exit;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -612,7 +620,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
-        public InputAction @Cancel => m_Wrapper.m_UI_Cancel;
+        public InputAction @Exit => m_Wrapper.m_UI_Exit;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -637,9 +645,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @ScrollWheel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
-                @Cancel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
-                @Cancel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
-                @Cancel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnCancel;
+                @Exit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -659,9 +667,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @ScrollWheel.started += instance.OnScrollWheel;
                 @ScrollWheel.performed += instance.OnScrollWheel;
                 @ScrollWheel.canceled += instance.OnScrollWheel;
-                @Cancel.started += instance.OnCancel;
-                @Cancel.performed += instance.OnCancel;
-                @Cancel.canceled += instance.OnCancel;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
             }
         }
     }
@@ -670,14 +678,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     // InGameActions
     private readonly InputActionMap m_InGameActions;
     private IInGameActionsActions m_InGameActionsActionsCallbackInterface;
-    private readonly InputAction m_InGameActions_Pause;
     private readonly InputAction m_InGameActions_Interact;
     private readonly InputAction m_InGameActions_GodMode;
     public struct InGameActionsActions
     {
         private @InputActions m_Wrapper;
         public InGameActionsActions(@InputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Pause => m_Wrapper.m_InGameActions_Pause;
         public InputAction @Interact => m_Wrapper.m_InGameActions_Interact;
         public InputAction @GodMode => m_Wrapper.m_InGameActions_GodMode;
         public InputActionMap Get() { return m_Wrapper.m_InGameActions; }
@@ -689,9 +695,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         {
             if (m_Wrapper.m_InGameActionsActionsCallbackInterface != null)
             {
-                @Pause.started -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnPause;
-                @Pause.performed -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnPause;
-                @Pause.canceled -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnPause;
                 @Interact.started -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
@@ -702,9 +705,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
             m_Wrapper.m_InGameActionsActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Pause.started += instance.OnPause;
-                @Pause.performed += instance.OnPause;
-                @Pause.canceled += instance.OnPause;
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
@@ -731,6 +731,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnAbilityOne(InputAction.CallbackContext context);
         void OnAbilityTwo(InputAction.CallbackContext context);
         void OnAbilityThree(InputAction.CallbackContext context);
+        void OnAbilityFour(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
     }
     public interface IUIActions
@@ -740,11 +741,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
-        void OnCancel(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
     public interface IInGameActionsActions
     {
-        void OnPause(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnGodMode(InputAction.CallbackContext context);
     }

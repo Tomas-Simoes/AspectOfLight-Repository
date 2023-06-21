@@ -42,7 +42,9 @@ public class Player_MoveState : State
     {
         base.PhysicsUpdate();
 
-        entity.rb.velocity = player.axisMovement.normalized * player.currentMovementSpeed;
+        entity.rb.velocity =
+            player.axisMovement.normalized
+            * (GameManager.Instance.onGodMode ? 6 : player.currentMovementSpeed);
     }
 
     public void ChangePlayerMovementSpeed(Dictionary<string, object> message)
