@@ -20,6 +20,7 @@ public class Thornborne_SleepState : State
     public override void Enter()
     {
         base.Enter();
+        enemy.canTakeDamage = false;
 
         enemy.target = enemy.playerReference;
         enemy.rb.velocity = Vector2.zero;

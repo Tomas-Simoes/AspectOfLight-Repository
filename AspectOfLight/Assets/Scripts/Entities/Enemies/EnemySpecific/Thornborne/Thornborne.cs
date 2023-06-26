@@ -102,6 +102,9 @@ public class Thornborne : Enemy
         );
 
         timeSinceUGAttack = cooldownData.ugAttackCD;
+        timeSinceUGTeleport = cooldownData.ugTeleportCD;
+        timeSinceHealing = cooldownData.healingCD;
+
         InitReferencePoints();
 
         stateMachine.Init(sleepState);

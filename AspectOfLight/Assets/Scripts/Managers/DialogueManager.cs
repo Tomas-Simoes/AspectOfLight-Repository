@@ -96,12 +96,14 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         dialogueText.text = "";
 
-        foreach (char character in text)
+        for (int i = 0; i < text.Length; i++)
         {
-            dialogueText.text += character;
+            Debug.Log(text[i]);
+            dialogueText.text += text[i];
 
             yield return new WaitForSeconds(nodeSpeed);
         }
+
 
         if (nodeHasChoises)
         {

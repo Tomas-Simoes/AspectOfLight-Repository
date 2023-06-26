@@ -4,4 +4,5 @@ using UnityEngine;
 public class D_EnemyChaseState : ScriptableObject
 {
     public float chaseSpeed = 4f;
+    public float minDistanceBetweenPlayer = 0.5f;
 }

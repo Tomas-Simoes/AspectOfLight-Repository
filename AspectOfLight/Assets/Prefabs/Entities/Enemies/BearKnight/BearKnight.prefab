@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 4617882225253241959}
   - component: {fileID: 1356085785}
   m_Layer: 7
-  m_Name: WolfKnight
+  m_Name: BearKnight
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -221,9 +221,9 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1275185391
-  m_SortingLayer: 3
-  m_SortingOrder: 1
-  m_Sprite: {fileID: -1197312576, guid: ce3a96ae46a7196458ee6770305c272d, type: 3}
+  m_SortingLayer: 4
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -450311840, guid: 8f47098e11b6ca6428dbab485199fae8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 0}
   - {fileID: 0}
+  isFightStarted: 0
   idleStateData: {fileID: 11400000, guid: 3cfe8c0da196c7d4cae7887bb9f131ae, type: 2}
   patrolStateData: {fileID: 11400000, guid: 1d60a22301000ae4d8eafee576902387, type: 2}
   chaseStateData: {fileID: 11400000, guid: 6164c9fe3611dd340ae169556772652e, type: 2}

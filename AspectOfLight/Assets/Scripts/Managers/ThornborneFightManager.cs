@@ -132,7 +132,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
         StartCoroutine(engineerVillageSpikes.Go("Down"));
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.7f);
 
         CameraManager.Instance.ChangeCamera(cameraAnimator, "mainCamera", true);
 

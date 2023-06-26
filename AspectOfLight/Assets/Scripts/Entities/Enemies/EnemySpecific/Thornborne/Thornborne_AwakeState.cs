@@ -26,6 +26,8 @@ public class Thornborne_AwakeState : State
     public override void Exit()
     {
         base.Exit();
+
+        enemy.canTakeDamage = true;
     }
 
     public override void LogicUpdate()

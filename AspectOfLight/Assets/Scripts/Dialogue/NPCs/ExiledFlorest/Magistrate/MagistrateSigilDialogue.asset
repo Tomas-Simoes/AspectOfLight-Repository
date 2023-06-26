@@ -27,8 +27,8 @@ MonoBehaviour:
     dialogueChoises:
     - choiseText: Who are you?
       choiseIndex: 0
-      followOnDialogue: {fileID: 0}
-      choiseWasAlreadyChoosen: 1
+      followOnDialogue: {fileID: 11400000, guid: 7dd9561995b40b74b98a7b65a21e29dc, type: 2}
+      choiseWasAlreadyChoosen: 0
       onlyReadbleOnce: 0
   followOnDialogue: {fileID: 0}
   startFollowOnDialogueIndex: 0

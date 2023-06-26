@@ -9,6 +9,8 @@ public class ThornbornePlant : Entity
     public ThornbornePlant_IdleState idleState { get; private set; }
 
     [Header("Shooting Plant Information")]
+    bool isThornbornePlant = true;
+
     public float shootingCD;
     public GameObject bullet;
     public Transform shootingPosition;
@@ -18,12 +20,16 @@ public class ThornbornePlant : Entity
 
     private void OnEnable()
     {
-        EventManager.StartListening("onThornborneDie", Die);
+        plantTarget = GameObject.FindGameObjectWithTag("Player");
+
+        if (isThornbornePlant)
+            EventManager.StartListening("onThornborneDie", Die);
     }
 
     private void OnDisable()
     {
-        EventManager.StopListening("onThornborneDie", Die);
+        if (isThornbornePlant)
+            EventManager.StopListening("onThornborneDie", Die);
     }
 
     public override void Start()
