@@ -37,8 +37,12 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
     {
         base.Init();
 
-        LoadGame();
-        GameManager.Instance.gameStarted = true;
+        if (GameManager.Instance.environment == "development")
+        {
+            LoadGame();
+            EventManager.TriggerEvent("onPlayerUI", true, null);
+            GameManager.Instance.gameStarted = true;
+        }
     }
 
     private void Awake()

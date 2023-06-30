@@ -49,7 +49,11 @@ public class Thornborne_ChaseState : Enemy_ChaseState
     {
         base.PhysicsUpdate();
 
-        if (enemy.path != null)
+        if (
+            enemy.path != null
+            && Vector2.Distance(enemy.transform.position, enemy.playerReference.transform.position)
+                >= stateData.minDistanceBetweenPlayer
+        )
         {
             Vector2 _direction =
                 enemy.path.vectorPath[enemy.currentWaypoint] - enemy.transform.position;
@@ -110,8 +114,8 @@ public class Thornborne_ChaseState : Enemy_ChaseState
 
             stateMachine.ChangeState(enemy.uGTeleportState);
         }
-        //? if the player has no cooldown for UG Attack or UG Teleport and it's close range, it will puke
-        if (_canPukeAttack)
+        //? if the player has no cooldown for UG Attack or UG Teleport and it's close range or it's tooo close to the player, it will puke
+        if (_canPukeAttack || _distanceToPlayer <= stateData.minDistanceBetweenPlayer)
             stateMachine.ChangeState(enemy.pukeAttackState);
     }
 }

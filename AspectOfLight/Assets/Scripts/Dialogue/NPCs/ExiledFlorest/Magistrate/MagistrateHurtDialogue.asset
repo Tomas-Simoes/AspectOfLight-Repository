@@ -16,8 +16,7 @@ MonoBehaviour:
   dialogueNodes:
   - dialogueText: 'It appears that you''re feeling hurt. No need to be afraid. '
     dialogueChoises: []
-  - dialogueText: Seek out my sigil in the ground and allow me to heal your wounds
-      and infuse you with new abilities.
+  - dialogueText: Seek out my sigil in the ground and allow me to heal your wounds.
     dialogueChoises: []
   followOnDialogue: {fileID: 0}
   startFollowOnDialogueIndex: 0

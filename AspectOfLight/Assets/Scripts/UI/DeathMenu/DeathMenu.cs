@@ -25,7 +25,11 @@ public class DeathMenu : Menu
     public void OnContinuePressed()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(DataPersistenceManager.Instance.gameData.areaInMap);
+
+        ScenesManager.Instance.LoadScene(
+            DataPersistenceManager.Instance.gameData.areaInMap,
+            loadDataAfterLoadingScene: true
+        );
     }
 
     public void OnExitToMenuPressed()

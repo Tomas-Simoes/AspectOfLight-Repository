@@ -200,7 +200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Load Game
+  m_text: Demonstration Area
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 46dd3116f84d43b4abb408877ce28ca1, type: 2}
   m_sharedMaterial: {fileID: 2853334642897727688, guid: 46dd3116f84d43b4abb408877ce28ca1, type: 2}
@@ -955,7 +955,7 @@ GameObject:
   - component: {fileID: 3303745818468769118}
   - component: {fileID: 3303745818468769119}
   m_Layer: 5
-  m_Name: LoadButton
+  m_Name: DemonstrationAreaButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

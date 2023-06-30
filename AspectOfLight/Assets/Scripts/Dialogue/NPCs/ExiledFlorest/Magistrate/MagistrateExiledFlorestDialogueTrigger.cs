@@ -17,7 +17,7 @@ public class MagistrateExiledFlorestDialogueTrigger : DialogueTrigger, IDataPers
     [SerializeField]
     private float dialogueDelay;
 
-    private bool alreadyReadTutorial = false;
+    protected bool alreadyReadTutorial = false;
     private bool inDialogue = false;
 
     public override void Update()

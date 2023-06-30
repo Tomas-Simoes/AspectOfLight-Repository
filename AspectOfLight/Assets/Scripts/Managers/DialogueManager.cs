@@ -28,7 +28,7 @@ public class DialogueManager : Singleton<DialogueManager>
     private IEnumerator currentDialogueCoroutine;
 
     [Header("Node Information")]
-    private float nodeSpeed = 0.05f;
+    private float nodeSpeed = 0.04f;
 
     private float timeInNode;
 
@@ -96,12 +96,14 @@ public class DialogueManager : Singleton<DialogueManager>
     {
         dialogueText.text = "";
 
-        foreach (char character in text)
+        for (int i = 0; i < text.Length; i++)
         {
-            dialogueText.text += character;
+            Debug.Log(text[i]);
+            dialogueText.text += text[i];
 
             yield return new WaitForSeconds(nodeSpeed);
         }
+
 
         if (nodeHasChoises)
         {

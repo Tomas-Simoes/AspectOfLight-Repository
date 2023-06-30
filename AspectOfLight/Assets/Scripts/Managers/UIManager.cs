@@ -8,21 +8,26 @@ public class UIManager : Singleton<UIManager>
 {
     [Header("Death UI")]
     private GameObject deathScreen;
+    private bool inDeathScreen = false;
     private TextMeshProUGUI deathText;
     private string[] deathMessages;
 
     [Header("MagistrateSigil UI")]
     private GameObject magistrateSigilMenu;
+    private bool inMagistrateSigil;
 
     [Header("Pause UI")]
     private GameObject pauseMenu;
+    private bool inPauseMenu = false;
 
     [Header("Dialogue UI")]
     private GameObject dialogueUI;
+    private bool inDialogue = false;
     public bool loadedDialogueUIHasChoises;
 
     [Header("Ability Tree UI")]
     private GameObject abilityTree;
+    public bool inAbilityTree = false;
 
     [Header("Progress Saved UI")]
     private GameObject progressSavedText;
@@ -30,30 +35,104 @@ public class UIManager : Singleton<UIManager>
     [Header("God Mode UI")]
     private GameObject godModeText;
 
+    [Header("Player UI")]
+    private GameObject playerUI;
+
+    [Header("Prompt UI")]
+    private GameObject promptMenu;
+
     private void OnEnable()
     {
         EventManager.StartListening("onPlayerDeath", OpenDeathScreen);
-        EventManager.StartListening("onPause", ChangeUIPauseState);
+        EventManager.StartListening("onExit", OnExitUI);
         EventManager.StartListening("onMagistrateSigil", ChangeUIMagistrateSigilState);
         EventManager.StartListening("onDialogue", ChangeUIDialogueState);
         EventManager.StartListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StartListening("onGameSaved", ShowProgressSavedText);
         EventManager.StartListening("onGodMode", ChangeUIGodModeState);
+        EventManager.StartListening("onPlayerUI", OpenPlayerUI);
+        EventManager.StartListening("onPrompt", onPrompt);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening("onPlayerDeath", OpenDeathScreen);
-        EventManager.StopListening("onPause", ChangeUIPauseState);
+        EventManager.StopListening("onExit", OnExitUI);
         EventManager.StopListening("onMagistrateSigil", ChangeUIMagistrateSigilState);
         EventManager.StopListening("onDialogue", ChangeUIDialogueState);
         EventManager.StopListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StopListening("onGameSaved", ShowProgressSavedText);
         EventManager.StopListening("onGodMode", ChangeUIGodModeState);
+        EventManager.StopListening("onPlayerUI", OpenPlayerUI);
+        EventManager.StopListening("onPrompt", onPrompt);
     }
+
+    public void OnExitUI(Dictionary<string, object> message)
+    {
+        Debug.Log("asaa");
+
+        if (inAbilityTree)
+        {
+            Debug.Log("aaa");
+            EventManager.TriggerEvent("onExitInAbilityTree", true, null);
+            return;
+        }
+
+        Debug.Log("a");
+        ChangeUIPauseState(
+            new Dictionary<string, object> { { "activeState", !GameManager.Instance.isPaused } }
+        );
+    }
+
+    public void onPrompt(Dictionary<string, object> message)
+    {
+        promptMenu =
+            (message["callbackMessage"] as Dictionary<string, object>)["prompt"] as GameObject;
+
+        TextMeshProUGUI _textPrompt = promptMenu.transform
+            .Find("TextPrompt")
+            .GetComponent<TextMeshProUGUI>();
+
+        Button _yesButton = promptMenu.transform.Find("YesButton").GetComponent<Button>();
+        Button _noButton = promptMenu.transform.Find("NoButton").GetComponent<Button>();
+
+        _textPrompt.text = (string)message["promptText"];
+
+        _yesButton.onClick.AddListener(() =>
+        {
+            OnPromptYes callback = message["yesCallback"] as OnPromptYes;
+            callback.Invoke(message["callbackMessage"] as Dictionary<string, object>);
+        });
+
+        _noButton.onClick.AddListener(() =>
+        {
+            OnPromptNo callback = message["noCallback"] as OnPromptNo;
+            callback.Invoke(message["callbackMessage"] as Dictionary<string, object>);
+        });
+    }
+
+    public delegate void OnPromptYes(Dictionary<string, object> message);
+
+    public delegate void OnPromptNo(Dictionary<string, object> message);
 
     public void OpenDeathScreen(Dictionary<string, object> message)
     {
+        inDeathScreen = (bool)message["activeState"];
+
+        if (inDeathScreen && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", false } }
+            );
+        }
+
+        if (!inDeathScreen && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", true } }
+            );
+        }
+
         if (deathScreen == null)
         {
             deathScreen = LoadUIObject("UIElements/DeathScreen/DeathScreen");
@@ -62,8 +141,40 @@ public class UIManager : Singleton<UIManager>
         deathScreen.SetActive((bool)message["activeState"]);
     }
 
+    public void OpenPlayerUI(Dictionary<string, object> message)
+    {
+        if (playerUI == null)
+        {
+            playerUI = LoadUIObject("UIElements/PlayerUI/PlayerUI");
+        }
+
+        playerUI.SetActive(true);
+    }
+
     public void ChangeUIPauseState(Dictionary<string, object> message)
     {
+        inPauseMenu = (bool)message["activeState"];
+        GameManager.Instance.isPaused = inPauseMenu;
+
+        if (inAbilityTree)
+        {
+            return;
+        }
+
+        if (inPauseMenu && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", false } }
+            );
+        }
+
+        if (!inPauseMenu && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", true } }
+            );
+        }
+
         if (pauseMenu == null)
         {
             pauseMenu = LoadUIObject("UIElements/PauseMenu/PauseMenu");
@@ -74,6 +185,11 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIMagistrateSigilState(Dictionary<string, object> message)
     {
+        if (!inPauseMenu && !inAbilityTree && !inDeathScreen)
+        {
+            inMagistrateSigil = (bool)message["activeState"];
+        }
+
         if (magistrateSigilMenu == null)
         {
             magistrateSigilMenu = LoadUIObject(
@@ -86,9 +202,21 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIAbilityTreeState(Dictionary<string, object> message)
     {
-        ChangeUIMagistrateSigilState(
-            new Dictionary<string, object> { { "activeState", !(bool)message["activeState"] } }
-        );
+        inAbilityTree = (bool)message["activeState"];
+
+        if (!inAbilityTree && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", true } }
+            );
+        }
+
+        if (inAbilityTree && inMagistrateSigil)
+        {
+            ChangeUIMagistrateSigilState(
+                new Dictionary<string, object> { { "activeState", false } }
+            );
+        }
 
         if (abilityTree == null)
         {
@@ -100,6 +228,8 @@ public class UIManager : Singleton<UIManager>
 
     public void ChangeUIDialogueState(Dictionary<string, object> message)
     {
+        inDialogue = (bool)message["activeState"];
+
         if ((bool)message["activeState"])
         {
             D_Dialogue _thisDialogue = (D_Dialogue)message["dialogue"];
@@ -202,7 +332,7 @@ public class UIManager : Singleton<UIManager>
             progressSavedText.SetActive(false);
     }
 
-    private GameObject LoadUIObject(string path)
+    public GameObject LoadUIObject(string path)
     {
         GameObject _newObject = Instantiate(Resources.Load<GameObject>(path));
 

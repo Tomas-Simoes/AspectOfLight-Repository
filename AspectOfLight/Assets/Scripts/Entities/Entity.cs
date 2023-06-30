@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Entity : MonoBehaviour
 {
@@ -108,7 +109,29 @@ public class Entity : MonoBehaviour
     public virtual void TakePoisonDamage(float damage, float poisonTime, float tickRate)
     {
         Coroutine poisonCoroutine = StartCoroutine(Poisoned(damage, tickRate));
-        StartCoroutine(StopCourotineAfterTime(poisonCoroutine, poisonTime));
+        StartCoroutine(StopCoroutineAfterTime(poisonCoroutine, poisonTime));
+    }
+
+    protected IEnumerator Poisoned(float damage, float tickRate)
+    {
+        while (true)
+        {
+            TakeDamage(damage, Color.magenta);
+            yield return new WaitForSeconds(tickRate);
+        }
+    }
+
+    protected IEnumerator StopCoroutineAfterTime(
+        Coroutine courotine,
+        float seconds,
+        Action callback = null
+    )
+    {
+        yield return new WaitForSeconds(seconds);
+
+        callback?.Invoke();
+
+        StopCoroutine(courotine);
     }
 
     public virtual void Heal(float healAmount)
@@ -156,22 +179,6 @@ public class Entity : MonoBehaviour
         GetComponent<SpriteRenderer>().color = color;
         yield return new WaitForSeconds(0.15f);
         GetComponent<SpriteRenderer>().color = Color.white;
-    }
-
-    private IEnumerator Poisoned(float damage, float tickRate)
-    {
-        while (true)
-        {
-            TakeDamage(damage, Color.magenta);
-            yield return new WaitForSeconds(tickRate);
-        }
-    }
-
-    private IEnumerator StopCourotineAfterTime(Coroutine courotine, float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-
-        StopCoroutine(courotine);
     }
 
     public virtual void OnDrawGizmos()

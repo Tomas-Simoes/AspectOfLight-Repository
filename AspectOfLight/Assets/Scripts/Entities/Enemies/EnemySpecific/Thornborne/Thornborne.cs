@@ -102,6 +102,9 @@ public class Thornborne : Enemy
         );
 
         timeSinceUGAttack = cooldownData.ugAttackCD;
+        timeSinceUGTeleport = cooldownData.ugTeleportCD;
+        timeSinceHealing = cooldownData.healingCD;
+
         InitReferencePoints();
 
         stateMachine.Init(sleepState);
@@ -132,7 +135,10 @@ public class Thornborne : Enemy
     public override void TakeDamage(float damage)
     {
         if (stateMachine.currentState == healingState)
+        {
             stateMachine.ChangeState(chaseState);
+            return;
+        }
 
         if (canTakeDamage)
             base.TakeDamage(damage);

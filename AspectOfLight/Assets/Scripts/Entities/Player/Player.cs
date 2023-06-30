@@ -38,7 +38,7 @@ public class Player : Entity, IDataPersistence
     [Header("The Plague Information")]
     public GameObject[] plagueSpawnPoints;
 
-    [Header("Basic attack Information")]
+    [Header("Attack Information")]
     [SerializeField]
     public GameObject bulletPrefab;
 
@@ -48,6 +48,8 @@ public class Player : Entity, IDataPersistence
     [SerializeField]
     public GameObject attackPosition;
 
+    [Header("Stacks Information")]
+    private int poisonStack = 0;
     public InputHandler inputHandler { get; private set; }
 
     public override void Awake()
@@ -97,9 +99,10 @@ public class Player : Entity, IDataPersistence
 
         timeSinceDash = coolDownData.dashCD; //TODO remove this after transforming dash into an ability
 
-        //! THIS IS FOR DEVELOPMENT ONLY
-        //! REMOVE THIS WHEN BUILDING THE GAME
-        DataPersistenceManager.Instance.Init();
+        if (GameManager.Instance.environment == "development")
+        {
+            DataPersistenceManager.Instance.Init();
+        }
 
         stateMachine.Init(idleState);
     }
@@ -177,6 +180,19 @@ public class Player : Entity, IDataPersistence
                     { "abilityGettingCasted", castingAbilityState.currentAbility }
                 }
             );
+
+        if (inputHandler.pressedAbilityFour)
+            EventManager.TriggerEvent(
+                "onAbilityCast",
+                false,
+                new Dictionary<string, object>
+                {
+                    { "slot", 4 },
+                    { "currentStamina", currentStamina },
+                    { "player", this },
+                    { "abilityGettingCasted", castingAbilityState.currentAbility }
+                }
+            );
     }
 
     public override void TakeDamage(float damage, Color damageColor)
@@ -187,6 +203,40 @@ public class Player : Entity, IDataPersistence
         base.TakeDamage(damage, damageColor);
 
         EventManager.TriggerEvent("onCameraShake", false, null);
+    }
+
+    public override void TakePoisonDamage(float damage, float poisonTime, float tickRate)
+    {
+        poisonStack++;
+
+        EventManager.TriggerEvent(
+            "onUpdateStackBar",
+            true,
+            new Dictionary<string, object> { { "type", "poison" }, { "stackNumber", poisonStack } }
+        );
+
+        Coroutine poisonCoroutine = StartCoroutine(Poisoned(damage, tickRate));
+
+        StartCoroutine(
+            StopCoroutineAfterTime(
+                poisonCoroutine,
+                poisonTime,
+                () =>
+                {
+                    poisonStack--;
+
+                    EventManager.TriggerEvent(
+                        "onUpdateStackBar",
+                        true,
+                        new Dictionary<string, object>
+                        {
+                            { "type", "poison" },
+                            { "stackNumber", poisonStack }
+                        }
+                    );
+                }
+            )
+        );
     }
 
     public override void Die()
