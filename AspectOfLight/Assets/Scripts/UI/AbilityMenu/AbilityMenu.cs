@@ -160,7 +160,7 @@ public class AbilityMenu : Menu
                     }
                 );
 
-            _newAbility.GetComponent<ButtonSelected>().ability = ability;
+            _newAbility.GetComponent<AbilitySelected>().ability = ability;
 
             availableAbilitySlots.Add(_newAbility.GetComponent<Button>());
         }
@@ -207,7 +207,7 @@ public class AbilityMenu : Menu
 
             Image _slotToUpdate = playerAbilitySlots[slotToChange].GetComponent<Image>();
 
-            _slotToUpdate.GetComponent<ButtonSelected>().ability = AbilityManager.playerAbilities[
+            _slotToUpdate.GetComponent<AbilitySelected>().ability = AbilityManager.playerAbilities[
                 slotToChange
             ];
             _slotToUpdate.sprite = AbilityManager.playerAbilities[slotToChange].iconAvailable;
@@ -400,7 +400,7 @@ public class AbilityMenu : Menu
             GameObject currentSlot = playerAbilitySlots[playerAbility.Key].gameObject;
 
             currentSlot.GetComponent<Image>().sprite = playerAbility.Value.iconAvailable;
-            currentSlot.GetComponent<ButtonSelected>().ability = playerAbility.Value;
+            currentSlot.GetComponent<AbilitySelected>().ability = playerAbility.Value;
         }
     }
 }

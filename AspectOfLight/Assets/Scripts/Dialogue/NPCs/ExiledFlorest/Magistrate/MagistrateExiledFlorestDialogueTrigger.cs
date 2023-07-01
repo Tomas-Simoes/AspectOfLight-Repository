@@ -26,7 +26,7 @@ public class MagistrateExiledFlorestDialogueTrigger : DialogueTrigger, IDataPers
 
         if (
             inDialogue
-            && player.inputHandler.pressedInteract
+            && player.inputHandler.pressedSelect
             && DialogueManager.Instance.inDialogueMode
         )
         {
