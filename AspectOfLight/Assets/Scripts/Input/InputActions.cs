@@ -263,15 +263,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Exit"",
-                    ""type"": ""Button"",
-                    ""id"": ""54cce947-3b59-4904-8a6a-1f1ea44356ef"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -333,7 +324,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""57e27d11-922d-4498-b8b8-bf83a0dc9904"",
-                    ""path"": ""<Keyboard>/enter"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
@@ -376,12 +367,12 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a955a99a-f556-460c-a5f9-74c64dbd88ac"",
-                    ""path"": ""<Keyboard>/escape"",
+                    ""id"": ""1e79aea4-272b-4ea9-9925-3a842eb8d4e6"",
+                    ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Exit"",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -401,6 +392,15 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""9e80e918-4d84-4780-9ee1-0c4772597934"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""GodMode"",
                     ""type"": ""Button"",
                     ""id"": ""684b5105-e0d6-4622-9881-a2f83f967976"",
@@ -414,7 +414,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bed449f2-dbce-4811-901f-c5c7d4a5ea4b"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -430,6 +430,17 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""GodMode"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f35231f5-d65e-4492-8555-56e4bb2d6d19"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -460,10 +471,10 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_ScrollWheel = m_UI.FindAction("ScrollWheel", throwIfNotFound: true);
-        m_UI_Exit = m_UI.FindAction("Exit", throwIfNotFound: true);
         // InGameActions
         m_InGameActions = asset.FindActionMap("InGameActions", throwIfNotFound: true);
         m_InGameActions_Interact = m_InGameActions.FindAction("Interact", throwIfNotFound: true);
+        m_InGameActions_Exit = m_InGameActions.FindAction("Exit", throwIfNotFound: true);
         m_InGameActions_GodMode = m_InGameActions.FindAction("GodMode", throwIfNotFound: true);
     }
 
@@ -610,7 +621,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_ScrollWheel;
-    private readonly InputAction m_UI_Exit;
     public struct UIActions
     {
         private @InputActions m_Wrapper;
@@ -620,7 +630,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @ScrollWheel => m_Wrapper.m_UI_ScrollWheel;
-        public InputAction @Exit => m_Wrapper.m_UI_Exit;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -645,9 +654,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @ScrollWheel.started -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
                 @ScrollWheel.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnScrollWheel;
-                @Exit.started -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @Exit.performed -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
-                @Exit.canceled -= m_Wrapper.m_UIActionsCallbackInterface.OnExit;
             }
             m_Wrapper.m_UIActionsCallbackInterface = instance;
             if (instance != null)
@@ -667,9 +673,6 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @ScrollWheel.started += instance.OnScrollWheel;
                 @ScrollWheel.performed += instance.OnScrollWheel;
                 @ScrollWheel.canceled += instance.OnScrollWheel;
-                @Exit.started += instance.OnExit;
-                @Exit.performed += instance.OnExit;
-                @Exit.canceled += instance.OnExit;
             }
         }
     }
@@ -679,12 +682,14 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_InGameActions;
     private IInGameActionsActions m_InGameActionsActionsCallbackInterface;
     private readonly InputAction m_InGameActions_Interact;
+    private readonly InputAction m_InGameActions_Exit;
     private readonly InputAction m_InGameActions_GodMode;
     public struct InGameActionsActions
     {
         private @InputActions m_Wrapper;
         public InGameActionsActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @Interact => m_Wrapper.m_InGameActions_Interact;
+        public InputAction @Exit => m_Wrapper.m_InGameActions_Exit;
         public InputAction @GodMode => m_Wrapper.m_InGameActions_GodMode;
         public InputActionMap Get() { return m_Wrapper.m_InGameActions; }
         public void Enable() { Get().Enable(); }
@@ -698,6 +703,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnInteract;
+                @Exit.started -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnExit;
+                @Exit.performed -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnExit;
+                @Exit.canceled -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnExit;
                 @GodMode.started -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnGodMode;
                 @GodMode.performed -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnGodMode;
                 @GodMode.canceled -= m_Wrapper.m_InGameActionsActionsCallbackInterface.OnGodMode;
@@ -708,6 +716,9 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
+                @Exit.started += instance.OnExit;
+                @Exit.performed += instance.OnExit;
+                @Exit.canceled += instance.OnExit;
                 @GodMode.started += instance.OnGodMode;
                 @GodMode.performed += instance.OnGodMode;
                 @GodMode.canceled += instance.OnGodMode;
@@ -741,11 +752,11 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnPoint(InputAction.CallbackContext context);
         void OnScrollWheel(InputAction.CallbackContext context);
-        void OnExit(InputAction.CallbackContext context);
     }
     public interface IInGameActionsActions
     {
         void OnInteract(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
         void OnGodMode(InputAction.CallbackContext context);
     }
 }

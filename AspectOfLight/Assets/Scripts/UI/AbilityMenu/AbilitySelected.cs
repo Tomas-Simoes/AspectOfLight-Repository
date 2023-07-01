@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonSelected : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class AbilitySelected : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     public Ability ability;
     public bool isSelected;

@@ -52,6 +52,7 @@ public class UIManager : Singleton<UIManager>
         EventManager.StartListening("onGodMode", ChangeUIGodModeState);
         EventManager.StartListening("onPlayerUI", OpenPlayerUI);
         EventManager.StartListening("onPrompt", onPrompt);
+        EventManager.StartListening("onPause", ChangeUIPauseState);
     }
 
     private void OnDisable()
@@ -65,21 +66,20 @@ public class UIManager : Singleton<UIManager>
         EventManager.StopListening("onGodMode", ChangeUIGodModeState);
         EventManager.StopListening("onPlayerUI", OpenPlayerUI);
         EventManager.StopListening("onPrompt", onPrompt);
+        EventManager.StopListening("onPause", ChangeUIPauseState);
     }
 
     public void OnExitUI(Dictionary<string, object> message)
     {
-        Debug.Log("asaa");
-
         if (inAbilityTree)
         {
-            Debug.Log("aaa");
             EventManager.TriggerEvent("onExitInAbilityTree", true, null);
             return;
         }
 
-        Debug.Log("a");
-        ChangeUIPauseState(
+        EventManager.TriggerEvent(
+            "onPause",
+            true,
             new Dictionary<string, object> { { "activeState", !GameManager.Instance.isPaused } }
         );
     }

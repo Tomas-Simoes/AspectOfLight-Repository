@@ -9,7 +9,6 @@ public class MagistrateSigilMenu : Menu
     protected override void OnEnable()
     {
         base.OnEnable();
-        Debug.Log("a");
     }
 
     public void OnRestPressed()

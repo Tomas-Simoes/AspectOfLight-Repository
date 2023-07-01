@@ -9,7 +9,7 @@ public class DefaultDialogueTrigger : DialogueTrigger
     {
         base.OnTriggerStay2D(other);
 
-        if (other.CompareTag("Player") && player.inputHandler.pressedInteract)
+        if (other.CompareTag("Player") && player.inputHandler.pressedSelect)
         {
             if (!DialogueManager.Instance.inDialogueMode)
                 StartDialogue(0);
