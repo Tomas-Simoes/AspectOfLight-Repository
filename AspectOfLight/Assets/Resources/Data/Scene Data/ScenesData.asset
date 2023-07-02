@@ -15,9 +15,19 @@ MonoBehaviour:
   gameScenes:
   - name: ExiledFlorest
     sceneConnections:
-    - connectionID: 1
+    - OptionalDescription: Enter from Engineer Village
+      connectionID: 1
       position: {x: 46.75, y: 5.72, z: 0}
+    - OptionalDescription: Enter from Demonstration Area
+      connectionID: 2
+      position: {x: 31.322948, y: 11.98024, z: 0}
   - name: EngineerVillage
     sceneConnections:
-    - connectionID: 1
+    - OptionalDescription: Enter from Exiled Florest (North Side)
+      connectionID: 1
       position: {x: -16.476, y: -2.657, z: 0}
+  - name: Demonstration
+    sceneConnections:
+    - OptionalDescription: Enter from Exiled Florest
+      connectionID: 1
+      position: {x: -2.51, y: 3.21, z: 0}

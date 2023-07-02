@@ -37,5 +37,8 @@ public class MagistrateSigilMenu : Menu
         DataPersistenceManager.Instance.SaveGame();
     }
 
-    public void OnLoadGamePressed() { }
+    public void OnDemonstrationScenePressed()
+    {
+        ScenesManager.Instance.LoadScene("Demonstration", 1);
+    }
 }

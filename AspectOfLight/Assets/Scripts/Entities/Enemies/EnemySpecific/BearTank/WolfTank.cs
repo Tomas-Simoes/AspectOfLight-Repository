@@ -24,16 +24,14 @@ public class WolfTank : Enemy
     [SerializeField]
     private D_EnemyCoolDown coolDownData;
 
-    [Header("Cooldowns")]
-    public float timeSinceAttack;
-
-    [Header("Informations")]
+    [Header("Wolf Tank Data")]
     [SerializeField]
     public GameObject bulletPrefab;
 
-    [SerializeField]
-    public GameObject bulletsParent;
     public GameObject attackPosition;
+
+    [Header("Wolf Tank Cooldowns")]
+    public float timeSinceAttack;
 
     public override void Start()
     {

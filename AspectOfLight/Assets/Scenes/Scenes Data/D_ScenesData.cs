@@ -17,6 +17,8 @@ public class D_ScenesData : ScriptableObject
     [System.Serializable]
     public class SceneConnection
     {
+        [TextArea(1, 5)]
+        public string OptionalDescription;
         public int connectionID;
         public Vector3 position;
     }

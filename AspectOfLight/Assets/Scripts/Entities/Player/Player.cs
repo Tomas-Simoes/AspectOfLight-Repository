@@ -42,8 +42,8 @@ public class Player : Entity, IDataPersistence
     [SerializeField]
     public GameObject bulletPrefab;
 
-    [SerializeField]
-    public GameObject abilityInstances; //TODO change this to AbilitiesManager
+    //[SerializeField]
+    // public GameObject abilityInstances; //TODO change this to AbilitiesManager
 
     [SerializeField]
     public GameObject attackPosition;
@@ -94,16 +94,15 @@ public class Player : Entity, IDataPersistence
 
         StartCoroutine(RecoverStamina());
 
-        inputHandler = this.GetComponent<InputHandler>();
+        inputHandler = GetComponent<InputHandler>();
         GetInputs();
-
-        timeSinceDash = coolDownData.dashCD; //TODO remove this after transforming dash into an ability
 
         if (GameManager.Instance.environment == "development")
         {
             DataPersistenceManager.Instance.Init();
         }
 
+        if (abilityInstances == null) { }
         stateMachine.Init(idleState);
     }
 

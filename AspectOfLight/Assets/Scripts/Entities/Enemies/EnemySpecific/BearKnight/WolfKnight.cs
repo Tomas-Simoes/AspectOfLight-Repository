@@ -27,11 +27,11 @@ public class WolfKnight : Enemy
     [SerializeField]
     private D_EnemyCoolDown coolDownData;
 
-    [Header("Cooldowns")]
-    public float timeSinceAttack;
-
-    [Header("Informations")]
+    [Header("Wolf Knight Data")]
     public GameObject attackPosition;
+
+    [Header("Wolf Knight Cooldowns")]
+    public float timeSinceAttack;
 
     public override void Start()
     {
