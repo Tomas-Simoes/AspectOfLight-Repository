@@ -19,9 +19,6 @@ public class InputHandler : MonoBehaviour
     public bool pressedAbilityThree;
     public bool pressedAbilityFour;
 
-    [Header("Pause Input")]
-    private bool isPaused = false;
-
     [Header("UI Input")]
     [SerializeField]
     public bool pressedSelect;

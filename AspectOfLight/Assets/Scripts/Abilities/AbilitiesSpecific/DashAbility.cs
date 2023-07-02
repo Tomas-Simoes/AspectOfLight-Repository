@@ -7,7 +7,6 @@ public class DashAbility : Ability
     [SerializeField]
     protected D_DashAbility abilityData;
     private float timeDashing = 0;
-    private bool dashing = true;
 
     public override void Cast(Player player)
     {
@@ -17,7 +16,6 @@ public class DashAbility : Ability
 
         this.player = player;
 
-        dashing = true;
         timeDashing = 0;
     }
 
@@ -29,7 +27,6 @@ public class DashAbility : Ability
 
         if (timeDashing >= abilityData.dashTime)
         {
-            Debug.Log("Stopped Dashing");
             timeDashing = 0;
             player.timeSinceDash = 0;
 
@@ -43,7 +40,6 @@ public class DashAbility : Ability
     {
         base.PhysicsUpdate();
 
-        Debug.Log(player.axisMovement.normalized);
         player.rb.velocity = player.axisMovement.normalized * abilityData.dashSpeed;
     }
 }
