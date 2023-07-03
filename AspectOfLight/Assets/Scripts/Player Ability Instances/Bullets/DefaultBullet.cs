@@ -22,6 +22,7 @@ public class DefaultBullet : Bullet
         if (other.CompareTag(targatableTag))
         {
             other.GetComponent<Entity>().TakeDamage(damage);
+            Debug.Log("Damage dealt: " + damage);
             Destroy(this.gameObject);
         }
 

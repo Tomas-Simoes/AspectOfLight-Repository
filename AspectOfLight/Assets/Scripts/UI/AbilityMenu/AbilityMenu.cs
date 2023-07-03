@@ -265,7 +265,6 @@ public class AbilityMenu : Menu
     {
         foreach (Button slot in playerAbilitySlots)
         {
-            Debug.Log("Slot " + slot.name + " set to " + state);
             slot.interactable = state;
         }
 
@@ -372,7 +371,7 @@ public class AbilityMenu : Menu
                     "promptText",
                     "Are you sure that you want this abiity? \n It will cost you "
                         + ability.unlockCost
-                        + " miracles."
+                        + (ability.unlockCost != 1 ? " miracles." : "miracle.")
                 },
                 { "yesCallback", OnYesUnlockingNewAbility },
                 { "noCallback", OnNoUnlockingNewAbility },

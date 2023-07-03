@@ -11,12 +11,11 @@ public class AutoSelectOnMouseEnter : MonoBehaviour, IPointerEnterHandler, IPoin
     private void Awake()
     {
         thisButton = GetComponent<Button>();
-        Debug.Log(thisButton);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("ya");
+        Debug.Log("Mouse entered " + this.gameObject.name);
         thisButton.Select();
     }
 

@@ -42,9 +42,6 @@ public class Player : Entity, IDataPersistence
     [SerializeField]
     public GameObject bulletPrefab;
 
-    //[SerializeField]
-    // public GameObject abilityInstances; //TODO change this to AbilitiesManager
-
     [SerializeField]
     public GameObject attackPosition;
 
@@ -102,8 +99,9 @@ public class Player : Entity, IDataPersistence
             DataPersistenceManager.Instance.Init();
         }
 
-        if (abilityInstances == null) { }
         stateMachine.Init(idleState);
+
+        Debug.Log(abilityInstances);
     }
 
     public override void Update()

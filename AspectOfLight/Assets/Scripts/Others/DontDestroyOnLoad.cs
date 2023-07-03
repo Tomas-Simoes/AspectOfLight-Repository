@@ -9,9 +9,13 @@ public class DontDestroyOnLoad : MonoBehaviour
     void Awake()
     {
         if (instance != null)
+        {
+            Debug.Log("Destroyed instance: " + instance);
             Destroy(instance);
+        }
 
         instance = gameObject;
+        instance.name = "New Ability Instance";
         DontDestroyOnLoad(this.gameObject);
     }
 }

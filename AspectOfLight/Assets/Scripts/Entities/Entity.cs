@@ -32,7 +32,7 @@ public class Entity : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        abilityInstances = GameObject.FindGameObjectWithTag("AbilityInstances");
+        StartCoroutine(GetCurrentAbilityInstances());
     }
 
     public virtual void Update()
@@ -44,6 +44,12 @@ public class Entity : MonoBehaviour
     public virtual void FixedUpdate()
     {
         stateMachine.currentState.PhysicsUpdate();
+    }
+
+    private IEnumerator GetCurrentAbilityInstances()
+    {
+        yield return new WaitForEndOfFrame();
+        abilityInstances = GameObject.FindGameObjectWithTag("AbilityInstances");
     }
 
     public virtual void UpdateCooldowns() { }
