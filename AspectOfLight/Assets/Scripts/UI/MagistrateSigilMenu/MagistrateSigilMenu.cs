@@ -9,7 +9,6 @@ public class MagistrateSigilMenu : Menu
     protected override void OnEnable()
     {
         base.OnEnable();
-        Debug.Log("a");
     }
 
     public void OnRestPressed()
@@ -38,5 +37,8 @@ public class MagistrateSigilMenu : Menu
         DataPersistenceManager.Instance.SaveGame();
     }
 
-    public void OnLoadGamePressed() { }
+    public void OnDemonstrationScenePressed()
+    {
+        ScenesManager.Instance.LoadScene("Demonstration", 1);
+    }
 }

@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ThornborneExplosion : MonoBehaviour
 {
-    //TODO when the animation is done update the '_animationTime' to use the GetCurrentAnimatorStateInfo
-
-
     [Header("Explosion Information")]
     private bool hasAlreadyHitted = false;
 
@@ -23,13 +20,6 @@ public class ThornborneExplosion : MonoBehaviour
     private float tickRate;
 
     private float _animationTime = 0;
-
-    void Start() { }
-
-    void Update()
-    {
-        _animationTime += Time.deltaTime;
-    }
 
     void Die()
     {

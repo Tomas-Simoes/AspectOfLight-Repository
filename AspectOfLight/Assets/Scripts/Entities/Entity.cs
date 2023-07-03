@@ -11,22 +11,12 @@ public class Entity : MonoBehaviour
     public StateMachine stateMachine;
 
     [Header("Entity Data")]
+    public GameObject abilityInstances;
     public D_Entity entityData;
-
-    [SerializeField]
     public float currentHealth;
     public int facingDirection;
-
-    [Header("Entity Informations")]
-    [SerializeField]
-    private Transform wallCheck;
-
     public GameObject target;
-
-    [SerializeField]
     public GameObject pivot;
-
-    private Vector2 velocityWorkspace;
 
     [Header("Others")]
     private Color defaultDamageColor = Color.red;
@@ -42,6 +32,7 @@ public class Entity : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        StartCoroutine(GetCurrentAbilityInstances());
     }
 
     public virtual void Update()
@@ -53,6 +44,12 @@ public class Entity : MonoBehaviour
     public virtual void FixedUpdate()
     {
         stateMachine.currentState.PhysicsUpdate();
+    }
+
+    private IEnumerator GetCurrentAbilityInstances()
+    {
+        yield return new WaitForEndOfFrame();
+        abilityInstances = GameObject.FindGameObjectWithTag("AbilityInstances");
     }
 
     public virtual void UpdateCooldowns() { }

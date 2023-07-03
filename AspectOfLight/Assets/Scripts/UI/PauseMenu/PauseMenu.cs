@@ -4,6 +4,17 @@ using UnityEngine;
 
 public class PauseMenu : Menu
 {
+    [Header("Default Menu")]
+    [SerializeField]
+    private GameObject defaultMenu;
+
+    [Header("Options Menu")]
+    [SerializeField]
+    private GameObject optionsMenu;
+
+    [SerializeField]
+    private GameObject videoOptionsMenu;
+
     protected override void OnEnable()
     {
         base.OnEnable();
@@ -33,7 +44,17 @@ public class PauseMenu : Menu
         );
     }
 
-    public void OnOptionsPressed() { }
+    public void OnOptionsPressed()
+    {
+        defaultMenu.SetActive(false);
+        optionsMenu.SetActive(true);
+    }
+
+    public void OnVideoOptionsPressed()
+    {
+        optionsMenu.SetActive(false);
+        videoOptionsMenu.SetActive(true);
+    }
 
     public void OnQuitToMenuPressed()
     {

@@ -10,7 +10,7 @@ public class Enemy : Entity
     public Path path;
     public int currentWaypoint = 0;
 
-    [Header("Informations")]
+    [Header("Enemy Data")]
     public GameObject playerReference;
 
     [Space(5)]
@@ -26,6 +26,7 @@ public class Enemy : Entity
         seeker = GetComponent<Seeker>();
         InvokeRepeating("UpdatePath", 0f, 0.2f); //TODO mayyybe change this to a Coroutine
 
+        playerReference = GameManager.Instance.playerReference.gameObject;
         currentHealth = entityData.MAX_HEALTH;
     }
 

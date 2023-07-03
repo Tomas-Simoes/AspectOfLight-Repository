@@ -150,7 +150,6 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
             backSpikes1.gameObject.SetActive(true);
             backSpikes2.gameObject.SetActive(true);
 
-            Debug.Log("Starting up coroutine");
             StartCoroutine(backSpikes1.Go("Up"));
             StartCoroutine(backSpikes2.Go("Up"));
             return;

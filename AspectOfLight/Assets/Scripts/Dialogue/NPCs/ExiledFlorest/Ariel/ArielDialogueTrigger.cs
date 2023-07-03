@@ -26,7 +26,7 @@ public class ArielDialogueTrigger : DialogueTrigger
                 return;
             }
 
-            if (player.inputHandler.pressedInteract)
+            if (player.inputHandler.pressedSelect)
             {
                 DialogueManager.Instance.TryToStandByCurrentDialogue();
             }

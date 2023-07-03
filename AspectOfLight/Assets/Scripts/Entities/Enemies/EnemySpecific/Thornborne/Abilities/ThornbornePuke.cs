@@ -50,7 +50,6 @@ public class ThornbornePuke : MonoBehaviour
     private void DoDamage(Entity entity)
     {
         timeSinceDamage = 0;
-
         entity.TakeDamage(damage);
     }
 }

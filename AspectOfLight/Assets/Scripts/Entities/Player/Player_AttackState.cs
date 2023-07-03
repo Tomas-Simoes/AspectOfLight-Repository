@@ -81,17 +81,12 @@ public class Player_AttackState : State
             GameObject _bullet = entity.CreatePrefab(
                 player.bulletPrefab,
                 player.attackPosition.transform.position,
-                player.abilityInstances
+                entity.abilityInstances
             );
 
-            if (GameManager.Instance.onGodMode)
-            {
-                _bullet.GetComponent<DefaultBullet>().damage = 100;
-            }
-            else
-            {
-                _bullet.GetComponent<DefaultBullet>().damage = currentDamage;
-            }
+            _bullet.GetComponent<DefaultBullet>().damage = GameManager.Instance.onGodMode
+                ? 100
+                : currentDamage;
 
             stateMachine.ChangeState(
                 player.axisMovement == Vector2.zero ? player.idleState : player.moveState

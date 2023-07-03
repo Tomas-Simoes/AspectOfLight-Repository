@@ -19,13 +19,10 @@ public class InputHandler : MonoBehaviour
     public bool pressedAbilityThree;
     public bool pressedAbilityFour;
 
-    [Header("Pause Input")]
-    private bool isPaused = false;
-
     [Header("UI Input")]
     [SerializeField]
-    public bool pressedSelect;
-    public bool pressedInteract;
+    public bool pressedSelect; // used in UIs
+    public bool pressedInteract; // used in game
 
     void Awake()
     {
@@ -56,39 +53,48 @@ public class InputHandler : MonoBehaviour
     {
         inputActions.Enable();
 
-        inputActions.Player.XAxisMovement.performed += SetXAxisMovement;
-        inputActions.Player.XAxisMovement.canceled += SetXAxisMovement;
-
-        inputActions.Player.YAxisMovement.performed += SetYAxisMovement;
-        inputActions.Player.YAxisMovement.canceled += SetYAxisMovement;
-
-        inputActions.Player.AbilityOne.started += SetAbilityOne;
-        inputActions.Player.AbilityOne.canceled += SetAbilityOne;
-
-        inputActions.Player.AbilityTwo.started += SetAbilityTwo;
-        inputActions.Player.AbilityTwo.canceled += SetAbilityTwo;
-
-        inputActions.Player.AbilityThree.started += SetAbilityThree;
-        inputActions.Player.AbilityThree.canceled += SetAbilityThree;
-
-        inputActions.Player.AbilityFour.started += SetAbilityFour;
-        inputActions.Player.AbilityFour.canceled += SetAbilityFour;
-
-        inputActions.Player.Attack.performed += SetAttack;
-        inputActions.Player.Attack.canceled += SetAttack;
-
-        //inputActions.InGameActions.Exit.started += SetExit;
-        inputActions.InGameActions.GodMode.started += SetGodMode;
-
-        inputActions.InGameActions.Interact.performed += SetInteract;
-        inputActions.InGameActions.Interact.canceled += SetInteract;
-
-        inputActions.UI.Select.performed += SetSelect;
-        inputActions.UI.Exit.performed += SetExit;
+        SubscribePlayerInputs(true);
+        SubscribeInGameActionsInputs(true);
+        SubscribeUIInputs(true);
     }
 
     private void UnsubscribeInputs()
     {
+        SubscribePlayerInputs(false);
+        SubscribeInGameActionsInputs(false);
+        SubscribeUIInputs(false);
+
+        inputActions.Disable();
+    }
+
+    private void SubscribePlayerInputs(bool isEnable)
+    {
+        if (isEnable)
+        {
+            inputActions.Player.XAxisMovement.performed += SetXAxisMovement;
+            inputActions.Player.XAxisMovement.canceled += SetXAxisMovement;
+
+            inputActions.Player.YAxisMovement.performed += SetYAxisMovement;
+            inputActions.Player.YAxisMovement.canceled += SetYAxisMovement;
+
+            inputActions.Player.AbilityOne.started += SetAbilityOne;
+            inputActions.Player.AbilityOne.canceled += SetAbilityOne;
+
+            inputActions.Player.AbilityTwo.started += SetAbilityTwo;
+            inputActions.Player.AbilityTwo.canceled += SetAbilityTwo;
+
+            inputActions.Player.AbilityThree.started += SetAbilityThree;
+            inputActions.Player.AbilityThree.canceled += SetAbilityThree;
+
+            inputActions.Player.AbilityFour.started += SetAbilityFour;
+            inputActions.Player.AbilityFour.canceled += SetAbilityFour;
+
+            inputActions.Player.Attack.performed += SetAttack;
+            inputActions.Player.Attack.canceled += SetAttack;
+
+            return;
+        }
+
         inputActions.Player.XAxisMovement.performed -= SetXAxisMovement;
         inputActions.Player.XAxisMovement.canceled -= SetXAxisMovement;
 
@@ -109,17 +115,47 @@ public class InputHandler : MonoBehaviour
 
         inputActions.Player.Attack.performed -= SetAttack;
         inputActions.Player.Attack.canceled -= SetAttack;
+    }
+
+    private void SubscribeInGameActionsInputs(bool isEnable)
+    {
+        if (isEnable)
+        {
+            inputActions.InGameActions.GodMode.started += SetGodMode;
+
+            inputActions.InGameActions.Exit.performed += SetExit;
+
+            inputActions.InGameActions.Interact.performed += SetInteract;
+            inputActions.InGameActions.Interact.canceled += SetInteract;
+
+            return;
+        }
+        inputActions.InGameActions.GodMode.started -= SetGodMode;
+
+        inputActions.InGameActions.Exit.performed -= SetExit;
 
         inputActions.InGameActions.Interact.performed -= SetInteract;
         inputActions.InGameActions.Interact.canceled -= SetInteract;
+    }
 
-        //inputActions.InGameActions.Exit.performed -= SetExit;
-        inputActions.InGameActions.GodMode.started -= SetGodMode;
+    private void SubscribeUIInputs(bool isEnable)
+    {
+        if (isEnable)
+        {
+            inputActions.UI.Select.performed += SetSelect;
+            inputActions.UI.Select.canceled += SetSelect;
+            inputActions.UI.Click.performed += Test;
+
+            return;
+        }
 
         inputActions.UI.Select.performed -= SetSelect;
-        inputActions.UI.Exit.performed -= SetExit;
+        inputActions.UI.Select.canceled -= SetSelect;
+    }
 
-        inputActions.Disable();
+    public void Test(InputAction.CallbackContext ctx)
+    {
+        //Debug.Log("clicked");
     }
 
     public void ChangeMapStatesBasedOnUI(Dictionary<string, object> message)
@@ -133,6 +169,8 @@ public class InputHandler : MonoBehaviour
 
         ChangeInputMapState(inputActions.Player, !_UIInputMapState);
         ChangeInputMapState(inputActions.UI, _UIInputMapState);
+
+        Debug.Log(_UIInputMapState ? "UI map active" : "UI map disabled");
     }
 
     public void ChangeInputMapState(InputActionMap map, bool state)
@@ -185,8 +223,6 @@ public class InputHandler : MonoBehaviour
 
     private void SetExit(InputAction.CallbackContext ctx)
     {
-        Debug.Log('s');
-
         EventManager.TriggerEvent(
             "onExit",
             true,

@@ -30,6 +30,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public virtual void Start()
     {
+        player = GameManager.Instance.playerReference;
         timeSinceInteract = minimumTimeToInteractAgain;
     }
 
@@ -60,7 +61,12 @@ public class DialogueTrigger : MonoBehaviour
         EventManager.TriggerEvent(
             "onDialogue",
             true,
-            new Dictionary<string, object> { { "dialogue", dialogue }, { "startNode", startNode }, {"activeState", true}}
+            new Dictionary<string, object>
+            {
+                { "dialogue", dialogue },
+                { "startNode", startNode },
+                { "activeState", true }
+            }
         );
     }
 
