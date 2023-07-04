@@ -28,7 +28,7 @@ public class Spikes : MonoBehaviour
                     Destroy(this.gameObject);
                 }
 
-                yield return null;
+                break;
             }
 
             yield return new WaitForSeconds(0.001f);
