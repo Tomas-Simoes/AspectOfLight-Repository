@@ -40,8 +40,12 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         if (GameManager.Instance.environment == "development")
         {
             LoadGame();
-            EventManager.TriggerEvent("onPlayerUI", true, null);
             GameManager.Instance.gameStarted = true;
+
+            if (UIManager.Instance.playerUI == null){
+                EventManager.TriggerEvent("onPlayerUI", true, null);
+                Debug.Log("ya");
+            }
         }
     }
 

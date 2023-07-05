@@ -52,6 +52,7 @@ public class Player : Entity, IDataPersistence
     public override void Awake()
     {
         base.Awake();
+        GameManager.Instance.SavePlayerReference(this);
 
         idleState = new Player_IdleState(this, stateMachine, "idle", this);
         moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -87,7 +88,6 @@ public class Player : Entity, IDataPersistence
     public override void Start()
     {
         base.Start();
-        GameManager.Instance.SavePlayerReference(this);
 
         StartCoroutine(RecoverStamina());
 
@@ -101,7 +101,6 @@ public class Player : Entity, IDataPersistence
 
         stateMachine.Init(idleState);
 
-        Debug.Log(abilityInstances);
     }
 
     public override void Update()

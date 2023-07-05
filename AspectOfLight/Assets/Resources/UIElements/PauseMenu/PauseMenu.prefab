@@ -142,7 +142,7 @@ MonoBehaviour:
       - m_Target: {fileID: 2495802849226369}
         m_TargetAssemblyTypeName: VideoOptionsMenu, Assembly-CSharp
         m_MethodName: OnSelectedResolutionChanged
-        m_Mode: 3
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

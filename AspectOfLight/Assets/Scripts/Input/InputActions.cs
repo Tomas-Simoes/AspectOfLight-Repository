@@ -205,7 +205,7 @@ public partial class @InputActions : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""1e14d9fd-1478-4610-816d-5b1a2d6d016e"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<Keyboard>/4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

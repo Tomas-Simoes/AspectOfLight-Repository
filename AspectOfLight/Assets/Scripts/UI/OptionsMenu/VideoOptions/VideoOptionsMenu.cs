@@ -6,8 +6,10 @@ using TMPro;
 public class VideoOptionsMenu : MonoBehaviour
 {
     [Header("Resolution Information")]
-    [SerializeField]
-    private List<Resolution> resolutions;
+    private Resolution[] resolutions;
+    private List<Resolution> filteredResolutions = new List<Resolution>();
+    private int currentResolutionIndex;
+    private float currentRefreshRate;
 
     [SerializeField]
     private TMP_Dropdown dropdown;
@@ -16,27 +18,65 @@ public class VideoOptionsMenu : MonoBehaviour
 
     private void Awake()
     {
+        GetAvailableResolutions();
         InitDropdownResolutions();
+    }
+
+    private void GetAvailableResolutions()
+    {
+        resolutions = Screen.resolutions;
+        currentRefreshRate = Screen.currentResolution.refreshRate;
+
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            if (resolutions[i].refreshRate == currentRefreshRate)
+                filteredResolutions.Add(resolutions[i]);
+        }
     }
 
     private void InitDropdownResolutions()
     {
         List<string> resolutionsToAdd = new List<string>();
 
-        foreach (Resolution resolution in resolutions)
-            resolutionsToAdd.Add(resolution.label);
+        for (int i = 0; i < filteredResolutions.Count; i++)
+        {
+            string _option =
+                filteredResolutions[i].width
+                + "x"
+                + filteredResolutions[i].height
+                + " "
+                + currentRefreshRate
+                + " Hz";
+
+            resolutionsToAdd.Add(_option);
+
+            bool _isCurrentResolution =
+                filteredResolutions[i].width == Screen.width
+                && filteredResolutions[i].height == Screen.height;
+
+            if (_isCurrentResolution)
+            {
+                currentResolutionIndex = i;
+                GameManager.Instance.currentResolution = filteredResolutions[i];
+            }
+        }
 
         dropdown.options.Clear();
 
         dropdown.AddOptions(resolutionsToAdd);
-        dropdown.value = 0;
+        dropdown.value = currentResolutionIndex;
 
         dropdown.RefreshShownValue();
     }
 
     public void OnSaveChangedOptions()
     {
-        if (resolutions[currentSelectedResolution].label != GameManager.Instance.currentResolution)
+        if (
+            filteredResolutions[currentSelectedResolution].width
+                != GameManager.Instance.currentResolution.width
+            && filteredResolutions[currentSelectedResolution].height
+                != GameManager.Instance.currentResolution.height
+        )
         {
             ChangeResolution(currentSelectedResolution);
         }
@@ -45,20 +85,20 @@ public class VideoOptionsMenu : MonoBehaviour
     public void OnSelectedResolutionChanged(int value)
     {
         currentSelectedResolution = value;
+        Debug.Log("Choise: " + currentSelectedResolution);
     }
 
     private void ChangeResolution(int newResolutionID)
     {
-        int _newHorizontal = resolutions[currentSelectedResolution].horizontal;
-        int _newVertical = resolutions[currentSelectedResolution].vertical;
+        int _newHorizontal = filteredResolutions[newResolutionID].width;
+        int _newVertical = filteredResolutions[newResolutionID].height;
 
-        Debug.Log(_newHorizontal + " " + _newVertical);
         Screen.SetResolution(_newHorizontal, _newVertical, true);
     }
 }
 
 [System.Serializable]
-public class Resolution
+public class Resolutions
 {
     public string label;
     public int horizontal;

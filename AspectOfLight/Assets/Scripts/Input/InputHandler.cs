@@ -209,6 +209,7 @@ public class InputHandler : MonoBehaviour
     private void SetAbilityFour(InputAction.CallbackContext ctx)
     {
         pressedAbilityFour = ctx.started;
+        Debug.Log(pressedAbilityFour);
     }
 
     private void SetAttack(InputAction.CallbackContext ctx)

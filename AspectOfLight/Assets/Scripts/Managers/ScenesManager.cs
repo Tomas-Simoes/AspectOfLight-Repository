@@ -7,6 +7,12 @@ using UnityEngine.SceneManagement;
 public class ScenesManager : Singleton<ScenesManager>
 {
     private D_ScenesData scenesData;
+    private GameObject sceneTransition;
+
+    public override void Init()
+    {
+        base.Init();
+    }
 
     private void Start()
     {
@@ -20,6 +26,11 @@ public class ScenesManager : Singleton<ScenesManager>
         bool loadDataAfterLoadingScene = false
     )
     {
+        if (sceneTransition == null)
+        {
+            sceneTransition = Resources.Load<GameObject>("Data/Scene Data/SceneTransition");
+        }
+
         StartCoroutine(
             LoadSceneAsync(
                 sceneName,
@@ -37,12 +48,33 @@ public class ScenesManager : Singleton<ScenesManager>
         bool loadDataAfterLoadingScene
     )
     {
+        if (isInGameTransition)
+        {
+            Animator _newSceneTransition = LoadSceneTransition();
+            _newSceneTransition.SetBool("fadeIn", true);
+
+            while (true)
+            {
+                float _animationTime = _newSceneTransition
+                    .GetCurrentAnimatorStateInfo(0)
+                    .normalizedTime;
+
+                if (_animationTime >= 1)
+                    break;
+
+                yield return new WaitForSeconds(0.001f);
+            }
+        }
+
         var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName);
 
         while (!asyncLoadScene.isDone)
         {
             yield return null;
         }
+
+        if (isInGameTransition)
+            LoadSceneTransition();
 
         GameManager.Instance.gameStarted = sceneName == "MainMenu" ? false : true;
 
@@ -82,5 +114,21 @@ public class ScenesManager : Singleton<ScenesManager>
             if (sceneConnection.connectionID == outConnectionID)
                 GameManager.Instance.playerReference.transform.position = sceneConnection.position;
         }
+    }
+
+    private Animator LoadSceneTransition()
+    {
+        sceneTransition = Instantiate(
+            Resources.Load<GameObject>("Data/Scene Data/SceneTransition")
+        );
+
+        Animator _newSceneTransition = sceneTransition.GetComponent<Animator>();
+
+        _newSceneTransition.transform.SetParent(
+            GameObject.FindGameObjectWithTag("Canvas").transform,
+            false
+        );
+
+        return _newSceneTransition;
     }
 }

@@ -205,6 +205,10 @@ public class AbilityMenu : Menu
             else
                 AbilityManager.playerAbilities.Add(slotToChange, ability);
 
+            AbilityManager.Instance.ForcebilityCooldown(
+                AbilityManager.playerAbilities[slotToChange].abilityName
+            );
+
             Image _slotToUpdate = playerAbilitySlots[slotToChange].GetComponent<Image>();
 
             _slotToUpdate.GetComponent<AbilitySelected>().ability = AbilityManager.playerAbilities[
