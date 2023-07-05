@@ -19,6 +19,7 @@ public class WolfTank_AttackState : Enemy_RangedAttackState
     public override void Enter()
     {
         base.Enter();
+
     }
 
     public override void Exit()
@@ -29,7 +30,7 @@ public class WolfTank_AttackState : Enemy_RangedAttackState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        
         float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
 
         if (_animationTime >= 0.77f && !attackedOnce)
@@ -40,8 +41,10 @@ public class WolfTank_AttackState : Enemy_RangedAttackState
                 entity.abilityInstances
             );
 
-            _bullet.GetComponent<DefaultBullet>().targetPosition = enemy.target.transform.position;
-
+            _bullet.GetComponent<DefaultBulletEnemies>().targetPosition = enemy
+            .target
+            .transform
+            .position;
             attackedOnce = true;
         }
 
