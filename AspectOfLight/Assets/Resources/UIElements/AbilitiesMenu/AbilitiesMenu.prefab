@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3830319440014194008}
   - component: {fileID: 7859647871381803114}
   - component: {fileID: 5882478424479793230}
+  - component: {fileID: 5901781428150746675}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -99,7 +100,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7254902, g: 0.2509804, b: 0.33333334, a: 1}
     m_PressedColor: {r: 0.59607846, g: 0.1882353, b: 0.25882354, a: 1}
     m_SelectedColor: {r: 0.7254902, g: 0.2509804, b: 0.33333334, a: 1}
     m_DisabledColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5019608}
@@ -133,6 +134,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &5901781428150746675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118033606549757461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7ea8827866d124b8d3c1da8cf7050d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &868594318456750701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1461,8 @@ GameObject:
   - component: {fileID: 6869345003181976738}
   - component: {fileID: 1157507004695360194}
   - component: {fileID: 1643457745256227675}
-  - component: {fileID: 3966930366194096295}
+  - component: {fileID: 8351828289144837814}
+  - component: {fileID: 4799621900245324256}
   m_Layer: 5
   m_Name: Slot 4
   m_TagString: Untagged
@@ -1536,7 +1550,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7254902, g: 0.2509804, b: 0.33333334, a: 1}
     m_PressedColor: {r: 0.5943396, g: 0.18876818, b: 0.2591565, a: 1}
     m_SelectedColor: {r: 0.7264151, g: 0.2512756, b: 0.33261144, a: 1}
     m_DisabledColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5019608}
@@ -1570,7 +1584,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3966930366194096295
+--- !u!114 &8351828289144837814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4659403214683712128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7ea8827866d124b8d3c1da8cf7050d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4799621900245324256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1595,7 +1621,8 @@ GameObject:
   - component: {fileID: 2563124655438146294}
   - component: {fileID: 6607846811541576496}
   - component: {fileID: 8258923883780606283}
-  - component: {fileID: 990895949485193773}
+  - component: {fileID: 119354390874794099}
+  - component: {fileID: 1867124889652637737}
   m_Layer: 5
   m_Name: Slot 1
   m_TagString: Untagged
@@ -1683,7 +1710,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7254902, g: 0.2509804, b: 0.33333334, a: 1}
     m_PressedColor: {r: 0.5943396, g: 0.18876818, b: 0.2591565, a: 1}
     m_SelectedColor: {r: 0.7264151, g: 0.2512756, b: 0.33261144, a: 1}
     m_DisabledColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5019608}
@@ -1717,7 +1744,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &990895949485193773
+--- !u!114 &119354390874794099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4671612930293018479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7ea8827866d124b8d3c1da8cf7050d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1867124889652637737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1742,7 +1781,8 @@ GameObject:
   - component: {fileID: 4922782762356520351}
   - component: {fileID: 2314892264097970167}
   - component: {fileID: 1955088353827815753}
-  - component: {fileID: 8347937466379202854}
+  - component: {fileID: 6140315766820357507}
+  - component: {fileID: 6529771843139013815}
   m_Layer: 5
   m_Name: Slot 2
   m_TagString: Untagged
@@ -1830,7 +1870,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7254902, g: 0.2509804, b: 0.33333334, a: 1}
     m_PressedColor: {r: 0.5943396, g: 0.18876818, b: 0.2591565, a: 1}
     m_SelectedColor: {r: 0.7264151, g: 0.2512756, b: 0.33261144, a: 1}
     m_DisabledColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5019608}
@@ -1864,7 +1904,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &8347937466379202854
+--- !u!114 &6140315766820357507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5113822912882037195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7ea8827866d124b8d3c1da8cf7050d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6529771843139013815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2138,7 +2190,8 @@ GameObject:
   - component: {fileID: 3617245327341659784}
   - component: {fileID: 2858557257670976976}
   - component: {fileID: 1424609964066197408}
-  - component: {fileID: 1828953652490825777}
+  - component: {fileID: 8909909642951745194}
+  - component: {fileID: 8502185347494128232}
   m_Layer: 5
   m_Name: Slot 3
   m_TagString: Untagged
@@ -2226,7 +2279,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 0, g: 0, b: 0, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.7254902, g: 0.2509804, b: 0.33333334, a: 1}
     m_PressedColor: {r: 0.5943396, g: 0.18876818, b: 0.2591565, a: 1}
     m_SelectedColor: {r: 0.7264151, g: 0.2512756, b: 0.33261144, a: 1}
     m_DisabledColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 0.5019608}
@@ -2260,7 +2313,19 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1828953652490825777
+--- !u!114 &8909909642951745194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6913963344049175926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b7ea8827866d124b8d3c1da8cf7050d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8502185347494128232
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -16,7 +16,7 @@ public class ThePlagueAbility : Ability
             player.CreatePrefab(
                 abilityData.plaguePrefab,
                 spawnpoint.transform.position,
-                GameObject.Find("AbilityInstances") //TODO have a reference to ability instances somewhere
+                player.abilityInstances
             );
 
             ResetCooldown();

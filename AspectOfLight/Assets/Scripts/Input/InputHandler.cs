@@ -21,8 +21,8 @@ public class InputHandler : MonoBehaviour
 
     [Header("UI Input")]
     [SerializeField]
-    public bool pressedSelect;
-    public bool pressedInteract;
+    public bool pressedSelect; // used in UIs
+    public bool pressedInteract; // used in game
 
     void Awake()
     {
@@ -155,7 +155,7 @@ public class InputHandler : MonoBehaviour
 
     public void Test(InputAction.CallbackContext ctx)
     {
-        Debug.Log("clicked");
+        //Debug.Log("clicked");
     }
 
     public void ChangeMapStatesBasedOnUI(Dictionary<string, object> message)
@@ -170,7 +170,7 @@ public class InputHandler : MonoBehaviour
         ChangeInputMapState(inputActions.Player, !_UIInputMapState);
         ChangeInputMapState(inputActions.UI, _UIInputMapState);
 
-        Debug.Log(_UIInputMapState);
+        Debug.Log(_UIInputMapState ? "UI map active" : "UI map disabled");
     }
 
     public void ChangeInputMapState(InputActionMap map, bool state)
@@ -209,6 +209,7 @@ public class InputHandler : MonoBehaviour
     private void SetAbilityFour(InputAction.CallbackContext ctx)
     {
         pressedAbilityFour = ctx.started;
+        Debug.Log(pressedAbilityFour);
     }
 
     private void SetAttack(InputAction.CallbackContext ctx)
@@ -223,8 +224,6 @@ public class InputHandler : MonoBehaviour
 
     private void SetExit(InputAction.CallbackContext ctx)
     {
-        Debug.Log("On Exit");
-
         EventManager.TriggerEvent(
             "onExit",
             true,

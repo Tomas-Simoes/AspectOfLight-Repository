@@ -42,9 +42,6 @@ public class Player : Entity, IDataPersistence
     [SerializeField]
     public GameObject bulletPrefab;
 
-    //[SerializeField]
-    // public GameObject abilityInstances; //TODO change this to AbilitiesManager
-
     [SerializeField]
     public GameObject attackPosition;
 
@@ -55,6 +52,7 @@ public class Player : Entity, IDataPersistence
     public override void Awake()
     {
         base.Awake();
+        GameManager.Instance.SavePlayerReference(this);
 
         idleState = new Player_IdleState(this, stateMachine, "idle", this);
         moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -90,7 +88,6 @@ public class Player : Entity, IDataPersistence
     public override void Start()
     {
         base.Start();
-        GameManager.Instance.SavePlayerReference(this);
 
         StartCoroutine(RecoverStamina());
 
@@ -102,8 +99,8 @@ public class Player : Entity, IDataPersistence
             DataPersistenceManager.Instance.Init();
         }
 
-        if (abilityInstances == null) { }
         stateMachine.Init(idleState);
+
     }
 
     public override void Update()

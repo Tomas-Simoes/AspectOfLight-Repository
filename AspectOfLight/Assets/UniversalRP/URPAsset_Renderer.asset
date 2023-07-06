@@ -31,8 +31,8 @@ MonoBehaviour:
   - name: Multiply with Mask
     maskTextureChannel: 1
     blendMode: 1
-  - name: Additive with Mask
-    maskTextureChannel: 1
+  - name: Negative Light
+    maskTextureChannel: 0
     blendMode: 0
   m_UseDepthStencilBuffer: 1
   m_UseCameraSortingLayersTexture: 0

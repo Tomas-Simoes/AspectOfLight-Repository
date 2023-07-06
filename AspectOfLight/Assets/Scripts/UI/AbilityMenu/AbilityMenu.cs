@@ -205,6 +205,10 @@ public class AbilityMenu : Menu
             else
                 AbilityManager.playerAbilities.Add(slotToChange, ability);
 
+            AbilityManager.Instance.ForcebilityCooldown(
+                AbilityManager.playerAbilities[slotToChange].abilityName
+            );
+
             Image _slotToUpdate = playerAbilitySlots[slotToChange].GetComponent<Image>();
 
             _slotToUpdate.GetComponent<AbilitySelected>().ability = AbilityManager.playerAbilities[
@@ -265,7 +269,6 @@ public class AbilityMenu : Menu
     {
         foreach (Button slot in playerAbilitySlots)
         {
-            Debug.Log("Slot " + slot.name + " set to " + state);
             slot.interactable = state;
         }
 
@@ -372,7 +375,7 @@ public class AbilityMenu : Menu
                     "promptText",
                     "Are you sure that you want this abiity? \n It will cost you "
                         + ability.unlockCost
-                        + " miracles."
+                        + (ability.unlockCost != 1 ? " miracles." : "miracle.")
                 },
                 { "yesCallback", OnYesUnlockingNewAbility },
                 { "noCallback", OnNoUnlockingNewAbility },

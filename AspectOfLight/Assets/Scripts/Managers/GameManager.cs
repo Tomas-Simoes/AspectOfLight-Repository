@@ -14,6 +14,9 @@ public class GameManager : Singleton<GameManager>
     public bool isPaused = false;
     public bool onGodMode = false;
 
+    [Header("Settings")]
+    public Resolution currentResolution;
+
     [Header("Class Information")]
     public Player playerReference;
 

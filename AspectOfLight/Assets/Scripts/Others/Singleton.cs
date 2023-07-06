@@ -32,7 +32,7 @@ public class Singleton<T> : MonoBehaviour
                         var singletonObject = new GameObject();
                         instance = singletonObject.AddComponent<T>();
 
-                        singletonObject.name = typeof(T).ToString() + " (Singleton)";
+                        singletonObject.name = "(Singleton) " + typeof(T).ToString();
                         // Make instance persistent.
                         DontDestroyOnLoad(singletonObject);
                     }

@@ -9,7 +9,9 @@ public class DontDestroyOnLoad : MonoBehaviour
     void Awake()
     {
         if (instance != null)
+        {
             Destroy(instance);
+        }
 
         instance = gameObject;
         DontDestroyOnLoad(this.gameObject);
