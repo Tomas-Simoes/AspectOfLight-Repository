@@ -100,7 +100,6 @@ public class Player : Entity, IDataPersistence
         }
 
         stateMachine.Init(idleState);
-
     }
 
     public override void Update()

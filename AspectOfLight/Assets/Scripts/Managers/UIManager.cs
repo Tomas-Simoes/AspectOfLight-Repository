@@ -44,38 +44,45 @@ public class UIManager : Singleton<UIManager>
     private void OnEnable()
     {
         EventManager.StartListening("onPlayerDeath", OpenDeathScreen);
-        EventManager.StartListening("onExit", OnExitUI);
+        EventManager.StartListening("onExit", OnExit);
         EventManager.StartListening("onMagistrateSigil", ChangeUIMagistrateSigilState);
         EventManager.StartListening("onDialogue", ChangeUIDialogueState);
         EventManager.StartListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StartListening("onGameSaved", ShowProgressSavedText);
         EventManager.StartListening("onGodMode", ChangeUIGodModeState);
         EventManager.StartListening("onPlayerUI", OpenPlayerUI);
-        EventManager.StartListening("onPrompt", onPrompt);
+        EventManager.StartListening("onPrompt", OnPrompt);
         EventManager.StartListening("onPause", ChangeUIPauseState);
+        EventManager.StartListening("onDelete", OnDelete);
     }
 
     private void OnDisable()
     {
         EventManager.StopListening("onPlayerDeath", OpenDeathScreen);
-        EventManager.StopListening("onExit", OnExitUI);
+        EventManager.StopListening("onExit", OnExit);
         EventManager.StopListening("onMagistrateSigil", ChangeUIMagistrateSigilState);
         EventManager.StopListening("onDialogue", ChangeUIDialogueState);
         EventManager.StopListening("onAbilityTree", ChangeUIAbilityTreeState);
         EventManager.StopListening("onGameSaved", ShowProgressSavedText);
         EventManager.StopListening("onGodMode", ChangeUIGodModeState);
         EventManager.StopListening("onPlayerUI", OpenPlayerUI);
-        EventManager.StopListening("onPrompt", onPrompt);
+        EventManager.StopListening("onPrompt", OnPrompt);
         EventManager.StopListening("onPause", ChangeUIPauseState);
+        EventManager.StopListening("onDelete", OnDelete);
     }
 
-    public void OnExitUI(Dictionary<string, object> message)
+    public void OnExit(Dictionary<string, object> message)
     {
         if (inAbilityTree)
         {
             EventManager.TriggerEvent("onExitInAbilityTree", true, null);
             return;
         }
+
+        if (inDialogue)
+            return;
+
+        Debug.Log("ya");
 
         EventManager.TriggerEvent(
             "onPause",
@@ -84,7 +91,16 @@ public class UIManager : Singleton<UIManager>
         );
     }
 
-    public void onPrompt(Dictionary<string, object> message)
+    public void OnDelete(Dictionary<string, object> message)
+    {
+        if (inAbilityTree)
+        {
+            EventManager.TriggerEvent("onDeleteInAbilityTree", true, null);
+            return;
+        }
+    }
+
+    public void OnPrompt(Dictionary<string, object> message)
     {
         promptMenu =
             (message["callbackMessage"] as Dictionary<string, object>)["prompt"] as GameObject;

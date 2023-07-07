@@ -44,7 +44,6 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 
             if (UIManager.Instance.playerUI == null){
                 EventManager.TriggerEvent("onPlayerUI", true, null);
-                Debug.Log("ya");
             }
         }
     }

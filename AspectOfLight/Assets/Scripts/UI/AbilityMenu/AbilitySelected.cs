@@ -19,6 +19,7 @@ public class AbilitySelected : MonoBehaviour, ISelectHandler, IDeselectHandler
                 true,
                 new Dictionary<string, object>
                 {
+                    { "ability", ability },
                     { "icon", ability.iconAvailable },
                     { "name", ability.abilityName },
                     {

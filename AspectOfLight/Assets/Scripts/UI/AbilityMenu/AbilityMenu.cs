@@ -25,12 +25,13 @@ public class AbilityMenu : Menu
 
     [Header("UI Slots")]
     [SerializeField]
-    private List<Button> playerAbilitySlots;
-
-    private List<Button> availableAbilitySlots = new List<Button>();
+    private Ability currentAbilitySelected;
 
     //? index 0 > passive
     //? index 1 / 2 / 3 > ability slots 1 / 2 / 3
+    [SerializeField]
+    private List<Button> playerAbilitySlots;
+    private List<Button> availableAbilitySlots = new List<Button>();
 
     [Header("Path Objects")]
     [SerializeField]
@@ -104,11 +105,12 @@ public class AbilityMenu : Menu
     protected override void OnEnable()
     {
         base.OnEnable();
-        UpdateAbilitySlots();
+        UpdatePlayerAbilitySlots();
 
         EventManager.StartListening("onSelectAbility", OnSelectAbility);
         EventManager.StartListening("onDeselectAbility", OnDeselectAbility);
         EventManager.StartListening("onExitInAbilityTree", OnExitInAbilityTree);
+        EventManager.StartListening("onDeleteInAbilityTree", OnDeleteInAbilityTree);
     }
 
     private void OnDisable()
@@ -116,6 +118,7 @@ public class AbilityMenu : Menu
         EventManager.StopListening("onSelectAbility", OnSelectAbility);
         EventManager.StopListening("onDeselectAbility", OnDeselectAbility);
         EventManager.StopListening("onExitInAbilityTree", OnExitInAbilityTree);
+        EventManager.StopListening("onDeleteInAbilityTree", OnDeleteInAbilityTree);
     }
 
     private void InitAbilities()
@@ -240,9 +243,6 @@ public class AbilityMenu : Menu
 
         isChangingPlayerAbility = true;
         slotToChange = slot;
-
-        if (AbilityManager.playerAbilities.ContainsKey(slot))
-            ChangeRemovePlayerAbility(slot, true);
     }
 
     public void UnlockPlayerAbility(Image image, Ability ability)
@@ -288,8 +288,22 @@ public class AbilityMenu : Menu
     }
 
     //TODO this
-    private void ChangeRemovePlayerAbility(int slot, bool state)
+    private void OnDeleteInAbilityTree(Dictionary<string, object> message)
     {
+        if (!UIManager.Instance.inAbilityTree)
+            return;
+
+        foreach (KeyValuePair<int, Ability> playerAbility in AbilityManager.playerAbilities)
+        {
+            if (playerAbility.Value == currentAbilitySelected)
+            {
+                AbilityManager.Instance.RemovePlayerAbility(playerAbility.Key);
+                UpdatePlayerAbilitySlots();
+
+                break;
+            }
+        }
+
         /*
          for (int i = 0; i <= 4; i++)
         {
@@ -356,6 +370,8 @@ public class AbilityMenu : Menu
         descriptionIcon.sprite = (Sprite)message["icon"];
         descriptionName.text = (string)message["name"];
         descriptionText.text = (string)message["text"];
+
+        currentAbilitySelected = message["ability"] as Ability;
     }
 
     public void OnDeselectAbility(Dictionary<string, object> message)
@@ -396,14 +412,22 @@ public class AbilityMenu : Menu
         );
     }
 
-    public void UpdateAbilitySlots()
+    public void UpdatePlayerAbilitySlots()
     {
-        foreach (KeyValuePair<int, Ability> playerAbility in AbilityManager.playerAbilities)
+        for (int i = 0; i < playerAbilitySlots.Count; i++)
         {
-            GameObject currentSlot = playerAbilitySlots[playerAbility.Key].gameObject;
+            bool isCurrentAbilityNull = !AbilityManager.playerAbilities.ContainsKey(i);
+            GameObject currentSlot = playerAbilitySlots[i].gameObject;
 
-            currentSlot.GetComponent<Image>().sprite = playerAbility.Value.iconAvailable;
-            currentSlot.GetComponent<AbilitySelected>().ability = playerAbility.Value;
+            currentSlot.GetComponent<Image>().sprite = isCurrentAbilityNull
+                ? emptySlotSprite
+                : AbilityManager.playerAbilities[i].iconAvailable;
+
+            currentSlot.GetComponent<AbilitySelected>().ability = isCurrentAbilityNull
+                ? null
+                : AbilityManager.playerAbilities[i];
+
+            OnDeselectAbility(null);
         }
     }
 }

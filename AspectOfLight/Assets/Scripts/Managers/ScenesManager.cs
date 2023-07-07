@@ -26,9 +26,9 @@ public class ScenesManager : Singleton<ScenesManager>
         bool loadDataAfterLoadingScene = false
     )
     {
-        if (sceneTransition == null)
+        if (sceneTransition != null)
         {
-            sceneTransition = Resources.Load<GameObject>("Data/Scene Data/SceneTransition");
+            Destroy(sceneTransition);
         }
 
         StartCoroutine(
