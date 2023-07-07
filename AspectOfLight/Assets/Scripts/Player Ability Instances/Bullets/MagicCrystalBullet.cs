@@ -97,6 +97,8 @@ public class MagicCrystalBullet : Bullet
                 return player.inputHandler.pressedAbilityTwo;
             case 3:
                 return player.inputHandler.pressedAbilityThree;
+            case 4:
+                return player.inputHandler.pressedAbilityFour;
         }
 
         return false;

@@ -40,6 +40,11 @@ public class DashAbility : Ability
     {
         base.PhysicsUpdate();
 
-        player.rb.velocity = player.axisMovement.normalized * abilityData.dashSpeed;
+        Vector2 direction =
+            player.axisMovement == Vector2.zero
+                ? new Vector2(player.facingDirection, 0)
+                : player.axisMovement.normalized;
+
+        player.rb.velocity = direction * abilityData.dashSpeed;
     }
 }

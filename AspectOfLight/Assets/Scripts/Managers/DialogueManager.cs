@@ -98,12 +98,10 @@ public class DialogueManager : Singleton<DialogueManager>
 
         for (int i = 0; i < text.Length; i++)
         {
-            Debug.Log(text[i]);
             dialogueText.text += text[i];
-
+            
             yield return new WaitForSeconds(nodeSpeed);
         }
-
 
         if (nodeHasChoises)
         {

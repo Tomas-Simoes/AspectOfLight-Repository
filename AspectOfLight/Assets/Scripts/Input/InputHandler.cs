@@ -19,10 +19,13 @@ public class InputHandler : MonoBehaviour
     public bool pressedAbilityThree;
     public bool pressedAbilityFour;
 
+    [Header("In Game Actions Input")]
+    public bool pressedInteract;
+
     [Header("UI Input")]
     [SerializeField]
-    public bool pressedSelect; // used in UIs
-    public bool pressedInteract; // used in game
+    public bool pressedSelect;
+    public bool pressedDelete;
 
     void Awake()
     {
@@ -123,18 +126,18 @@ public class InputHandler : MonoBehaviour
         {
             inputActions.InGameActions.GodMode.started += SetGodMode;
 
-            inputActions.InGameActions.Exit.performed += SetExit;
+            inputActions.InGameActions.Exit.started += SetExit;
 
-            inputActions.InGameActions.Interact.performed += SetInteract;
+            inputActions.InGameActions.Interact.started += SetInteract;
             inputActions.InGameActions.Interact.canceled += SetInteract;
 
             return;
         }
         inputActions.InGameActions.GodMode.started -= SetGodMode;
 
-        inputActions.InGameActions.Exit.performed -= SetExit;
+        inputActions.InGameActions.Exit.started -= SetExit;
 
-        inputActions.InGameActions.Interact.performed -= SetInteract;
+        inputActions.InGameActions.Interact.started -= SetInteract;
         inputActions.InGameActions.Interact.canceled -= SetInteract;
     }
 
@@ -142,20 +145,20 @@ public class InputHandler : MonoBehaviour
     {
         if (isEnable)
         {
-            inputActions.UI.Select.performed += SetSelect;
+            inputActions.UI.Select.started += SetSelect;
             inputActions.UI.Select.canceled += SetSelect;
-            inputActions.UI.Click.performed += Test;
+
+            inputActions.UI.Delete.started += SetDelete;
+            inputActions.UI.Delete.canceled += SetDelete;
 
             return;
         }
 
-        inputActions.UI.Select.performed -= SetSelect;
+        inputActions.UI.Select.started -= SetSelect;
         inputActions.UI.Select.canceled -= SetSelect;
-    }
 
-    public void Test(InputAction.CallbackContext ctx)
-    {
-        //Debug.Log("clicked");
+        inputActions.UI.Delete.started -= SetDelete;
+        inputActions.UI.Delete.canceled -= SetDelete;
     }
 
     public void ChangeMapStatesBasedOnUI(Dictionary<string, object> message)
@@ -169,8 +172,6 @@ public class InputHandler : MonoBehaviour
 
         ChangeInputMapState(inputActions.Player, !_UIInputMapState);
         ChangeInputMapState(inputActions.UI, _UIInputMapState);
-
-        Debug.Log(_UIInputMapState ? "UI map active" : "UI map disabled");
     }
 
     public void ChangeInputMapState(InputActionMap map, bool state)
@@ -181,6 +182,9 @@ public class InputHandler : MonoBehaviour
             map.Disable();
     }
 
+    //? --------------------
+    //? - Player Input Map -
+    //? --------------------
     private void SetXAxisMovement(InputAction.CallbackContext ctx)
     {
         xAxis = ctx.ReadValue<Vector2>().x;
@@ -209,7 +213,6 @@ public class InputHandler : MonoBehaviour
     private void SetAbilityFour(InputAction.CallbackContext ctx)
     {
         pressedAbilityFour = ctx.started;
-        Debug.Log(pressedAbilityFour);
     }
 
     private void SetAttack(InputAction.CallbackContext ctx)
@@ -217,9 +220,13 @@ public class InputHandler : MonoBehaviour
         pressingAttack = ctx.performed;
     }
 
+    //? -----------------------------
+    //? - In Game Actions Input Map -
+    //? -----------------------------
+
     private void SetInteract(InputAction.CallbackContext ctx)
     {
-        pressedInteract = ctx.performed;
+        pressedInteract = ctx.started;
     }
 
     private void SetExit(InputAction.CallbackContext ctx)
@@ -243,13 +250,16 @@ public class InputHandler : MonoBehaviour
         );
     }
 
+    //? ------------------------
+    //? - UI Actions Input Map -
+    //? ------------------------
     private void SetSelect(InputAction.CallbackContext ctx)
     {
         pressedSelect = ctx.started;
     }
 
-    private void SetCancel(InputAction.CallbackContext ctx)
+    private void SetDelete(InputAction.CallbackContext ctx)
     {
-        EventManager.TriggerEvent("onCancel", true, null);
+        EventManager.TriggerEvent("onDelete", true, null);
     }
 }
