@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     public bool onGodMode = false;
 
     [Header("Settings")]
-    public string currentResolution = "1920x1080";
+    public Resolution currentResolution;
 
     [Header("Class Information")]
     public Player playerReference;

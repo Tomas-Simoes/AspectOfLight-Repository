@@ -10,12 +10,10 @@ public class DontDestroyOnLoad : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.Log("Destroyed instance: " + instance);
             Destroy(instance);
         }
 
         instance = gameObject;
-        instance.name = "New Ability Instance";
         DontDestroyOnLoad(this.gameObject);
     }
 }

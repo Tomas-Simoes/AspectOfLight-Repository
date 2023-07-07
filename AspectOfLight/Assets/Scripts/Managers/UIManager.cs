@@ -36,7 +36,7 @@ public class UIManager : Singleton<UIManager>
     private GameObject godModeText;
 
     [Header("Player UI")]
-    private GameObject playerUI;
+    public GameObject playerUI;
 
     [Header("Prompt UI")]
     private GameObject promptMenu;

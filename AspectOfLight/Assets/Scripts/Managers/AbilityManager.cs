@@ -70,7 +70,6 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
     public void CastAbility(Dictionary<string, object> message)
     {
         int _currentSlot = (int)message["slot"];
-
         if (!playerAbilities.ContainsKey(_currentSlot))
             return;
 
@@ -83,9 +82,12 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                 && timeSinceAbilityGotCasted >= minTimeSinceAbilityGotCasted
             ) && _hasStaminaToCast;
 
+        Debug.Log(_hasStaminaToCast);
+
+        //TODO001 continue checking but related to ability four here
+
         if (!_canCastAbility)
         {
-            //TODO play some visual indicator that user has no stamina;
             return;
         }
 
@@ -134,6 +136,28 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                         break;
                     case 3:
                         timeSinceAbilityThree = 0;
+                        break;
+                }
+            }
+        }
+    }
+
+    public void ForcebilityCooldown(string name)
+    {
+        foreach (KeyValuePair<int, Ability> playerAbility in playerAbilities)
+        {
+            if (playerAbility.Value.abilityName == name)
+            {
+                switch (playerAbility.Key)
+                {
+                    case 1:
+                        timeSinceAbilityOne = playerAbility.Value.abilityCD;
+                        break;
+                    case 2:
+                        timeSinceAbilityTwo = playerAbility.Value.abilityCD;
+                        break;
+                    case 3:
+                        timeSinceAbilityThree = playerAbility.Value.abilityCD;
                         break;
                 }
             }

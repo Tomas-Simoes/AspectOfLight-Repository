@@ -414,7 +414,7 @@ SpriteRenderer:
   m_SortingLayerID: 1275185391
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 339281839, guid: 50acd414147c1b44590f3a55311f6306, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -459,8 +459,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
+  m_Offset: {x: -0.04781132, y: -0.3609208}
+  m_Size: {x: 0.5120056, y: 1.2781575}
   m_Direction: 0
 --- !u!95 &480230100939751986
 Animator:
@@ -472,7 +472,7 @@ Animator:
   m_GameObject: {fileID: 480230100939751979}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cebbbb5bbce23c44bb30b77b387354ba, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -494,36 +494,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33718251956ee84d9e13a5543398a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityInstances: {fileID: 0}
   entityData: {fileID: 11400000, guid: 8c4f4faf969e2a34287972178e6bd276, type: 2}
   currentHealth: 0
   facingDirection: 0
-  wallCheck: {fileID: 480230101691718370}
   target: {fileID: 0}
   pivot: {fileID: 0}
   coolDownData: {fileID: 11400000, guid: 07f65c5ccfc73e64ab563f8dec899eee, type: 2}
   moveStateData: {fileID: 11400000, guid: e70a09bca30f5c243b680560dfe84669, type: 2}
-  dashStateData: {fileID: 11400000, guid: b726f2b98028dd54e9b5d4211cfee371, type: 2}
   attackStateData: {fileID: 11400000, guid: 2f49c34f63670124194c767185439259, type: 2}
   staminaData: {fileID: 11400000, guid: 56b15af9ce6e3f0438766ee667df8537, type: 2}
   timeSinceAttack: 0
   timeSinceDash: 0
-  timeSinceAbilityOne: 0
-  timeSinceAbilityTwo: 0
-  timeSinceAbilityThree: 0
   timeSinceStaminaUsage: 0
   axisMovement: {x: 0, y: 0}
-  FacingRight: 1
+  currentMovementSpeed: 0
   hasStamina: 0
   currentStamina: 0
-  abilityManager: {fileID: 0}
   plagueSpawnPoints:
   - {fileID: 1990554867}
   - {fileID: 229118592}
   - {fileID: 1956915854}
   bulletPrefab: {fileID: 4915393039249167469, guid: 297de1f1acbc8a6488fba136241f2b53, type: 3}
-  bulletsParent: {fileID: 0}
   attackPosition: {fileID: 918610556}
-  deathUIManager: {fileID: 0}
 --- !u!114 &480230100939751976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,11 +532,10 @@ MonoBehaviour:
   xAxis: 0
   yAxis: 0
   pressingAttack: 0
-  pressedDash: 0
   pressedAbilityOne: 0
   pressedAbilityTwo: 0
   pressedAbilityThree: 0
-  pauseMenuHandler: {fileID: 0}
+  pressedAbilityFour: 0
   pressedSelect: 0
   pressedInteract: 0
 --- !u!1 &480230101691718373
