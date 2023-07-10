@@ -182,9 +182,8 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
         }
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(GameData data, bool loadSensitiveData)
     {
-        Debug.Log("loading");
         bossAlreadyDefeated = data.bosses[bossName];
 
         if (bossAlreadyDefeated)

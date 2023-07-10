@@ -31,18 +31,17 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
 
     private List<IDataPersistence> dataPersistanceObjects = new List<IDataPersistence>();
 
-    //! THIS IS FOR DEVELOPMENT ONLY
-    //! REMOVE THIS WHEN BUILDING THE GAME
     public override void Init()
     {
         base.Init();
 
         if (GameManager.Instance.environment == "development")
         {
-            LoadGame();
+            LoadGame(false);
             GameManager.Instance.gameStarted = true;
 
-            if (UIManager.Instance.playerUI == null){
+            if (UIManager.Instance.playerUI == null)
+            {
                 EventManager.TriggerEvent("onPlayerUI", true, null);
             }
         }
@@ -94,6 +93,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         GameManager.Instance.Init();
         EventManager.TriggerEvent("onNewGameStarted", false, null);
 
+        Debug.LogWarning("A new game was created.");
         SaveGame(true);
     }
 
@@ -127,9 +127,10 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         dataHandler.Save(gameData, selectedProfileId);
 
         EventManager.TriggerEvent("onGameSaved", true, null);
+        Debug.LogWarning("The game was saved sucessfully.");
     }
 
-    public void LoadGame()
+    public void LoadGame(bool isAfterChangingScene = true)
     {
         if (disableDataPersitence)
         {
@@ -149,8 +150,10 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         dataPersistanceObjects = FindAllDataPersistenceObjects();
         foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
-            dataPersistenceObj.LoadData(gameData);
+            dataPersistenceObj.LoadData(gameData, !isAfterChangingScene);
         }
+
+        Debug.LogWarning("The game was loaded sucessfully.");
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

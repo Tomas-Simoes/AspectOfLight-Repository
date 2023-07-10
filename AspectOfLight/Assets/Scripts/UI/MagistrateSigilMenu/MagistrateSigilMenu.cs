@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MagistrateSigilMenu : Menu
 {
@@ -37,8 +38,22 @@ public class MagistrateSigilMenu : Menu
         DataPersistenceManager.Instance.SaveGame();
     }
 
+    //TODO001
     public void OnDemonstrationScenePressed()
     {
+        if (SceneManager.GetActiveScene().name == "Demonstration")
+        {
+            ScenesManager.Instance.LoadScene("ExiledFlorest", 2);
+            DeactivateMenu();
+            return;
+        }
+
         ScenesManager.Instance.LoadScene("Demonstration", 1);
+        DeactivateMenu();
+    }
+
+    public void DeactivateMenu()
+    {
+        gameObject.SetActive(false);
     }
 }
