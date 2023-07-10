@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [Header("Off Game Information")]
+    //? development, production or staging
     public string environment = "production";
 
     [Header("In Game Information")]

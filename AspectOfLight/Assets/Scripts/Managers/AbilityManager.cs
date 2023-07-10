@@ -225,7 +225,7 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
         return 0;
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(GameData data, bool loadSensitiveData)
     {
         if (data.abilityLockState.Count != 0)
         {

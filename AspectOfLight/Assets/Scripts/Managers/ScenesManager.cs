@@ -82,10 +82,11 @@ public class ScenesManager : Singleton<ScenesManager>
             EventManager.TriggerEvent("onPlayerUI", true, null);
 
         if (loadDataAfterLoadingScene)
-            DataPersistenceManager.Instance.LoadGame();
+            DataPersistenceManager.Instance.LoadGame(isInGameTransition);
 
         if (isInGameTransition)
         {
+            UIManager.Instance.ResetUIStates();
             SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
             CameraManager.Instance.SetUpDefaultCamera();
         }

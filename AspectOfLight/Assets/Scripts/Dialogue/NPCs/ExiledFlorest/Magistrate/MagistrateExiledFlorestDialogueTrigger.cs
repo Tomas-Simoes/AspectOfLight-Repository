@@ -62,7 +62,7 @@ public class MagistrateExiledFlorestDialogueTrigger : DialogueTrigger, IDataPers
         this.GetComponent<BoxCollider2D>().enabled = false;
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(GameData data,  bool loadSensitiveData)
     {
         alreadyReadTutorial = data.tutorials[tutorialName];
     }

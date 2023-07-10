@@ -71,6 +71,15 @@ public class UIManager : Singleton<UIManager>
         EventManager.StopListening("onDelete", OnDelete);
     }
 
+    public void ResetUIStates()
+    {
+        inAbilityTree = false;
+        inPauseMenu = false;
+        inDialogue = false;
+        inMagistrateSigil = false;
+        inPauseMenu = false;
+    }
+
     public void OnExit(Dictionary<string, object> message)
     {
         if (inAbilityTree)

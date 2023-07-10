@@ -31,6 +31,8 @@ public class EventManager : Singleton<EventManager>
             thisEvent += listener;
             Instance.eventDictionary.Add(eventName, thisEvent);
         }
+
+        Debug.LogWarning("The event \"" + eventName + "\" was sucessfully listened.");
     }
 
     public static void StopListening(string eventName, Action<Dictionary<string, object>> listener)
@@ -45,6 +47,8 @@ public class EventManager : Singleton<EventManager>
             thisEvent -= listener;
             Instance.eventDictionary[eventName] = thisEvent;
         }
+
+        Debug.LogWarning("The event \"" + eventName + "\" was sucessfully unlistened.");
     }
 
     public static void TriggerEvent(
@@ -53,6 +57,8 @@ public class EventManager : Singleton<EventManager>
         Dictionary<string, object> message
     )
     {
+        Debug.Log("Trying to trigger \"" + eventName + "\" event");
+
         Action<Dictionary<string, object>> thisEvent = null;
 
         if (isUIEvent)
@@ -62,5 +68,7 @@ public class EventManager : Singleton<EventManager>
         {
             thisEvent.Invoke(message);
         }
+
+        Debug.LogWarning("The event \"" + eventName + "\" was sucessfully triggered.");
     }
 }

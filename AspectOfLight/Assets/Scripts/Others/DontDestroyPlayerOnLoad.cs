@@ -8,7 +8,7 @@ public class DontDestroyPlayerOnLoad : MonoBehaviour
 
     void Awake()
     {
-        if (instance != null)
+        if (instance != null) 
             Destroy(instance);
 
         instance = gameObject;

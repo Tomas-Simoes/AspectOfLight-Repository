@@ -297,12 +297,16 @@ public class Player : Entity, IDataPersistence
         return currentStamina - staminaCost >= 0;
     }
 
-    public void LoadData(GameData data)
+    public void LoadData(GameData data, bool loadSensitiveData)
     {
-        currentHealth = data.currentHealth;
-        currentStamina = data.currentStamina;
+        if (loadSensitiveData)
+        {
+            currentHealth = data.currentHealth;
+            currentStamina = data.currentStamina;
+        }
+
+        currentMovementSpeed = data.movementSpeed; //TODO002
         transform.position = data.playerPosition;
-        currentMovementSpeed = data.movementSpeed;
     }
 
     public void SaveData(GameData data)
