@@ -983,8 +983,8 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -16, y: -16}
-        - {x: -16, y: -3}
-        - {x: 16, y: -3}
+        - {x: -16, y: 6}
+        - {x: 16, y: 6}
         - {x: 16, y: -16}
       tessellationDetail: 0
       bones: []

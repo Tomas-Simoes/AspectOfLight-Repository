@@ -80,13 +80,19 @@ public class Thornborne_ChaseState : Enemy_ChaseState
 
         bool _canUGAttack = enemy.timeSinceUGAttack >= cooldownData.ugAttackCD;
 
+        bool _canHeal = enemy.timeSinceHealing >= cooldownData.healingCD;
         //? if the enemy is low life, it will teleport to the safe point
-        if (enemy.currentHealth <= enemy.ugTeleportStateData.minimumLifeToHeal && _canUGTeleport)
+        if (
+            enemy.currentHealth <= enemy.ugTeleportStateData.minimumLifeToHeal
+            && _canUGTeleport
+            && (_canUGAttack || _canHeal)
+        )
         {
             enemy.uGTeleportState.teleportToPlayer = false;
             enemy.uGTeleportState.teleportToSafePoint = true;
 
             stateMachine.ChangeState(enemy.uGTeleportState);
+            return;
         }
 
         //? if the enemy has cooldown for UG Attack but it's close range, it will teleport to the safe point
@@ -100,6 +106,7 @@ public class Thornborne_ChaseState : Enemy_ChaseState
             enemy.uGTeleportState.teleportToSafePoint = true;
 
             stateMachine.ChangeState(enemy.uGTeleportState);
+            return;
         }
 
         //? if the enemy can't UG Attack but can UG Teleport and it's long range, it will teleport towards the player
@@ -113,7 +120,9 @@ public class Thornborne_ChaseState : Enemy_ChaseState
             enemy.uGTeleportState.teleportToSafePoint = false;
 
             stateMachine.ChangeState(enemy.uGTeleportState);
+            return;
         }
+
         //? if the player has no cooldown for UG Attack or UG Teleport and it's close range or it's tooo close to the player, it will puke
         if (_canPukeAttack || _distanceToPlayer <= stateData.minDistanceBetweenPlayer)
             stateMachine.ChangeState(enemy.pukeAttackState);

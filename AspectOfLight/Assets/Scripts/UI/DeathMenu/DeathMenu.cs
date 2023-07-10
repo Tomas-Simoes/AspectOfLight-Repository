@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -30,6 +29,8 @@ public class DeathMenu : Menu
             DataPersistenceManager.Instance.gameData.areaInMap,
             loadDataAfterLoadingScene: true
         );
+
+        gameObject.SetActive(false);
     }
 
     public void OnExitToMenuPressed()

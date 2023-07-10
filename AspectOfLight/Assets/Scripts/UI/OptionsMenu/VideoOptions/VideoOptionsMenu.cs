@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using System;
 
 public class VideoOptionsMenu : MonoBehaviour
 {
@@ -11,15 +12,23 @@ public class VideoOptionsMenu : MonoBehaviour
     private int currentResolutionIndex;
     private float currentRefreshRate;
 
-    [SerializeField]
-    private TMP_Dropdown dropdown;
-
+    [Header("Current Selected Options")]
     private int currentSelectedResolution;
+    private int currentSelectedTargetFrameRate;
+
+    [Header("UI Elements")]
+    [SerializeField]
+    private TMP_Dropdown resolutionsDropdown;
+
+    [SerializeField]
+    private TMP_InputField targetFrameRateInputField;
 
     private void Awake()
     {
         GetAvailableResolutions();
         InitDropdownResolutions();
+
+        targetFrameRateInputField.text = GameManager.Instance.currentTargetFrameRate.ToString();
     }
 
     private void GetAvailableResolutions()
@@ -61,12 +70,12 @@ public class VideoOptionsMenu : MonoBehaviour
             }
         }
 
-        dropdown.options.Clear();
+        resolutionsDropdown.options.Clear();
 
-        dropdown.AddOptions(resolutionsToAdd);
-        dropdown.value = currentResolutionIndex;
+        resolutionsDropdown.AddOptions(resolutionsToAdd);
+        resolutionsDropdown.value = currentResolutionIndex;
 
-        dropdown.RefreshShownValue();
+        resolutionsDropdown.RefreshShownValue();
     }
 
     public void OnSaveChangedOptions()
@@ -80,12 +89,27 @@ public class VideoOptionsMenu : MonoBehaviour
         {
             ChangeResolution(currentSelectedResolution);
         }
+
+        if (currentSelectedTargetFrameRate != GameManager.Instance.currentTargetFrameRate)
+        {
+            ChangeTargetFrameRate(currentSelectedTargetFrameRate);
+        }
     }
 
     public void OnSelectedResolutionChanged(int value)
     {
         currentSelectedResolution = value;
-        Debug.Log("Choise: " + currentSelectedResolution);
+    }
+
+    public void OnEndEditFrameRateChanged(string value)
+    {
+        currentSelectedTargetFrameRate =
+            value != "" || value == "0"
+                ? Int16.Parse(value)
+                : GameManager.Instance.currentTargetFrameRate;
+
+        if (value == "" || value == "0")
+            targetFrameRateInputField.text = currentSelectedTargetFrameRate.ToString();
     }
 
     private void ChangeResolution(int newResolutionID)
@@ -94,13 +118,12 @@ public class VideoOptionsMenu : MonoBehaviour
         int _newVertical = filteredResolutions[newResolutionID].height;
 
         Screen.SetResolution(_newHorizontal, _newVertical, true);
+        GameManager.Instance.currentResolution = filteredResolutions[newResolutionID];
     }
-}
 
-[System.Serializable]
-public class Resolutions
-{
-    public string label;
-    public int horizontal;
-    public int vertical;
+    private void ChangeTargetFrameRate(int newTargetFrameRate)
+    {
+        Application.targetFrameRate = newTargetFrameRate;
+        GameManager.Instance.currentTargetFrameRate = newTargetFrameRate;
+    }
 }

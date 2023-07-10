@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [Header("Off Game Information")]
-    public string environment = "development";
+    public string environment = "production";
 
     [Header("In Game Information")]
     public int deathCount = 0;
@@ -16,12 +16,15 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Settings")]
     public Resolution currentResolution;
+    public int currentTargetFrameRate = 60;
 
     [Header("Class Information")]
     public Player playerReference;
 
     private void OnEnable()
     {
+        Application.targetFrameRate = currentTargetFrameRate;
+
         EventManager.StartListening("onNewGameStarted", OnNewGameStarted);
         EventManager.StartListening("onGodMode", OnGodMode);
     }

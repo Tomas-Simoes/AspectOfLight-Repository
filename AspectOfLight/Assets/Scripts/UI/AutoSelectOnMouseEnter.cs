@@ -15,7 +15,6 @@ public class AutoSelectOnMouseEnter : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Mouse entered " + this.gameObject.name);
         thisButton.Select();
     }
 

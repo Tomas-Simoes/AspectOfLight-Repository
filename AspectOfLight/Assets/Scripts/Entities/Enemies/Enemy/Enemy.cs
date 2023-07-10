@@ -26,7 +26,6 @@ public class Enemy : Entity
         seeker = GetComponent<Seeker>();
         InvokeRepeating("UpdatePath", 0f, 0.2f); //TODO mayyybe change this to a Coroutine
 
-        Debug.Log(GameManager.Instance.playerReference);
         playerReference = GameManager.Instance.playerReference.gameObject;
         currentHealth = entityData.MAX_HEALTH;
     }

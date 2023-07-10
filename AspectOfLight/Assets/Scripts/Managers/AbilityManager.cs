@@ -19,6 +19,7 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
     private float timeSinceAbilityOne;
     private float timeSinceAbilityTwo;
     private float timeSinceAbilityThree;
+    private float timeSinceAbilityFour;
     private float timeSinceAbilityGotCasted;
     private float minTimeSinceAbilityGotCasted = 0.75f;
 
@@ -48,6 +49,8 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
         timeSinceAbilityOne += Time.deltaTime;
         timeSinceAbilityTwo += Time.deltaTime;
         timeSinceAbilityThree += Time.deltaTime;
+        timeSinceAbilityFour += Time.deltaTime;
+
         timeSinceAbilityGotCasted += Time.deltaTime;
     }
 
@@ -81,10 +84,6 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                 GetTimeSinceCast(_currentSlot) >= playerAbilities[_currentSlot].abilityCD
                 && timeSinceAbilityGotCasted >= minTimeSinceAbilityGotCasted
             ) && _hasStaminaToCast;
-
-        Debug.Log(_hasStaminaToCast);
-
-        //TODO001 continue checking but related to ability four here
 
         if (!_canCastAbility)
         {
@@ -137,6 +136,9 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                     case 3:
                         timeSinceAbilityThree = 0;
                         break;
+                    case 4:
+                        timeSinceAbilityFour = 0;
+                        break;
                 }
             }
         }
@@ -158,6 +160,9 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                         break;
                     case 3:
                         timeSinceAbilityThree = playerAbility.Value.abilityCD;
+                        break;
+                    case 4:
+                        timeSinceAbilityFour = playerAbility.Value.abilityCD;
                         break;
                 }
             }
@@ -201,8 +206,11 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
                 return timeSinceAbilityTwo;
             case 3:
                 return timeSinceAbilityThree;
+            case 4:
+                return timeSinceAbilityFour;
         }
 
+        Debug.LogWarning("There is no variable with the cooldown for that slot.");
         return 0;
     }
 

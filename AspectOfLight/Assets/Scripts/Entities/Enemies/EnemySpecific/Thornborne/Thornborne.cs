@@ -136,7 +136,8 @@ public class Thornborne : Enemy
     {
         if (stateMachine.currentState == healingState)
         {
-            stateMachine.ChangeState(chaseState);
+            Debug.Log("Healing going UP!");
+            anim.SetBool("healingUp", true);
             return;
         }
 
@@ -182,5 +183,10 @@ public class Thornborne : Enemy
     public void StartSpawningSpikes()
     {
         ugAttackState.canSpawnWaves = true;
+    }
+
+    private void OnDestroy()
+    {
+        Debug.Log("a");
     }
 }
