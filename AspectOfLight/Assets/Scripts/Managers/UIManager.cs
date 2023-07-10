@@ -79,10 +79,14 @@ public class UIManager : Singleton<UIManager>
             return;
         }
 
+        if (inPauseMenu)
+        {
+            EventManager.TriggerEvent("onExitInPauseMenu", true, null);
+            return;
+        }
+
         if (inDialogue)
             return;
-
-        Debug.Log("ya");
 
         EventManager.TriggerEvent(
             "onPause",

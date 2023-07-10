@@ -154,7 +154,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
             StartCoroutine(backSpikes2.Go("Up"));
             return;
         }
-        
+
         Debug.Log("Starting down coroutine");
         StartCoroutine(backSpikes1.Go("Down"));
         StartCoroutine(backSpikes2.Go("Down"));
@@ -184,6 +184,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
+        Debug.Log("loading");
         bossAlreadyDefeated = data.bosses[bossName];
 
         if (bossAlreadyDefeated)

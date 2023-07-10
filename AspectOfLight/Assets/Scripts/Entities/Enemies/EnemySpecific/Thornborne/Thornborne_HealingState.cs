@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Thornborne_HealingState : State
 {
+    bool exitingHealing = false;
+
     Thornborne enemy;
     D_ThornborneHealingState stateData;
 
@@ -27,8 +29,8 @@ public class Thornborne_HealingState : State
     {
         base.Enter();
 
+        Debug.Log("entered healing");
         enemy.rb.velocity = Vector2.zero;
-        timeSinceLastHealingTick = stateData.timeToHeal;
     }
 
     public override void Exit()
@@ -41,6 +43,33 @@ public class Thornborne_HealingState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+
+        if (entity.anim.GetCurrentAnimatorStateInfo(0).IsName("HealingDown"))
+        {
+            float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+            if (_animationTime >= 1)
+            {
+                timeSinceLastHealingTick = stateData.timeToHeal;
+                Debug.Log("ready to heal");
+            }
+
+            return;
+        }
+
+        if (entity.anim.GetCurrentAnimatorStateInfo(0).IsName("HealingUp"))
+        {
+            float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+            if (_animationTime >= 1)
+            {
+                entity.anim.SetBool("healingUp", false);
+                stateMachine.ChangeState(enemy.chaseState);
+            }
+
+            return;
+        }
+
         timeSinceLastHealingTick += Time.deltaTime;
 
         if (timeSinceLastHealingTick >= stateData.timeToHeal)

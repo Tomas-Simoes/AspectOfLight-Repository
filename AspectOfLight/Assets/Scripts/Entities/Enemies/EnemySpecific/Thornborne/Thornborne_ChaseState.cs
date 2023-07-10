@@ -80,8 +80,13 @@ public class Thornborne_ChaseState : Enemy_ChaseState
 
         bool _canUGAttack = enemy.timeSinceUGAttack >= cooldownData.ugAttackCD;
 
+        bool _canHeal = enemy.timeSinceHealing >= cooldownData.healingCD;
         //? if the enemy is low life, it will teleport to the safe point
-        if (enemy.currentHealth <= enemy.ugTeleportStateData.minimumLifeToHeal && _canUGTeleport)
+        if (
+            enemy.currentHealth <= enemy.ugTeleportStateData.minimumLifeToHeal
+            && _canUGTeleport
+            && (_canUGAttack || _canHeal)
+        )
         {
             enemy.uGTeleportState.teleportToPlayer = false;
             enemy.uGTeleportState.teleportToSafePoint = true;
