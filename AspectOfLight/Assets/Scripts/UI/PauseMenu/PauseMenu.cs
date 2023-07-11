@@ -83,6 +83,7 @@ public class PauseMenu : Menu
     public void OnQuitToMenuPressed()
     {
         ScenesManager.Instance.LoadScene(sceneName: "MainMenu", isInGameTransition: false);
+        GameManager.Instance.isPaused = false;
     }
 
     public void ChangeOptionsMenuState(bool activeState)

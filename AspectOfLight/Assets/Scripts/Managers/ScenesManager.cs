@@ -79,17 +79,20 @@ public class ScenesManager : Singleton<ScenesManager>
         GameManager.Instance.gameStarted = sceneName == "MainMenu" ? false : true;
 
         if (sceneName != "MainMenu")
+        {
             EventManager.TriggerEvent("onPlayerUI", true, null);
+        }
 
         if (loadDataAfterLoadingScene)
             DataPersistenceManager.Instance.LoadGame(isInGameTransition);
 
         if (isInGameTransition)
         {
-            UIManager.Instance.ResetUIStates();
             SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
             CameraManager.Instance.SetUpDefaultCamera();
         }
+
+        UIManager.Instance.ResetUIStates();
     }
 
     public void SetPlayerPositionOnLoadedScene(string sceneName, int outConnectionID)

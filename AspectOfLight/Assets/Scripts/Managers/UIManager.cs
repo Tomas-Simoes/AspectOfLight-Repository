@@ -79,7 +79,7 @@ public class UIManager : Singleton<UIManager>
         inMagistrateSigil = false;
         inPauseMenu = false;
     }
-
+    
     public void OnExit(Dictionary<string, object> message)
     {
         if (inAbilityTree)
