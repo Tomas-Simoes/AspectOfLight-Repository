@@ -5,6 +5,7 @@ using System;
 
 public class EventManager : Singleton<EventManager>
 {
+    private bool debugLogs = false;
     private Dictionary<string, Action<Dictionary<string, object>>> eventDictionary;
 
     public override void Init()
@@ -32,7 +33,8 @@ public class EventManager : Singleton<EventManager>
             Instance.eventDictionary.Add(eventName, thisEvent);
         }
 
-        Debug.LogWarning("The event \"" + eventName + "\" was sucessfully listened.");
+        if (Instance.debugLogs)
+            Debug.LogWarning("The event \"" + eventName + "\" was sucessfully listened.");
     }
 
     public static void StopListening(string eventName, Action<Dictionary<string, object>> listener)
@@ -48,7 +50,8 @@ public class EventManager : Singleton<EventManager>
             Instance.eventDictionary[eventName] = thisEvent;
         }
 
-        Debug.LogWarning("The event \"" + eventName + "\" was sucessfully unlistened.");
+        if (Instance.debugLogs)
+            Debug.LogWarning("The event \"" + eventName + "\" was sucessfully unlistened.");
     }
 
     public static void TriggerEvent(
@@ -57,7 +60,8 @@ public class EventManager : Singleton<EventManager>
         Dictionary<string, object> message
     )
     {
-        Debug.Log("Trying to trigger \"" + eventName + "\" event");
+        if (Instance.debugLogs)
+            Debug.Log("Trying to trigger \"" + eventName + "\" event");
 
         Action<Dictionary<string, object>> thisEvent = null;
 
@@ -69,6 +73,7 @@ public class EventManager : Singleton<EventManager>
             thisEvent.Invoke(message);
         }
 
-        Debug.LogWarning("The event \"" + eventName + "\" was sucessfully triggered.");
+        if (Instance.debugLogs)
+            Debug.LogWarning("The event \"" + eventName + "\" was sucessfully triggered.");
     }
 }

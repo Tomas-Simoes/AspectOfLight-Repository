@@ -27,6 +27,8 @@ public class Enemy : Entity
         InvokeRepeating("UpdatePath", 0f, 0.2f); //TODO mayyybe change this to a Coroutine
 
         playerReference = GameManager.Instance.playerReference.gameObject;
+        target = playerReference;
+        
         currentHealth = entityData.MAX_HEALTH;
     }
 

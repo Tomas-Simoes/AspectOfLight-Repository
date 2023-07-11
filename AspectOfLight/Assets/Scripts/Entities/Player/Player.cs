@@ -52,7 +52,6 @@ public class Player : Entity, IDataPersistence
     public override void Awake()
     {
         base.Awake();
-        GameManager.Instance.SavePlayerReference(this);
 
         idleState = new Player_IdleState(this, stateMachine, "idle", this);
         moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -88,7 +87,6 @@ public class Player : Entity, IDataPersistence
     public override void Start()
     {
         base.Start();
-
         StartCoroutine(RecoverStamina());
 
         inputHandler = GetComponent<InputHandler>();
@@ -299,8 +297,10 @@ public class Player : Entity, IDataPersistence
 
     public void LoadData(GameData data, bool loadSensitiveData)
     {
+        Debug.Log("Loading data.");
         if (loadSensitiveData)
         {
+            Debug.Log("Loading sensitive data as well.");
             currentHealth = data.currentHealth;
             currentStamina = data.currentStamina;
         }

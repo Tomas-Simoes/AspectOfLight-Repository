@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class ScenesManager : Singleton<ScenesManager>
 {
@@ -23,7 +24,7 @@ public class ScenesManager : Singleton<ScenesManager>
         string sceneName,
         int outConnectionID = 0,
         bool isInGameTransition = true,
-        bool loadDataAfterLoadingScene = false
+        bool loadDataAfterLoadingScene = true
     )
     {
         if (sceneTransition != null)
@@ -81,10 +82,30 @@ public class ScenesManager : Singleton<ScenesManager>
         if (sceneName != "MainMenu")
         {
             EventManager.TriggerEvent("onPlayerUI", true, null);
-        }
 
-        if (loadDataAfterLoadingScene)
-            DataPersistenceManager.Instance.LoadGame(isInGameTransition);
+            if (loadDataAfterLoadingScene)
+                DataPersistenceManager.Instance.LoadGame(isInGameTransition);
+        }
+        else
+        {
+            //TODO003
+
+            IEnumerable<DontDestroyOnLoad> dontDestroyOnLoadObjects =
+                FindObjectsOfType<MonoBehaviour>(true).OfType<DontDestroyOnLoad>();
+
+            IEnumerable<DontDestroyPlayerOnLoad> dontDestroyPlayerOnLoadObject =
+                FindObjectsOfType<MonoBehaviour>(true).OfType<DontDestroyPlayerOnLoad>();
+
+            foreach (DontDestroyOnLoad item in dontDestroyOnLoadObjects)
+            {
+                Destroy(item.gameObject);
+            }
+
+            foreach (DontDestroyPlayerOnLoad item in dontDestroyPlayerOnLoadObject)
+            {
+                Destroy(item.gameObject);
+            }
+        }
 
         if (isInGameTransition)
         {

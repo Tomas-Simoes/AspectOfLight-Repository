@@ -184,9 +184,4 @@ public class Thornborne : Enemy
     {
         ugAttackState.canSpawnWaves = true;
     }
-
-    private void OnDestroy()
-    {
-        Debug.Log("a");
-    }
 }
