@@ -130,7 +130,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         Debug.LogWarning("The game was saved sucessfully.");
     }
 
-    public void LoadGame(bool isAfterChangingScene = true)
+    public void LoadGame(bool isAfterChangingScene = true, bool loadSensitiveData = false)
     {
         if (disableDataPersitence)
         {
@@ -150,7 +150,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         dataPersistanceObjects = FindAllDataPersistenceObjects();
         foreach (IDataPersistence dataPersistenceObj in dataPersistanceObjects)
         {
-            dataPersistenceObj.LoadData(gameData, !isAfterChangingScene);
+            dataPersistenceObj.LoadData(gameData, loadSensitiveData);
         }
 
         Debug.LogWarning("The game was loaded sucessfully.");

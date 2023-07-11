@@ -58,7 +58,8 @@ public class MainMenu : Menu
 
         ScenesManager.Instance.LoadScene(
             DataPersistenceManager.Instance.gameData.areaInMap,
-            loadDataAfterLoadingScene: true
+            loadDataAfterLoadingScene: true,
+            loadSensitiveData: true
         );
     }
 

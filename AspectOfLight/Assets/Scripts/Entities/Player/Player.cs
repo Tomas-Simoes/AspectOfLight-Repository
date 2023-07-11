@@ -28,6 +28,7 @@ public class Player : Entity, IDataPersistence
     public float timeSinceStaminaUsage;
 
     [Header("Player Information")]
+    public bool isPlayerDead = false;
     public Vector2 axisMovement;
     public float currentMovementSpeed;
 
@@ -52,6 +53,7 @@ public class Player : Entity, IDataPersistence
     public override void Awake()
     {
         base.Awake();
+        isPlayerDead = false;
 
         idleState = new Player_IdleState(this, stateMachine, "idle", this);
         moveState = new Player_MoveState(this, stateMachine, "move", moveStateData, this);
@@ -234,6 +236,10 @@ public class Player : Entity, IDataPersistence
 
     public override void Die()
     {
+        if (isPlayerDead)
+            return;
+
+        isPlayerDead = true;
         EventManager.TriggerEvent(
             "onPlayerDeath",
             true,
@@ -297,10 +303,10 @@ public class Player : Entity, IDataPersistence
 
     public void LoadData(GameData data, bool loadSensitiveData)
     {
-        Debug.Log("Loading data.");
+        Debug.LogWarning("Loading data.");
         if (loadSensitiveData)
         {
-            Debug.Log("Loading sensitive data as well.");
+            Debug.LogWarning("Loading sensitive data as well.");
             currentHealth = data.currentHealth;
             currentStamina = data.currentStamina;
         }

@@ -19,11 +19,14 @@ public class CameraManager : Singleton<CameraManager>
 
     public void SetUpDefaultCamera()
     {
+        Debug.Log("Setting up default camera.");
+
         defaultCamera = GameObject
             .FindGameObjectWithTag("DefaultCamera")
             .GetComponent<CinemachineVirtualCamera>();
 
         defaultCamera.Follow = GameManager.Instance.playerReference.transform;
+        Debug.Log(GameManager.Instance.playerReference.name);
     }
 
     private void OnCameraShake(Dictionary<string, object> message)
@@ -52,6 +55,16 @@ public class CameraManager : Singleton<CameraManager>
 
     public void ChangeCamera(Animator cameraAnimator, string conditionName, bool condition)
     {
+        Debug.LogWarning(
+            "Changing camera to: "
+                + cameraAnimator.name
+                + "("
+                + conditionName
+                + " -> "
+                + condition
+                + ")"
+        );
+
         cameraAnimator.SetBool(conditionName, condition);
     }
 }

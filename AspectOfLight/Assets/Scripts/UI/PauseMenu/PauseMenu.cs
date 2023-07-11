@@ -34,6 +34,8 @@ public class PauseMenu : Menu
 
     public void PauseGame(bool pauseState)
     {
+        Debug.Log("yaa");
+
         if (pauseState)
             Time.timeScale = 0f;
         else

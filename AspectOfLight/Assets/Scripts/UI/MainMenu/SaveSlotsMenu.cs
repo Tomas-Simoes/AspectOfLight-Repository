@@ -42,7 +42,8 @@ public class SaveSlotsMenu : Menu
             ScenesManager.Instance.LoadScene(
                 "ExiledFlorest",
                 isInGameTransition: false,
-                loadDataAfterLoadingScene: true
+                loadDataAfterLoadingScene: true,
+                loadSensitiveData: true
             );
 
             return;
@@ -51,7 +52,8 @@ public class SaveSlotsMenu : Menu
         ScenesManager.Instance.LoadScene(
             DataPersistenceManager.Instance.gameData.areaInMap,
             isInGameTransition: false,
-            loadDataAfterLoadingScene: true
+            loadDataAfterLoadingScene: true,
+            loadSensitiveData: true
         );
 
         //DataPersistenceManager.Instance.SaveGame();

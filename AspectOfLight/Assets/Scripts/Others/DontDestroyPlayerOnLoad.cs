@@ -9,8 +9,6 @@ public class DontDestroyPlayerOnLoad : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("New player awaked: " + this.gameObject.name);
-
         if (instance == null)
         {
             instance = this;
@@ -18,6 +16,7 @@ public class DontDestroyPlayerOnLoad : MonoBehaviour
                 instance.gameObject.GetComponentInChildren<Player>();
 
             DontDestroyOnLoad(this.gameObject);
+            this.gameObject.name = this.gameObject.name + " (DDOL)";
         }
         else
         {

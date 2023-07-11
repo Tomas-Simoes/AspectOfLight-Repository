@@ -24,7 +24,9 @@ public class ScenesManager : Singleton<ScenesManager>
         string sceneName,
         int outConnectionID = 0,
         bool isInGameTransition = true,
-        bool loadDataAfterLoadingScene = true
+        bool loadDataAfterLoadingScene = true,
+        bool loadSensitiveData = false,
+        bool isRestartingGameInSave = false
     )
     {
         if (sceneTransition != null)
@@ -37,7 +39,9 @@ public class ScenesManager : Singleton<ScenesManager>
                 sceneName,
                 outConnectionID,
                 isInGameTransition,
-                loadDataAfterLoadingScene
+                loadDataAfterLoadingScene,
+                isRestartingGameInSave,
+                loadSensitiveData
             )
         );
     }
@@ -46,11 +50,20 @@ public class ScenesManager : Singleton<ScenesManager>
         string sceneName,
         int outConnectionID,
         bool isInGameTransition,
-        bool loadDataAfterLoadingScene
+        bool loadDataAfterLoadingScene,
+        bool isRestartingGameInSave,
+        bool loadSensitiveData
     )
     {
+        Debug.LogWarning("Loading new scene with configurations: ");
+        Debug.LogWarning("Scene Name: " + sceneName);
+        Debug.LogWarning("Is in game transition: " + isInGameTransition);
+        Debug.LogWarning("Load data after loading scene: " + loadDataAfterLoadingScene);
+        Debug.LogWarning("Load sensitive data: " + loadSensitiveData);
+
         if (isInGameTransition)
         {
+            Debug.LogWarning("Instantiate scene transition.");
             Animator _newSceneTransition = LoadSceneTransition();
             _newSceneTransition.SetBool("fadeIn", true);
 
@@ -61,18 +74,32 @@ public class ScenesManager : Singleton<ScenesManager>
                     .normalizedTime;
 
                 if (_animationTime >= 1)
+                {
                     break;
+                }
 
+                //Debug.LogWarning("Animation time: " + _animationTime);
+                //Debug.LogWarning("Time" + Time.timeScale);
                 yield return new WaitForSeconds(0.001f);
             }
         }
 
-        var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName);
+        if (isInGameTransition)
+        {
+            Debug.LogWarning("Set player position on out connectio: " + outConnectionID);
+            SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
+        }
+
+        Debug.LogWarning("Starting async loading in scene " + sceneName + ".");
+
+        var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 
         while (!asyncLoadScene.isDone)
         {
             yield return null;
         }
+
+        Debug.LogWarning("Async loading is done.");
 
         if (isInGameTransition)
             LoadSceneTransition();
@@ -84,12 +111,12 @@ public class ScenesManager : Singleton<ScenesManager>
             EventManager.TriggerEvent("onPlayerUI", true, null);
 
             if (loadDataAfterLoadingScene)
-                DataPersistenceManager.Instance.LoadGame(isInGameTransition);
+                DataPersistenceManager.Instance.LoadGame(false, loadSensitiveData);
         }
         else
         {
             //TODO003
-
+            /*
             IEnumerable<DontDestroyOnLoad> dontDestroyOnLoadObjects =
                 FindObjectsOfType<MonoBehaviour>(true).OfType<DontDestroyOnLoad>();
 
@@ -105,15 +132,19 @@ public class ScenesManager : Singleton<ScenesManager>
             {
                 Destroy(item.gameObject);
             }
+            */
         }
 
         if (isInGameTransition)
         {
-            SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
             CameraManager.Instance.SetUpDefaultCamera();
         }
 
         UIManager.Instance.ResetUIStates();
+        GameManager.Instance.playerReference.inputHandler.ChangeMapStatesBasedOnUI(
+            new Dictionary<string, object> { { "activeState", false } }
+        );
+        Debug.LogWarning("Scene loaded sucessfully.");
     }
 
     public void SetPlayerPositionOnLoadedScene(string sceneName, int outConnectionID)

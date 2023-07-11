@@ -58,6 +58,7 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
     private void OnEnable()
     {
+        boss.isFightStarted = false;
         EventManager.StartListening("onThornborneDie", OnBossDefeated);
     }
 

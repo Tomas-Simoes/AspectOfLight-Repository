@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ThornbornePlant : Entity
 {
@@ -21,6 +22,7 @@ public class ThornbornePlant : Entity
     private void OnEnable()
     {
         plantTarget = GameObject.FindGameObjectWithTag("Player");
+        SceneManager.sceneLoaded += DieOnSceneLoaded;
 
         if (isThornbornePlant)
             EventManager.StartListening("onThornborneDie", Die);
@@ -28,6 +30,8 @@ public class ThornbornePlant : Entity
 
     private void OnDisable()
     {
+        SceneManager.sceneLoaded -= DieOnSceneLoaded;
+
         if (isThornbornePlant)
             EventManager.StopListening("onThornborneDie", Die);
     }
@@ -53,5 +57,10 @@ public class ThornbornePlant : Entity
     public void Die(Dictionary<string, object> message)
     {
         base.Die();
+    }
+
+    public void DieOnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Die();
     }
 }

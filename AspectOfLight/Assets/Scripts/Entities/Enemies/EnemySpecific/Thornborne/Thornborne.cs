@@ -60,7 +60,7 @@ public class Thornborne : Enemy
 
     public override void Start()
     {
-        base.Start();
+        base.Start();   
 
         sleepState = new Thornborne_SleepState(this, stateMachine, "sleep", this);
         awakeState = new Thornborne_AwakeState(this, stateMachine, "awake", this);
@@ -106,6 +106,7 @@ public class Thornborne : Enemy
         timeSinceHealing = cooldownData.healingCD;
 
         InitReferencePoints();
+        
 
         stateMachine.Init(sleepState);
     }
