@@ -6,6 +6,7 @@ using UnityEngine;
 public class CameraManager : Singleton<CameraManager>
 {
     public CinemachineVirtualCamera defaultCamera;
+    public string currentCameraCondition;
 
     private void OnEnable()
     {
@@ -19,14 +20,13 @@ public class CameraManager : Singleton<CameraManager>
 
     public void SetUpDefaultCamera()
     {
-        Debug.Log("Setting up default camera.");
+        Debug.LogWarning("Setting up default camera to follow the player.");
 
         defaultCamera = GameObject
             .FindGameObjectWithTag("DefaultCamera")
             .GetComponent<CinemachineVirtualCamera>();
 
         defaultCamera.Follow = GameManager.Instance.playerReference.transform;
-        Debug.Log(GameManager.Instance.playerReference.name);
     }
 
     private void OnCameraShake(Dictionary<string, object> message)
@@ -53,8 +53,14 @@ public class CameraManager : Singleton<CameraManager>
         cameraPerlinNoise.m_FrequencyGain = 0;
     }
 
+    //TODO004
     public void ChangeCamera(Animator cameraAnimator, string conditionName, bool condition)
     {
+        if (currentCameraCondition == null)
+            currentCameraCondition = conditionName;
+        else
+            cameraAnimator.SetBool(currentCameraCondition, false);
+
         Debug.LogWarning(
             "Changing camera to: "
                 + cameraAnimator.name

@@ -169,6 +169,14 @@ public class AbilityManager : Singleton<AbilityManager>, IDataPersistence
         }
     }
 
+    public void ForceAllAbilitiesCooldown()
+    {
+        foreach (Ability ability in playerAbilities.Values)
+        {
+            ForcebilityCooldown(ability.abilityName);
+        }
+    }
+
     public void RemovePlayerAbility(int slot)
     {
         playerAbilities.Remove(slot);

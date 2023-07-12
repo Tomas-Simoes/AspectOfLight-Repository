@@ -29,11 +29,8 @@ public class DeathMenu : Menu
 
         ScenesManager.Instance.LoadScene(
             DataPersistenceManager.Instance.gameData.areaInMap,
-            isInGameTransition: true,
-            loadSensitiveData: true
+            "RestartTransition"
         );
-
-        
     }
 
     public void OnExitToMenuPressed()

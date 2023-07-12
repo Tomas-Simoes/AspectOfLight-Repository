@@ -58,8 +58,7 @@ public class MainMenu : Menu
 
         ScenesManager.Instance.LoadScene(
             DataPersistenceManager.Instance.gameData.areaInMap,
-            loadDataAfterLoadingScene: true,
-            loadSensitiveData: true
+            "UITransition"
         );
     }
 

@@ -48,6 +48,7 @@ public class Player : Entity, IDataPersistence
 
     [Header("Stacks Information")]
     private int poisonStack = 0;
+    private List<PoisonCoroutine> currentPoisonCoroutines = new List<PoisonCoroutine>();
     public InputHandler inputHandler { get; private set; }
 
     public override void Awake()
@@ -77,6 +78,7 @@ public class Player : Entity, IDataPersistence
         EventManager.StartListening("onRest", moveState.ChangePlayerMovementSpeed);
         EventManager.StartListening("onPlayerCastingState", ChangeToCastAbilityState);
         EventManager.StartListening("onRest", Rest);
+        EventManager.StartListening("onSceneLoadingOver", OnSceneLoadingOver);
     }
 
     private void OnDisable()
@@ -84,6 +86,7 @@ public class Player : Entity, IDataPersistence
         EventManager.StopListening("onRest", moveState.ChangePlayerMovementSpeed);
         EventManager.StopListening("onPlayerCastingState", ChangeToCastAbilityState);
         EventManager.StopListening("onRest", Rest);
+        EventManager.StopListening("onSceneLoadingOver", OnSceneLoadingOver);
     }
 
     public override void Start()
@@ -190,6 +193,7 @@ public class Player : Entity, IDataPersistence
             );
     }
 
+    //TODO005
     public override void TakeDamage(float damage, Color damageColor)
     {
         if (GameManager.Instance.onGodMode)
@@ -210,11 +214,10 @@ public class Player : Entity, IDataPersistence
             new Dictionary<string, object> { { "type", "poison" }, { "stackNumber", poisonStack } }
         );
 
-        Coroutine poisonCoroutine = StartCoroutine(Poisoned(damage, tickRate));
-
-        StartCoroutine(
+        Coroutine poisonDamage = StartCoroutine(Poisoned(damage, tickRate));
+        Coroutine stopPoisonDamage = StartCoroutine(
             StopCoroutineAfterTime(
-                poisonCoroutine,
+                poisonDamage,
                 poisonTime,
                 () =>
                 {
@@ -232,6 +235,9 @@ public class Player : Entity, IDataPersistence
                 }
             )
         );
+
+        PoisonCoroutine newPoisonCoroutine = new PoisonCoroutine(poisonDamage, stopPoisonDamage);
+        currentPoisonCoroutines.Add(newPoisonCoroutine);
     }
 
     public override void Die()
@@ -239,6 +245,7 @@ public class Player : Entity, IDataPersistence
         if (isPlayerDead)
             return;
 
+        Debug.Log("dead");
         isPlayerDead = true;
         EventManager.TriggerEvent(
             "onPlayerDeath",
@@ -301,6 +308,25 @@ public class Player : Entity, IDataPersistence
         return currentStamina - staminaCost >= 0;
     }
 
+    private void OnSceneLoadingOver(Dictionary<string, object> message)
+    {
+        if (message["transitionType"] as string == "RestartTransition")
+        {
+            isPlayerDead = false;
+            poisonStack = 0;
+
+            if (currentPoisonCoroutines.Count != 0)
+            {
+                foreach (PoisonCoroutine poisonCoroutine in currentPoisonCoroutines)
+                {
+                    StopCoroutine(poisonCoroutine.poisonDamage);
+                    StopCoroutine(poisonCoroutine.stopPoisonDamage);
+                }
+                currentPoisonCoroutines.Clear();
+            }
+        }
+    }
+
     public void LoadData(GameData data, bool loadSensitiveData)
     {
         Debug.LogWarning("Loading data.");
@@ -309,10 +335,10 @@ public class Player : Entity, IDataPersistence
             Debug.LogWarning("Loading sensitive data as well.");
             currentHealth = data.currentHealth;
             currentStamina = data.currentStamina;
+            transform.position = data.playerPosition;
         }
 
         currentMovementSpeed = data.movementSpeed; //TODO002
-        transform.position = data.playerPosition;
     }
 
     public void SaveData(GameData data)
@@ -338,4 +364,16 @@ public class Player : Entity, IDataPersistence
         if (_hasToFlip)
             Flip();
     }*/
+}
+
+public class PoisonCoroutine
+{
+    public Coroutine poisonDamage;
+    public Coroutine stopPoisonDamage;
+
+    public PoisonCoroutine(Coroutine poisonDamage, Coroutine stopPoisonDamage)
+    {
+        this.poisonDamage = poisonDamage;
+        this.stopPoisonDamage = stopPoisonDamage;
+    }
 }

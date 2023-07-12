@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1843742842366480041}
   - component: {fileID: 1843742842366480040}
   - component: {fileID: 4849115121996861085}
+  - component: {fileID: -7239889848750966850}
   m_Layer: 10
   m_Name: BaseBullet
   m_TagString: Bullet
@@ -141,3 +142,15 @@ MonoBehaviour:
   damage: 2
   lifeTime: 4
   targatableTag: Player
+--- !u!114 &-7239889848750966850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843742842366480047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8986b5d8eea44b4e93eb6e34c5621bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

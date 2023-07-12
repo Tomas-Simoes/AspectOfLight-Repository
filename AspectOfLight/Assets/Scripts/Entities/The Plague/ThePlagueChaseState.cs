@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ThePlagueChaseState : State
 {
+    private float timeSinceClosestEnemyCheck = 0;
+
     private ThePlague plague;
     protected D_PlagueChaseState stateData;
     private D_PlagueAttackState attackStateData;
@@ -37,10 +39,13 @@ public class ThePlagueChaseState : State
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        timeSinceClosestEnemyCheck += Time.deltaTime;
 
         if (plague.closestEnemy == null)
         {
-            GetClosestEnemy();
+            if (timeSinceClosestEnemyCheck >= stateData.minTimeToCheckClosestEnemy)
+                GetClosestEnemy();
+
             return;
         }
 
@@ -63,29 +68,61 @@ public class ThePlagueChaseState : State
     {
         base.PhysicsUpdate();
 
-        if (plague.closestEnemy == null)
-            return;
+        Vector2 _direction;
 
-        entity.GoTowardsPosition(plague.closestEnemy.transform.position, stateData.movementSpeed);
+        if (plague.closestEnemy == null)
+        {
+            float _distanceToPlayer = Vector2.Distance(
+                plague.transform.position,
+                GameManager.Instance.playerReference.transform.position
+            );
+
+            if (_distanceToPlayer >= stateData.minDistanceToPlayer)
+                _direction =
+                    GameManager.Instance.playerReference.transform.position
+                    - plague.transform.position;
+            else
+                _direction = new Vector2(0, 0);
+        }
+        else
+            _direction = plague.closestEnemy.transform.position - plague.transform.position;
+
+        plague.rb.velocity = _direction.normalized * stateData.movementSpeed;
     }
 
     private void GetClosestEnemy()
     {
+        Debug.Log("finding new enemy");
         plague.closestEnemy = null;
 
+        timeSinceClosestEnemyCheck = 0;
         GameObject[] _allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-        float _distance = Mathf.Infinity;
+
+        float _largerDistance = 0;
 
         foreach (GameObject enemy in _allEnemies)
         {
-            Vector3 diff = enemy.transform.position - entity.transform.position;
-            float _currentDistance = diff.sqrMagnitude;
+            float _currentDistance = Vector2.Distance(
+                enemy.transform.position,
+                plague.transform.position
+            );
 
-            if (_currentDistance < _distance)
+            Debug.Log(_currentDistance);
+            Debug.Log(_largerDistance);
+            Debug.Log(stateData.maxDistanceToChase);
+
+            if (_currentDistance >= _largerDistance)
             {
-                plague.closestEnemy = enemy;
-                _distance = _currentDistance;
+                if (!(_currentDistance >= stateData.maxDistanceToChase))
+                {
+                    _largerDistance = _currentDistance;
+                    plague.closestEnemy = enemy;
+                }
             }
         }
+
+        Debug.Log(plague.closestEnemy);
     }
+
+    private void ChasePlayer() { }
 }

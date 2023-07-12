@@ -58,5 +58,6 @@ public class ThePlague : Entity
     {
         base.OnDrawGizmos();
         Gizmos.DrawWireSphere(transform.position, attackStateData.explosionRange);
+        Gizmos.DrawWireSphere(transform.position, chaseStateData.maxDistanceToChase);
     }
 }

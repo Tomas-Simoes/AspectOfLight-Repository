@@ -130,7 +130,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         Debug.LogWarning("The game was saved sucessfully.");
     }
 
-    public void LoadGame(bool isAfterChangingScene = true, bool loadSensitiveData = false)
+    public void LoadGame(bool loadSensitiveData = false)
     {
         if (disableDataPersitence)
         {

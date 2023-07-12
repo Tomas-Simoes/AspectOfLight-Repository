@@ -146,7 +146,6 @@ public class UIManager : Singleton<UIManager>
 
     public void OpenDeathScreen(Dictionary<string, object> message)
     {
-        Debug.Log("Opening death screen.");
         
         inDeathScreen = (bool)message["activeState"];
 

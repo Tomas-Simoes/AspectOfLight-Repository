@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WolfTank_Bulllet
       objectReference: {fileID: 0}
+    - target: {fileID: 4849115121996861085, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
+      propertyPath: speed
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7333152501252095579, guid: 9d38cb6173c58444f95b8195aebd0b86, type: 3}
       propertyPath: speed
       value: 8

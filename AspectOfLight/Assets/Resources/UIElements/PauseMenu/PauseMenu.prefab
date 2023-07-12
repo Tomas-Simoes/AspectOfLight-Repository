@@ -1694,6 +1694,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 3107145363834385225}
   defaultMenu: {fileID: 2334969080082947710}
+  continueButton: {fileID: 3107145363834385225}
+  optionsButton: {fileID: 3107145361820667491}
+  quitToMenuButton: {fileID: 3107145363010199116}
   optionsMenu: {fileID: 6760074942429116698}
   videoOptionsMenu: {fileID: 2706389551659515231}
 --- !u!1 &3107145362848214962

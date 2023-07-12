@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: -4139755165410498969}
   - component: {fileID: 7388513832403684345}
   - component: {fileID: 289530480361911833}
+  - component: {fileID: -6676533311313502375}
   m_Layer: 7
   m_Name: ShootingPlant
   m_TagString: Enemy
@@ -199,10 +200,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 292a3ee4370e24c4cb47d017cb1dc1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  abilityInstances: {fileID: 0}
   entityData: {fileID: 11400000, guid: b6a411478e387ef41a2c956454e65e73, type: 2}
   currentHealth: 0
   facingDirection: 0
-  wallCheck: {fileID: 0}
   target: {fileID: 0}
   pivot: {fileID: 0}
   shootingCD: 3
@@ -210,3 +211,15 @@ MonoBehaviour:
   shootingPosition: {fileID: 289530480142718248}
   plantTarget: {fileID: 0}
   bulletParent: {fileID: 0}
+--- !u!114 &-6676533311313502375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289530480361911834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8986b5d8eea44b4e93eb6e34c5621bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

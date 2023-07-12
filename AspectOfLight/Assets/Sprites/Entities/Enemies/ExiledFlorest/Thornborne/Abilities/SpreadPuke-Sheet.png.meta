@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a948db02875cd124188348c3f98a7dae
+guid: 0b7d251b938fd8a4a8ce93ec1896267c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpreadPuke-Sheet_0
+      name: acidpoolgrow-Sheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5cddd7f63992602458b61dd8b8dc92f6
-      internalID: -1372926808
+      spriteID: 8c5f53c6d3db31542898c13649257a57
+      internalID: 205164259
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpreadPuke-Sheet_1
+      name: acidpoolgrow-Sheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 20de9dc97cf0a3b4ca8a2e45675b32c3
-      internalID: 1732887783
+      spriteID: 6a61e36f519de224a9c24ded137a2034
+      internalID: -967885232
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpreadPuke-Sheet_2
+      name: acidpoolgrow-Sheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3bf738fcbb3fcb8478c4e20b759a7daa
-      internalID: -972452440
+      spriteID: 2fe707ba47e6cff41aca28030c4eefc7
+      internalID: -1837230949
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpreadPuke-Sheet_3
+      name: acidpoolgrow-Sheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7dba1eb81542774593ffd0e51139596
-      internalID: 376407746
+      spriteID: c7991fa6672dbe141b2661033abb7e94
+      internalID: 2139582020
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpreadPuke-Sheet_4
+      name: acidpoolgrow-Sheet_4
       rect:
         serializedVersion: 2
         x: 256
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8428bd1c2ee72a847a931197a01d8f53
-      internalID: 188105131
+      spriteID: 60e31d4b355c43d41a484d8a5c9ce076
+      internalID: 347358141
       vertices: []
       indices: 
       edges: []
@@ -220,11 +220,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SpreadPuke-Sheet_3: 376407746
-      SpreadPuke-Sheet_4: 188105131
-      SpreadPuke-Sheet_0: -1372926808
-      SpreadPuke-Sheet_1: 1732887783
-      SpreadPuke-Sheet_2: -972452440
+      acidpoolgrow-Sheet_3: 2139582020
+      acidpoolgrow-Sheet_1: -967885232
+      acidpoolgrow-Sheet_2: -1837230949
+      acidpoolgrow-Sheet_0: 205164259
+      acidpoolgrow-Sheet_4: 347358141
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
