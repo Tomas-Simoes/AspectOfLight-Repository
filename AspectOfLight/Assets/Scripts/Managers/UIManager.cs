@@ -79,7 +79,7 @@ public class UIManager : Singleton<UIManager>
         inMagistrateSigil = false;
         inPauseMenu = false;
     }
-    
+
     public void OnExit(Dictionary<string, object> message)
     {
         if (inAbilityTree)
@@ -146,6 +146,7 @@ public class UIManager : Singleton<UIManager>
 
     public void OpenDeathScreen(Dictionary<string, object> message)
     {
+        
         inDeathScreen = (bool)message["activeState"];
 
         if (inDeathScreen && inMagistrateSigil)

@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: Plague_ChaseStateData
   m_EditorClassIdentifier: 
   movementSpeed: 4
+  maxDistanceToChase: 5
+  minTimeToCheckClosestEnemy: 0.5
+  minDistanceToPlayer: 2

@@ -39,19 +39,15 @@ public class SaveSlotsMenu : Menu
         {
             DataPersistenceManager.Instance.NewGame();
 
-            ScenesManager.Instance.LoadScene(
-                "ExiledFlorest",
-                isInGameTransition: false,
-                loadDataAfterLoadingScene: true
-            );
+            ScenesManager.Instance.LoadScene("ExiledFlorest", "UITransition", startingGame: true);
 
             return;
         }
 
         ScenesManager.Instance.LoadScene(
             DataPersistenceManager.Instance.gameData.areaInMap,
-            isInGameTransition: false,
-            loadDataAfterLoadingScene: true
+            "UITransition",
+            startingGame: true
         );
 
         //DataPersistenceManager.Instance.SaveGame();

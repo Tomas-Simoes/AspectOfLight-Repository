@@ -4,6 +4,7 @@ using UnityEngine;
 using Cinemachine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 {
@@ -58,12 +59,17 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
     private void OnEnable()
     {
+        boss.isFightStarted = false;
         EventManager.StartListening("onThornborneDie", OnBossDefeated);
+        EventManager.StartListening("onSceneLoadingOver", OnSceneLoadingOver);
+        SceneManager.sceneLoaded += OnLoadedScene;
     }
 
     private void OnDisable()
     {
         EventManager.StopListening("onThornborneDie", OnBossDefeated);
+        EventManager.StopListening("onSceneLoadingOver", OnSceneLoadingOver);
+        SceneManager.sceneLoaded -= OnLoadedScene;
     }
 
     private void Start()
@@ -83,6 +89,8 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
     private void StartBossBattle()
     {
+        Debug.LogWarning("Boss fight has started");
+
         ChangeBarriersState(true);
         bossArenaUI.SetActive(true);
 
@@ -92,6 +100,19 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
 
         FadeInText(bossNameText);
         StartCoroutine(AwakeBoss(awakeSeconds));
+    }
+
+    private void OnSceneLoadingOver(Dictionary<string, object> message)
+    {
+        if (message["transitionType"] as string == "RestartScene")
+            ChangeBarriersState(false);
+
+        CameraManager.Instance.ChangeCamera(cameraAnimator, "mainCamera", true);
+    }
+
+    private void OnLoadedScene(Scene scene, LoadSceneMode sceneMode)
+    {
+        boss.isFightStarted = false;
     }
 
     IEnumerator AwakeBoss(float time)
@@ -155,7 +176,6 @@ public class ThornborneFightManager : MonoBehaviour, IDataPersistence
             return;
         }
 
-        Debug.Log("Starting down coroutine");
         StartCoroutine(backSpikes1.Go("Down"));
         StartCoroutine(backSpikes2.Go("Down"));
     }

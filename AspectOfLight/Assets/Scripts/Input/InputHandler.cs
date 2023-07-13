@@ -24,7 +24,6 @@ public class InputHandler : MonoBehaviour
 
     [Header("UI Input")]
     [SerializeField]
-    public bool pressedSelect;
     public bool pressedDelete;
 
     void Awake()
@@ -145,17 +144,11 @@ public class InputHandler : MonoBehaviour
     {
         if (isEnable)
         {
-            inputActions.UI.Select.started += SetSelect;
-            inputActions.UI.Select.canceled += SetSelect;
-
             inputActions.UI.Delete.started += SetDelete;
             inputActions.UI.Delete.canceled += SetDelete;
 
             return;
         }
-
-        inputActions.UI.Select.started -= SetSelect;
-        inputActions.UI.Select.canceled -= SetSelect;
 
         inputActions.UI.Delete.started -= SetDelete;
         inputActions.UI.Delete.canceled -= SetDelete;
@@ -253,11 +246,6 @@ public class InputHandler : MonoBehaviour
     //? ------------------------
     //? - UI Actions Input Map -
     //? ------------------------
-    private void SetSelect(InputAction.CallbackContext ctx)
-    {
-        pressedSelect = ctx.started;
-    }
-
     private void SetDelete(InputAction.CallbackContext ctx)
     {
         EventManager.TriggerEvent("onDelete", true, null);

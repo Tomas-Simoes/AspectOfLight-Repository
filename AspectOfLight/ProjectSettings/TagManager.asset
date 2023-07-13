@@ -5,12 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Drone
   - Bullet
   - Wall
   - Canvas
   - DefaultCamera
   - AbilityInstances
+  - Plague
   layers:
   - Default
   - TransparentFX
@@ -20,7 +20,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - Drone
+  - Plague
   - Wall
   - Bullet
   - House

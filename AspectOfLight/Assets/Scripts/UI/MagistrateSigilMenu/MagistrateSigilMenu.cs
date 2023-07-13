@@ -43,12 +43,12 @@ public class MagistrateSigilMenu : Menu
     {
         if (SceneManager.GetActiveScene().name == "Demonstration")
         {
-            ScenesManager.Instance.LoadScene("ExiledFlorest", 2);
+            ScenesManager.Instance.LoadScene("ExiledFlorest", "InGameTransition", 2);
             DeactivateMenu();
             return;
         }
 
-        ScenesManager.Instance.LoadScene("Demonstration", 1);
+        ScenesManager.Instance.LoadScene("Demonstration", "InGameTransition", 1);
         DeactivateMenu();
     }
 

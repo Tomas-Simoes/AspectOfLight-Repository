@@ -17,7 +17,7 @@ public class GameManager : Singleton<GameManager>
 
     [Header("Settings")]
     public Resolution currentResolution;
-    public int currentTargetFrameRate = 60;
+    public int currentTargetFrameRate = 120;
 
     [Header("Class Information")]
     public Player playerReference;

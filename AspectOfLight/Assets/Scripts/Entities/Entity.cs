@@ -37,12 +37,18 @@ public class Entity : MonoBehaviour
 
     public virtual void Update()
     {
+        if (!stateMachine.isInitialized)
+            return;
+
         stateMachine.currentState.LogicUpdate();
         UpdateCooldowns();
     }
 
     public virtual void FixedUpdate()
     {
+        if (!stateMachine.isInitialized)
+            return;
+
         stateMachine.currentState.PhysicsUpdate();
     }
 

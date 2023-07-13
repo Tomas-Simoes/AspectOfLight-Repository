@@ -28,7 +28,7 @@ public class Enemy : Entity
 
         playerReference = GameManager.Instance.playerReference.gameObject;
         target = playerReference;
-        
+
         currentHealth = entityData.MAX_HEALTH;
     }
 

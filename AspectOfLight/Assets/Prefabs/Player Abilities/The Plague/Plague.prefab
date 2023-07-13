@@ -14,9 +14,10 @@ GameObject:
   - component: {fileID: -1394053911047200645}
   - component: {fileID: 4084799059633435177}
   - component: {fileID: 7732880258948926922}
+  - component: {fileID: 4810396361199879523}
   m_Layer: 8
   m_Name: Plague
-  m_TagString: Drone
+  m_TagString: Plague
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -170,6 +171,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   closestEnemy: {fileID: 0}
+--- !u!114 &4810396361199879523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2668328830784829214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8986b5d8eea44b4e93eb6e34c5621bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8788947464693772216
 GameObject:
   m_ObjectHideFlags: 0

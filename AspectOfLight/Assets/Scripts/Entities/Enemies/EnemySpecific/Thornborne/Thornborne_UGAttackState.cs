@@ -122,19 +122,23 @@ public class Thornborne_UGAttackState : State
             _availableReferencePoints
         );
 
-        entity.CreatePrefab(enemy.ugAttackExplosion, _closestReferencePoint, enemy.abilitiesParent);
+        entity.CreatePrefab(
+            enemy.ugAttackExplosion,
+            _closestReferencePoint,
+            enemy.abilityInstances
+        );
+
         entity.CreatePrefab(
             enemy.ugAttackExplosion,
             enemy.playerReference.transform.position,
-            enemy.abilitiesParent
+            enemy.abilityInstances
         );
 
-        
         if (currentWavesCount >= wavesCount - 1)
             UpgradePreviousPlants();
 
         SpawnExplosions(_availableReferencePoints);
-        
+
         currentWavesCount++;
     }
 
@@ -173,7 +177,7 @@ public class Thornborne_UGAttackState : State
             entity.CreatePrefab(
                 enemy.ugAttackExplosion,
                 referencePoints[_referencePointIndex],
-                enemy.abilitiesParent
+                enemy.abilityInstances
             );
 
             if (currentWavesCount >= wavesCount - 1 && _plantsCount <= stateData.plantsCount)
@@ -183,7 +187,7 @@ public class Thornborne_UGAttackState : State
                     GameObject _shootingPlant = entity.CreatePrefab(
                         enemy.shootingPlant,
                         referencePoints[_referencePointIndex],
-                        enemy.abilitiesParent
+                        enemy.abilityInstances
                     );
 
                     currentShootingPlants.Add(
@@ -194,7 +198,7 @@ public class Thornborne_UGAttackState : State
                     ThornbornePlant _shootingPlantComponent =
                         _shootingPlant.GetComponent<ThornbornePlant>();
 
-                    _shootingPlantComponent.bulletParent = enemy.abilitiesParent;
+                    _shootingPlantComponent.bulletParent = enemy.abilityInstances;
                     _shootingPlantComponent.plantTarget = enemy.target;
 
                     _plantsCount++;

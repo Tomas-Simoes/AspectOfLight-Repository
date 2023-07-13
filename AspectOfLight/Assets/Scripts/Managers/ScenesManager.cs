@@ -10,6 +10,8 @@ public class ScenesManager : Singleton<ScenesManager>
     private D_ScenesData scenesData;
     private GameObject sceneTransition;
 
+    private string currentSceneTransitionType;
+
     public override void Init()
     {
         base.Init();
@@ -20,37 +22,138 @@ public class ScenesManager : Singleton<ScenesManager>
         scenesData = Resources.Load<D_ScenesData>("Data/Scene Data/ScenesData");
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
     public void LoadScene(
         string sceneName,
+        string transitionType,
         int outConnectionID = 0,
-        bool isInGameTransition = true,
-        bool loadDataAfterLoadingScene = true
+        bool startingGame = false
     )
     {
+        currentSceneTransitionType = transitionType;
+
         if (sceneTransition != null)
         {
             Destroy(sceneTransition);
         }
 
-        StartCoroutine(
-            LoadSceneAsync(
-                sceneName,
-                outConnectionID,
-                isInGameTransition,
-                loadDataAfterLoadingScene
-            )
-        );
+        StartCoroutine(LoadSceneAsync(sceneName, transitionType, outConnectionID, startingGame));
     }
 
     private IEnumerator LoadSceneAsync(
         string sceneName,
+        string transitionType,
         int outConnectionID,
-        bool isInGameTransition,
-        bool loadDataAfterLoadingScene
+        bool startingGame
     )
     {
+        Debug.LogWarning("Instantiate scene transition.");
+        Animator _newSceneTransition = LoadSceneTransition();
+        _newSceneTransition.SetBool("fadeIn", true);
+
+        while (true)
+        {
+            float _animationTime = _newSceneTransition
+                .GetCurrentAnimatorStateInfo(0)
+                .normalizedTime;
+
+            if (_animationTime >= 1)
+            {
+                goto FadeInTransitionOver;
+            }
+
+            //Debug.LogWarning("Animation time: " + _animationTime);
+            //Debug.LogWarning("Time" + Time.timeScale);
+            yield return new WaitForSeconds(0.001f);
+        }
+        FadeInTransitionOver:
+        ;
+
+        var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+
+        while (!asyncLoadScene.isDone)
+        {
+            yield return null;
+        }
+        Debug.LogWarning("Scene async loading is done.");
+        Debug.LogWarning("Triggering \"onSceneLoadingOver\" event");
+
+        EventManager.TriggerEvent(
+            "onSceneLoadingOver",
+            false,
+            new Dictionary<string, object> { { "transitionType", transitionType } }
+        );
+
+        if (transitionType == "InGameTransition")
+            SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
+        else
+            AbilityManager.Instance.ForceAllAbilitiesCooldown();
+
+        LoadSceneTransition();
+
+        if (sceneName != "MainMenu")
+        {
+            EventManager.TriggerEvent("onPlayerUI", true, null);
+        }
+
+        if (transitionType != "UITransition" || startingGame)
+        {
+            CameraManager.Instance.SetUpDefaultCamera();
+            GameManager.Instance.playerReference.inputHandler.ChangeMapStatesBasedOnUI(
+                new Dictionary<string, object> { { "activeState", false } }
+            );
+        }
+
+        if (startingGame)
+            GameManager.Instance.gameStarted = true;
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode sceneMode)
+    {
+        UIManager.Instance.ResetUIStates();
+
+        if (
+            currentSceneTransitionType == "UITransition"
+            || currentSceneTransitionType == "RestartTransition"
+        )
+        {
+            DataPersistenceManager.Instance.LoadGame(loadSensitiveData: true);
+        }
+
+        if (currentSceneTransitionType == "InGameTransition")
+        {
+            DataPersistenceManager.Instance.LoadGame(loadSensitiveData: false);
+        }
+    }
+
+    /*
+    private IEnumerator LoadSceneAsync(
+        string sceneName,
+        int outConnectionID,
+        bool isInGameTransition,
+        bool loadDataAfterLoadingScene,
+        bool isRestartingGameInSave,
+        bool loadSensitiveData
+    )
+    {
+        Debug.LogWarning("Loading new scene with configurations: ");
+        Debug.LogWarning("Scene Name: " + sceneName);
+        Debug.LogWarning("Is in game transition: " + isInGameTransition);
+        Debug.LogWarning("Load data after loading scene: " + loadDataAfterLoadingScene);
+        Debug.LogWarning("Load sensitive data: " + loadSensitiveData);
+
         if (isInGameTransition)
         {
+            Debug.LogWarning("Instantiate scene transition.");
             Animator _newSceneTransition = LoadSceneTransition();
             _newSceneTransition.SetBool("fadeIn", true);
 
@@ -61,18 +164,32 @@ public class ScenesManager : Singleton<ScenesManager>
                     .normalizedTime;
 
                 if (_animationTime >= 1)
+                {
                     break;
+                }
 
+                //Debug.LogWarning("Animation time: " + _animationTime);
+                //Debug.LogWarning("Time" + Time.timeScale);
                 yield return new WaitForSeconds(0.001f);
             }
         }
 
-        var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName);
+        if (isInGameTransition)
+        {
+            Debug.LogWarning("Set player position on out connectio: " + outConnectionID);
+            SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
+        }
+
+        Debug.LogWarning("Starting async loading in scene " + sceneName + ".");
+
+        var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
 
         while (!asyncLoadScene.isDone)
         {
             yield return null;
         }
+
+        Debug.LogWarning("Async loading is done.");
 
         if (isInGameTransition)
             LoadSceneTransition();
@@ -81,15 +198,14 @@ public class ScenesManager : Singleton<ScenesManager>
 
         if (sceneName != "MainMenu")
         {
-            EventManager.TriggerEvent("onPlayerUI", true, null);
 
             if (loadDataAfterLoadingScene)
-                DataPersistenceManager.Instance.LoadGame(isInGameTransition);
+                DataPersistenceManager.Instance.LoadGame(false, loadSensitiveData);
         }
         else
         {
             //TODO003
-
+            /*
             IEnumerable<DontDestroyOnLoad> dontDestroyOnLoadObjects =
                 FindObjectsOfType<MonoBehaviour>(true).OfType<DontDestroyOnLoad>();
 
@@ -105,16 +221,21 @@ public class ScenesManager : Singleton<ScenesManager>
             {
                 Destroy(item.gameObject);
             }
+            
         }
 
         if (isInGameTransition)
         {
-            SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
             CameraManager.Instance.SetUpDefaultCamera();
         }
 
         UIManager.Instance.ResetUIStates();
+        GameManager.Instance.playerReference.inputHandler.ChangeMapStatesBasedOnUI(
+            new Dictionary<string, object> { { "activeState", false } }
+        );
+        Debug.LogWarning("Scene loaded sucessfully.");
     }
+    */
 
     public void SetPlayerPositionOnLoadedScene(string sceneName, int outConnectionID)
     {

@@ -36,6 +36,9 @@ public class Thornborne_SleepState : State
         base.LogicUpdate();
 
         if (enemy.isFightStarted)
+        {
+            Debug.Log("ya");
             stateMachine.ChangeState(enemy.awakeState);
+        }
     }
 }

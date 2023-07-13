@@ -25,12 +25,12 @@ public class DeathMenu : Menu
     {
         Time.timeScale = 1f;
 
+        gameObject.SetActive(false);
+
         ScenesManager.Instance.LoadScene(
             DataPersistenceManager.Instance.gameData.areaInMap,
-            loadDataAfterLoadingScene: true
+            "RestartTransition"
         );
-
-        gameObject.SetActive(false);
     }
 
     public void OnExitToMenuPressed()

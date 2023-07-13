@@ -13,6 +13,7 @@ public class DontDestroyOnLoad : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+            this.gameObject.name = this.gameObject.name + " (DDOL)";
         }
         else
         {

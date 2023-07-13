@@ -39,8 +39,6 @@ public class Thornborne : Enemy
     public float timeSinceHealing;
 
     [Header("Abilities Information")]
-    public GameObject abilitiesParent;
-
     [Space(2)]
     public GameObject ugAttackExplosion;
 
@@ -107,6 +105,13 @@ public class Thornborne : Enemy
 
         InitReferencePoints();
 
+        isFightStarted = false;
+        StartCoroutine(InitBoss());
+    }
+
+    public IEnumerator InitBoss()
+    {
+        yield return new WaitForEndOfFrame();
         stateMachine.Init(sleepState);
     }
 
@@ -167,7 +172,7 @@ public class Thornborne : Enemy
 
     public void SpawnPuke()
     {
-        CreatePrefab(pukeAttack, pukeAttackPosition.transform.position, abilitiesParent);
+        CreatePrefab(pukeAttack, pukeAttackPosition.transform.position, abilityInstances);
     }
 
     public override void OnDrawGizmos()

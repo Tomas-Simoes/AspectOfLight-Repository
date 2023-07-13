@@ -14,7 +14,7 @@ public class LoadSceneTrigger : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            ScenesManager.Instance.LoadScene(sceneName, outConnectionID);
+            ScenesManager.Instance.LoadScene(sceneName, "InGameTransition", outConnectionID);
         }
     }
 }
