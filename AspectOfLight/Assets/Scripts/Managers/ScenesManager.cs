@@ -87,10 +87,20 @@ public class ScenesManager : Singleton<ScenesManager>
         Debug.LogWarning("Scene async loading is done.");
         Debug.LogWarning("Triggering \"onSceneLoadingOver\" event");
 
+        D_ScenesData.GameScene _currentScene = scenesData.gameScenes.Find(
+            scene => scene.name == sceneName
+        );
+
         EventManager.TriggerEvent(
             "onSceneLoadingOver",
             false,
-            new Dictionary<string, object> { { "transitionType", transitionType } }
+            new Dictionary<string, object>
+            {
+                { "transitionType", transitionType },
+                { "sceneName", sceneName },
+                { "playThemeOnEnter", _currentScene.audio.playThemeOnEnter },
+                { "delayTime", _currentScene.audio.delayTime }
+            }
         );
 
         if (transitionType == "InGameTransition")
@@ -135,108 +145,6 @@ public class ScenesManager : Singleton<ScenesManager>
         }
     }
 
-    /*
-    private IEnumerator LoadSceneAsync(
-        string sceneName,
-        int outConnectionID,
-        bool isInGameTransition,
-        bool loadDataAfterLoadingScene,
-        bool isRestartingGameInSave,
-        bool loadSensitiveData
-    )
-    {
-        Debug.LogWarning("Loading new scene with configurations: ");
-        Debug.LogWarning("Scene Name: " + sceneName);
-        Debug.LogWarning("Is in game transition: " + isInGameTransition);
-        Debug.LogWarning("Load data after loading scene: " + loadDataAfterLoadingScene);
-        Debug.LogWarning("Load sensitive data: " + loadSensitiveData);
-
-        if (isInGameTransition)
-        {
-            Debug.LogWarning("Instantiate scene transition.");
-            Animator _newSceneTransition = LoadSceneTransition();
-            _newSceneTransition.SetBool("fadeIn", true);
-
-            while (true)
-            {
-                float _animationTime = _newSceneTransition
-                    .GetCurrentAnimatorStateInfo(0)
-                    .normalizedTime;
-
-                if (_animationTime >= 1)
-                {
-                    break;
-                }
-
-                //Debug.LogWarning("Animation time: " + _animationTime);
-                //Debug.LogWarning("Time" + Time.timeScale);
-                yield return new WaitForSeconds(0.001f);
-            }
-        }
-
-        if (isInGameTransition)
-        {
-            Debug.LogWarning("Set player position on out connectio: " + outConnectionID);
-            SetPlayerPositionOnLoadedScene(sceneName, outConnectionID);
-        }
-
-        Debug.LogWarning("Starting async loading in scene " + sceneName + ".");
-
-        var asyncLoadScene = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-
-        while (!asyncLoadScene.isDone)
-        {
-            yield return null;
-        }
-
-        Debug.LogWarning("Async loading is done.");
-
-        if (isInGameTransition)
-            LoadSceneTransition();
-
-        GameManager.Instance.gameStarted = sceneName == "MainMenu" ? false : true;
-
-        if (sceneName != "MainMenu")
-        {
-
-            if (loadDataAfterLoadingScene)
-                DataPersistenceManager.Instance.LoadGame(false, loadSensitiveData);
-        }
-        else
-        {
-            //TODO003
-            /*
-            IEnumerable<DontDestroyOnLoad> dontDestroyOnLoadObjects =
-                FindObjectsOfType<MonoBehaviour>(true).OfType<DontDestroyOnLoad>();
-
-            IEnumerable<DontDestroyPlayerOnLoad> dontDestroyPlayerOnLoadObject =
-                FindObjectsOfType<MonoBehaviour>(true).OfType<DontDestroyPlayerOnLoad>();
-
-            foreach (DontDestroyOnLoad item in dontDestroyOnLoadObjects)
-            {
-                Destroy(item.gameObject);
-            }
-
-            foreach (DontDestroyPlayerOnLoad item in dontDestroyPlayerOnLoadObject)
-            {
-                Destroy(item.gameObject);
-            }
-            
-        }
-
-        if (isInGameTransition)
-        {
-            CameraManager.Instance.SetUpDefaultCamera();
-        }
-
-        UIManager.Instance.ResetUIStates();
-        GameManager.Instance.playerReference.inputHandler.ChangeMapStatesBasedOnUI(
-            new Dictionary<string, object> { { "activeState", false } }
-        );
-        Debug.LogWarning("Scene loaded sucessfully.");
-    }
-    */
-
     public void SetPlayerPositionOnLoadedScene(string sceneName, int outConnectionID)
     {
         D_ScenesData.GameScene newScene = null;
@@ -262,7 +170,7 @@ public class ScenesManager : Singleton<ScenesManager>
         }
     }
 
-    private Animator LoadSceneTransition()
+    public Animator LoadSceneTransition()
     {
         sceneTransition = Instantiate(
             Resources.Load<GameObject>("Data/Scene Data/SceneTransition")
