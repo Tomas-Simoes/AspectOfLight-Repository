@@ -63,7 +63,9 @@ public class ThePlagueChaseState : State
         entity.CheckIfFlip(
             entity.facingDirection,
             entity.transform.position,
-            plague.closestEnemy.transform.position
+            plague.closestEnemy == null
+                ? GameManager.Instance.playerReference.transform.position
+                : plague.closestEnemy.transform.position
         );
     }
 
