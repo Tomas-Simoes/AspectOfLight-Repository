@@ -20,14 +20,5 @@ MonoBehaviour:
     dialogueChoises: []
   - dialogueText: Take heart and begin your adventure. Use WASD keys to move.
     dialogueChoises: []
-  - dialogueText: "[not in the actual game] Welcome to the version 0.2.1 of Aspect
-      of Light. In the previous patch there were a lot of bugs that we've just never
-      seen them.\t"
-    dialogueChoises: []
-  - dialogueText: '[not in the actual game] So thank you a lot for the ones who have
-      given us feedback and I hope you stay with us for the rest of this journey.'
-    dialogueChoises: []
-  - dialogueText: "[not in the actual game] Anyways, good luck!\n- sim\xF5es"
-    dialogueChoises: []
   followOnDialogue: {fileID: 0}
   startFollowOnDialogueIndex: 0
