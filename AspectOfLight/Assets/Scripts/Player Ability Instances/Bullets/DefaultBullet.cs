@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class DefaultBullet : Bullet
 {
+    public Vector3 mousePosition;
+
     public override void Start()
     {
         base.Start();
-        rb.velocity = (GetMousePosition() - transform.position).normalized * speed;
+        rb.velocity = (mousePosition - transform.position).normalized * speed;
 
         Destroy(this.gameObject, lifeTime);
     }

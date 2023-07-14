@@ -391,7 +391,7 @@ public class AbilityMenu : Menu
                     "promptText",
                     "Are you sure that you want this abiity? \n It will cost you "
                         + ability.unlockCost
-                        + (ability.unlockCost != 1 ? " miracles." : "miracle.")
+                        + (ability.unlockCost != 1 ? " miracles." : " miracle.")
                 },
                 { "yesCallback", OnYesUnlockingNewAbility },
                 { "noCallback", OnNoUnlockingNewAbility },

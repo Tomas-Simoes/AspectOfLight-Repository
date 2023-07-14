@@ -11,6 +11,7 @@ public class Player_AttackState : State
     public float attackTime;
     private float changeDamageTime;
     private float currentDamage;
+    private Vector2 currentMousePosition;
 
     [Header("Stamina Information")]
     private float currentStaminaCostTime;
@@ -32,12 +33,19 @@ public class Player_AttackState : State
     public override void Enter()
     {
         base.Enter();
-        attackTime = 0;
-        currentStaminaCostTime = stateData.staminaCostTime;
 
         player.timeSinceAttack = 0;
 
+        /*
+        attackTime = 0;
+        currentStaminaCostTime = stateData.staminaCostTime;
         changeDamageTime = stateData.changeDamageTimeJump;
+        */
+
+        Vector3 _mousePosition = Mouse.current.position.ReadValue();
+        _mousePosition.z = 10;
+
+        currentMousePosition = Camera.main.ScreenToWorldPoint(_mousePosition);
         currentDamage = stateData.defaultDamage;
 
         entity.rb.velocity = Vector2.zero;
@@ -52,6 +60,28 @@ public class Player_AttackState : State
     {
         base.LogicUpdate();
 
+        float _animationTime = entity.anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+
+        if (_animationTime >= 1)
+        {
+            GameObject _bullet = entity.CreatePrefab(
+                player.bulletPrefab,
+                player.attackPosition.transform.position,
+                entity.abilityInstances
+            );
+
+            _bullet.GetComponent<DefaultBullet>().damage = GameManager.Instance.onGodMode
+                ? 100
+                : currentDamage;
+
+            _bullet.GetComponent<DefaultBullet>().mousePosition = currentMousePosition;
+
+            stateMachine.ChangeState(
+                player.axisMovement == Vector2.zero ? player.idleState : player.moveState
+            );
+        }
+
+        /*
         if (attackTime >= stateData.maxAttackTime)
         {
             currentStaminaCostTime += Time.deltaTime;
@@ -92,6 +122,7 @@ public class Player_AttackState : State
                 player.axisMovement == Vector2.zero ? player.idleState : player.moveState
             );
         }
+        */
     }
 
     public override void PhysicsUpdate()

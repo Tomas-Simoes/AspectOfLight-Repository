@@ -57,6 +57,9 @@ public class ThePlagueChaseState : State
             stateMachine.ChangeState(plague.attackState);
         }
 
+        Debug.Log(entity.facingDirection);
+        Debug.Log(entity.facingDirection);
+
         entity.CheckIfFlip(
             entity.facingDirection,
             entity.transform.position,
