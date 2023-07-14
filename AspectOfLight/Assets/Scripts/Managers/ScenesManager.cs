@@ -90,7 +90,7 @@ public class ScenesManager : Singleton<ScenesManager>
         D_ScenesData.GameScene _currentScene = scenesData.gameScenes.Find(
             scene => scene.name == sceneName
         );
-
+        
         EventManager.TriggerEvent(
             "onSceneLoadingOver",
             false,
