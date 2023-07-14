@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
 
     private void OnEnable()
     {
-        Application.targetFrameRate = currentTargetFrameRate;
+        OnApplicationStart();
 
         EventManager.StartListening("onNewGameStarted", OnNewGameStarted);
         EventManager.StartListening("onGodMode", OnGodMode);
@@ -34,6 +34,18 @@ public class GameManager : Singleton<GameManager>
     {
         EventManager.StopListening("onNewGameStarted", OnNewGameStarted);
         EventManager.StopListening("onGodMode", OnGodMode);
+    }
+
+    public void OnApplicationStart()
+    {
+        Debug.LogWarning("On application start called.");
+
+        Application.targetFrameRate = currentTargetFrameRate;
+
+        StartCoroutine(AudioManager.Instance.PlayAudioWithDelay("MainMenuTheme", 0, true));
+
+        Animator onApplicationStartFadeIn = ScenesManager.Instance.LoadSceneTransition();
+        onApplicationStartFadeIn.SetBool("longFadeOut", true);
     }
 
     private void OnNewGameStarted(Dictionary<string, object> message)

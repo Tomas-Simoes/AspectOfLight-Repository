@@ -91,6 +91,7 @@ public class DataPersistenceManager : Singleton<DataPersistenceManager>
         this.gameData = new GameData();
 
         GameManager.Instance.Init();
+
         EventManager.TriggerEvent("onNewGameStarted", false, null);
 
         Debug.LogWarning("A new game was created.");

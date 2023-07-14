@@ -11,6 +11,7 @@ public class D_ScenesData : ScriptableObject
     public class GameScene
     {
         public string name;
+        public SceneAudio audio;
         public List<SceneConnection> sceneConnections;
     }
 
@@ -21,5 +22,12 @@ public class D_ScenesData : ScriptableObject
         public string OptionalDescription;
         public int connectionID;
         public Vector3 position;
+    }
+
+    [System.Serializable]
+    public class SceneAudio
+    {
+        public bool playThemeOnEnter = true;
+        public float delayTime;
     }
 }

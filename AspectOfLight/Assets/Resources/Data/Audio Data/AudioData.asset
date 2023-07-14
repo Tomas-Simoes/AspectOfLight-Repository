@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 343d9db7db9170840a9a94c455fa3515, type: 3}
+  m_Name: AudioData
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: MainMenuTheme
+    clip: {fileID: 8300000, guid: 5accf73c4b6b66e4ba127c7c072f9994, type: 3}
+    volume: 0.3
+    pitch: 0.5
+    loop: 1
+    fadeInDuration: 6
+    fadeOutDuration: 5
+    source: {fileID: 0}
+  - name: ExiledFlorestTheme
+    clip: {fileID: 8300000, guid: 63d2b0f5dd8bbad4a8fef4512fb6f3fa, type: 3}
+    volume: 0.3
+    pitch: 0.5
+    loop: 1
+    fadeInDuration: 6
+    fadeOutDuration: 5
+    source: {fileID: 0}
+  - name: EngineerVillageTheme
+    clip: {fileID: 8300000, guid: 78033529d0cd4f44aa074bf921662764, type: 3}
+    volume: 0.3
+    pitch: 0.5
+    loop: 1
+    fadeInDuration: 8
+    fadeOutDuration: 4
+    source: {fileID: 0}
