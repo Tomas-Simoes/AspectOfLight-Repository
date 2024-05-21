@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameScenes:
   - name: ExiledFlorest
+    audio:
+      playThemeOnEnter: 1
+      delayTime: 5
     sceneConnections:
     - OptionalDescription: Enter from Engineer Village
       connectionID: 1
@@ -22,11 +25,17 @@ MonoBehaviour:
       connectionID: 2
       position: {x: 31.322948, y: 11.98024, z: 0}
   - name: EngineerVillage
+    audio:
+      playThemeOnEnter: 1
+      delayTime: 5
     sceneConnections:
     - OptionalDescription: Enter from Exiled Florest (North Side)
       connectionID: 1
       position: {x: -17.99, y: -2.94, z: 0}
   - name: Demonstration
+    audio:
+      playThemeOnEnter: 0
+      delayTime: 0
     sceneConnections:
     - OptionalDescription: Enter from Exiled Florest
       connectionID: 1
