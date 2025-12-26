@@ -1,2 +1,1 @@
-# Aspect of Light
-Final course project that we're currently developing
+Source code of my game ***Aspect of Light***
